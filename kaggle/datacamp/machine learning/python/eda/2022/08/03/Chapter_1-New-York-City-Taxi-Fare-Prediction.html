@@ -10,8 +10,8 @@
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="In this first chapter, you will get exposure to the Kaggle competition process. You will train a model and prepare a csv file ready for submission. You will learn the difference between Public and Private test splits, and how to prevent overfitting." />
 <meta property="og:description" content="In this first chapter, you will get exposure to the Kaggle competition process. You will train a model and prepare a csv file ready for submission. You will learn the difference between Public and Private test splits, and how to prevent overfitting." />
-<link rel="canonical" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/fastpages/jupyter/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html" />
-<meta property="og:url" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/fastpages/jupyter/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html" />
+<link rel="canonical" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/kaggle/datacamp/machine%20learning/python/eda/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html" />
+<meta property="og:url" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/kaggle/datacamp/machine%20learning/python/eda/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html" />
 <meta property="og:site_name" content="Self-study Data Science Projects notes Blog" />
 <meta property="og:image" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/some_folder/your_image.png" />
 <meta property="og:type" content="article" />
@@ -20,7 +20,7 @@
 <meta property="twitter:image" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/some_folder/your_image.png" />
 <meta property="twitter:title" content="Winning a Kaggle Competition in Python - Part 1" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-08-03T00:00:00-05:00","datePublished":"2022-08-03T00:00:00-05:00","description":"In this first chapter, you will get exposure to the Kaggle competition process. You will train a model and prepare a csv file ready for submission. You will learn the difference between Public and Private test splits, and how to prevent overfitting.","headline":"Winning a Kaggle Competition in Python - Part 1","image":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/some_folder/your_image.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/fastpages/jupyter/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/fastpages/jupyter/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-08-03T00:00:00-05:00","datePublished":"2022-08-03T00:00:00-05:00","description":"In this first chapter, you will get exposure to the Kaggle competition process. You will train a model and prepare a csv file ready for submission. You will learn the difference between Public and Private test splits, and how to prevent overfitting.","headline":"Winning a Kaggle Competition in Python - Part 1","image":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/some_folder/your_image.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/kaggle/datacamp/machine%20learning/python/eda/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/kaggle/datacamp/machine%20learning/python/eda/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -88,10 +88,19 @@ window.onload = wrap_img;
     
       <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
       
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#fastpages">fastpages</a>
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Kaggle">Kaggle</a>
         &nbsp;
       
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#jupyter">jupyter</a>
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Datacamp">Datacamp</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Machine Learning">Machine Learning</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Python">Python</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#EDA">EDA</a>
         
       
       </p>
@@ -524,7 +533,7 @@ c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\xgboost\data.p
         theme="github-light"
         crossorigin="anonymous"
         async>
-</script><a class="u-url" href="/Data-Science-selfstudy-notes-Blog/fastpages/jupyter/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html" hidden></a>
+</script><a class="u-url" href="/Data-Science-selfstudy-notes-Blog/kaggle/datacamp/machine%20learning/python/eda/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html" hidden></a>
 </article>
 
       </div>
