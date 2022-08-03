@@ -4,21 +4,23 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
-<title>Title | Self-study Data Science Projects notes Blog</title>
+<title>Winning a Kaggle Competition in Python - Part 1 | Self-study Data Science Projects notes Blog</title>
 <meta name="generator" content="Jekyll v4.1.1" />
-<meta property="og:title" content="Title" />
+<meta property="og:title" content="Winning a Kaggle Competition in Python - Part 1" />
 <meta property="og:locale" content="en_US" />
-<meta name="description" content="A collection of jupyter notebooks and datasets for practicing Data Science skills." />
-<meta property="og:description" content="A collection of jupyter notebooks and datasets for practicing Data Science skills." />
-<link rel="canonical" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html" />
-<meta property="og:url" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html" />
+<meta name="description" content="In this first chapter, you will get exposure to the Kaggle competition process. You will train a model and prepare a csv file ready for submission. You will learn the difference between Public and Private test splits, and how to prevent overfitting." />
+<meta property="og:description" content="In this first chapter, you will get exposure to the Kaggle competition process. You will train a model and prepare a csv file ready for submission. You will learn the difference between Public and Private test splits, and how to prevent overfitting." />
+<link rel="canonical" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/fastpages/jupyter/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html" />
+<meta property="og:url" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/fastpages/jupyter/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html" />
 <meta property="og:site_name" content="Self-study Data Science Projects notes Blog" />
+<meta property="og:image" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/some_folder/your_image.png" />
 <meta property="og:type" content="article" />
 <meta property="article:published_time" content="2022-08-03T00:00:00-05:00" />
-<meta name="twitter:card" content="summary" />
-<meta property="twitter:title" content="Title" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/some_folder/your_image.png" />
+<meta property="twitter:title" content="Winning a Kaggle Competition in Python - Part 1" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-08-03T00:00:00-05:00","datePublished":"2022-08-03T00:00:00-05:00","description":"A collection of jupyter notebooks and datasets for practicing Data Science skills.","headline":"Title","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-08-03T00:00:00-05:00","datePublished":"2022-08-03T00:00:00-05:00","description":"In this first chapter, you will get exposure to the Kaggle competition process. You will train a model and prepare a csv file ready for submission. You will learn the difference between Public and Private test splits, and how to prevent overfitting.","headline":"Winning a Kaggle Competition in Python - Part 1","image":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/some_folder/your_image.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/fastpages/jupyter/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/fastpages/jupyter/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -73,7 +75,7 @@ window.onload = wrap_img;
         <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
   <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Title</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-08-03T00:00:00-05:00" itemprop="datePublished">
+    <h1 class="post-title p-name" itemprop="name headline">Winning a Kaggle Competition in Python - Part 1</h1><p class="page-description">In this first chapter, you will get exposure to the Kaggle competition process. You will train a model and prepare a csv file ready for submission. You will learn the difference between Public and Private test splits, and how to prevent overfitting.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-08-03T00:00:00-05:00" itemprop="datePublished">
         Aug 3, 2022
       </time>
        • <span class="read-time" title="Estimated read time">
@@ -83,6 +85,16 @@ window.onload = wrap_img;
     
 </span></p>
 
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#fastpages">fastpages</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#jupyter">jupyter</a>
+        
+      
+      </p>
     
 
     
@@ -125,34 +137,6 @@ window.onload = wrap_img;
 
 <div class="container" id="notebook-container">
         
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Chapter-1:-Kaggle-competitions-process">Chapter 1: Kaggle competitions process<a class="anchor-link" href="#Chapter-1:-Kaggle-competitions-process"> </a></h3><p>In this first chapter, you will get exposure to the Kaggle competition process. You will train a model and prepare a csv file ready for submission. You will learn the difference between Public and Private test splits, and how to prevent overfitting.</p>
-<ul>
-<li>1.1 Competitions overview<ul>
-<li>Explore train data</li>
-<li>Explore test data<br />
-<br /></li>
-</ul>
-</li>
-<li>1.2 Prepare your first submission<ul>
-<li>Determine a problem type</li>
-<li>Train a simple model</li>
-<li>Prepare a submission<br />
-<br />    </li>
-</ul>
-</li>
-<li>1.3 Public vs Private leaderboard<ul>
-<li>What model is overfitting?</li>
-<li>Train XGBoost models</li>
-<li>Explore overfitting XGBoost</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h4 id="1.1-Overview">1.1 Overview<a class="anchor-link" href="#1.1-Overview"> </a></h4><ul>
@@ -532,7 +516,15 @@ c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\xgboost\data.p
 
 
 
-  </div><a class="u-url" href="/Data-Science-selfstudy-notes-Blog/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html" hidden></a>
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="anhhaibkhn/Data-Science-selfstudy-notes-Blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/Data-Science-selfstudy-notes-Blog/fastpages/jupyter/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html" hidden></a>
 </article>
 
       </div>
