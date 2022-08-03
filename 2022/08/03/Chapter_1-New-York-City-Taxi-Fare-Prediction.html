@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Title | Self-study Data Science Projects notes Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Title" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="A collection of jupyter notebooks and datasets for practicing Data Science skills." />
+<meta property="og:description" content="A collection of jupyter notebooks and datasets for practicing Data Science skills." />
+<link rel="canonical" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html" />
+<meta property="og:url" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html" />
+<meta property="og:site_name" content="Self-study Data Science Projects notes Blog" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-03T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="Title" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-08-03T00:00:00-05:00","datePublished":"2022-08-03T00:00:00-05:00","description":"A collection of jupyter notebooks and datasets for practicing Data Science skills.","headline":"Title","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/Data-Science-selfstudy-notes-Blog/">Self-study Data Science Projects notes Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/about/">About Me</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/search/">Search</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Title</h1><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-08-03T00:00:00-05:00" itemprop="datePublished">
+        Aug 3, 2022
+      </time>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      3 min read
+    
+</span></p>
+
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/2022-08-03-Chapter_1 New York City Taxi Fare Prediction.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/anhhaibkhn/Data-Science-selfstudy-notes-Blog/master?filepath=_notebooks%2F2022-08-03-Chapter_1+New+York+City+Taxi+Fare+Prediction.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/anhhaibkhn/Data-Science-selfstudy-notes-Blog/blob/master/_notebooks/2022-08-03-Chapter_1 New York City Taxi Fare Prediction.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fanhhaibkhn%2FData-Science-selfstudy-notes-Blog%2Fblob%2Fmaster%2F_notebooks%2F2022-08-03-Chapter_1+New+York+City+Taxi+Fare+Prediction.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/2022-08-03-Chapter_1 New York City Taxi Fare Prediction.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Chapter-1:-Kaggle-competitions-process">Chapter 1: Kaggle competitions process<a class="anchor-link" href="#Chapter-1:-Kaggle-competitions-process"> </a></h3><p>In this first chapter, you will get exposure to the Kaggle competition process. You will train a model and prepare a csv file ready for submission. You will learn the difference between Public and Private test splits, and how to prevent overfitting.</p>
+<ul>
+<li>1.1 Competitions overview<ul>
+<li>Explore train data</li>
+<li>Explore test data<br />
+<br /></li>
+</ul>
+</li>
+<li>1.2 Prepare your first submission<ul>
+<li>Determine a problem type</li>
+<li>Train a simple model</li>
+<li>Prepare a submission<br />
+<br />    </li>
+</ul>
+</li>
+<li>1.3 Public vs Private leaderboard<ul>
+<li>What model is overfitting?</li>
+<li>Train XGBoost models</li>
+<li>Explore overfitting XGBoost</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="1.1-Overview">1.1 Overview<a class="anchor-link" href="#1.1-Overview"> </a></h4><ul>
+<li>Explore train and test data</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Read train data</span>
+<span class="n">taxi_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/taxi_train_chapter_4.csv&#39;</span><span class="p">)</span>
+<span class="n">taxi_train</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;id&#39;,
+ &#39;fare_amount&#39;,
+ &#39;pickup_datetime&#39;,
+ &#39;pickup_longitude&#39;,
+ &#39;pickup_latitude&#39;,
+ &#39;dropoff_longitude&#39;,
+ &#39;dropoff_latitude&#39;,
+ &#39;passenger_count&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot; &#39;fare_amount&#39; column is missing in test data because this is the column that we are predicting.&quot;&quot;&quot;</span>
+
+<span class="c1"># Read test data</span>
+<span class="n">taxi_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/taxi_test_chapter_4.csv&#39;</span><span class="p">)</span>
+<span class="n">taxi_test</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;id&#39;,
+ &#39;pickup_datetime&#39;,
+ &#39;pickup_longitude&#39;,
+ &#39;pickup_latitude&#39;,
+ &#39;dropoff_longitude&#39;,
+ &#39;dropoff_latitude&#39;,
+ &#39;passenger_count&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">taxi_sample_sub</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/taxi_sample_submission.csv&#39;</span><span class="p">)</span>
+<span class="n">taxi_sample_sub</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>key</th>
+      <th>fare_amount</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2015-01-27 13:08:24.0000002</td>
+      <td>11.35</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2015-01-27 13:08:24.0000003</td>
+      <td>11.35</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2011-10-08 11:53:44.0000002</td>
+      <td>11.35</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2012-12-01 21:12:12.0000002</td>
+      <td>11.35</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2012-12-01 21:12:12.0000003</td>
+      <td>11.35</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Train-XGBoost-models">Train XGBoost models<a class="anchor-link" href="#Train-XGBoost-models"> </a></h3>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_full</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/train.csv&#39;</span><span class="p">)</span>
+<span class="c1"># test = pd.read_csv(&#39;datasets/test.csv&#39;)</span>
+
+<span class="c1"># Randomly use 30000 of your dataframe</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df_full</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">30000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+
+
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="n">train</span><span class="p">,</span> <span class="n">test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+
+<span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
+
+<span class="c1"># Create DMatrix on train data</span>
+<span class="n">dtrain</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train</span><span class="p">[[</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">]],</span>
+                     <span class="n">label</span><span class="o">=</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;sales&#39;</span><span class="p">])</span>
+<span class="c1"># dtest = xgb.DMatrix(data=test[[&#39;store&#39;, &#39;item&#39;]])</span>
+
+
+<span class="c1"># Define xgboost parameters</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>  <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;reg:linear&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="c1"># &#39;max_depth&#39;: 8,</span>
+            <span class="c1"># &#39;max_depth&#39;: 15,</span>
+            <span class="s1">&#39;verbosity&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+
+<span class="c1"># Train xgboost model</span>
+<span class="n">xg_depth_2</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">dtrain</span><span class="o">=</span><span class="n">dtrain</span><span class="p">)</span>
+
+
+<span class="c1"># Define xgboost parameters</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>  <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;reg:linear&#39;</span><span class="p">,</span>
+            <span class="c1">#&#39;max_depth&#39;: 2,</span>
+            <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="c1"># &#39;max_depth&#39;: 15,</span>
+            <span class="s1">&#39;verbosity&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+
+<span class="c1"># Train xgboost model</span>
+<span class="n">xg_depth_8</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">dtrain</span><span class="o">=</span><span class="n">dtrain</span><span class="p">)</span>
+
+<span class="c1"># Define xgboost parameters</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>  <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;reg:linear&#39;</span><span class="p">,</span>
+            <span class="c1">#&#39;max_depth&#39;: 2,</span>
+            <span class="c1"># &#39;max_depth&#39;: 8,</span>
+            <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+            <span class="s1">&#39;verbosity&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+
+<span class="c1"># Train xgboost model</span>
+<span class="n">xg_depth_15</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">dtrain</span><span class="o">=</span><span class="n">dtrain</span><span class="p">)</span>
+
+<span class="c1"># Define xgboost parameters</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>  <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;reg:linear&#39;</span><span class="p">,</span>
+            <span class="c1">#&#39;max_depth&#39;: 2,</span>
+            <span class="c1"># &#39;max_depth&#39;: 8,</span>
+            <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+            <span class="s1">&#39;verbosity&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+
+<span class="c1"># Train xgboost model</span>
+<span class="n">xg_depth_30</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">dtrain</span><span class="o">=</span><span class="n">dtrain</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+Int64Index: 30000 entries, 782526 to 499585
+Data columns (total 4 columns):
+ #   Column  Non-Null Count  Dtype 
+---  ------  --------------  ----- 
+ 0   date    30000 non-null  object
+ 1   store   30000 non-null  int64 
+ 2   item    30000 non-null  int64 
+ 3   sales   30000 non-null  int64 
+dtypes: int64(3), object(1)
+memory usage: 1.1+ MB
+None
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\xgboost\data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Explore-overfitting-XGBoost">Explore overfitting XGBoost<a class="anchor-link" href="#Explore-overfitting-XGBoost"> </a></h4><p>Having trained 3 XGBoost models with different maximum depths, you will now evaluate their quality. For this purpose, you will measure the quality of each model on both the train data and the test data. As you know by now, the train data is the data models have been trained on. The test data is the next month sales data that models have never seen before.</p>
+<p>The goal of this exercise is to determine whether any of the models trained is overfitting. To measure the quality of the models you will use Mean Squared Error (MSE). It's available in sklearn.metrics as mean_squared_error() function that takes two arguments: true values and predicted values.</p>
+<p>train and test DataFrames together with 3 models trained (xg_depth_2, xg_depth_8, xg_depth_15) are available in your workspace.</p>
+<ul>
+<li><p>Instructions</p>
+<ul>
+<li>Make predictions for each model on both the train and test data.</li>
+<li>Calculate the MSE between the true values and your predictions for both the train and test data.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="n">dtrain_</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train</span><span class="p">[[</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">]])</span>
+<span class="n">dtest</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">test</span><span class="p">[[</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">]])</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
+
+<span class="c1"># For each of 3 trained models</span>
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="p">[</span><span class="n">xg_depth_2</span><span class="p">,</span> <span class="n">xg_depth_8</span><span class="p">,</span> <span class="n">xg_depth_15</span><span class="p">,</span><span class="n">xg_depth_30</span><span class="p">]:</span>
+    <span class="c1"># Make predictions</span>
+    <span class="n">train_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dtrain_</span><span class="p">)</span>     
+    <span class="n">test_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dtest</span><span class="p">)</span>          
+    
+    <span class="c1"># Calculate metrics</span>
+    <span class="n">mse_train</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;sales&#39;</span><span class="p">],</span> <span class="n">train_pred</span><span class="p">)</span>                  
+    <span class="n">mse_test</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;sales&#39;</span><span class="p">],</span> <span class="n">test_pred</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MSE Train: </span><span class="si">{:.3f}</span><span class="s1">. MSE Test: </span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mse_train</span><span class="p">,</span> <span class="n">mse_test</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>15000 15000
+MSE Train: 600.630. MSE Test: 601.486
+MSE Train: 295.394. MSE Test: 301.276
+MSE Train: 252.848. MSE Test: 263.355
+MSE Train: 251.809. MSE Test: 262.937
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\xgboost\data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\xgboost\data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><a class="u-url" href="/Data-Science-selfstudy-notes-Blog/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/Data-Science-selfstudy-notes-Blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/Data-Science-selfstudy-notes-Blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>A collection of jupyter notebooks and datasets for practicing Data Science skills.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/anhhaibkhn" target="_blank" title="anhhaibkhn"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/NguyenNgocHai2" target="_blank" title="NguyenNgocHai2"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
