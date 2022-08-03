@@ -39,7 +39,7 @@ baseurl: "/Data-Science-selfstudy-notes-Blog" # the subpath of your site, e.g. "
 # Github and twitter are optional:
 minima:
   social_links:
-    twitter: @NguyenNgocHai2
+    twitter: NguyenNgocHai2
     github: anhhaibkhn
 
 # Set this to true to get LaTeX math equation support
