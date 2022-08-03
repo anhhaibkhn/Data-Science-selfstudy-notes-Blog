@@ -12,3 +12,6 @@ _notebooks/.ipynb_checkpoints
 .netlify
 .tweet-cache
 __pycache__
+_notebooks/Winning a Kaggle Competition in Python/datasets/two_sigma_connect/
+_notebooks/Winning a Kaggle Competition in Python/datasets/train.csv
+_notebooks/Winning a Kaggle Competition in Python/datasets/test.csv
