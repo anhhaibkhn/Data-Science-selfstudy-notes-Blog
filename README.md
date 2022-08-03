@@ -6,7 +6,7 @@
 
 https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/
 
-# My Blog
+# Data-Science-selfstudy-notes-Blog
 
 
 _powered by [fastpages](https://github.com/fastai/fastpages)_
