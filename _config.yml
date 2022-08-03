@@ -6,8 +6,8 @@
 # https://learn-the-web.algonquindesign.ca/topics/markdown-yaml-cheat-sheet/#yaml
 # https://learnxinyminutes.com/docs/yaml/
 
-title: fastpages
-description: An easy to use blogging platform with support for Jupyter Notebooks.
+title: Self-study Data Science Projects notes Blog
+description: A collection of jupyter notebooks and datasets for practicing Data Science skills. 
 github_username: anhhaibkhn
 # you can comment the below line out if your repo name is not different than your baseurl
 github_repo: "Data-Science-selfstudy-notes-Blog"
@@ -39,8 +39,8 @@ baseurl: "/Data-Science-selfstudy-notes-Blog" # the subpath of your site, e.g. "
 # Github and twitter are optional:
 minima:
   social_links:
-    twitter: fastdotai
-    github: fastai
+    twitter: @NguyenNgocHai2
+    github: anhhaibkhn
 
 # Set this to true to get LaTeX math equation support
 use_math: 
