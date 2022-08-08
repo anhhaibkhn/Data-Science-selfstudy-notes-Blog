@@ -7,6 +7,7 @@
 <title>Winning a Kaggle Competition in Python - Part 1 | Self-study Data Science Projects notes Blog</title>
 <meta name="generator" content="Jekyll v4.1.1" />
 <meta property="og:title" content="Winning a Kaggle Competition in Python - Part 1" />
+<meta name="author" content="Hai Nguyen" />
 <meta property="og:locale" content="en_US" />
 <meta name="description" content="In this first chapter, you will get exposure to the Kaggle competition process. You will train a model and prepare a csv file ready for submission. You will learn the difference between Public and Private test splits, and how to prevent overfitting." />
 <meta property="og:description" content="In this first chapter, you will get exposure to the Kaggle competition process. You will train a model and prepare a csv file ready for submission. You will learn the difference between Public and Private test splits, and how to prevent overfitting." />
@@ -20,7 +21,7 @@
 <meta property="twitter:image" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/some_folder/your_image.png" />
 <meta property="twitter:title" content="Winning a Kaggle Competition in Python - Part 1" />
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"BlogPosting","dateModified":"2022-08-03T00:00:00-05:00","datePublished":"2022-08-03T00:00:00-05:00","description":"In this first chapter, you will get exposure to the Kaggle competition process. You will train a model and prepare a csv file ready for submission. You will learn the difference between Public and Private test splits, and how to prevent overfitting.","headline":"Winning a Kaggle Competition in Python - Part 1","image":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/some_folder/your_image.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/kaggle/datacamp/machine%20learning/python/eda/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/kaggle/datacamp/machine%20learning/python/eda/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html"}</script>
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hai Nguyen"},"dateModified":"2022-08-03T00:00:00-05:00","datePublished":"2022-08-03T00:00:00-05:00","description":"In this first chapter, you will get exposure to the Kaggle competition process. You will train a model and prepare a csv file ready for submission. You will learn the difference between Public and Private test splits, and how to prevent overfitting.","headline":"Winning a Kaggle Competition in Python - Part 1","image":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/some_folder/your_image.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/kaggle/datacamp/machine%20learning/python/eda/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/kaggle/datacamp/machine%20learning/python/eda/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html"}</script>
 <!-- End Jekyll SEO tag -->
 <link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -77,7 +78,9 @@ window.onload = wrap_img;
   <header class="post-header">
     <h1 class="post-title p-name" itemprop="name headline">Winning a Kaggle Competition in Python - Part 1</h1><p class="page-description">In this first chapter, you will get exposure to the Kaggle competition process. You will train a model and prepare a csv file ready for submission. You will learn the difference between Public and Private test splits, and how to prevent overfitting.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-08-03T00:00:00-05:00" itemprop="datePublished">
         Aug 3, 2022
-      </time>
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Hai Nguyen</span></span>
        • <span class="read-time" title="Estimated read time">
     
     
@@ -137,7 +140,12 @@ window.onload = wrap_img;
       </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    <!--
+    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h3"><a href="#Chapter-1:-Kaggle-competitions-process">Chapter 1: Kaggle competitions process </a></li>
+<li class="toc-entry toc-h1"><a href="#1.1-Overview">1.1 Overview </a></li>
+<li class="toc-entry toc-h1"><a href="#Train-XGBoost-models">Train XGBoost models </a></li>
+<li class="toc-entry toc-h1"><a href="#Explore-overfitting-XGBoost">Explore overfitting XGBoost </a></li>
+</ul><!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
@@ -146,9 +154,45 @@ window.onload = wrap_img;
 
 <div class="container" id="notebook-container">
         
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="1.1-Overview">1.1 Overview<a class="anchor-link" href="#1.1-Overview"> </a></h4><ul>
+<h3 id="Chapter-1:-Kaggle-competitions-process">
+<a class="anchor" href="#Chapter-1:-Kaggle-competitions-process" aria-hidden="true"><span class="octicon octicon-link"></span></a>Chapter 1: Kaggle competitions process<a class="anchor-link" href="#Chapter-1:-Kaggle-competitions-process"> </a>
+</h3>
+<ul>
+<li>1.1 Competitions overview<ul>
+<li>Explore train data</li>
+<li>Explore test data<br>
+<br>
+</li>
+</ul>
+</li>
+<li>1.2 Prepare your first submission<ul>
+<li>Determine a problem type</li>
+<li>Train a simple model</li>
+<li>Prepare a submission<br>
+<br>    </li>
+</ul>
+</li>
+<li>1.3 Public vs Private leaderboard<ul>
+<li>What model is overfitting?</li>
+<li>Train XGBoost models</li>
+<li>Explore overfitting XGBoost</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="1.1-Overview">
+<a class="anchor" href="#1.1-Overview" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.1 Overview<a class="anchor-link" href="#1.1-Overview"> </a>
+</h1>
+<ul>
 <li>Explore train and test data</li>
 </ul>
 
@@ -165,7 +209,7 @@ window.onload = wrap_img;
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="c1"># Read train data</span>
-<span class="n">taxi_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/taxi_train_chapter_4.csv&#39;</span><span class="p">)</span>
+<span class="n">taxi_train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'datasets/taxi_train_chapter_4.csv'</span><span class="p">)</span>
 <span class="n">taxi_train</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
 </pre></div>
 
@@ -181,14 +225,14 @@ window.onload = wrap_img;
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;id&#39;,
- &#39;fare_amount&#39;,
- &#39;pickup_datetime&#39;,
- &#39;pickup_longitude&#39;,
- &#39;pickup_latitude&#39;,
- &#39;dropoff_longitude&#39;,
- &#39;dropoff_latitude&#39;,
- &#39;passenger_count&#39;]</pre>
+<pre>['id',
+ 'fare_amount',
+ 'pickup_datetime',
+ 'pickup_longitude',
+ 'pickup_latitude',
+ 'dropoff_longitude',
+ 'dropoff_latitude',
+ 'passenger_count']</pre>
 </div>
 
 </div>
@@ -206,10 +250,10 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot; &#39;fare_amount&#39; column is missing in test data because this is the column that we are predicting.&quot;&quot;&quot;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">""" 'fare_amount' column is missing in test data because this is the column that we are predicting."""</span>
 
 <span class="c1"># Read test data</span>
-<span class="n">taxi_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/taxi_test_chapter_4.csv&#39;</span><span class="p">)</span>
+<span class="n">taxi_test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'datasets/taxi_test_chapter_4.csv'</span><span class="p">)</span>
 <span class="n">taxi_test</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
 </pre></div>
 
@@ -225,13 +269,13 @@ window.onload = wrap_img;
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>[&#39;id&#39;,
- &#39;pickup_datetime&#39;,
- &#39;pickup_longitude&#39;,
- &#39;pickup_latitude&#39;,
- &#39;dropoff_longitude&#39;,
- &#39;dropoff_latitude&#39;,
- &#39;passenger_count&#39;]</pre>
+<pre>['id',
+ 'pickup_datetime',
+ 'pickup_longitude',
+ 'pickup_latitude',
+ 'dropoff_longitude',
+ 'dropoff_latitude',
+ 'passenger_count']</pre>
 </div>
 
 </div>
@@ -249,7 +293,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">taxi_sample_sub</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/taxi_sample_submission.csv&#39;</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">taxi_sample_sub</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'datasets/taxi_sample_submission.csv'</span><span class="p">)</span>
 <span class="n">taxi_sample_sub</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -325,9 +369,12 @@ window.onload = wrap_img;
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Train-XGBoost-models">Train XGBoost models<a class="anchor-link" href="#Train-XGBoost-models"> </a></h3>
+<h1 id="Train-XGBoost-models">
+<a class="anchor" href="#Train-XGBoost-models" aria-hidden="true"><span class="octicon octicon-link"></span></a>Train XGBoost models<a class="anchor-link" href="#Train-XGBoost-models"> </a>
+</h1>
 </div>
 </div>
 </div>
@@ -338,8 +385,8 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_full</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/train.csv&#39;</span><span class="p">)</span>
-<span class="c1"># test = pd.read_csv(&#39;datasets/test.csv&#39;)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_full</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'datasets/train.csv'</span><span class="p">)</span>
+<span class="c1"># test = pd.read_csv('datasets/test.csv')</span>
 
 <span class="c1"># Randomly use 30000 of your dataframe</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">df_full</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">30000</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
@@ -355,48 +402,48 @@ window.onload = wrap_img;
 <span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
 
 <span class="c1"># Create DMatrix on train data</span>
-<span class="n">dtrain</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train</span><span class="p">[[</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">]],</span>
-                     <span class="n">label</span><span class="o">=</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;sales&#39;</span><span class="p">])</span>
-<span class="c1"># dtest = xgb.DMatrix(data=test[[&#39;store&#39;, &#39;item&#39;]])</span>
+<span class="n">dtrain</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train</span><span class="p">[[</span><span class="s1">'store'</span><span class="p">,</span> <span class="s1">'item'</span><span class="p">]],</span>
+                     <span class="n">label</span><span class="o">=</span><span class="n">train</span><span class="p">[</span><span class="s1">'sales'</span><span class="p">])</span>
+<span class="c1"># dtest = xgb.DMatrix(data=test[['store', 'item']])</span>
 
 
 <span class="c1"># Define xgboost parameters</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>  <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;reg:linear&#39;</span><span class="p">,</span>
-            <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
-            <span class="c1"># &#39;max_depth&#39;: 8,</span>
-            <span class="c1"># &#39;max_depth&#39;: 15,</span>
-            <span class="s1">&#39;verbosity&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>  <span class="s1">'objective'</span><span class="p">:</span> <span class="s1">'reg:linear'</span><span class="p">,</span>
+            <span class="s1">'max_depth'</span><span class="p">:</span> <span class="mi">2</span><span class="p">,</span>
+            <span class="c1"># 'max_depth': 8,</span>
+            <span class="c1"># 'max_depth': 15,</span>
+            <span class="s1">'verbosity'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 
 <span class="c1"># Train xgboost model</span>
 <span class="n">xg_depth_2</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">dtrain</span><span class="o">=</span><span class="n">dtrain</span><span class="p">)</span>
 
 
 <span class="c1"># Define xgboost parameters</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>  <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;reg:linear&#39;</span><span class="p">,</span>
-            <span class="c1">#&#39;max_depth&#39;: 2,</span>
-            <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
-            <span class="c1"># &#39;max_depth&#39;: 15,</span>
-            <span class="s1">&#39;verbosity&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>  <span class="s1">'objective'</span><span class="p">:</span> <span class="s1">'reg:linear'</span><span class="p">,</span>
+            <span class="c1">#'max_depth': 2,</span>
+            <span class="s1">'max_depth'</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+            <span class="c1"># 'max_depth': 15,</span>
+            <span class="s1">'verbosity'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 
 <span class="c1"># Train xgboost model</span>
 <span class="n">xg_depth_8</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">dtrain</span><span class="o">=</span><span class="n">dtrain</span><span class="p">)</span>
 
 <span class="c1"># Define xgboost parameters</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>  <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;reg:linear&#39;</span><span class="p">,</span>
-            <span class="c1">#&#39;max_depth&#39;: 2,</span>
-            <span class="c1"># &#39;max_depth&#39;: 8,</span>
-            <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
-            <span class="s1">&#39;verbosity&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>  <span class="s1">'objective'</span><span class="p">:</span> <span class="s1">'reg:linear'</span><span class="p">,</span>
+            <span class="c1">#'max_depth': 2,</span>
+            <span class="c1"># 'max_depth': 8,</span>
+            <span class="s1">'max_depth'</span><span class="p">:</span> <span class="mi">15</span><span class="p">,</span>
+            <span class="s1">'verbosity'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 
 <span class="c1"># Train xgboost model</span>
 <span class="n">xg_depth_15</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">dtrain</span><span class="o">=</span><span class="n">dtrain</span><span class="p">)</span>
 
 <span class="c1"># Define xgboost parameters</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>  <span class="s1">&#39;objective&#39;</span><span class="p">:</span> <span class="s1">&#39;reg:linear&#39;</span><span class="p">,</span>
-            <span class="c1">#&#39;max_depth&#39;: 2,</span>
-            <span class="c1"># &#39;max_depth&#39;: 8,</span>
-            <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
-            <span class="s1">&#39;verbosity&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span>  <span class="s1">'objective'</span><span class="p">:</span> <span class="s1">'reg:linear'</span><span class="p">,</span>
+            <span class="c1">#'max_depth': 2,</span>
+            <span class="c1"># 'max_depth': 8,</span>
+            <span class="s1">'max_depth'</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+            <span class="s1">'verbosity'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 
 <span class="c1"># Train xgboost model</span>
 <span class="n">xg_depth_30</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">train</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">dtrain</span><span class="o">=</span><span class="n">dtrain</span><span class="p">)</span>
@@ -412,7 +459,7 @@ window.onload = wrap_img;
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+<pre>&lt;class 'pandas.core.frame.DataFrame'&gt;
 Int64Index: 30000 entries, 782526 to 499585
 Data columns (total 4 columns):
  #   Column  Non-Null Count  Dtype 
@@ -443,13 +490,18 @@ None
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Explore-overfitting-XGBoost">Explore overfitting XGBoost<a class="anchor-link" href="#Explore-overfitting-XGBoost"> </a></h4><p>Having trained 3 XGBoost models with different maximum depths, you will now evaluate their quality. For this purpose, you will measure the quality of each model on both the train data and the test data. As you know by now, the train data is the data models have been trained on. The test data is the next month sales data that models have never seen before.</p>
+<h1 id="Explore-overfitting-XGBoost">
+<a class="anchor" href="#Explore-overfitting-XGBoost" aria-hidden="true"><span class="octicon octicon-link"></span></a>Explore overfitting XGBoost<a class="anchor-link" href="#Explore-overfitting-XGBoost"> </a>
+</h1>
+<p>Having trained 3 XGBoost models with different maximum depths, you will now evaluate their quality. For this purpose, you will measure the quality of each model on both the train data and the test data. As you know by now, the train data is the data models have been trained on. The test data is the next month sales data that models have never seen before.</p>
 <p>The goal of this exercise is to determine whether any of the models trained is overfitting. To measure the quality of the models you will use Mean Squared Error (MSE). It's available in sklearn.metrics as mean_squared_error() function that takes two arguments: true values and predicted values.</p>
 <p>train and test DataFrames together with 3 models trained (xg_depth_2, xg_depth_8, xg_depth_15) are available in your workspace.</p>
 <ul>
-<li><p>Instructions</p>
+<li>
+<p>Instructions</p>
 <ul>
 <li>Make predictions for each model on both the train and test data.</li>
 <li>Calculate the MSE between the true values and your predictions for both the train and test data.</li>
@@ -469,8 +521,8 @@ None
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
 
-<span class="n">dtrain_</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train</span><span class="p">[[</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">]])</span>
-<span class="n">dtest</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">test</span><span class="p">[[</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">]])</span>
+<span class="n">dtrain_</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">train</span><span class="p">[[</span><span class="s1">'store'</span><span class="p">,</span> <span class="s1">'item'</span><span class="p">]])</span>
+<span class="n">dtest</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">test</span><span class="p">[[</span><span class="s1">'store'</span><span class="p">,</span> <span class="s1">'item'</span><span class="p">]])</span>
 <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">train</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">test</span><span class="p">))</span>
 
 <span class="c1"># For each of 3 trained models</span>
@@ -480,9 +532,9 @@ None
     <span class="n">test_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">dtest</span><span class="p">)</span>          
     
     <span class="c1"># Calculate metrics</span>
-    <span class="n">mse_train</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;sales&#39;</span><span class="p">],</span> <span class="n">train_pred</span><span class="p">)</span>                  
-    <span class="n">mse_test</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;sales&#39;</span><span class="p">],</span> <span class="n">test_pred</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;MSE Train: </span><span class="si">{:.3f}</span><span class="s1">. MSE Test: </span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mse_train</span><span class="p">,</span> <span class="n">mse_test</span><span class="p">))</span>
+    <span class="n">mse_train</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">'sales'</span><span class="p">],</span> <span class="n">train_pred</span><span class="p">)</span>                  
+    <span class="n">mse_test</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">'sales'</span><span class="p">],</span> <span class="n">test_pred</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'MSE Train: </span><span class="si">{:.3f}</span><span class="s1">. MSE Test: </span><span class="si">{:.3f}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mse_train</span><span class="p">,</span> <span class="n">mse_test</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -557,7 +609,7 @@ c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\xgboost\data.p
       </div>
     </div>
 
-    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/anhhaibkhn" target="_blank" title="anhhaibkhn"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/NguyenNgocHai2" target="_blank" title="NguyenNgocHai2"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/anhhaibkhn" target="_blank" title="anhhaibkhn"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://www.linkedin.com/in/nguyen-hai-b1ab8042" target="_blank" title="nguyen-hai-b1ab8042"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#linkedin"></use></svg></a></li><li><a rel="me" href="https://twitter.com/NguyenNgocHai2" target="_blank" title="NguyenNgocHai2"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
 </div>
 
   </div>
