@@ -1,12 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
-<loc>https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/markdown/2020/01/14/test-markdown-post.html</loc>
-<lastmod>2020-01-14T00:00:00-06:00</lastmod>
-</url>
-<url>
 <loc>https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/jupyter/2020/02/20/test.html</loc>
 <lastmod>2020-02-20T00:00:00-06:00</lastmod>
+</url>
+<url>
+<loc>https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/kaggle/datacamp/machine%20learning/python/eda/2022/02/16/A-Visual-History-of-Nobel-Prize-Winner.html</loc>
+<lastmod>2022-02-16T00:00:00-06:00</lastmod>
+</url>
+<url>
+<loc>https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/datacamp/machine%20learning/tensorflow/pandas/eda/2022/02/16/ASL-Recognition-with-Deep-Learning.html</loc>
+<lastmod>2022-02-16T00:00:00-06:00</lastmod>
+</url>
+<url>
+<loc>https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/datacamp/machine%20learning/pandas/eda/2022/02/16/Analyzing-TV-Data.html</loc>
+<lastmod>2022-02-16T00:00:00-06:00</lastmod>
+</url>
+<url>
+<loc>https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/datacamp/machine%20learning/gensim/pandas/eda/2022/02/16/Book-Recommendations-from-Charles-Darwin.html</loc>
+<lastmod>2022-02-16T00:00:00-06:00</lastmod>
+</url>
+<url>
+<loc>https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/datacamp/machine%20learning/gensim/pandas/eda/2022/02/16/Dr-Semmelweis-and-the-Discovery-of-Handwashing.html</loc>
+<lastmod>2022-02-16T00:00:00-06:00</lastmod>
 </url>
 <url>
 <loc>https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/kaggle/datacamp/machine%20learning/python/eda/2022/08/03/Chapter_1-New-York-City-Taxi-Fare-Prediction.html</loc>
