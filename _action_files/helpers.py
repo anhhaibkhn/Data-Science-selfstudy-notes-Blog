@@ -20,6 +20,8 @@ def getDirectoryList(path):
 
     return directoryList
 
-# src_dir = os.getcwd() + '\_notebooks'
-# print(src_dir)
-# print(list( (f + '\\*.ipynb') for f in getDirectoryList(src_dir)))
+
+# if __name__=='__main__':
+#     src_dir = os.getcwd() + '\_notebooks'
+#     print(src_dir)
+#     print(list( (f + '\\*.ipynb') for f in getDirectoryList(src_dir)))
