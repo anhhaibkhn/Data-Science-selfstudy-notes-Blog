@@ -8,7 +8,7 @@ badges: true
 comments: true
 author: Hai Nguyen
 categories: [Python, Datacamp, Machine Learning, Gensim, Pandas, EDA, Pandas]
-image: images/some_folder/your_image.png
+image: https://assets.datacamp.com/production/project_20/img/ignaz_semmelweis_1860.jpeg
 hide: false
 search_exclude: true
 metadata_key1: metadata_value1

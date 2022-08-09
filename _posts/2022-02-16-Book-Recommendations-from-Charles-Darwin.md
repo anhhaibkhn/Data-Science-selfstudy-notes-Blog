@@ -8,7 +8,7 @@ badges: true
 comments: true
 author: Hai Nguyen
 categories: [Python, Datacamp, Machine Learning, Gensim, Pandas, EDA, Pandas]
-image: images/some_folder/your_image.png
+image: https://assets.datacamp.com/production/project_607/img/CharlesDarwin.jpg
 hide: false
 search_exclude: true
 metadata_key1: metadata_value1
@@ -26,11 +26,14 @@ layout: notebook
 
 <div class="container" id="notebook-container">
         
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="1.-List-Darwin's-bibliography.">1. List Darwin's bibliography.<a class="anchor-link" href="#1.-List-Darwin's-bibliography."> </a></h2><p>
 Retrieve a list of all text files (*.txt) present in the datasets/ folder using <strong>glob.glob()</strong>. Store them in files.
-Sort files alphabetically using the sort() method.</p>
+Sort files alphabetically using the sort() method.</p><p><img src="https://assets.datacamp.com/production/project_607/img/CharlesDarwin.jpg" alt="Charles Darwin" width="300px"></p>
+<p>Charles Darwin is one of the few universal figures of science. His most renowned work is without a doubt his "<em>On the Origin of Species</em>" published in 1859 which introduced the concept of natural selection. But Darwin wrote many other books on a wide range of topics, including geology, plants or his personal life. In this notebook, we will automatically detect how closely related his books are to each other.</p>
+<p>To this purpose, we will develop the bases of <strong>a content-based book recommendation system</strong>, which will determine which books are close to each other based on how similar the discussed topics are. The methods we will use are commonly used in text- or documents-heavy industries such as legal, tech or customer support to perform some common task such as text classification or handling search engine queries.</p>
+<p>Let's take a look at the books we'll use in our recommendation system.</p>
 </div>
 </div>
 </div>
@@ -1146,15 +1149,6 @@ NotebookApp.rate_limit_window=3.0 (secs)
 </div>
     {% endraw %}
 
-<div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.-Darwin's-bibliography">1. Darwin's bibliography<a class="anchor-link" href="#1.-Darwin's-bibliography"> </a></h2><p><img src="https://assets.datacamp.com/production/project_607/img/CharlesDarwin.jpg" alt="Charles Darwin" width="300px"></p>
-<p>Charles Darwin is one of the few universal figures of science. His most renowned work is without a doubt his "<em>On the Origin of Species</em>" published in 1859 which introduced the concept of natural selection. But Darwin wrote many other books on a wide range of topics, including geology, plants or his personal life. In this notebook, we will automatically detect how closely related his books are to each other.</p>
-<p>To this purpose, we will develop the bases of <strong>a content-based book recommendation system</strong>, which will determine which books are close to each other based on how similar the discussed topics are. The methods we will use are commonly used in text- or documents-heavy industries such as legal, tech or customer support to perform some common task such as text classification or handling search engine queries.</p>
-<p>Let's take a look at the books we'll use in our recommendation system.</p>
-</div>
-</div>
-</div>
 </div>
  
 

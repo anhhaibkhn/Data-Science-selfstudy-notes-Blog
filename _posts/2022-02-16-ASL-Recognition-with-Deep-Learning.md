@@ -7,8 +7,8 @@ branch: master
 badges: true
 comments: true
 author: Hai Nguyen
-categories: [Python, Datacamp, Machine Learning,TensorFlow, Pandas, EDA, Pandas]
-image: images/some_folder/your_image.png
+categories: [Python, Datacamp, Machine Learning, TensorFlow, Keras, Pandas, EDA, Pandas, Convolutional Neural Network]
+image: images/asl_deeplearning.png
 hide: false
 search_exclude: true
 metadata_key1: metadata_value1

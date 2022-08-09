@@ -1,14 +1,14 @@
 ---
 keywords: fastai
 description: Explore a dataset from Kaggle containing a century's worth of Nobel Laureates. Who won? Who got snubbed?
-title: A Visual History of Nobel Prize Winners
+title: A Visual History of Nobel Prize Winners (Datacamp project)
 toc: true
 branch: master
 badges: true
 comments: true
 author: Hai Nguyen
 categories: [Kaggle, Datacamp, Machine Learning, Python, EDA]
-image: images/some_folder/your_image.png
+image: images/nobel_prize.png
 hide: false
 search_exclude: true
 metadata_key1: metadata_value1

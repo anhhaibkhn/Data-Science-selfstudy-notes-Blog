@@ -8,7 +8,7 @@ badges: true
 comments: true
 author: Hai Nguyen
 categories: [Python, Datacamp, Machine Learning, Pandas, EDA, Pandas]
-image: images/some_folder/your_image.png
+image: images/analyzing_tv_data_chart.png
 hide: false
 search_exclude: true
 metadata_key1: metadata_value1
