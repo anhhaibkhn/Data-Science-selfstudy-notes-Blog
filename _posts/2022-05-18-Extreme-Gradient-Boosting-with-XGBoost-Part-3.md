@@ -1,12 +1,13 @@
 ---
 keywords: fastai
-title: Extreme Gradient Boosting with XGBoost - Part 3
+description: Chapter 3 - Fine-tuning your XGBoost model
+title: Extreme Gradient Boosting with XGBoost - Part 3 (DataCamp interactive course)
 toc: false
 branch: master
 badges: true
 comments: true
 author: Hai Nguyen
-categories: [Fine-tuning, Grid-Search, Random-Search, EDA, Pandas, XGBoost]
+categories: [Python, Datacamp, Data Visualization, EDA, Pandas, XGBoost, scikit-learn]
 image: images/xgb_part3.png
 hide: false
 search_exclude: true

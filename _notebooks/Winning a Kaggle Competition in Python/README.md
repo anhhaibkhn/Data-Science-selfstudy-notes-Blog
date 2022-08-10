@@ -1,5 +1,4 @@
-## Winning a Kaggle Competition in Python 
-(DataCamp interactive course)
+## Winning a Kaggle Competition in Python  (DataCamp interactive course)
 
 
 #### Course Description

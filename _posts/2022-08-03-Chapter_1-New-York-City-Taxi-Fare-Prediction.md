@@ -1,6 +1,6 @@
 ---
 keywords: fastai
-description: "In this first chapter, you will get exposure to the Kaggle competition process. You will train a model and prepare a csv file ready for submission. You will learn the difference between Public and Private test splits, and how to prevent overfitting."
+description: In this first chapter, you will get exposure to the Kaggle competition process. You will train a model and prepare a csv file ready for submission. You will learn the difference between Public and Private test splits, and how to prevent overfitting.
 title: Winning a Kaggle Competition in Python - Part 1
 toc: true
 branch: master
@@ -8,7 +8,7 @@ badges: true
 comments: true
 author: Hai Nguyen
 categories: [Kaggle, Datacamp, Machine Learning, Python, EDA]
-image: images/some_folder/your_image.png
+image: images/winning_kaggle_p1.png
 hide: false
 search_exclude: true
 metadata_key1: metadata_value1

@@ -1,12 +1,13 @@
 ---
 keywords: fastai
-title: Extreme Gradient Boosting with XGBoost - Part 2
+description: Chapter 2 - Regression with XGBoost
+title: Extreme Gradient Boosting with XGBoost - Part 2 (DataCamp interactive course)
 toc: false
 branch: master
 badges: true
 comments: true
 author: Hai Nguyen
-categories: [Python, Datacamp, Data Visualization, EDA, Pandas, XGBoost]
+categories: [Python, Datacamp, Data Visualization, EDA, Pandas, XGBoost, scikit-learn]
 image: images/xgb_part2.png
 hide: false
 search_exclude: true

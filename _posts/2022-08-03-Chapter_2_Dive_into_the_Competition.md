@@ -1,6 +1,6 @@
 ---
 keywords: fastai
-description: "Now that you know the basics of Kaggle competitions, you will learn how to study the specific problem at hand. You will practice EDA and get to establish correct local validation strategies. You will also learn about data leakage.."
+description: Now that you know the basics of Kaggle competitions, you will learn how to study the specific problem at hand. You will practice EDA and get to establish correct local validation strategies. You will also learn about data leakage.
 title: Winning a Kaggle Competition in Python - Part 2
 toc: true
 branch: master
@@ -8,7 +8,7 @@ badges: true
 comments: true
 author: Hai Nguyen
 categories: [Kaggle, Datacamp, Machine Learning, Python, EDA]
-image: images/some_folder/your_image.png
+image: images/winning_kaggle_p2.png
 hide: false
 search_exclude: true
 metadata_key1: metadata_value1
@@ -683,7 +683,7 @@ Name: interest_level, dtype: int64</pre>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.3-Local-validation">2.3 Local validation<a class="anchor-link" href="#2.3-Local-validation"> </a></h3><ul>
+<h2 id="2.3-Local-validation">2.3 Local validation<a class="anchor-link" href="#2.3-Local-validation"> </a></h2><ul>
 <li>K-fold cross-validation</li>
 <li>Stratified K-fold  </li>
 </ul>
@@ -693,7 +693,7 @@ Name: interest_level, dtype: int64</pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.4-Validation-usage">2.4 Validation usage<a class="anchor-link" href="#2.4-Validation-usage"> </a></h3><ul>
+<h2 id="2.4-Validation-usage">2.4 Validation usage<a class="anchor-link" href="#2.4-Validation-usage"> </a></h2><ul>
 <li>Time K-fold</li>
 <li>Overall validation score.  </li>
 </ul>
