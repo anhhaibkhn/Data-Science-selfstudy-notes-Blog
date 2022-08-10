@@ -1,0 +1,1371 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Extreme Gradient Boosting with XGBoost - Part 3 (DataCamp interactive course) | Self-study Data Science Projects notes Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Extreme Gradient Boosting with XGBoost - Part 3 (DataCamp interactive course)" />
+<meta name="author" content="Hai Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Chapter 3 - Fine-tuning your XGBoost model" />
+<meta property="og:description" content="Chapter 3 - Fine-tuning your XGBoost model" />
+<link rel="canonical" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/datacamp/data%20visualization/eda/pandas/xgboost/scikit-learn/2022/05/18/Extreme-Gradient-Boosting-with-XGBoost-Part-3.html" />
+<meta property="og:url" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/datacamp/data%20visualization/eda/pandas/xgboost/scikit-learn/2022/05/18/Extreme-Gradient-Boosting-with-XGBoost-Part-3.html" />
+<meta property="og:site_name" content="Self-study Data Science Projects notes Blog" />
+<meta property="og:image" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/xgb_part3.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-05-18T00:00:00-05:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/xgb_part3.png" />
+<meta property="twitter:title" content="Extreme Gradient Boosting with XGBoost - Part 3 (DataCamp interactive course)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hai Nguyen"},"dateModified":"2022-05-18T00:00:00-05:00","datePublished":"2022-05-18T00:00:00-05:00","description":"Chapter 3 - Fine-tuning your XGBoost model","headline":"Extreme Gradient Boosting with XGBoost - Part 3 (DataCamp interactive course)","image":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/xgb_part3.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/datacamp/data%20visualization/eda/pandas/xgboost/scikit-learn/2022/05/18/Extreme-Gradient-Boosting-with-XGBoost-Part-3.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/datacamp/data%20visualization/eda/pandas/xgboost/scikit-learn/2022/05/18/Extreme-Gradient-Boosting-with-XGBoost-Part-3.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/Data-Science-selfstudy-notes-Blog/">Self-study Data Science Projects notes Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/about/">About Me</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/search/">Search</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Extreme Gradient Boosting with XGBoost - Part 3 (DataCamp interactive course)</h1><p class="page-description">Chapter 3 - Fine-tuning your XGBoost model</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-05-18T00:00:00-05:00" itemprop="datePublished">
+        May 18, 2022
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Hai Nguyen</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      15 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Python">Python</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Datacamp">Datacamp</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Data Visualization">Data Visualization</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#EDA">EDA</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Pandas">Pandas</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#XGBoost">XGBoost</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#scikit-learn">scikit-learn</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/Extreme Gradient Boosting with XGBoost/2022-05-18-Extreme Gradient Boosting with XGBoost-Part 3.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/anhhaibkhn/Data-Science-selfstudy-notes-Blog/master?filepath=_notebooks%2FExtreme+Gradient+Boosting+with+XGBoost%2F2022-05-18-Extreme+Gradient+Boosting+with+XGBoost-Part+3.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/anhhaibkhn/Data-Science-selfstudy-notes-Blog/blob/master/_notebooks/Extreme Gradient Boosting with XGBoost/2022-05-18-Extreme Gradient Boosting with XGBoost-Part 3.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fanhhaibkhn%2FData-Science-selfstudy-notes-Blog%2Fblob%2Fmaster%2F_notebooks%2FExtreme+Gradient+Boosting+with+XGBoost%2F2022-05-18-Extreme+Gradient+Boosting+with+XGBoost-Part+3.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/Extreme Gradient Boosting with XGBoost/2022-05-18-Extreme Gradient Boosting with XGBoost-Part 3.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Chapter-3:-Fine-tuning-your-XGBoost-model">Chapter 3: Fine-tuning your XGBoost model<a class="anchor-link" href="#Chapter-3:-Fine-tuning-your-XGBoost-model"> </a></h3><p>This chapter will teach you how to make your XGBoost models as performant as possible. You'll learn about the variety of parameters that can be adjusted to alter the behavior of XGBoost and how to tune them efficiently so that you can supercharge the performance of your models.</p>
+<ul>
+<li>3.1 Why tune your model?<ul>
+<li>When is tuning your model a bad idea?</li>
+<li>Tuning the number of boosting rounds</li>
+<li>Automated boosting round selection using early_stopping<br />
+<br /></li>
+</ul>
+</li>
+<li>3.2 Overview of XGBoost's hyperparameters<ul>
+<li>Tuning eta</li>
+<li>Tuning max_depth</li>
+<li>Tuning colsample_bytree<br />
+<br /></li>
+</ul>
+</li>
+<li>3.3 Review of grid search and random search<ul>
+<li>Grid search with XGBoost</li>
+<li>Random search with XGBoost<br />
+<br /></li>
+</ul>
+</li>
+<li>3.4 Limits of grid search and random search<ul>
+<li>When should you use grid search and random search? 
+<br /></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="3.1.1-Why-tune-your-model-?">3.1.1 Why tune your model ?<a class="anchor-link" href="#3.1.1-Why-tune-your-model-?"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;datasets/ames_housing_trimmed_processed.csv&#39;</span><span class="p">)</span>
+<span class="n">housing_data</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MSSubClass</th>
+      <th>LotFrontage</th>
+      <th>LotArea</th>
+      <th>OverallQual</th>
+      <th>OverallCond</th>
+      <th>YearBuilt</th>
+      <th>Remodeled</th>
+      <th>GrLivArea</th>
+      <th>BsmtFullBath</th>
+      <th>BsmtHalfBath</th>
+      <th>...</th>
+      <th>HouseStyle_1.5Unf</th>
+      <th>HouseStyle_1Story</th>
+      <th>HouseStyle_2.5Fin</th>
+      <th>HouseStyle_2.5Unf</th>
+      <th>HouseStyle_2Story</th>
+      <th>HouseStyle_SFoyer</th>
+      <th>HouseStyle_SLvl</th>
+      <th>PavedDrive_P</th>
+      <th>PavedDrive_Y</th>
+      <th>SalePrice</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+      <td>...</td>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+      <td>1460.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>56.897260</td>
+      <td>57.623288</td>
+      <td>10516.828082</td>
+      <td>6.099315</td>
+      <td>5.575342</td>
+      <td>1971.267808</td>
+      <td>0.476712</td>
+      <td>1515.463699</td>
+      <td>0.425342</td>
+      <td>0.057534</td>
+      <td>...</td>
+      <td>0.009589</td>
+      <td>0.497260</td>
+      <td>0.005479</td>
+      <td>0.007534</td>
+      <td>0.304795</td>
+      <td>0.025342</td>
+      <td>0.044521</td>
+      <td>0.020548</td>
+      <td>0.917808</td>
+      <td>180921.195890</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>42.300571</td>
+      <td>34.664304</td>
+      <td>9981.264932</td>
+      <td>1.382997</td>
+      <td>1.112799</td>
+      <td>30.202904</td>
+      <td>0.499629</td>
+      <td>525.480383</td>
+      <td>0.518911</td>
+      <td>0.238753</td>
+      <td>...</td>
+      <td>0.097486</td>
+      <td>0.500164</td>
+      <td>0.073846</td>
+      <td>0.086502</td>
+      <td>0.460478</td>
+      <td>0.157217</td>
+      <td>0.206319</td>
+      <td>0.141914</td>
+      <td>0.274751</td>
+      <td>79442.502883</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>20.000000</td>
+      <td>0.000000</td>
+      <td>1300.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1872.000000</td>
+      <td>0.000000</td>
+      <td>334.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>34900.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>20.000000</td>
+      <td>42.000000</td>
+      <td>7553.500000</td>
+      <td>5.000000</td>
+      <td>5.000000</td>
+      <td>1954.000000</td>
+      <td>0.000000</td>
+      <td>1129.500000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>129975.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>50.000000</td>
+      <td>63.000000</td>
+      <td>9478.500000</td>
+      <td>6.000000</td>
+      <td>5.000000</td>
+      <td>1973.000000</td>
+      <td>0.000000</td>
+      <td>1464.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>163000.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>70.000000</td>
+      <td>79.000000</td>
+      <td>11601.500000</td>
+      <td>7.000000</td>
+      <td>6.000000</td>
+      <td>2000.000000</td>
+      <td>1.000000</td>
+      <td>1776.750000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>...</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>214000.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>190.000000</td>
+      <td>313.000000</td>
+      <td>215245.000000</td>
+      <td>10.000000</td>
+      <td>9.000000</td>
+      <td>2010.000000</td>
+      <td>1.000000</td>
+      <td>5642.000000</td>
+      <td>3.000000</td>
+      <td>2.000000</td>
+      <td>...</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+      <td>755000.000000</td>
+    </tr>
+  </tbody>
+</table>
+<p>8 rows × 57 columns</p>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot; Untuned model example &quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+
+<span class="n">X</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">housing_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">housing_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="n">housing_dmatrix</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">untuned_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;objective&quot;</span><span class="p">:</span> <span class="s2">&quot;reg:squarederror&quot;</span><span class="p">}</span>
+
+<span class="c1"># run 4 fold cross validation on untuned model params</span>
+<span class="n">untuned_cv_results_rmse</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">dtrain</span><span class="o">=</span><span class="n">housing_dmatrix</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">untuned_params</span><span class="p">,</span><span class="n">nfold</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;rmse&quot;</span><span class="p">,</span> <span class="n">as_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Untuned model RMSE:&quot;</span><span class="p">,</span> <span class="n">untuned_cv_results_rmse</span><span class="p">[</span><span class="s2">&quot;test-rmse-mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\xgboost\compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Untuned model RMSE: 9    34624.22998
+Name: test-rmse-mean, dtype: float64
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\xgboost\data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot; Tuned model example &quot;&quot;&quot;</span>
+<span class="c1"># data was loaded and prepared in the above cell</span>
+
+<span class="n">tuned_params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;objective&quot;</span><span class="p">:</span> <span class="s2">&quot;reg:squarederror&quot;</span><span class="p">,</span> <span class="s1">&#39;colsample_bytree&#39;</span><span class="p">:</span> <span class="mf">0.3</span><span class="p">,</span><span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,</span> <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="mi">5</span><span class="p">}</span>
+
+<span class="n">tuned_cv_results_rmse</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">dtrain</span><span class="o">=</span><span class="n">housing_dmatrix</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">tuned_params</span><span class="p">,</span><span class="n">nfold</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">num_boost_round</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;rmse&quot;</span><span class="p">,</span> <span class="n">as_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tuned model RMSE:&quot;</span><span class="p">,</span> <span class="n">tuned_cv_results_rmse</span><span class="p">[</span><span class="s2">&quot;test-rmse-mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+ 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Tuned model RMSE: 199    29965.413086
+Name: test-rmse-mean, dtype: float64
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="3.1.2-Tuning-the-number-of-boosting-rounds">3.1.2 Tuning the number of boosting rounds<a class="anchor-link" href="#3.1.2-Tuning-the-number-of-boosting-rounds"> </a></h4><p>Let's start with parameter tuning by seeing how the number of boosting rounds (number of trees you build) impacts the out-of-sample performance of your XGBoost model. You'll use <strong>xgb.cv()</strong> inside a for loop and build one model per num_boost_round parameter.</p>
+<p>Here, you'll continue working with the Ames housing dataset. The features are available in the array X, and the target vector is contained in y.</p>
+<ul>
+<li>Instructions: <ul>
+<li>Create a DMatrix called housing_dmatrix from X and y.</li>
+<li>Create a parameter dictionary called params, passing in the appropriate "objective" ("reg:linear") and "max_depth" (set it to 3).</li>
+<li>Iterate over num_rounds inside a for loop and perform 3-fold cross-validation. In each iteration of the loop, pass in the current number of boosting rounds (curr_num_rounds) to xgb.cv() as the argument to num_boost_round.</li>
+<li>Append the final boosting round RMSE for each cross-validated XGBoost model to the final_rmse_per_round list.</li>
+<li>num_rounds and final_rmse_per_round have been zipped and converted into a DataFrame so you can easily see how the model performs with each boosting round. Hit 'Submit Answer' to see the results!</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">warnings</span><span class="p">;</span>   <span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span> <span class="c1"># ignored the pandas warning</span>
+ 
+<span class="c1"># Create the DMatrix: housing_dmatrix</span>
+<span class="n">housing_dmatrix</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span> <span class="n">X</span><span class="p">,</span> <span class="n">label</span> <span class="o">=</span> <span class="n">y</span> <span class="p">)</span>
+
+<span class="c1"># Create the parameter dictionary for each tree: params </span>
+<span class="c1"># params = {&quot;objective&quot;:&quot;reg:linear&quot;, &quot;max_depth&quot;:3}</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;objective&quot;</span><span class="p">:</span><span class="s2">&quot;reg:squarederror&quot;</span><span class="p">,</span> <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
+
+<span class="c1"># Create list of number of boosting rounds</span>
+<span class="n">num_rounds</span> <span class="o">=</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">75</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">200</span><span class="p">]</span>
+
+<span class="c1"># Empty list to store final round rmse per XGBoost model</span>
+<span class="n">final_rmse_per_round</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Iterate over num_rounds and build one model per num_boost_round parameter</span>
+<span class="k">for</span> <span class="n">curr_num_rounds</span> <span class="ow">in</span> <span class="n">num_rounds</span><span class="p">:</span>
+
+    <span class="c1"># Perform cross-validation: cv_results</span>
+    <span class="n">cv_results</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">dtrain</span><span class="o">=</span><span class="n">housing_dmatrix</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> <span class="n">nfold</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_boost_round</span><span class="o">=</span><span class="n">curr_num_rounds</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;rmse&quot;</span><span class="p">,</span> <span class="n">as_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+    
+    <span class="c1"># Append final round RMSE</span>
+    <span class="n">final_rmse_per_round</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cv_results</span><span class="p">[</span><span class="s2">&quot;test-rmse-mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Print the resultant DataFrame</span>
+<span class="n">num_rounds_rmses</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">num_rounds</span><span class="p">,</span> <span class="n">final_rmse_per_round</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">num_rounds_rmses</span><span class="p">,</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;num_boosting_rounds&quot;</span><span class="p">,</span><span class="s2">&quot;rmse&quot;</span><span class="p">]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>   num_boosting_rounds          rmse
+0                    5  50903.298177
+1                   10  34774.192709
+2                   15  32895.097656
+3                   20  32019.971354
+4                   50  30943.686198
+5                   75  30579.746094
+6                  100  30680.307292
+7                  200  30691.264974
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="3.1.3-Automated-boosting-round-selection-using-early_stopping">3.1.3 Automated boosting round selection using early_stopping<a class="anchor-link" href="#3.1.3-Automated-boosting-round-selection-using-early_stopping"> </a></h4><p>Now, instead of attempting to cherry pick the best possible number of boosting rounds, you can very easily have XGBoost automatically select the number of boosting rounds for you within <strong>xgb.cv()</strong>. This is done using a technique called <strong>early stopping</strong>.</p>
+<p>Early stopping works by testing the XGBoost model after every boosting round against a hold-out dataset and stopping the creation of additional boosting rounds (thereby finishing training of the model early) if the hold-out metric ("rmse" in our case) does not improve for a given number of rounds. Here you will use the early_stopping_rounds parameter in xgb.cv() with a large possible number of boosting rounds (50). Bear in mind that if the holdout metric continuously improves up through when num_boost_rounds is reached, then early stopping does not occur.</p>
+<p>Here, the DMatrix and parameter dictionary have been created for you. Your task is to use cross-validation with early stopping. Go for it!</p>
+<ul>
+<li>Instructions<ul>
+<li>Perform 3-fold cross-validation with early stopping and "rmse" as your metric. Use 10 early stopping rounds and 50 boosting rounds. Specify a seed of 123 and make sure the output is a pandas DataFrame. Remember to specify the other parameters such as dtrain, params, and metrics.</li>
+<li>Print cv_results.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing_dmatrix</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Create the parameter dictionary for each tree: params</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;objective&quot;</span><span class="p">:</span><span class="s2">&quot;reg:linear&quot;</span><span class="p">,</span> <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span>
+
+<span class="c1"># Perform cross-validation with early stopping: cv_results</span>
+<span class="n">cv_results</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">dtrain</span><span class="o">=</span><span class="n">housing_dmatrix</span><span class="p">,</span>
+                    <span class="n">params</span> <span class="o">=</span> <span class="n">params</span><span class="p">,</span>
+                    <span class="n">nfold</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                    <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+                    <span class="n">metrics</span><span class="o">=</span><span class="s1">&#39;rmse&#39;</span><span class="p">,</span>
+                    <span class="n">as_pandas</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+                    <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                    <span class="n">seed</span> <span class="o">=</span> <span class="mi">123</span><span class="p">)</span>
+
+<span class="c1"># Print cv_results</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cv_results</span><span class="p">[</span><span class="s2">&quot;test-rmse-mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tail</span><span class="p">())</span>
+<span class="c1"># print(cv_results)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[16:14:55] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[16:14:55] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[16:14:55] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+45    30758.543620
+46    30729.971354
+47    30732.663411
+48    30712.240886
+49    30720.854818
+Name: test-rmse-mean, dtype: float64
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="3.2.1-Tunable-parameters-in-XGBoost">3.2.1 Tunable parameters in XGBoost<a class="anchor-link" href="#3.2.1-Tunable-parameters-in-XGBoost"> </a></h4><ul>
+<li>Common tree tunable parameters<ul>
+<li>learning rate: learning rate/eta</li>
+<li>gamma: min loss reduction to create new tree split</li>
+<li>lambda: L2 reg on leaf weights</li>
+<li>alpha: L1 reg on leaf weights</li>
+<li>max_depth: max depth per tree</li>
+<li>subsample: % samples used per tree</li>
+<li>colsample_bytree: % features used per<br />
+<br /></li>
+</ul>
+</li>
+<li>Linear tunable parameters<ul>
+<li>lambda: L2 reg on weights</li>
+<li>alpha: L1 reg on weights</li>
+<li>lambda_bias: L2 reg term on bias</li>
+<li>You can also tune the number of estimators used for both base model types!</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="3.2.2-Tuning-eta">3.2.2 Tuning eta<a class="anchor-link" href="#3.2.2-Tuning-eta"> </a></h4><p>It's time to practice tuning other XGBoost hyperparameters in earnest and observing their effect on model performance! You'll begin by tuning the "eta", also known as the learning rate.</p>
+<p>The learning rate in XGBoost is a parameter that can range between 0 and 1, with higher values of "eta" penalizing feature weights more strongly, causing much stronger regularization.</p>
+<ul>
+<li><p>Instructions</p>
+<ul>
+<li>Create a list called eta_vals to store the following "eta" values: 0.001, 0.01, and 0.1.</li>
+<li>Iterate over your eta_vals list using a for loop.</li>
+<li>In each iteration of the for loop, set the "eta" key of params to be equal to curr_val. Then, perform 3-fold cross-validation with early stopping (5 rounds), 10 boosting rounds, a metric of "rmse", and a seed of 123. Ensure the output is a DataFrame.</li>
+<li>Append the final round RMSE to the best_rmse list.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing_dmatrix</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Create the parameter dictionary for each tree (boosting round)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;objective&quot;</span><span class="p">:</span><span class="s2">&quot;reg:linear&quot;</span><span class="p">,</span> <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
+
+<span class="c1"># Create list of eta values and empty list to store final round rmse per xgboost model</span>
+<span class="n">eta_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]</span>
+<span class="n">best_rmse</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Systematically vary the eta </span>
+<span class="k">for</span> <span class="n">curr_val</span> <span class="ow">in</span> <span class="n">eta_vals</span><span class="p">:</span>
+
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;eta&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr_val</span>
+    
+    <span class="c1"># Perform cross-validation: cv_results</span>
+    <span class="n">cv_results</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">dtrain</span> <span class="o">=</span> <span class="n">housing_dmatrix</span><span class="p">,</span>
+                        <span class="n">params</span> <span class="o">=</span> <span class="n">params</span><span class="p">,</span>
+                        <span class="n">nfold</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span> 
+                        <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                        <span class="n">early_stopping_rounds</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+                        <span class="n">metrics</span> <span class="o">=</span><span class="s2">&quot;rmse&quot;</span><span class="p">,</span>
+                        <span class="n">as_pandas</span> <span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">seed</span> <span class="o">=</span> <span class="mi">123</span><span class="p">)</span>
+    
+    <span class="c1"># Append the final round rmse to best_rmse</span>
+    <span class="n">best_rmse</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cv_results</span><span class="p">[</span><span class="s2">&quot;test-rmse-mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Print the resultant DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">eta_vals</span><span class="p">,</span> <span class="n">best_rmse</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;eta&quot;</span><span class="p">,</span><span class="s2">&quot;best_rmse&quot;</span><span class="p">]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[16:55:08] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[16:55:09] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[16:55:09] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[16:55:09] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[16:55:09] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[16:55:09] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[16:55:09] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[16:55:09] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[16:55:09] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+     eta      best_rmse
+0  0.001  195736.406250
+1  0.010  179932.187500
+2  0.100   79759.411459
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="3.2.3-Tuning-max_depth">3.2.3 Tuning max_depth<a class="anchor-link" href="#3.2.3-Tuning-max_depth"> </a></h4><p>In this exercise, your job is to tune max_depth, which is the parameter that dictates the maximum depth that each tree in a boosting round can grow to. Smaller values will lead to shallower trees, and larger values to deeper trees.</p>
+<ul>
+<li>Instructions<ul>
+<li>Create a list called max_depths to store the following "max_depth" values: 2, 5, 10, and 20.</li>
+<li>Iterate over your max_depths list using a for loop.</li>
+<li>Systematically vary "max_depth" in each iteration of the for loop and perform 2-fold cross-validation with early stopping (5 rounds), 10 boosting rounds, a metric of "rmse", and a seed of 123. Ensure the output is a</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing_dmatrix</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Create the parameter dictionary</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;objective&quot;</span><span class="p">:</span><span class="s2">&quot;reg:linear&quot;</span><span class="p">}</span>
+
+<span class="c1"># Create list of max_depth values</span>
+<span class="n">max_depths</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
+<span class="n">best_rmse</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Systematically vary the max_depth</span>
+<span class="k">for</span> <span class="n">curr_val</span> <span class="ow">in</span> <span class="n">max_depths</span><span class="p">:</span>
+
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;max_depth&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr_val</span>
+    
+    <span class="c1"># Perform cross-validation</span>
+    <span class="n">cv_results</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">dtrain</span><span class="o">=</span> <span class="n">housing_dmatrix</span><span class="p">,</span>
+                        <span class="n">params</span> <span class="o">=</span> <span class="n">params</span><span class="p">,</span>
+                        <span class="n">nfold</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
+                        <span class="n">num_boost_round</span> <span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                        <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                        <span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;rmse&quot;</span><span class="p">,</span>
+                        <span class="n">as_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+    
+    
+    <span class="c1"># Append the final round rmse to best_rmse</span>
+    <span class="n">best_rmse</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cv_results</span><span class="p">[</span><span class="s2">&quot;test-rmse-mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Print the resultant DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">max_depths</span><span class="p">,</span> <span class="n">best_rmse</span><span class="p">)),</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;max_depth&quot;</span><span class="p">,</span><span class="s2">&quot;best_rmse&quot;</span><span class="p">]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[17:09:43] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[17:09:43] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[17:09:43] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[17:09:43] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[17:09:43] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[17:09:43] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[17:09:43] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[17:09:43] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+   max_depth     best_rmse
+0          2  37957.468750
+1          5  35596.599610
+2         10  36065.548829
+3         20  36739.578125
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="3.2.4-Tuning-colsample_bytree">3.2.4 Tuning colsample_bytree<a class="anchor-link" href="#3.2.4-Tuning-colsample_bytree"> </a></h4><p>Now, it's time to tune "colsample_bytree". You've already seen this if you've ever worked with scikit-learn's RandomForestClassifier or RandomForestRegressor, where it just was called max_features. In both xgboost and sklearn, this parameter (although named differently) simply specifies the fraction of features to choose from at every split in a given tree. In xgboost, colsample_bytree must be specified as a float between 0 and 1.</p>
+<ul>
+<li>Instructions<ul>
+<li>Create a list called colsample_bytree_vals to store the values 0.1, 0.5, 0.8, and 1.</li>
+<li>Systematically vary "colsample_bytree" and perform cross-validation, exactly as you did with max_depth and eta previously.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing_dmatrix</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Create the parameter dictionary</span>
+<span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;objective&quot;</span><span class="p">:</span><span class="s2">&quot;reg:linear&quot;</span><span class="p">,</span><span class="s2">&quot;max_depth&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
+
+<span class="c1"># Create list of hyperparameter values: colsample_bytree_vals</span>
+<span class="n">colsample_bytree_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">best_rmse</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Systematically vary the hyperparameter value </span>
+<span class="k">for</span> <span class="n">curr_val</span> <span class="ow">in</span> <span class="n">colsample_bytree_vals</span><span class="p">:</span>
+
+    <span class="n">params</span><span class="p">[</span><span class="s2">&quot;colsample_bytree&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">curr_val</span>
+    
+    <span class="c1"># Perform cross-validation</span>
+    <span class="n">cv_results</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">dtrain</span><span class="o">=</span><span class="n">housing_dmatrix</span><span class="p">,</span> 
+                        <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span>
+                        <span class="n">nfold</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                        <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> 
+                        <span class="n">early_stopping_rounds</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                        <span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;rmse&quot;</span><span class="p">,</span>
+                        <span class="n">as_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+    
+    <span class="c1"># Append the final round rmse to best_rmse</span>
+    <span class="n">best_rmse</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cv_results</span><span class="p">[</span><span class="s2">&quot;test-rmse-mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tail</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="c1"># Print the resultant DataFrame</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">colsample_bytree_vals</span><span class="p">,</span> <span class="n">best_rmse</span><span class="p">)),</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;colsample_bytree&quot;</span><span class="p">,</span><span class="s2">&quot;best_rmse&quot;</span><span class="p">]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[17:14:54] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[17:14:54] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[17:14:54] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[17:14:54] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[17:14:54] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[17:14:54] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[17:14:54] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+[17:14:54] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
+   colsample_bytree     best_rmse
+0               0.1  40918.117188
+1               0.5  35813.906250
+2               0.8  35995.677735
+3               1.0  35836.042969
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="3.3.1-Review-of-grid-search-and-random-search">3.3.1 Review of grid search and random search<a class="anchor-link" href="#3.3.1-Review-of-grid-search-and-random-search"> </a></h4>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Grid search: example&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+
+<span class="n">housing_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;datasets/ames_housing_trimmed_processed.csv&quot;</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">housing_data</span><span class="p">[</span><span class="n">housing_data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">housing_data</span><span class="p">[</span><span class="n">housing_data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="n">housing_dmatrix</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+<span class="n">gbm_param_grid</span> <span class="o">=</span> <span class="p">{</span>  <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.05</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.9</span><span class="p">],</span>
+                    <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">],</span>
+                    <span class="c1"># &#39;subsample&#39;: [0.3, 0.5, 0.9]}</span>
+                    <span class="s1">&#39;subsample&#39;</span><span class="p">:</span>  <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">1.05</span><span class="p">,</span><span class="o">.</span><span class="mi">05</span><span class="p">)}</span>
+<span class="n">gbm</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">()</span>
+
+<span class="n">grid_mse</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">gbm</span><span class="p">,</span><span class="n">param_grid</span><span class="o">=</span><span class="n">gbm_param_grid</span><span class="p">,</span><span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">grid_mse</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best parameters found: &quot;</span><span class="p">,</span><span class="n">grid_mse</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lowest RMSE found: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">grid_mse</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)))</span>
+
+
+<span class="sd">&quot;&quot;&quot; 2m41.3s</span>
+<span class="sd">Fitting 4 folds for each of 100 candidates, totalling 400 fits</span>
+<span class="sd">Best parameters found:  {&#39;learning_rate&#39;: 0.1, &#39;n_estimators&#39;: 200, &#39;subsample&#39;: 0.45}</span>
+<span class="sd">Lowest RMSE found:  28528.32863427011</span>
+<span class="sd">&quot;&quot;&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Fitting 4 folds for each of 100 candidates, totalling 400 fits
+Best parameters found:  {&#39;learning_rate&#39;: 0.1, &#39;n_estimators&#39;: 200, &#39;subsample&#39;: 0.45}
+Lowest RMSE found:  28528.32863427011
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot;Random search: example&quot;&quot;&quot;</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">RandomizedSearchCV</span>
+
+<span class="n">housing_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;datasets/ames_housing_trimmed_processed.csv&quot;</span><span class="p">)</span>
+<span class="n">X</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">housing_data</span><span class="p">[</span><span class="n">housing_data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]],</span> <span class="n">housing_data</span><span class="p">[</span><span class="n">housing_data</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">tolist</span><span class="p">()[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
+
+<span class="n">housing_dmatrix</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">gbm_param_grid</span> <span class="o">=</span> <span class="p">{</span>  <span class="s1">&#39;learning_rate&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">1.05</span><span class="p">,</span><span class="o">.</span><span class="mi">05</span><span class="p">),</span>
+                    <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">200</span><span class="p">],</span>
+                    <span class="s1">&#39;subsample&#39;</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">1.05</span><span class="p">,</span><span class="o">.</span><span class="mi">05</span><span class="p">)}</span>
+<span class="n">gbm</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">()</span>
+
+<span class="c1"># try with 25 random combinations</span>
+<span class="n">randomized_mse</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span><span class="n">gbm</span><span class="p">,</span> <span class="n">param_distributions</span><span class="o">=</span><span class="n">gbm_param_grid</span><span class="p">,</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">randomized_mse</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best parameters found: &quot;</span><span class="p">,</span><span class="n">randomized_mse</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lowest RMSE found: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">randomized_mse</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Fitting 4 folds for each of 25 candidates, totalling 100 fits
+Best parameters found:  {&#39;subsample&#39;: 0.6500000000000001, &#39;n_estimators&#39;: 200, &#39;learning_rate&#39;: 0.05}
+Lowest RMSE found:  28875.728215978015
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mf">0.05</span><span class="p">,</span><span class="mf">1.05</span><span class="p">,</span><span class="o">.</span><span class="mi">05</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>array([0.05, 0.1 , 0.15, 0.2 , 0.25, 0.3 , 0.35, 0.4 , 0.45, 0.5 , 0.55,
+       0.6 , 0.65, 0.7 , 0.75, 0.8 , 0.85, 0.9 , 0.95, 1.  ])</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="3.3.2-Grid-search-with-XGBoost">3.3.2 Grid search with XGBoost<a class="anchor-link" href="#3.3.2-Grid-search-with-XGBoost"> </a></h4><p>Now that you've learned how to tune parameters individually with XGBoost, let's take your parameter tuning to the next level by using scikit-learn's GridSearch and RandomizedSearch capabilities with internal cross-validation using the GridSearchCV and RandomizedSearchCV functions. You will use these to find the best model exhaustively from a collection of possible parameter values across multiple parameters simultaneously. Let's get to work, starting with GridSearchCV!</p>
+<ul>
+<li>Instructions<ul>
+<li>Create a parameter grid called gbm_param_grid that contains a list of "colsample_bytree" values (0.3, 0.7), a list with a single value for "n_estimators" (50), and a list of 2 "max_depth" (2, 5) values.</li>
+<li>Instantiate an XGBRegressor object called gbm.</li>
+<li>Create a GridSearchCV object called grid_mse, passing in: the parameter grid to param_grid, the XGBRegressor to estimator, "neg_mean_squared_error" to scoring, and 4 to cv. - Also specify verbose=1 so you can better understand the output.</li>
+<li>Fit the GridSearchCV object to X and y.</li>
+<li>Print the best parameter values and lowest RMSE, using the .best<em>params</em> and .best<em>score</em> attributes, respectively, of grid_mse.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gbm_param_grid</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;colsample_bytree&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mf">0.3</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">],</span>
+    <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">50</span><span class="p">],</span>
+    <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="p">}</span>
+
+<span class="c1"># Instantiate the regressor: gbm</span>
+<span class="n">gbm</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">()</span>
+
+<span class="c1"># Perform grid search: grid_mse</span>
+<span class="n">grid_mse</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">estimator</span><span class="o">=</span> <span class="n">gbm</span><span class="p">,</span>
+                        <span class="n">param_grid</span><span class="o">=</span><span class="n">gbm_param_grid</span><span class="p">,</span>
+                        <span class="n">scoring</span><span class="o">=</span> <span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">,</span>
+                        <span class="n">cv</span> <span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                        <span class="n">verbose</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># Fit grid_mse to the data</span>
+<span class="n">grid_mse</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Print the best parameters and lowest RMSE</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best parameters found: &quot;</span><span class="p">,</span> <span class="n">grid_mse</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lowest RMSE found: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">grid_mse</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Fitting 4 folds for each of 4 candidates, totalling 16 fits
+Best parameters found:  {&#39;colsample_bytree&#39;: 0.3, &#39;max_depth&#39;: 5, &#39;n_estimators&#39;: 50}
+Lowest RMSE found:  28986.18703093561
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="3.3.3-Random-search-with-XGBoost">3.3.3 Random search with XGBoost<a class="anchor-link" href="#3.3.3-Random-search-with-XGBoost"> </a></h4><p>Often, GridSearchCV can be really time consuming, so in practice, you may want to use RandomizedSearchCV instead, as you will do in this exercise. The good news is you only have to make a few modifications to your GridSearchCV code to do RandomizedSearchCV. The key difference is you have to specify a param_distributions parameter instead of a param_grid parameter.</p>
+<ul>
+<li>Instructions<ul>
+<li>Create a parameter grid called gbm_param_grid that contains a list with a single value for 'n_estimators' (25), and a list of 'max_depth' values between 2 and 11 for 'max_depth' - use range(2, 12) for this.</li>
+<li>Create a RandomizedSearchCV object called randomized_mse, passing in: the parameter grid to param_distributions, the XGBRegressor to estimator, "neg_mean_squared_error" to scoring, 5 to n_iter, and 4 to cv. Also specify verbose=1 so you can better understand the output.</li>
+<li>Fit the RandomizedSearchCV object to X and y.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">gbm_param_grid</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s1">&#39;n_estimators&#39;</span><span class="p">:</span> <span class="p">[</span><span class="mi">25</span><span class="p">],</span>
+    <span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="mi">12</span><span class="p">)</span>
+<span class="p">}</span>
+
+<span class="c1"># Instantiate the regressor: gbm</span>
+<span class="n">gbm</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Perform random search: grid_mse</span>
+<span class="n">randomized_mse</span> <span class="o">=</span> <span class="n">RandomizedSearchCV</span><span class="p">(</span><span class="n">estimator</span> <span class="o">=</span><span class="n">gbm</span><span class="p">,</span>
+                            <span class="n">param_distributions</span> <span class="o">=</span> <span class="n">gbm_param_grid</span><span class="p">,</span>
+                            <span class="n">scoring</span><span class="o">=</span><span class="s1">&#39;neg_mean_squared_error&#39;</span><span class="p">,</span>
+                            <span class="n">cv</span> <span class="o">=</span><span class="mi">4</span><span class="p">,</span> 
+                            <span class="n">n_iter</span> <span class="o">=</span> <span class="mi">5</span><span class="p">,</span>
+                            <span class="n">verbose</span> <span class="o">=</span><span class="mi">1</span> <span class="p">)</span>
+
+
+<span class="c1"># Fit randomized_mse to the data</span>
+<span class="n">randomized_mse</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Print the best parameters and lowest RMSE</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best parameters found: &quot;</span><span class="p">,</span> <span class="n">randomized_mse</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Lowest RMSE found: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">randomized_mse</span><span class="o">.</span><span class="n">best_score_</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Fitting 4 folds for each of 5 candidates, totalling 20 fits
+Best parameters found:  {&#39;n_estimators&#39;: 25, &#39;max_depth&#39;: 4}
+Lowest RMSE found:  29998.4522530019
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="anhhaibkhn/Data-Science-selfstudy-notes-Blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/Data-Science-selfstudy-notes-Blog/python/datacamp/data%20visualization/eda/pandas/xgboost/scikit-learn/2022/05/18/Extreme-Gradient-Boosting-with-XGBoost-Part-3.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/Data-Science-selfstudy-notes-Blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="https://feedrabbit.com/?url=https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>A collection of jupyter notebooks and datasets for practicing Data Science skills.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/anhhaibkhn" target="_blank" title="anhhaibkhn"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://www.linkedin.com/in/nguyen-hai-b1ab8042" target="_blank" title="nguyen-hai-b1ab8042"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#linkedin"></use></svg></a></li><li><a rel="me" href="https://twitter.com/NguyenNgocHai2" target="_blank" title="NguyenNgocHai2"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

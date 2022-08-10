@@ -1,0 +1,990 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>The GitHub History of the Scala Language | Self-study Data Science Projects notes Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="The GitHub History of the Scala Language" />
+<meta name="author" content="Hai Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Open source projects contain entire development histories, such as who made changes, the changes themselves, and code reviews. In this project, Let’s find the true Scala experts by exploring its development history in Git and GitHub." />
+<meta property="og:description" content="Open source projects contain entire development histories, such as who made changes, the changes themselves, and code reviews. In this project, Let’s find the true Scala experts by exploring its development history in Git and GitHub." />
+<link rel="canonical" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/datacamp/python/eda/jupyter%20notebook/pandas/data%20manipulation/data%20visualization/importing%20&%20cleaning%20data/2022/02/16/The-GitHub-History-of-the-Scala-Language.html" />
+<meta property="og:url" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/datacamp/python/eda/jupyter%20notebook/pandas/data%20manipulation/data%20visualization/importing%20&%20cleaning%20data/2022/02/16/The-GitHub-History-of-the-Scala-Language.html" />
+<meta property="og:site_name" content="Self-study Data Science Projects notes Blog" />
+<meta property="og:image" content="https://opengraph.githubassets.com/d48a9c60ee407a234f5ca66ac7b12118995e89a643e5c00248005cf98badf29e/scala/scala" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-02-16T00:00:00-06:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://opengraph.githubassets.com/d48a9c60ee407a234f5ca66ac7b12118995e89a643e5c00248005cf98badf29e/scala/scala" />
+<meta property="twitter:title" content="The GitHub History of the Scala Language" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hai Nguyen"},"dateModified":"2022-02-16T00:00:00-06:00","datePublished":"2022-02-16T00:00:00-06:00","description":"Open source projects contain entire development histories, such as who made changes, the changes themselves, and code reviews. In this project, Let’s find the true Scala experts by exploring its development history in Git and GitHub.","headline":"The GitHub History of the Scala Language","image":"https://opengraph.githubassets.com/d48a9c60ee407a234f5ca66ac7b12118995e89a643e5c00248005cf98badf29e/scala/scala","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/datacamp/python/eda/jupyter%20notebook/pandas/data%20manipulation/data%20visualization/importing%20&%20cleaning%20data/2022/02/16/The-GitHub-History-of-the-Scala-Language.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/datacamp/python/eda/jupyter%20notebook/pandas/data%20manipulation/data%20visualization/importing%20&%20cleaning%20data/2022/02/16/The-GitHub-History-of-the-Scala-Language.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/Data-Science-selfstudy-notes-Blog/">Self-study Data Science Projects notes Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/about/">About Me</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/search/">Search</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">The GitHub History of the Scala Language</h1><p class="page-description">Open source projects contain entire development histories, such as who made changes, the changes themselves, and code reviews. In this project, Let's find the true Scala experts by exploring its development history in Git and GitHub.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-02-16T00:00:00-06:00" itemprop="datePublished">
+        Feb 16, 2022
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Hai Nguyen</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      11 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Datacamp">Datacamp</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Python">Python</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#EDA">EDA</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Jupyter notebook">Jupyter notebook</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Pandas">Pandas</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Data Manipulation">Data Manipulation</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Data Visualization">Data Visualization</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Importing & Cleaning Data">Importing & Cleaning Data</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/The GitHub History of the Scala Language/2022-02-16-The GitHub History of the Scala Language.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/anhhaibkhn/Data-Science-selfstudy-notes-Blog/master?filepath=_notebooks%2FThe+GitHub+History+of+the+Scala+Language%2F2022-02-16-The+GitHub+History+of+the+Scala+Language.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/anhhaibkhn/Data-Science-selfstudy-notes-Blog/blob/master/_notebooks/The GitHub History of the Scala Language/2022-02-16-The GitHub History of the Scala Language.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fanhhaibkhn%2FData-Science-selfstudy-notes-Blog%2Fblob%2Fmaster%2F_notebooks%2FThe+GitHub+History+of+the+Scala+Language%2F2022-02-16-The+GitHub+History+of+the+Scala+Language.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <ul id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#1.-Scala's-real-world-project-repository-data">1. Scala&#39;s real-world project repository data </a></li>
+<li class="toc-entry toc-h2"><a href="#2.-Preparing-and-cleaning-the-data">2. Preparing and cleaning the data </a></li>
+<li class="toc-entry toc-h2"><a href="#3.-Merging-the-DataFrames">3. Merging the DataFrames </a></li>
+<li class="toc-entry toc-h2"><a href="#4.-Is-the-project-still-actively-maintained?">4. Is the project still actively maintained? </a></li>
+<li class="toc-entry toc-h2"><a href="#5.-Is-there-camaraderie-in-the-project?">5. Is there camaraderie in the project? </a></li>
+<li class="toc-entry toc-h2"><a href="#6.-What-files-were-changed-in-the-last-ten-pull-requests?">6. What files were changed in the last ten pull requests? </a></li>
+<li class="toc-entry toc-h2"><a href="#7.-Who-made-the-most-pull-requests-to-a-given-file?">7. Who made the most pull requests to a given file? </a></li>
+<li class="toc-entry toc-h2"><a href="#8.-Who-made-the-last-ten-pull-requests-on-a-given-file?">8. Who made the last ten pull requests on a given file? </a></li>
+<li class="toc-entry toc-h2"><a href="#9.-The-pull-requests-of-two-special-developers">9. The pull requests of two special developers </a></li>
+<li class="toc-entry toc-h2"><a href="#10.-Visualizing-the-contributions-of-each-developer">10. Visualizing the contributions of each developer </a></li>
+</ul><!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/The GitHub History of the Scala Language/2022-02-16-The GitHub History of the Scala Language.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered celltag_context">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="1.-Scala's-real-world-project-repository-data">
+<a class="anchor" href="#1.-Scala's-real-world-project-repository-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Scala's real-world project repository data<a class="anchor-link" href="#1.-Scala's-real-world-project-repository-data"> </a>
+</h2>
+<p></p>
+<p>With almost 30k commits and a history spanning over ten years, Scala is a mature programming language. It is a general-purpose programming language that has recently become another prominent language for data scientists.</p>
+<p></p>
+<p>Scala is also an open source project. Open source projects have the advantage that their entire development histories -- who made changes, what was changed, code reviews, etc. -- are publicly available. </p>
+<p></p>
+<p>We're going to read in, clean up, and visualize the real world project repository of Scala that spans data from a version control system (Git) as well as a project hosting site (GitHub). We will find out who has had the most influence on its development and who are the experts.</p>
+<p></p>
+<p>The dataset we will use, which has been previously mined and extracted from GitHub, is comprised of three files:</p>
+<ol>
+<li>
+<code>pulls_2011-2013.csv</code> contains the basic information about the pull requests, and spans from the end of 2011 up to (but not including) 2014.</li>
+<li>
+<code>pulls_2014-2018.csv</code> contains identical information, and spans from 2014 up to 2018.</li>
+<li>
+<code>pull_files.csv</code> contains the files that were modified by each pull request.</li>
+</ol>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered celltag_sample_code">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="c1"># Loading in the data</span>
+<span class="n">pulls_one</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'datasets/pulls_2011-2013.csv'</span><span class="p">)</span>
+<span class="n">pulls_two</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'datasets/pulls_2014-2018.csv'</span><span class="p">)</span>
+<span class="n">pull_files</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'datasets/pull_files.csv'</span><span class="p">)</span> 
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered celltag_context">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="2.-Preparing-and-cleaning-the-data">
+<a class="anchor" href="#2.-Preparing-and-cleaning-the-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Preparing and cleaning the data<a class="anchor-link" href="#2.-Preparing-and-cleaning-the-data"> </a>
+</h2>
+<p>First, we will need to combine the data from the two separate pull DataFrames. </p>
+<p>Next, the raw data extracted from GitHub contains dates in the ISO8601 format. However, <code>pandas</code> imports them as regular strings. To make our analysis easier, we need to convert the strings into Python's <code>DateTime</code> objects. <code>DateTime</code> objects have the important property that they can be compared and sorted.</p>
+<p>The pull request times are all in UTC (also known as Coordinated Universal Time). The commit times, however, are in the local time of the author with time zone information (number of hours difference from UTC). To make comparisons easy, we should convert all times to UTC.</p>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered celltag_sample_code">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pulls</span> <span class="o">=</span> <span class="n">pulls_one</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pulls_two</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pulls</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">pulls</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="c1"># Convert the date for the pulls object</span>
+<span class="n">pulls</span><span class="p">[</span><span class="s1">'date'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">pulls</span><span class="p">[</span><span class="s1">'date'</span><span class="p">],</span> <span class="n">utc</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pulls</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">pulls</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>        pid         user                  date
+0  11166973  VladimirNik  2013-12-31T23:10:55Z
+1  11161892      Ichoran  2013-12-31T16:55:47Z
+2  11153894      Ichoran  2013-12-31T02:41:13Z
+3  11151917      rklaehn  2013-12-30T23:45:47Z
+4  11131244        qerub  2013-12-29T17:21:01Z 
+ 18600
+        pid         user                      date
+0  11166973  VladimirNik 2013-12-31 23:10:55+00:00
+1  11161892      Ichoran 2013-12-31 16:55:47+00:00
+2  11153894      Ichoran 2013-12-31 02:41:13+00:00
+3  11151917      rklaehn 2013-12-30 23:45:47+00:00
+4  11131244        qerub 2013-12-29 17:21:01+00:00 
+ 18600
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>C:\Users\nguyenngochai\AppData\Local\Temp\ipykernel_26248\2338645692.py:2: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
+  pulls = pulls_one.append(pulls_two, ignore_index=True)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered celltag_context">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="3.-Merging-the-DataFrames">
+<a class="anchor" href="#3.-Merging-the-DataFrames" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Merging the DataFrames<a class="anchor-link" href="#3.-Merging-the-DataFrames"> </a>
+</h2>
+<p>The data extracted comes in two separate files. Merging the two DataFrames will make it easier for us to analyze the data in the future tasks.</p>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered celltag_sample_code">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">pull_files</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">pulls</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">)</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pulls</span><span class="p">,</span> <span class="n">pull_files</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span><span class="s1">'pid'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>         pid                              file
+0  163314316   test/files/pos/t5638/Among.java
+1  163314316  test/files/pos/t5638/Usage.scala
+2  163314316        test/files/pos/t9291.scala 
+         pid         user                      date
+0  11166973  VladimirNik 2013-12-31 23:10:55+00:00
+1  11161892      Ichoran 2013-12-31 16:55:47+00:00
+2  11153894      Ichoran 2013-12-31 02:41:13+00:00
+&lt;class 'pandas.core.frame.DataFrame'&gt;
+Int64Index: 85588 entries, 0 to 85587
+Data columns (total 4 columns):
+ #   Column  Non-Null Count  Dtype              
+---  ------  --------------  -----              
+ 0   pid     85588 non-null  int64              
+ 1   user    85588 non-null  object             
+ 2   date    85588 non-null  datetime64[ns, UTC]
+ 3   file    85588 non-null  object             
+dtypes: datetime64[ns, UTC](1), int64(1), object(2)
+memory usage: 3.3+ MB
+        pid         user                      date  \
+0  11166973  VladimirNik 2013-12-31 23:10:55+00:00   
+1  11166973  VladimirNik 2013-12-31 23:10:55+00:00   
+2  11166973  VladimirNik 2013-12-31 23:10:55+00:00   
+3  11166973  VladimirNik 2013-12-31 23:10:55+00:00   
+4  11161892      Ichoran 2013-12-31 16:55:47+00:00   
+
+                                                file  
+0       src/reflect/scala/reflect/api/Printers.scala  
+1  src/reflect/scala/reflect/internal/Printers.scala  
+2                    test/files/run/reify_ann3.check  
+3  test/junit/scala/reflect/internal/PrintersTest...  
+4  src/library/scala/collection/mutable/ArrayOps....   
+ 342352 
+ None
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered celltag_context">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="4.-Is-the-project-still-actively-maintained?">
+<a class="anchor" href="#4.-Is-the-project-still-actively-maintained?" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Is the project still actively maintained?<a class="anchor-link" href="#4.-Is-the-project-still-actively-maintained?"> </a>
+</h2>
+<p></p>
+<p>The activity in an open source project is not very consistent. Some projects might be active for many years after the initial release, while others can slowly taper out into oblivion. Before committing to contributing to a project, it is important to understand the state of the project. Is development going steadily, or is there a drop? Has the project been abandoned altogether?</p>
+<p></p>
+<p>The data used in this project was collected in January of 2018. We are interested in the evolution of the number of contributions up to that date.</p>
+<p></p>
+<p>For Scala, we will do this by plotting a chart of the project's activity. We will calculate the number of pull requests submitted each (calendar) month during the project's lifetime. We will then plot these numbers to see the trend of contributions.</p>
+<ul>
+<li><p>A helpful reminder of how to access various components of a date can be found in <a href="https://campus.datacamp.com/courses/data-manipulation-with-pandas/slicing-and-indexing?ex=12">this exercise of Data Manipulation with pandas</a></p></li>
+<li><p>Additionally, recall that you can group by multiple variables by passing a list to <code>groupby()</code>. This video from <a href="https://campus.datacamp.com/courses/data-manipulation-with-pandas/aggregating-data-ad6d4643-0e95-470c-8299-f69cc4c83de8?ex=9">Data Manipulation with pandas</a> should help!</p></li>
+</ul>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered celltag_sample_code">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># Create a column that will store the month</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">'month'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"date"</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">month</span>
+
+<span class="c1"># Create a column that will store the year</span>
+<span class="n">data</span><span class="p">[</span><span class="s1">'year'</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">"date"</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="c1"># Group by the month and year and count the pull requests</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'year'</span><span class="p">,</span> <span class="s1">'month'</span><span class="p">])[</span><span class="s1">'pid'</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<span class="c1"># Plot the results</span>
+<span class="n">counts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>        pid         user                      date  \
+0  11166973  VladimirNik 2013-12-31 23:10:55+00:00   
+1  11166973  VladimirNik 2013-12-31 23:10:55+00:00   
+2  11166973  VladimirNik 2013-12-31 23:10:55+00:00   
+3  11166973  VladimirNik 2013-12-31 23:10:55+00:00   
+4  11161892      Ichoran 2013-12-31 16:55:47+00:00   
+
+                                                file  month  year  
+0       src/reflect/scala/reflect/api/Printers.scala     12  2013  
+1  src/reflect/scala/reflect/internal/Printers.scala     12  2013  
+2                    test/files/run/reify_ann3.check     12  2013  
+3  test/junit/scala/reflect/internal/PrintersTest...     12  2013  
+4  src/library/scala/collection/mutable/ArrayOps....     12  2013  
+year  month
+2011  12        590
+2012  1         489
+      2         787
+      3         880
+      4        3354
+               ... 
+2017  9         578
+      10        535
+      11        172
+      12        224
+2018  1         202
+Name: pid, Length: 74, dtype: int64
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;AxesSubplot:xlabel='year,month'&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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">
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered celltag_context">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="5.-Is-there-camaraderie-in-the-project?">
+<a class="anchor" href="#5.-Is-there-camaraderie-in-the-project?" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Is there camaraderie in the project?<a class="anchor-link" href="#5.-Is-there-camaraderie-in-the-project?"> </a>
+</h2>
+<p>The organizational structure varies from one project to another, and it can influence your success as a contributor. A project that has a very small community might not be the best one to start working on. The small community might indicate a high barrier of entry. This can be caused by several factors, including a community that is reluctant to accept pull requests from "outsiders," that the code base is hard to work with, etc. However, a large community can serve as an indicator that the project is regularly accepting pull requests from new contributors. Such a project would be a good place to start.</p>
+<p>In order to evaluate the dynamics of the community, we will plot a histogram of the number of pull requests submitted by each user. A distribution that shows that there are few people that only contribute a small number of pull requests can be used as in indicator that the project is not welcoming of new contributors. </p>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered celltag_sample_code">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># Group by the submitter</span>
+<span class="n">by_user</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'user'</span><span class="p">])[</span><span class="s1">'pid'</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+
+<span class="c1"># Plot the histogram</span>
+<span class="n">by_user</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;AxesSubplot:ylabel='Frequency'&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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">
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered celltag_context">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="6.-What-files-were-changed-in-the-last-ten-pull-requests?">
+<a class="anchor" href="#6.-What-files-were-changed-in-the-last-ten-pull-requests?" aria-hidden="true"><span class="octicon octicon-link"></span></a>6. What files were changed in the last ten pull requests?<a class="anchor-link" href="#6.-What-files-were-changed-in-the-last-ten-pull-requests?"> </a>
+</h2>
+<p>Choosing the right place to make a contribution is as important as choosing the project to contribute to. Some parts of the code might be stable, some might be dead. Contributing there might not have the most impact. Therefore it is important to understand the parts of the system that have been recently changed. This allows us to pinpoint the "hot" areas of the code where most of the activity is happening. Focusing on those parts might not the most effective use of our times.</p>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered celltag_sample_code">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">last_10</span> <span class="o">=</span> <span class="n">pulls</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">'date'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">last_10</span><span class="p">)</span>
+
+<span class="c1"># Join the two data sets</span>
+<span class="n">joined_pr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">last_10</span><span class="p">,</span> <span class="n">pull_files</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">'pid'</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">'inner'</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"#########"</span><span class="p">)</span>
+
+<span class="c1"># Identify the unique files</span>
+<span class="n">files</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">joined_pr</span><span class="p">[</span><span class="s1">'file'</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span> <span class="p">)</span>
+
+<span class="c1"># Print the results</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>            pid         user                      date
+3296  163314316       hrhino 2018-01-16 23:29:16+00:00
+3297  163061502     joroKr21 2018-01-15 23:44:52+00:00
+3298  163057333    mkeskells 2018-01-15 23:05:06+00:00
+3299  162985594        lrytz 2018-01-15 15:52:39+00:00
+3300  162838837    zuvizudar 2018-01-14 19:16:16+00:00
+3301  162765232  howtonotwin 2018-01-13 04:37:17+00:00
+3302  162643301       hrhino 2018-01-12 14:29:49+00:00
+3303  162256029    mkeskells 2018-01-10 23:20:03+00:00
+3304  162197834    SethTisue 2018-01-10 18:31:25+00:00
+3305  162011899     joroKr21 2018-01-10 00:45:57+00:00
+#########
+{'src/scaladoc/scala/tools/nsc/doc/html/page/Entity.scala', 'test/files/pos/leibniz_liskov.scala', 'src/compiler/scala/tools/nsc/typechecker/Contexts.scala', 'src/compiler/scala/tools/nsc/backend/jvm/BCodeHelpers.scala', 'test/files/run/t8348/TableColumn.java', 'src/compiler/scala/tools/nsc/profile/Profiler.scala', 'test/files/neg/leibniz-liskov.check', 'src/reflect/scala/reflect/internal/tpe/GlbLubs.scala', 'test/files/pos/parallel-classloader.scala', 'doc/LICENSE.md', 'src/compiler/scala/tools/nsc/profile/AsyncHelper.scala', 'src/reflect/scala/reflect/internal/pickling/ByteCodecs.scala', 'src/library/scala/util/Properties.scala', 'src/scalap/decoder.properties', 'src/compiler/scala/tools/nsc/backend/jvm/analysis/BackendUtils.scala', 'src/library/scala/Predef.scala', 'src/library/scala/concurrent/Lock.scala', 'src/compiler/scala/tools/nsc/symtab/classfile/ClassfileParser.scala', 'LICENSE', 'doc/License.rtf', 'test/files/pos/leibniz-liskov.scala', 'project/VersionUtil.scala', 'test/files/pos/t5638/Usage.scala', 'src/compiler/scala/reflect/reify/phases/Calculate.scala', 'test/files/run/t8348/Test.scala', 'test/files/pos/t9291.scala', 'test/files/run/t8348/TableColumnImpl.java', 'test/files/neg/leibniz-liskov.scala', 'test/files/pos/t10686.scala', 'test/files/run/t8348.check', 'src/compiler/scala/tools/nsc/backend/jvm/PostProcessor.scala', 'test/files/pos/t10568/Impl.scala', 'test/files/pos/t5638/Among.java', 'test/files/pos/t10568/Converter.java'}
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered celltag_context">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="7.-Who-made-the-most-pull-requests-to-a-given-file?">
+<a class="anchor" href="#7.-Who-made-the-most-pull-requests-to-a-given-file?" aria-hidden="true"><span class="octicon octicon-link"></span></a>7. Who made the most pull requests to a given file?<a class="anchor-link" href="#7.-Who-made-the-most-pull-requests-to-a-given-file?"> </a>
+</h2>
+<p>When contributing to a project, we might need some guidance. We might find ourselves needing some information regarding the codebase. It is important direct any questions to the right person. Contributors to open source projects generally have other day jobs, so their time is limited. It is important to address our questions to the right people. One way to identify the right target for our inquiries is by using their contribution history.</p>
+<p>We identified <code>src/compiler/scala/reflect/reify/phases/Calculate.scala</code> as being recently changed. We are interested in the top 3 developers who changed that file. Those developers are the ones most likely to have the best understanding of the code.</p>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered celltag_sample_code">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="s1">'src/compiler/scala/reflect/reify/phases/Calculate.scala'</span>
+
+<span class="c1"># Identify the commits that changed the file</span>
+<span class="n">file_pr</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">'file'</span><span class="p">]</span> <span class="o">==</span> <span class="n">file</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">file_pr</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># Count the number of changes made by each developer</span>
+<span class="n">author_counts</span> <span class="o">=</span> <span class="n">file_pr</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'user'</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">author_counts</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># Print the top 3 developers</span>
+<span class="n">author_counts</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">'pid'</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>            pid          user                      date  \
+1234   10587633      retronym 2013-12-06 10:04:43+00:00   
+12514   5320191           soc 2013-04-23 15:47:45+00:00   
+12823   5291974  bjornregnell 2013-04-22 13:56:06+00:00   
+13381   5050360      retronym 2013-04-09 06:13:57+00:00   
+13779   5026775      retronym 2013-04-08 07:07:45+00:00   
+
+                                                    file  month  year  
+1234   src/compiler/scala/reflect/reify/phases/Calcul...     12  2013  
+12514  src/compiler/scala/reflect/reify/phases/Calcul...      4  2013  
+12823  src/compiler/scala/reflect/reify/phases/Calcul...      4  2013  
+13381  src/compiler/scala/reflect/reify/phases/Calcul...      4  2013  
+13779  src/compiler/scala/reflect/reify/phases/Calcul...      4  2013  
+              pid  date  file  month  year
+user                                      
+bjornregnell    1     1     1      1     1
+densh           1     1     1      1     1
+gkossakowski    1     1     1      1     1
+melloc          1     1     1      1     1
+odersky         2     2     2      2     2
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pid</th>
+      <th>date</th>
+      <th>file</th>
+      <th>month</th>
+      <th>year</th>
+    </tr>
+    <tr>
+      <th>user</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>xeno-by</th>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+    </tr>
+    <tr>
+      <th>retronym</th>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>soc</th>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered celltag_context">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="8.-Who-made-the-last-ten-pull-requests-on-a-given-file?">
+<a class="anchor" href="#8.-Who-made-the-last-ten-pull-requests-on-a-given-file?" aria-hidden="true"><span class="octicon octicon-link"></span></a>8. Who made the last ten pull requests on a given file?<a class="anchor-link" href="#8.-Who-made-the-last-ten-pull-requests-on-a-given-file?"> </a>
+</h2>
+<p>Open source projects suffer from fluctuating membership. This makes the problem of finding the right person more challenging: the person has to be knowledgeable <em>and</em> still be involved in the project. A person that contributed a lot in the past might no longer be available (or willing) to help. To get a better understanding, we need to investigate the more recent history of that particular part of the system. </p>
+<p>Like in the previous task, we will look at the history of  <code>src/compiler/scala/reflect/reify/phases/Calculate.scala</code>.</p>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered celltag_sample_code">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">file</span> <span class="o">=</span> <span class="s1">'src/compiler/scala/reflect/reify/phases/Calculate.scala'</span>
+
+<span class="c1"># Select the pull requests that changed the target file</span>
+<span class="n">file_pr</span> <span class="o">=</span> <span class="n">pull_files</span><span class="p">[</span><span class="n">pull_files</span><span class="o">.</span><span class="n">file</span> <span class="o">==</span> <span class="n">file</span><span class="p">]</span>
+
+<span class="c1"># Merge the obtained results with the pulls DataFrame</span>
+<span class="n">joined_pr</span> <span class="o">=</span> <span class="n">file_pr</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pulls</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span><span class="s1">'pid'</span><span class="p">)</span>
+
+<span class="c1"># Find the users of the last 10 most recent pull requests</span>
+<span class="n">users_last_10</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">joined_pr</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">'pid'</span><span class="p">,</span> <span class="n">keep</span><span class="o">=</span><span class="s1">'last'</span><span class="p">)[</span><span class="s1">'user'</span><span class="p">])</span>
+
+<span class="c1"># Printing the results</span>
+<span class="n">users_last_10</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{'bjornregnell', 'retronym', 'soc', 'starblood', 'xeno-by', 'zuvizudar'}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered celltag_context">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="9.-The-pull-requests-of-two-special-developers">
+<a class="anchor" href="#9.-The-pull-requests-of-two-special-developers" aria-hidden="true"><span class="octicon octicon-link"></span></a>9. The pull requests of two special developers<a class="anchor-link" href="#9.-The-pull-requests-of-two-special-developers"> </a>
+</h2>
+<p>Now that we have identified two potential contacts in the projects, we need to find the person who was most involved in the project in recent times. That person is most likely to answer our questions. For each calendar year, we are interested in understanding the number of pull requests the authors submitted. This will give us a high-level image of their contribution trend to the project.</p>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered celltag_sample_code">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+
+<span class="c1"># The developers we are interested in</span>
+<span class="n">authors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'xeno-by'</span><span class="p">,</span> <span class="s1">'soc'</span><span class="p">]</span>
+
+<span class="c1"># Get all the developers' pull requests</span>
+<span class="n">by_author</span> <span class="o">=</span> <span class="n">pulls</span><span class="p">[</span><span class="n">pulls</span><span class="p">[</span><span class="s1">'user'</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">authors</span><span class="p">)]</span>
+
+<span class="c1"># Count the number of pull requests submitted each year</span>
+<span class="n">counts</span> <span class="o">=</span> <span class="n">by_author</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'user'</span><span class="p">,</span> <span class="n">by_author</span><span class="p">[</span><span class="s1">'date'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="p">])</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s1">'pid'</span><span class="p">:</span> <span class="s1">'count'</span><span class="p">})</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># Convert the table to a wide format</span>
+<span class="n">counts_wide</span> <span class="o">=</span> <span class="n">counts</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'date'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'user'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">'pid'</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Plot the results</span>
+<span class="n">counts_wide</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;AxesSubplot:xlabel='date'&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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VFZWMmrUqCPnmlm4cCGf//znmTBhAgMHDuSuu+46cjtPPfUUw4YN4/zzz2fWrFkN3t8HH3zAlClTGDp0KLfeeiuHDh3iscceY+bMmUfWefTRR/na175WlP68525mHVJlZSVXXXUV3/zmN/nwww+ZPn06ixYtYty4cSxYsIBdu3YxevRoLrvsMgCqqqp488036dKlC+eeey533HEHnTp1YtasWaxcuZJevXrxuc99jp///OdMnjz5mPt7/fXXWbt2Leeccw4TJkzgueeeY+rUqQwfPpz77ruPsrIyfvSjH/HDH/6wKP053M2sw5ozZw6VlZV07dqVBx54gDFjxrB48WLuv7/u20NramrYvHkzAJdeeimnnVY3dTR06FDeeecddu7cydixYzn8nRTTpk3j5ZdfLhjuo0eP5hOf+AQA1113Ha+88gpXX30148aNY8mSJQwZMoQDBw4wbNiwovTmcDezDuv9999n7969HDhwgJqaGiKCZ599lnPPPfffrffaa6/RpUuXI9c7depEbW0tEcd8D9GR9W+55RYA7rnnHk499dRjThl8+PqXv/xl7r33XgYPHsyXvvSlovXmOXcz67BmzJjBt7/9baZNm8asWbMYP348Dz744JHQLnQCsfrGjBnDr3/9a9577z0OHjzIU089xcUXX8yYMWOoqqqiqqqKq666Cqibltm4cSOHDh1i0aJFfPrTnz5yG1u2bOHJJ5/kuuuuK1pv3nM3sw7piSeeoHPnznzxi1/k4MGDXHjhhcyZM4fFixczfPhwIoLy8nKWLFnS4G3069eP73znO1xyySVEBFdccQWTJk0quO6nPvUpZs+ezerVq/nsZz/LlClTjiy79tprqaqqolevXgW3bQ419LKiLVVUVMSKFSvyLiMdzT2krIMfOmZta926dQwZMiTvMtqFiRMnMnPmTC699NIG1yn07yVpZURUFFrf0zJmZjnZtWsXgwYNolu3bscN9ubwtIyZWU569uzJ73//+1a5be+5m5klyOFuZrlpD+/5lYLm/Ds53M0sF127dmXnzp0O+EZEBDt37qRr164ntJ3n3M0sF/3796e6upodO3bkXUq717VrV/r3739C2zjczSwXZWVlDBgwIO8ykuVpGTOzBDnczcwS5HA3M0uQw93MLEEOdzOzBDnczcwS1Gi4Szpb0j9LWifpbUlfzcZ7S/ql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">
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered celltag_context">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="10.-Visualizing-the-contributions-of-each-developer">
+<a class="anchor" href="#10.-Visualizing-the-contributions-of-each-developer" aria-hidden="true"><span class="octicon octicon-link"></span></a>10. Visualizing the contributions of each developer<a class="anchor-link" href="#10.-Visualizing-the-contributions-of-each-developer"> </a>
+</h2>
+<p>As mentioned before, it is important to make a distinction between the global expertise and contribution levels and the contribution levels at a more granular level (file, submodule, etc.) In our case, we want to see which of our two developers of interest have the most experience with the code in a given file. We will measure experience by the number of pull requests submitted that affect that file and how recent those pull requests were submitted.</p>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered celltag_sample_code">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">authors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'xeno-by'</span><span class="p">,</span> <span class="s1">'soc'</span><span class="p">]</span>
+<span class="n">file</span> <span class="o">=</span> <span class="s1">'src/compiler/scala/reflect/reify/phases/Calculate.scala'</span>
+
+<span class="c1"># Select the pull requests submitted by the authors, from the `data` DataFrame</span>
+<span class="n">by_author</span> <span class="o">=</span> <span class="n">data</span><span class="p">[(</span><span class="n">data</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">authors</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="o">|</span> <span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">authors</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+
+<span class="c1"># Select the pull requests that affect the file</span>
+<span class="n">by_file</span> <span class="o">=</span> <span class="n">by_author</span><span class="p">[</span><span class="n">by_author</span><span class="o">.</span><span class="n">file</span> <span class="o">==</span> <span class="n">file</span><span class="p">]</span>
+
+<span class="c1"># Group and count the number of PRs done by each user each year</span>
+<span class="n">grouped</span> <span class="o">=</span> <span class="n">by_file</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">'user'</span><span class="p">,</span> <span class="n">by_file</span><span class="p">[</span><span class="s1">'date'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span><span class="p">])</span><span class="o">.</span><span class="n">count</span><span class="p">()[</span><span class="s1">'pid'</span><span class="p">]</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+
+<span class="c1"># Transform the data into a wide format</span>
+<span class="n">by_file_wide</span> <span class="o">=</span> <span class="n">grouped</span><span class="o">.</span><span class="n">pivot_table</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="s1">'date'</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="s1">'user'</span><span class="p">,</span> <span class="n">values</span><span class="o">=</span><span class="s1">'pid'</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="c1"># Plot the results</span>
+<span class="n">by_file_wide</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&lt;AxesSubplot:xlabel='date'&gt;</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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">
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="anhhaibkhn/Data-Science-selfstudy-notes-Blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/Data-Science-selfstudy-notes-Blog/datacamp/python/eda/jupyter%20notebook/pandas/data%20manipulation/data%20visualization/importing%20&%20cleaning%20data/2022/02/16/The-GitHub-History-of-the-Scala-Language.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/Data-Science-selfstudy-notes-Blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="https://feedrabbit.com/?url=https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>A collection of jupyter notebooks and datasets for practicing Data Science skills.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/anhhaibkhn" target="_blank" title="anhhaibkhn"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://www.linkedin.com/in/nguyen-hai-b1ab8042" target="_blank" title="nguyen-hai-b1ab8042"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#linkedin"></use></svg></a></li><li><a rel="me" href="https://twitter.com/NguyenNgocHai2" target="_blank" title="NguyenNgocHai2"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>

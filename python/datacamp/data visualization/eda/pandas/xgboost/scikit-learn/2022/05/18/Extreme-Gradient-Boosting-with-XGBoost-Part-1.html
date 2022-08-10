@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Extreme Gradient Boosting with XGBoost - Part 1 (DataCamp interactive course) | Self-study Data Science Projects notes Blog</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Extreme Gradient Boosting with XGBoost - Part 1 (DataCamp interactive course)" />
+<meta name="author" content="Hai Nguyen" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Chapter 1 - Classification with XGBoost" />
+<meta property="og:description" content="Chapter 1 - Classification with XGBoost" />
+<link rel="canonical" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/datacamp/data%20visualization/eda/pandas/xgboost/scikit-learn/2022/05/18/Extreme-Gradient-Boosting-with-XGBoost-Part-1.html" />
+<meta property="og:url" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/datacamp/data%20visualization/eda/pandas/xgboost/scikit-learn/2022/05/18/Extreme-Gradient-Boosting-with-XGBoost-Part-1.html" />
+<meta property="og:site_name" content="Self-study Data Science Projects notes Blog" />
+<meta property="og:image" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/xgb_part1.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-05-18T00:00:00-05:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/xgb_part1.png" />
+<meta property="twitter:title" content="Extreme Gradient Boosting with XGBoost - Part 1 (DataCamp interactive course)" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hai Nguyen"},"dateModified":"2022-05-18T00:00:00-05:00","datePublished":"2022-05-18T00:00:00-05:00","description":"Chapter 1 - Classification with XGBoost","headline":"Extreme Gradient Boosting with XGBoost - Part 1 (DataCamp interactive course)","image":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/xgb_part1.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/datacamp/data%20visualization/eda/pandas/xgboost/scikit-learn/2022/05/18/Extreme-Gradient-Boosting-with-XGBoost-Part-1.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/datacamp/data%20visualization/eda/pandas/xgboost/scikit-learn/2022/05/18/Extreme-Gradient-Boosting-with-XGBoost-Part-1.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/Data-Science-selfstudy-notes-Blog/">Self-study Data Science Projects notes Blog</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/about/">About Me</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/search/">Search</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">Extreme Gradient Boosting with XGBoost - Part 1 (DataCamp interactive course)</h1><p class="page-description">Chapter 1 - Classification with XGBoost</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-05-18T00:00:00-05:00" itemprop="datePublished">
+        May 18, 2022
+      </time>• 
+          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+            <span class="p-author h-card" itemprop="name">Hai Nguyen</span></span>
+       • <span class="read-time" title="Estimated read time">
+    
+    
+      6 min read
+    
+</span></p>
+
+    
+      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Python">Python</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Datacamp">Datacamp</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Data Visualization">Data Visualization</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#EDA">EDA</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Pandas">Pandas</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#XGBoost">XGBoost</a>
+        &nbsp;
+      
+        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#scikit-learn">scikit-learn</a>
+        
+      
+      </p>
+    
+
+    
+      
+        <div class="pb-5 d-flex flex-justify-center">
+          <div class="px-2">
+
+    <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/Extreme Gradient Boosting with XGBoost/2022-05-18-Extreme Gradient Boosting with XGBoost-Part 1.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/anhhaibkhn/Data-Science-selfstudy-notes-Blog/master?filepath=_notebooks%2FExtreme+Gradient+Boosting+with+XGBoost%2F2022-05-18-Extreme+Gradient+Boosting+with+XGBoost-Part+1.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+          <div class="px-2">
+    <a href="https://colab.research.google.com/github/anhhaibkhn/Data-Science-selfstudy-notes-Blog/blob/master/_notebooks/Extreme Gradient Boosting with XGBoost/2022-05-18-Extreme Gradient Boosting with XGBoost-Part 1.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+          <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fanhhaibkhn%2FData-Science-selfstudy-notes-Blog%2Fblob%2Fmaster%2F_notebooks%2FExtreme+Gradient+Boosting+with+XGBoost%2F2022-05-18-Extreme+Gradient+Boosting+with+XGBoost-Part+1.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+        </div>
+      </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/Extreme Gradient Boosting with XGBoost/2022-05-18-Extreme Gradient Boosting with XGBoost-Part 1.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Chapter-1:-Classification-with-XGBoost">Chapter 1: Classification with XGBoost<a class="anchor-link" href="#Chapter-1:-Classification-with-XGBoost"> </a></h3><p>This chapter will introduce you to the fundamental idea behind XGBoost—boosted learners. Once you understand how XGBoost works, you'll apply it to solve a common classification problem found in industry: predicting whether a customer will stop being a customer at some point in the future.
+<br /></p>
+<ul>
+<li><p>1.1 Course Intro:</p>
+<ul>
+<li>Which of these is a classification problem?</li>
+<li>Which of these is a binary classification problem?<br />
+<br /></li>
+</ul>
+</li>
+<li><p>1.2 Introducing XGBoost</p>
+<ul>
+<li>XGBoost: Fit/Predict</li>
+<li>Decision trees<br />
+<br /></li>
+</ul>
+</li>
+<li><p>1.3 What is Boosting?</p>
+<ul>
+<li>Measuring accuracy</li>
+<li>Measuring AUC<br />
+<br /></li>
+</ul>
+</li>
+<li><p>1.4 When should I use XGBoost?</p>
+<ul>
+<li>Using XGBoost</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="1.2-Introducing-XGBosst">1.2 Introducing XGBosst<a class="anchor-link" href="#1.2-Introducing-XGBosst"> </a></h4><ul>
+<li>1.2.1 XGBoost: Fit/Predict<ul>
+<li>Import xgboost as xgb.</li>
+<li>Create training and test sets such that 20% of the data is used for testing. Use a random_state of 123.</li>
+<li>Instantiate an XGBoostClassifier as xg_cl using xgb.XGBClassifier(). Specify n_estimators to be 10 estimators and an objective of 'binary:logistic'. Do not worry about what this means just yet, you will learn about these parameters later in this course.</li>
+<li>Fit xg_cl to the training set (X_train, y_train) using the .fit() method.</li>
+<li>Predict the labels of the test set (X_test) using the .predict() method and hit 'Submit Answer' to print the accuracy.</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+
+<span class="c1"># churn_data = pd.read_csv(&quot;datasets/churn.csv&quot;) # This dataset is not the one that was used in the course. </span>
+<span class="n">churn_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;datasets/churn_data.csv&quot;</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">churn_data</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+<span class="n">churn_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+RangeIndex: 50000 entries, 0 to 49999
+Data columns (total 13 columns):
+ #   Column                       Non-Null Count  Dtype  
+---  ------                       --------------  -----  
+ 0   avg_dist                     50000 non-null  float64
+ 1   avg_rating_by_driver         49799 non-null  float64
+ 2   avg_rating_of_driver         41878 non-null  float64
+ 3   avg_inc_price                50000 non-null  float64
+ 4   inc_pct                      50000 non-null  float64
+ 5   weekday_pct                  50000 non-null  float64
+ 6   fancy_car_user               50000 non-null  bool   
+ 7   city_Carthag                 50000 non-null  int64  
+ 8   city_Harko                   50000 non-null  int64  
+ 9   phone_iPhone                 50000 non-null  int64  
+ 10  first_month_cat_more_1_trip  50000 non-null  int64  
+ 11  first_month_cat_no_trips     50000 non-null  int64  
+ 12  month_5_still_here           50000 non-null  int64  
+dtypes: bool(1), float64(6), int64(6)
+memory usage: 4.6 MB
+None
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>avg_dist</th>
+      <th>avg_rating_by_driver</th>
+      <th>avg_rating_of_driver</th>
+      <th>avg_inc_price</th>
+      <th>inc_pct</th>
+      <th>weekday_pct</th>
+      <th>fancy_car_user</th>
+      <th>city_Carthag</th>
+      <th>city_Harko</th>
+      <th>phone_iPhone</th>
+      <th>first_month_cat_more_1_trip</th>
+      <th>first_month_cat_no_trips</th>
+      <th>month_5_still_here</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3.67</td>
+      <td>5.0</td>
+      <td>4.7</td>
+      <td>1.10</td>
+      <td>15.4</td>
+      <td>46.2</td>
+      <td>True</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>8.26</td>
+      <td>5.0</td>
+      <td>5.0</td>
+      <td>1.00</td>
+      <td>0.0</td>
+      <td>50.0</td>
+      <td>False</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.77</td>
+      <td>5.0</td>
+      <td>4.3</td>
+      <td>1.00</td>
+      <td>0.0</td>
+      <td>100.0</td>
+      <td>False</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.36</td>
+      <td>4.9</td>
+      <td>4.6</td>
+      <td>1.14</td>
+      <td>20.0</td>
+      <td>80.0</td>
+      <td>True</td>
+      <td>0</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3.13</td>
+      <td>4.9</td>
+      <td>4.4</td>
+      <td>1.19</td>
+      <td>11.8</td>
+      <td>82.4</td>
+      <td>False</td>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span> 
+
+<span class="c1"># Create arrays for the features and the target: X, y</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">churn_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">churn_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+
+<span class="c1"># Create the training and test sets</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="c1"># Instantiate the XGBClassifier: xg_cl</span>
+<span class="n">xg_cl</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBClassifier</span><span class="p">(</span><span class="n">objective</span><span class="o">=</span><span class="s1">&#39;binary:logistic&#39;</span><span class="p">,</span> <span class="n">eval_metric</span> <span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span> <span class="n">use_label_encoder</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+<span class="c1"># Fit the classifier to the training set</span>
+<span class="n">xg_cl</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Predict the labels of the test set: preds</span>
+<span class="n">preds</span> <span class="o">=</span> <span class="n">xg_cl</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Compute the accuracy: accuracy</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">preds</span><span class="o">==</span><span class="n">y_test</span><span class="p">))</span><span class="o">/</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;accuracy: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">accuracy</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>accuracy: 0.758200
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>1.2.2 Decision Tree</li>
+</ul>
+<p>Our task in this exercise is to make a simple decision tree using scikit-learn's DecisionTreeClassifier on the breast cancer dataset that comes pre-loaded with scikit-learn.</p>
+<p>This dataset contains numeric measurements of various dimensions of individual tumors (such as perimeter and texture) from breast biopsies and a single outcome value (the tumor is either malignant, or benign).</p>
+<p>We've preloaded the dataset of samples (measurements) into X and the target values per tumor into y. Now, you have to split the complete dataset into training and testing sets, and then train a DecisionTreeClassifier. You'll specify a parameter called max_depth.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+
+<span class="c1"># load the breast cancer dataset</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;datasets/breast_cancer_classification_data.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">diagnosis_type</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;M&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="n">df</span><span class="o">.</span><span class="n">diagnosis</span> <span class="o">=</span> <span class="p">[</span><span class="n">diagnosis_type</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">diagnosis</span><span class="p">]</span>
+
+<span class="c1"># Droping the column has NaN</span>
+<span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+    <span class="n">null_num</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">null_num</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;col </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="n">null_num</span><span class="si">}</span><span class="s2"> null values&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Droping </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;diagnosis&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">df</span><span class="o">.</span><span class="n">diagnosis</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X.shape: </span><span class="si">{}</span><span class="s2">, y.shape: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+
+<span class="c1"># Create the training and test sets</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="c1"># Instantiate the classifier: dt_clf_4</span>
+<span class="n">dt_clf_4</span> <span class="o">=</span> <span class="n">DecisionTreeClassifier</span><span class="p">(</span><span class="n">max_depth</span> <span class="o">=</span> <span class="mi">4</span><span class="p">)</span>
+
+<span class="c1"># Fit the classifier to the training set</span>
+<span class="n">dt_clf_4</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Predict the labels of the test set: y_pred_4</span>
+<span class="n">y_pred_4</span> <span class="o">=</span> <span class="n">dt_clf_4</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Compute the accuracy of the predictions: accuracy</span>
+<span class="n">accuracy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_pred_4</span><span class="o">==</span><span class="n">y_test</span><span class="p">))</span><span class="o">/</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;accuracy:&quot;</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>col Unnamed: 32 has True null values
+Droping Unnamed: 32
+X.shape: (569, 30), y.shape: (569,)
+accuracy: 0.9736842105263158
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="1.3-What-is-Boosting">1.3 What is Boosting<a class="anchor-link" href="#1.3-What-is-Boosting"> </a></h4><ul>
+<li>1.3.1 Accuracy</li>
+</ul>
+<p>You'll now practice using XGBoost's learning API through its baked in cross-validation capabilities. As Sergey discussed in the previous video, XGBoost gets its lauded performance and efficiency gains by utilizing its own optimized data structure for datasets called a DMatrix.</p>
+<p>In the previous exercise, the input datasets were converted into DMatrix data on the fly, but when you use the xgboost cv object, you have to first explicitly convert your data into a DMatrix. So, that's what you will do here before running cross-validation on churn_data.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">churn_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">churn_data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">type</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+
+<span class="c1"># Create the DMatrix from X and y: churn_dmatrix</span>
+<span class="n">churn_dmatrix</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
+
+<span class="c1"># Create the parameter dictionary: params</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;objective&quot;</span><span class="p">:</span><span class="s2">&quot;reg:logistic&quot;</span><span class="p">,</span> <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
+
+<span class="c1"># Perform cross-validation: cv_results</span>
+<span class="n">cv_results</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">dtrain</span><span class="o">=</span><span class="n">churn_dmatrix</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> 
+                  <span class="n">nfold</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
+                  <span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="n">as_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="c1"># Print cv_results</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cv_results</span><span class="p">)</span>
+
+<span class="c1"># Print the accuracy</span>
+<span class="nb">print</span><span class="p">(((</span><span class="mi">1</span><span class="o">-</span><span class="n">cv_results</span><span class="p">[</span><span class="s2">&quot;test-error-mean&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\xgboost\data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>   train-error-mean  train-error-std  test-error-mean  test-error-std
+0           0.28232         0.002366          0.28378        0.001932
+1           0.26951         0.001855          0.27190        0.001932
+2           0.25605         0.003213          0.25798        0.003963
+3           0.25090         0.001845          0.25434        0.003827
+4           0.24654         0.001981          0.24852        0.000934
+0.75148
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>1.3.2 Measuring AUC</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cv_results</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">dtrain</span><span class="o">=</span><span class="n">churn_dmatrix</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> 
+                  <span class="n">nfold</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
+                  <span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;auc&quot;</span><span class="p">,</span> <span class="n">as_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+
+<span class="c1"># Print cv_results</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cv_results</span><span class="p">)</span>
+
+<span class="c1"># Print the AUC</span>
+<span class="nb">print</span><span class="p">((</span><span class="n">cv_results</span><span class="p">[</span><span class="s2">&quot;test-auc-mean&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>   train-auc-mean  train-auc-std  test-auc-mean  test-auc-std
+0        0.768893       0.001544       0.767863      0.002820
+1        0.790864       0.006758       0.789156      0.006847
+2        0.815872       0.003899       0.814476      0.005997
+3        0.822959       0.002018       0.821682      0.003912
+4        0.827528       0.000769       0.826191      0.001938
+0.8261913333333334
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Fantastic! An AUC of 0.84 is quite strong. As you have seen, XGBoost's learning API makes it very easy to compute any metric you may be interested in. In Chapter 3, you'll learn about techniques to fine-tune your XGBoost models to improve their performance even further. For now, it's time to learn a little about exactly when to use XGBoost.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>When to use XGBoost:<ul>
+<li>You have a large number of training samples ( &gt; 1000 training samples, less 100 features, number of features &lt; number of training samples)</li>
+<li>You have a mixture of categorical and numeric features ( or just numeric features)<br />
+<br /></li>
+</ul>
+</li>
+<li>When to NOT use XGBoost:<ul>
+<li>Image recognition</li>
+<li>Computer Vision</li>
+<li>NLP or understanding problems</li>
+<li>Number of training samples is significantly smaller than number of features</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+  </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="anhhaibkhn/Data-Science-selfstudy-notes-Blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/Data-Science-selfstudy-notes-Blog/python/datacamp/data%20visualization/eda/pandas/xgboost/scikit-learn/2022/05/18/Extreme-Gradient-Boosting-with-XGBoost-Part-1.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/Data-Science-selfstudy-notes-Blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="https://feedrabbit.com/?url=https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+      </div>
+      <div class="footer-col">
+        <p>A collection of jupyter notebooks and datasets for practicing Data Science skills.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/anhhaibkhn" target="_blank" title="anhhaibkhn"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://www.linkedin.com/in/nguyen-hai-b1ab8042" target="_blank" title="nguyen-hai-b1ab8042"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#linkedin"></use></svg></a></li><li><a rel="me" href="https://twitter.com/NguyenNgocHai2" target="_blank" title="NguyenNgocHai2"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
