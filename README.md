@@ -16,7 +16,6 @@ Hi, and Welcome to my GitHub [Blog](https://anhhaibkhn.github.io/Data-Science-se
 
 All of my posts here are the memo from my self-study courses, articles, and books. I hope that some of these practices will help you along in your own journey of learning data science.
 
-![]({{site.baseurl}}/images/diagram.png "https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/")
 
 ## To start writing content, here are some helpful links:
 
