@@ -643,7 +643,68 @@ Test columns: [&#39;id&#39;, &#39;date&#39;, &#39;store&#39;, &#39;item&#39;]
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="1.2-Train-XGBoost-models">1.2 Train XGBoost models<a class="anchor-link" href="#1.2-Train-XGBoost-models"> </a></h1>
+<h2 id="1.3--Public-vs-Private-Leaderboard">1.3  Public vs Private Leaderboard<a class="anchor-link" href="#1.3--Public-vs-Private-Leaderboard"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="1.3.1-Public-vs-Private-Leaderboard">1.3.1 Public vs Private Leaderboard<a class="anchor-link" href="#1.3.1-Public-vs-Private-Leaderboard"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/competition_metrics.png" alt="Competition metrics"></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images//test_split.png" alt="Test Split"></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/leaderboards.png" alt="Leaders Board"></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/overfitting.png" alt="Over Fitting"></p>
+<p>Prepare a submission</p>
+<p>You've already built a model on the training data from the Kaggle Store Item Demand Forecasting Challenge. Now, it's time to make predictions on the test data and create a submission file in the specified format.</p>
+<p>Your goal is to read the test data, make predictions, and save these in the format specified in the "sample_submission.csv" file. The rf object you created in the previous exercise is available in your workspace.</p>
+<p>Note that starting from now and for the rest of the course, pandas library will be always imported for you and could be accessed as pd.</p>
+<p>Instructions:</p>
+<ul>
+<li>Note that sample submission has id and sales columns. Now, make predictions on the test data using the rf model, that you fitted on the train data.</li>
+<li>Using the format given in the sample submission, write your results to a new file.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;test.csv&#39;</span><span class="p">)</span>
+<span class="n">sample_submission</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;sample_submission.csv&#39;</span><span class="p">)</span>
+
+<span class="c1"># Show the head() of the sample_submission</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sample_submission</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+<span class="c1"># Get predictions for the test set</span>
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;sales&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">[[</span><span class="s1">&#39;store&#39;</span><span class="p">,</span> <span class="s1">&#39;item&#39;</span><span class="p">]])</span>
+
+<span class="c1"># Write test predictions using the sample_submission format</span>
+<span class="n">test</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;sales&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;kaggle_submission.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="1.3.2-Train-XGBoost-models">1.3.2 Train XGBoost models<a class="anchor-link" href="#1.3.2-Train-XGBoost-models"> </a></h3><p>Every Machine Learning method could potentially overfit. You will see it on this example with XGBoost. Again, you are working with the Store Item Demand Forecasting Challenge. The train DataFrame is available in your workspace.</p>
+<p>Firstly, let's train multiple XGBoost models with different sets of hyperparameters using XGBoost's learning API. The single hyperparameter you will change is:</p>
+<p>max_depth - maximum depth of a tree. Increasing this value will make the model more complex and more likely to overfit.
+Instructions:</p>
+<ul>
+<li>Set the maximum depth to 2. Then hit Submit Answer button to train the first model.</li>
+<li>Now, set the maximum depth to 8. Then hit Submit Answer button to train the second model.</li>
+<li>Finally, set the maximum depth to 15. Then hit Submit Answer button to train the third model.</li>
+</ul>
+
 </div>
 </div>
 </div>
@@ -747,7 +808,9 @@ None
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\xgboost\data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+<pre>c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\xgboost\compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
+  from pandas import MultiIndex, Int64Index
+c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\xgboost\data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
   elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
 </pre>
 </div>
@@ -761,7 +824,7 @@ None
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="1.3-Explore-overfitting-XGBoost">1.3 Explore overfitting XGBoost<a class="anchor-link" href="#1.3-Explore-overfitting-XGBoost"> </a></h1><p>Having trained 3 XGBoost models with different maximum depths, you will now evaluate their quality. For this purpose, you will measure the quality of each model on both the train data and the test data. As you know by now, the train data is the data models have been trained on. The test data is the next month sales data that models have never seen before.</p>
+<h3 id="1.3.3-Explore-overfitting-XGBoost">1.3.3 Explore overfitting XGBoost<a class="anchor-link" href="#1.3.3-Explore-overfitting-XGBoost"> </a></h3><p>Having trained 3 XGBoost models with different maximum depths, you will now evaluate their quality. For this purpose, you will measure the quality of each model on both the train data and the test data. As you know by now, the train data is the data models have been trained on. The test data is the next month sales data that models have never seen before.</p>
 <p>The goal of this exercise is to determine whether any of the models trained is overfitting. To measure the quality of the models you will use Mean Squared Error (MSE). It's available in sklearn.metrics as mean_squared_error() function that takes two arguments: true values and predicted values.</p>
 <p>train and test DataFrames together with 3 models trained (xg_depth_2, xg_depth_8, xg_depth_15) are available in your workspace.</p>
 <ul>
