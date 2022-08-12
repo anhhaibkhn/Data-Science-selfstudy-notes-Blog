@@ -100,7 +100,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      12 min read
+      15 min read
     
 </span></p>
 
@@ -182,6 +182,7 @@ window.onload = wrap_img;
 <li class="toc-entry toc-h2"><a href="#2.4-Validation-usage">2.4 Validation usage </a>
 <ul>
 <li class="toc-entry toc-h3"><a href="#2.4.1-Time-K-fold">2.4.1 Time K-fold </a></li>
+<li class="toc-entry toc-h3"><a href="#2.4.2-Overall-validation-score">2.4.2 Overall validation score </a></li>
 </ul>
 </li>
 </ul><!--
@@ -1478,6 +1479,186 @@ Medium interest listings in CV test: 75
 <li>Loop over each time split using time_kfold object.</li>
 <li>For each split select training and testing folds using train_index and test_index.</li>
 </ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">TimeSeriesSplit</span>
+
+<span class="n">train_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"datasets/demand_forecasting_train_1_month.csv"</span><span class="p">)</span>
+
+<span class="c1"># Create TimeSeriesSplit object</span>
+<span class="n">time_kfold</span> <span class="o">=</span> <span class="n">TimeSeriesSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Sort train data by date</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">train_df</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">'date'</span><span class="p">)</span>
+
+<span class="c1"># Iterate through each split</span>
+<span class="n">fold</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">time_kfold</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">train</span><span class="p">):</span>
+    <span class="n">cv_train</span><span class="p">,</span> <span class="n">cv_test</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">train</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Fold :'</span><span class="p">,</span> <span class="n">fold</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Train date range: from </span><span class="si">{}</span><span class="s1"> to </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cv_train</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">cv_train</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">'Test date range: from </span><span class="si">{}</span><span class="s1"> to </span><span class="si">{}</span><span class="se">\n</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">cv_test</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">min</span><span class="p">(),</span> <span class="n">cv_test</span><span class="o">.</span><span class="n">date</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+    <span class="n">fold</span> <span class="o">+=</span> <span class="mi">1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Fold : 0
+Train date range: from 2017-12-01 to 2017-12-08
+Test date range: from 2017-12-08 to 2017-12-16
+
+Fold : 1
+Train date range: from 2017-12-01 to 2017-12-16
+Test date range: from 2017-12-16 to 2017-12-24
+
+Fold : 2
+Train date range: from 2017-12-01 to 2017-12-24
+Test date range: from 2017-12-24 to 2017-12-31
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Great! You've applied time K-fold cross-validation strategy for the demand forecasting. Look at the output. It works as expected, training only on the past data and predicting the future. Progress to the next exercise to evaluate different models!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="2.4.2-Overall-validation-score">
+<a class="anchor" href="#2.4.2-Overall-validation-score" aria-hidden="true"><span class="octicon octicon-link"></span></a>2.4.2 Overall validation score<a class="anchor-link" href="#2.4.2-Overall-validation-score"> </a>
+</h3>
+<p>Now it's time to get the actual model performance using cross-validation! How does our store item demand prediction model perform?</p>
+<p>Your task is to take the Mean Squared Error (MSE) for each fold separately, and then combine these results into a single number.</p>
+<p>For simplicity, you're given get_fold_mse() function that for each cross-validation split fits a Random Forest model and returns a list of MSE scores by fold. get_fold_mse() accepts two arguments: train and TimeSeriesSplit object.</p>
+<p>Instructions 1/3</p>
+<ul>
+<li>Create time 3-fold cross-validation.</li>
+<li>Print the numpy mean of MSE scores by folds.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="k">def</span> <span class="nf">get_fold_mse</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">kf</span><span class="p">):</span>
+    <span class="n">mse_scores</span> <span class="o">=</span> <span class="p">[]</span>
+    
+    <span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">kf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">train</span><span class="p">):</span>
+        <span class="n">fold_train</span><span class="p">,</span> <span class="n">fold_test</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">train</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
+
+        <span class="c1"># Fit the data and make predictions</span>
+        <span class="c1"># Create a Random Forest object</span>
+        <span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+
+        <span class="c1"># Train a model</span>
+        <span class="n">rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">fold_train</span><span class="p">[[</span><span class="s1">'store'</span><span class="p">,</span> <span class="s1">'item'</span><span class="p">]],</span> <span class="n">y</span><span class="o">=</span><span class="n">fold_train</span><span class="p">[</span><span class="s1">'sales'</span><span class="p">])</span>
+
+        <span class="c1"># Get predictions for the test set</span>
+        <span class="n">pred</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">fold_test</span><span class="p">[[</span><span class="s1">'store'</span><span class="p">,</span> <span class="s1">'item'</span><span class="p">]])</span>
+    
+        <span class="n">fold_score</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">fold_test</span><span class="p">[</span><span class="s1">'sales'</span><span class="p">],</span> <span class="n">pred</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
+        <span class="n">mse_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fold_score</span><span class="p">)</span>
+        
+    <span class="k">return</span> <span class="n">mse_scores</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">TimeSeriesSplit</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Sort train data by date</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">'date'</span><span class="p">)</span>
+
+<span class="c1"># Initialize 3-fold time cross-validation</span>
+<span class="n">kf</span> <span class="o">=</span> <span class="n">TimeSeriesSplit</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Get MSE scores for each cross-validation split</span>
+<span class="n">mse_scores</span> <span class="o">=</span> <span class="n">get_fold_mse</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">kf</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Mean validation MSE: </span><span class="si">{:.5f}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mse_scores</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'MSE by fold: </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">mse_scores</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'Overall validation MSE: </span><span class="si">{:.5f}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mse_scores</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mse_scores</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Mean validation MSE: 955.49186
+MSE by fold: [890.30336, 961.65797, 1014.51424]
+Overall validation MSE: 1006.38784
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Congratulations, you've mastered it! Now, you know different validation strategies as well as how to use them to obtain overall model performance. It's time for the next and the most interesting part of the solution process: Feature Engineering and Modeling. See you in the next Chapters!</p>
 
 </div>
 </div>
