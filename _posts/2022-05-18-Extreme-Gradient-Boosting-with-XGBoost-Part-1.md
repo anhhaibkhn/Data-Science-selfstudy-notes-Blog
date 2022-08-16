@@ -2,12 +2,12 @@
 keywords: fastai
 description: Chapter 1 - Classification with XGBoost
 title: Extreme Gradient Boosting with XGBoost - Part 1 (DataCamp interactive course)
-toc: false
+toc: true
 branch: master
 badges: true
 comments: true
 author: Hai Nguyen
-categories: [Python, Datacamp, Data Visualization, EDA, Pandas, XGBoost, scikit-learn]
+categories: [Python, Datacamp, Data Visualization, EDA, Pandas, XGBoost, scikit-learn, Classification]
 image: images/xgb_part1.png
 hide: false
 search_exclude: true
@@ -28,33 +28,24 @@ layout: notebook
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Chapter-1:-Classification-with-XGBoost">Chapter 1: Classification with XGBoost<a class="anchor-link" href="#Chapter-1:-Classification-with-XGBoost"> </a></h3><p>This chapter will introduce you to the fundamental idea behind XGBoost—boosted learners. Once you understand how XGBoost works, you'll apply it to solve a common classification problem found in industry: predicting whether a customer will stop being a customer at some point in the future.
-<br /></p>
-<ul>
-<li><p>1.1 Course Intro:</p>
-<ul>
-<li>Which of these is a classification problem?</li>
-<li>Which of these is a binary classification problem?<br>
-<br /></li>
+<h2 id="1.1-Introduction">1.1 Introduction<a class="anchor-link" href="#1.1-Introduction"> </a></h2><ul>
+<li>Supervised Learning<ul>
+<li>Relies on labeled data</li>
+<li>Have some understanding of past behavior</li>
 </ul>
 </li>
-<li><p>1.2 Introducing XGBoost</p>
+</ul>
 <ul>
-<li>XGBoost: Fit/Predict</li>
-<li>Decision trees<br>
-<br /></li>
+<li>AUC: Metric for binary classification models<ul>
+<li>Area Under the ROC Curve (AUC). Larger area under the ROC curve = better model</li>
 </ul>
 </li>
-<li><p>1.3 What is Boosting?</p>
-<ul>
-<li>Measuring accuracy</li>
-<li>Measuring AUC<br>
-<br /></li>
 </ul>
-</li>
-<li><p>1.4 When should I use XGBoost?</p>
 <ul>
-<li>Using XGBoost</li>
+<li>Other supervised learning considerations:<ul>
+<li>Features can be either numeric or categorical</li>
+<li>Numeric features should be scaled (Z-scored)</li>
+<li>Categorical features should be encoded (one-hot)</li>
 </ul>
 </li>
 </ul>
@@ -64,20 +55,72 @@ layout: notebook
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="1.2-Introducing-XGBosst">1.2 Introducing XGBosst<a class="anchor-link" href="#1.2-Introducing-XGBosst"> </a></h4><ul>
-<li>1.2.1 XGBoost: Fit/Predict<ul>
+<h2 id="1.2-Introducing-XGBosst">1.2 Introducing XGBosst<a class="anchor-link" href="#1.2-Introducing-XGBosst"> </a></h2><ul>
+<li><p>What is XGBoost? (Extreme Gradient Boosting)</p>
+<ul>
+<li>Optimized gradient-boosting machine learning library</li>
+<li>Originally written in C++</li>
+<li>Has APIs in several languages: Python, R, Scala, Julia, Java</li>
+</ul>
+</li>
+<li><p>What makes XGBoost so popular?</p>
+<ul>
+<li>Speed and performance</li>
+<li>Core algorithm is parallelizable</li>
+<li>Consistently outperforms single-algorithm methods</li>
+<li>State-of-the-art performance in many ML tasks</li>
+</ul>
+</li>
+</ul>
+<h3 id="1.2.1-XGBoost:-Fit/Predict">1.2.1 XGBoost: Fit/Predict<a class="anchor-link" href="#1.2.1-XGBoost:-Fit/Predict"> </a></h3><p>It's time to create your first XGBoost model! As Sergey showed you in the video, you can use the scikit-learn .fit() / .predict() paradigm that you are already familiar to build your XGBoost models, as the xgboost library has a scikit-learn compatible API!</p>
+<p>Here, you'll be working with churn data. This dataset contains imaginary data from a ride-sharing app with user behaviors over their first month of app usage in a set of imaginary cities as well as whether they used the service 5 months after sign-up.</p>
+<p>Your goal is to use the first month's worth of data to predict whether the app's users will remain users of the service at the 5 month mark. This is a typical setup for a churn prediction problem. To do this, you'll split the data into training and test sets, fit a small xgboost model on the training set, and evaluate its performance on the test set by computing its accuracy.</p>
+<p>Instructions:</p>
+<ul>
 <li>Import xgboost as xgb.</li>
 <li>Create training and test sets such that 20% of the data is used for testing. Use a random_state of 123.</li>
 <li>Instantiate an XGBoostClassifier as xg_cl using xgb.XGBClassifier(). Specify n_estimators to be 10 estimators and an objective of 'binary:logistic'. Do not worry about what this means just yet, you will learn about these parameters later in this course.</li>
 <li>Fit xg_cl to the training set (X_train, y_train) using the .fit() method.</li>
 <li>Predict the labels of the test set (X_test) using the .predict() method and hit 'Submit Answer' to print the accuracy.</li>
 </ul>
-</li>
-</ul>
 
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">xgboost</span> <span class="k">as</span> <span class="nn">xgb</span>
+<span class="n">xgb</span><span class="o">.</span><span class="n">__version__</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;1.6.1&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -314,9 +357,23 @@ None
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="1.2.2-What-is-a-decision-tree?">1.2.2 What is a decision tree?<a class="anchor-link" href="#1.2.2-What-is-a-decision-tree?"> </a></h3><ul>
+<li><p>Decision trees as base learners</p>
 <ul>
-<li>1.2.2 Decision Tree</li>
+<li>Base learner : Individual learning algorithm in an ensemble algorithm</li>
+<li>Composed of a series of binary questions</li>
+<li>Predictions happen at the "leaves" of the tree</li>
 </ul>
+</li>
+<li><p>CART: Classification And Regression Trees:</p>
+<ul>
+<li>Each leaf always contains a real-valued score</li>
+<li>Can later be converted into categories</li>
+<li>Decision trees</li>
+</ul>
+</li>
+</ul>
+<p>Decision Tree (Exercise)</p>
 <p>Our task in this exercise is to make a simple decision tree using scikit-learn's DecisionTreeClassifier on the breast cancer dataset that comes pre-loaded with scikit-learn.</p>
 <p>This dataset contains numeric measurements of various dimensions of individual tumors (such as perimeter and texture) from breast biopsies and a single outcome value (the tumor is either malignant, or benign).</p>
 <p>We've preloaded the dataset of samples (measurements) into X and the target values per tumor into y. Now, you have to split the complete dataset into training and testing sets, and then train a DecisionTreeClassifier. You'll specify a parameter called max_depth.</p>
@@ -380,7 +437,7 @@ None
 <pre>col Unnamed: 32 has True null values
 Droping Unnamed: 32
 X.shape: (569, 30), y.shape: (569,)
-accuracy: 0.9736842105263158
+accuracy: 0.9649122807017544
 </pre>
 </div>
 </div>
@@ -393,10 +450,37 @@ accuracy: 0.9736842105263158
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="1.3-What-is-Boosting">1.3 What is Boosting<a class="anchor-link" href="#1.3-What-is-Boosting"> </a></h4><ul>
-<li>1.3.1 Accuracy</li>
+<h2 id="1.3-What-is-Boosting">1.3 What is Boosting<a class="anchor-link" href="#1.3-What-is-Boosting"> </a></h2><ul>
+<li><p>Boosting overview</p>
+<ul>
+<li>Not a specific machine learning algorithm</li>
+<li>Concept that can be applied to a set of machine learning models "Meta-algorithm"</li>
+<li>Ensemble meta-algorithm used to convert many weak learners into a strong learner</li>
 </ul>
-<p>You'll now practice using XGBoost's learning API through its baked in cross-validation capabilities. As Sergey discussed in the previous video, XGBoost gets its lauded performance and efficiency gains by utilizing its own optimized data structure for datasets called a DMatrix.</p>
+</li>
+<li><p>Weak learners and strong learners</p>
+<ul>
+<li>Weak learner: ML algorithm that is slightly better than chance</li>
+<li>Boosting converts a collection of weak learners into a strong learner</li>
+<li>Strong learner: Any algorithm that can be tuned to achieve good performance.</li>
+</ul>
+</li>
+<li><p>How boosting is accomplished?</p>
+<ul>
+<li>Iteratively learning a set of week models on subsets of the data</li>
+<li>Weighting each weak prediction according to each weak learner's performance</li>
+<li>Combine the weighted predictions to obtain a single weighted prediction that is much better than the individual predictions themselves!</li>
+</ul>
+</li>
+<li><p>Model evaluation through cross-validation</p>
+<ul>
+<li>Cross-validation: Robust method for estimating the performance of a model on unseen data</li>
+<li>Generates many non-overlapping train/test splits on training data</li>
+<li>Reports the average test set performance across all data splits</li>
+</ul>
+</li>
+</ul>
+<h3 id="1.3.1-Accuracy">1.3.1 Accuracy<a class="anchor-link" href="#1.3.1-Accuracy"> </a></h3><p>You'll now practice using XGBoost's learning API through its baked in cross-validation capabilities. As Sergey discussed in the previous video, XGBoost gets its lauded performance and efficiency gains by utilizing its own optimized data structure for datasets called a DMatrix.</p>
 <p>In the previous exercise, the input datasets were converted into DMatrix data on the fly, but when you use the xgboost cv object, you have to first explicitly convert your data into a DMatrix. So, that's what you will do here before running cross-validation on churn_data.</p>
 
 </div>
@@ -424,7 +508,7 @@ accuracy: 0.9736842105263158
                   <span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="n">as_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
 
 <span class="c1"># Print cv_results</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cv_results</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">cv_results</span><span class="p">)</span>
 
 <span class="c1"># Print the accuracy</span>
 <span class="nb">print</span><span class="p">(((</span><span class="mi">1</span><span class="o">-</span><span class="n">cv_results</span><span class="p">[</span><span class="s2">&quot;test-error-mean&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
@@ -447,23 +531,79 @@ accuracy: 0.9736842105263158
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\xgboost\data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
-  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
-</pre>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>train-error-mean</th>
+      <th>train-error-std</th>
+      <th>test-error-mean</th>
+      <th>test-error-std</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.28232</td>
+      <td>0.002366</td>
+      <td>0.28378</td>
+      <td>0.001932</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.26951</td>
+      <td>0.001855</td>
+      <td>0.27190</td>
+      <td>0.001932</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.25605</td>
+      <td>0.003213</td>
+      <td>0.25798</td>
+      <td>0.003963</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.25090</td>
+      <td>0.001844</td>
+      <td>0.25434</td>
+      <td>0.003827</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.24654</td>
+      <td>0.001981</td>
+      <td>0.24852</td>
+      <td>0.000934</td>
+    </tr>
+  </tbody>
+</table>
 </div>
+</div>
+
 </div>
 
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>   train-error-mean  train-error-std  test-error-mean  test-error-std
-0           0.28232         0.002366          0.28378        0.001932
-1           0.26951         0.001855          0.27190        0.001932
-2           0.25605         0.003213          0.25798        0.003963
-3           0.25090         0.001845          0.25434        0.003827
-4           0.24654         0.001981          0.24852        0.000934
-0.75148
+<pre>0.751480015401492
 </pre>
 </div>
 </div>
@@ -476,9 +616,15 @@ accuracy: 0.9736842105263158
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>1.3.2 Measuring AUC</li>
-</ul>
+<p>cv_results stores the training and test mean and standard deviation of the error per boosting round (tree built) as a DataFrame. From cv_results, the final round 'test-error-mean' is extracted and converted into an accuracy, where accuracy is 1-error. The final accuracy of around 75% is an improvement from earlier!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="1.3.2-Measuring-AUC">1.3.2 Measuring AUC<a class="anchor-link" href="#1.3.2-Measuring-AUC"> </a></h3><p>Now that you've used cross-validation to compute average out-of-sample accuracy (after converting from an error), it's very easy to compute any other metric you might be interested in. All you have to do is pass it (or a list of metrics) in as an argument to the metrics parameter of xgb.cv().</p>
+<p>Your job in this exercise is to compute another common metric used in binary classification - the area under the curve ("auc").</p>
 
 </div>
 </div>
@@ -495,7 +641,7 @@ accuracy: 0.9736842105263158
                   <span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;auc&quot;</span><span class="p">,</span> <span class="n">as_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
 
 <span class="c1"># Print cv_results</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">cv_results</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">cv_results</span><span class="p">)</span>
 
 <span class="c1"># Print the AUC</span>
 <span class="nb">print</span><span class="p">((</span><span class="n">cv_results</span><span class="p">[</span><span class="s2">&quot;test-auc-mean&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
@@ -510,14 +656,79 @@ accuracy: 0.9736842105263158
 
 <div class="output_area">
 
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>train-auc-mean</th>
+      <th>train-auc-std</th>
+      <th>test-auc-mean</th>
+      <th>test-auc-std</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.768893</td>
+      <td>0.001544</td>
+      <td>0.767863</td>
+      <td>0.002819</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.790864</td>
+      <td>0.006758</td>
+      <td>0.789156</td>
+      <td>0.006846</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.815872</td>
+      <td>0.003900</td>
+      <td>0.814476</td>
+      <td>0.005997</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.822959</td>
+      <td>0.002018</td>
+      <td>0.821682</td>
+      <td>0.003912</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.827528</td>
+      <td>0.000769</td>
+      <td>0.826191</td>
+      <td>0.001937</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>   train-auc-mean  train-auc-std  test-auc-mean  test-auc-std
-0        0.768893       0.001544       0.767863      0.002820
-1        0.790864       0.006758       0.789156      0.006847
-2        0.815872       0.003899       0.814476      0.005997
-3        0.822959       0.002018       0.821682      0.003912
-4        0.827528       0.000769       0.826191      0.001938
-0.8261913333333334
+<pre>0.8261911413597645
 </pre>
 </div>
 </div>
@@ -537,20 +748,22 @@ accuracy: 0.9736842105263158
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>When to use XGBoost:<ul>
-<li>You have a large number of training samples ( &gt; 1000 training samples, less 100 features, number of features &lt; number of training samples)</li>
-<li>You have a mixture of categorical and numeric features ( or just numeric features)<br>
-<br/></li>
+<h2 id="1.4-When-should-I-use-XGBoost?">1.4 When should I use XGBoost?<a class="anchor-link" href="#1.4-When-should-I-use-XGBoost?"> </a></h2><h3 id="1.4.1-When-to-use-XGBoost">1.4.1 When to use XGBoost<a class="anchor-link" href="#1.4.1-When-to-use-XGBoost"> </a></h3><ul>
+<li>You have a large number of training samples<ul>
+<li>Greater than 1000 training samples and less 100 features</li>
+<li>The number of features &lt; number of training samples</li>
 </ul>
 </li>
-<li>When to NOT use XGBoost:<ul>
+<li>You have a mixture of categorical and numeric features<ul>
+<li>Or just numeric features</li>
+</ul>
+</li>
+</ul>
+<h3 id="1.4.2-When-to-NOT-use-XGBoost">1.4.2 When to NOT use XGBoost<a class="anchor-link" href="#1.4.2-When-to-NOT-use-XGBoost"> </a></h3><ul>
 <li>Image recognition</li>
-<li>Computer Vision</li>
-<li>NLP or understanding problems</li>
-<li>Number of training samples is significantly smaller than number of features</li>
-</ul>
-</li>
+<li>Computer vision</li>
+<li>Natural language processing and understanding problems</li>
+<li>When the number of training samples is significantly smaller than the number of features</li>
 </ul>
 
 </div>
