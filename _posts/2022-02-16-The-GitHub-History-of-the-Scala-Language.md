@@ -8,7 +8,7 @@ badges: true
 comments: true
 author: Hai Nguyen
 categories: [Datacamp, Python, EDA, Jupyter notebook, Pandas, Data Manipulation, Data Visualization, Importing & Cleaning Data]
-image: https://opengraph.githubassets.com/d48a9c60ee407a234f5ca66ac7b12118995e89a643e5c00248005cf98badf29e/scala/scala
+image: images/scala_github_history.png
 search_exclude: true
 metadata_key1: metadata_value1
 metadata_key2: metadata_value2 
