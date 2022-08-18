@@ -100,7 +100,7 @@ window.onload = wrap_img;
        • <span class="read-time" title="Estimated read time">
     
     
-      1 min read
+      17 min read
     
 </span></p>
 
@@ -170,8 +170,11 @@ window.onload = wrap_img;
 <ul>
 <li class="toc-entry toc-h2"><a href="#4.1-Preprocessing-data">4.1 Preprocessing data </a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#Creating-dummy-variables">Creating dummy variables </a></li>
-<li class="toc-entry toc-h3"><a href="#Regression-with-categorical-features">Regression with categorical features </a></li>
+<li class="toc-entry toc-h3"><a href="#Example-of-Dealing-with-categorical-features">Example of Dealing with categorical features </a></li>
+<li class="toc-entry toc-h3"><a href="#Dealing-with-categorical-features-in-Python">Dealing with categorical features in Python </a></li>
+<li class="toc-entry toc-h3"><a href="#Music-dataset">Music dataset </a></li>
+<li class="toc-entry toc-h3"><a href="#Creating-dummy-variables-(Exercise)">Creating dummy variables (Exercise) </a></li>
+<li class="toc-entry toc-h3"><a href="#Regression-with-categorical-features-(Exercise)">Regression with categorical features (Exercise) </a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#4.2-Handling-missing-data">4.2 Handling missing data </a>
@@ -183,16 +186,27 @@ window.onload = wrap_img;
 </li>
 <li class="toc-entry toc-h2"><a href="#4.3-Centering-and-scaling">4.3 Centering and scaling </a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#Centering-and-scaling-for-regression">Centering and scaling for regression </a></li>
-<li class="toc-entry toc-h3"><a href="#Centering-and-scaling-for-classification">Centering and scaling for classification </a></li>
+<li class="toc-entry toc-h3"><a href="#Why-scale-our-data?">Why scale our data? </a></li>
+<li class="toc-entry toc-h3"><a href="#How-to-scale-our-data">How to scale our data </a></li>
+<li class="toc-entry toc-h3"><a href="#Scaling-in-scikit-learn">Scaling in scikit-learn </a></li>
+<li class="toc-entry toc-h3"><a href="#Scaling-in-a-pipeline">Scaling in a pipeline </a></li>
+<li class="toc-entry toc-h3"><a href="#Comparing-performance-using-unscaled-data">Comparing performance using unscaled data </a></li>
+<li class="toc-entry toc-h3"><a href="#CV-and-scaling-in-a-pipeline">CV and scaling in a pipeline </a></li>
+<li class="toc-entry toc-h3"><a href="#Centering-and-scaling-for-regression-(Exercise)">Centering and scaling for regression (Exercise) </a></li>
+<li class="toc-entry toc-h3"><a href="#Centering-and-scaling-for--classification-(Exercise)">Centering and scaling for  classification (Exercise) </a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#4.4-Evaluating-multiple-models">4.4 Evaluating multiple models </a>
 <ul>
-<li class="toc-entry toc-h3"><a href="#Visualizing-regression-model-performance">Visualizing regression model performance </a></li>
-<li class="toc-entry toc-h3"><a href="#Predicting-on-the-test-set">Predicting on the test set </a></li>
-<li class="toc-entry toc-h3"><a href="#Visualizing-classification-model-performance">Visualizing classification model performance </a></li>
-<li class="toc-entry toc-h3"><a href="#Pipeline-for-predicting-song-popularity">Pipeline for predicting song popularity </a></li>
+<li class="toc-entry toc-h3"><a href="#Some-guiding-principles">Some guiding principles </a></li>
+<li class="toc-entry toc-h3"><a href="#It's-all-in-the-metrics">It&#39;s all in the metrics </a></li>
+<li class="toc-entry toc-h3"><a href="#A-note-on-scaling">A note on scaling </a></li>
+<li class="toc-entry toc-h3"><a href="#Evaluating-classification-models">Evaluating classification models </a></li>
+<li class="toc-entry toc-h3"><a href="#Evaluating-classification-models">Evaluating classification models </a></li>
+<li class="toc-entry toc-h3"><a href="#Visualizing-regression-model-performance-(Exercise)">Visualizing regression model performance (Exercise) </a></li>
+<li class="toc-entry toc-h3"><a href="#Predicting-on-the-test-set-(Exercise)">Predicting on the test set (Exercise) </a></li>
+<li class="toc-entry toc-h3"><a href="#Visualizing-classification-model-performance-(Exercise)">Visualizing classification model performance (Exercise) </a></li>
+<li class="toc-entry toc-h3"><a href="#Pipeline-for-predicting-song-popularity-(Exercise)">Pipeline for predicting song popularity (Exercise) </a></li>
 </ul>
 </li>
 <li class="toc-entry toc-h2"><a href="#4.5-Congratulations">4.5 Congratulations </a></li>
@@ -214,7 +228,7 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
@@ -240,12 +254,676 @@ window.onload = wrap_img;
 <h2 id="4.1-Preprocessing-data">
 <a class="anchor" href="#4.1-Preprocessing-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.1 Preprocessing data<a class="anchor-link" href="#4.1-Preprocessing-data"> </a>
 </h2>
-<h3 id="Creating-dummy-variables">
-<a class="anchor" href="#Creating-dummy-variables" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating dummy variables<a class="anchor-link" href="#Creating-dummy-variables"> </a>
+<p>scikit-learn requirements:</p>
+<ul>
+<li>Numeric data</li>
+<li>No missing values</li>
+<li>With real-world data:<ul>
+<li>This is rarely the case</li>
+<li>We will often need to preprocess our data first</li>
+</ul>
+</li>
+</ul>
+<h3 id="Example-of-Dealing-with-categorical-features">
+<a class="anchor" href="#Example-of-Dealing-with-categorical-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example of Dealing with categorical features<a class="anchor-link" href="#Example-of-Dealing-with-categorical-features"> </a>
 </h3>
-<h3 id="Regression-with-categorical-features">
-<a class="anchor" href="#Regression-with-categorical-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Regression with categorical features<a class="anchor-link" href="#Regression-with-categorical-features"> </a>
+<ul>
+<li>scikit-learn will not accept categorical features by default</li>
+<li>Need to convert categorical features into numeric values</li>
+<li>Convert to binary features called dummy variables:<ul>
+<li>0: Observation was NOT that category</li>
+<li>1: Observation was that category</li>
+</ul>
+</li>
+</ul>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/dummies.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>We can reduce the <strong>Rock</strong> column, as if all other columns are zeros, then it should be <strong>Rock</strong> genre.</p>
+<h3 id="Dealing-with-categorical-features-in-Python">
+<a class="anchor" href="#Dealing-with-categorical-features-in-Python" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dealing with categorical features in Python<a class="anchor-link" href="#Dealing-with-categorical-features-in-Python"> </a>
 </h3>
+<ul>
+<li>scikit-learn:<code>OneHotEncoder()</code>
+</li>
+<li>pandas: <code>get_dummies()</code>
+</li>
+</ul>
+<h3 id="Music-dataset">
+<a class="anchor" href="#Music-dataset" aria-hidden="true"><span class="octicon octicon-link"></span></a>Music dataset<a class="anchor-link" href="#Music-dataset"> </a>
+</h3>
+<ul>
+<li>popularity : Target variable</li>
+<li>genre : Categorical feature</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">music_clean_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./datasets/music_clean.csv'</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">display</span><span class="p">(</span><span class="n">music_clean_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">cols</span> <span class="o">=</span> <span class="n">music_clean_df</span><span class="o">.</span><span class="n">columns</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cols</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">music_clean_df</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>popularity</th>
+      <th>acousticness</th>
+      <th>danceability</th>
+      <th>duration_ms</th>
+      <th>energy</th>
+      <th>instrumentalness</th>
+      <th>liveness</th>
+      <th>loudness</th>
+      <th>speechiness</th>
+      <th>tempo</th>
+      <th>valence</th>
+      <th>genre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>36506</th>
+      <td>60.0</td>
+      <td>0.896000</td>
+      <td>0.726</td>
+      <td>214547.0</td>
+      <td>0.177</td>
+      <td>0.000002</td>
+      <td>0.1160</td>
+      <td>-14.824</td>
+      <td>0.0353</td>
+      <td>92.934</td>
+      <td>0.618</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>37591</th>
+      <td>63.0</td>
+      <td>0.003840</td>
+      <td>0.635</td>
+      <td>190448.0</td>
+      <td>0.908</td>
+      <td>0.083400</td>
+      <td>0.2390</td>
+      <td>-4.795</td>
+      <td>0.0563</td>
+      <td>110.012</td>
+      <td>0.637</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>37658</th>
+      <td>59.0</td>
+      <td>0.000075</td>
+      <td>0.352</td>
+      <td>456320.0</td>
+      <td>0.956</td>
+      <td>0.020300</td>
+      <td>0.1250</td>
+      <td>-3.634</td>
+      <td>0.1490</td>
+      <td>122.897</td>
+      <td>0.228</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>36060</th>
+      <td>54.0</td>
+      <td>0.945000</td>
+      <td>0.488</td>
+      <td>352280.0</td>
+      <td>0.326</td>
+      <td>0.015700</td>
+      <td>0.1190</td>
+      <td>-12.020</td>
+      <td>0.0328</td>
+      <td>106.063</td>
+      <td>0.323</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>35710</th>
+      <td>55.0</td>
+      <td>0.245000</td>
+      <td>0.667</td>
+      <td>273693.0</td>
+      <td>0.647</td>
+      <td>0.000297</td>
+      <td>0.0633</td>
+      <td>-7.787</td>
+      <td>0.0487</td>
+      <td>143.995</td>
+      <td>0.300</td>
+      <td>1</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>['popularity', 'acousticness', 'danceability', 'duration_ms', 'energy', 'instrumentalness', 'liveness', 'loudness', 'speechiness', 'tempo', 'valence', 'genre']
+&lt;class 'pandas.core.frame.DataFrame'&gt;
+Int64Index: 1000 entries, 36506 to 18960
+Data columns (total 12 columns):
+ #   Column            Non-Null Count  Dtype  
+---  ------            --------------  -----  
+ 0   popularity        1000 non-null   float64
+ 1   acousticness      1000 non-null   float64
+ 2   danceability      1000 non-null   float64
+ 3   duration_ms       1000 non-null   float64
+ 4   energy            1000 non-null   float64
+ 5   instrumentalness  1000 non-null   float64
+ 6   liveness          1000 non-null   float64
+ 7   loudness          1000 non-null   float64
+ 8   speechiness       1000 non-null   float64
+ 9   tempo             1000 non-null   float64
+ 10  valence           1000 non-null   float64
+ 11  genre             1000 non-null   int64  
+dtypes: float64(11), int64(1)
+memory usage: 101.6 KB
+None
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">music_df_full</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./datasets/music_genre.csv'</span><span class="p">,</span><span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">music_df_full</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">{</span><span class="s1">'music_genre'</span><span class="p">:</span> <span class="s1">'genre'</span><span class="p">},</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">music_df_full</span> <span class="o">=</span> <span class="n">music_df_full</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">music_df_full</span><span class="p">[</span><span class="s1">'tempo'</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">'?'</span><span class="p">]</span>
+
+<span class="n">music_df</span> <span class="o">=</span> <span class="n">music_df_full</span><span class="p">[</span><span class="n">cols</span><span class="p">]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">music_df</span><span class="p">[</span><span class="s1">'tempo'</span><span class="p">]</span> <span class="o">=</span> <span class="n">music_df</span><span class="p">[</span><span class="s1">'tempo'</span><span class="p">]</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+
+<span class="n">music_df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">music_df</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">music_df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>&lt;class 'pandas.core.frame.DataFrame'&gt;
+RangeIndex: 1000 entries, 0 to 999
+Data columns (total 12 columns):
+ #   Column            Non-Null Count  Dtype  
+---  ------            --------------  -----  
+ 0   popularity        1000 non-null   float64
+ 1   acousticness      1000 non-null   float64
+ 2   danceability      1000 non-null   float64
+ 3   duration_ms       1000 non-null   float64
+ 4   energy            1000 non-null   float64
+ 5   instrumentalness  1000 non-null   float64
+ 6   liveness          1000 non-null   float64
+ 7   loudness          1000 non-null   float64
+ 8   speechiness       1000 non-null   float64
+ 9   tempo             1000 non-null   float64
+ 10  valence           1000 non-null   float64
+ 11  genre             1000 non-null   object 
+dtypes: float64(11), object(1)
+memory usage: 93.9+ KB
+None
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>popularity</th>
+      <th>acousticness</th>
+      <th>danceability</th>
+      <th>duration_ms</th>
+      <th>energy</th>
+      <th>instrumentalness</th>
+      <th>liveness</th>
+      <th>loudness</th>
+      <th>speechiness</th>
+      <th>tempo</th>
+      <th>valence</th>
+      <th>genre</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>32.0</td>
+      <td>0.9890</td>
+      <td>0.403</td>
+      <td>192013.0</td>
+      <td>0.0467</td>
+      <td>0.874000</td>
+      <td>0.149</td>
+      <td>-22.857</td>
+      <td>0.0456</td>
+      <td>124.043</td>
+      <td>0.559</td>
+      <td>Classical</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>44.0</td>
+      <td>0.7880</td>
+      <td>0.119</td>
+      <td>271520.0</td>
+      <td>0.3460</td>
+      <td>0.000022</td>
+      <td>0.129</td>
+      <td>-8.093</td>
+      <td>0.0376</td>
+      <td>64.630</td>
+      <td>0.135</td>
+      <td>Classical</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>77.0</td>
+      <td>0.0931</td>
+      <td>0.620</td>
+      <td>234213.0</td>
+      <td>0.6900</td>
+      <td>0.000000</td>
+      <td>0.131</td>
+      <td>-6.508</td>
+      <td>0.0493</td>
+      <td>133.935</td>
+      <td>0.331</td>
+      <td>Rap</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>59.0</td>
+      <td>0.0942</td>
+      <td>0.919</td>
+      <td>296587.0</td>
+      <td>0.6770</td>
+      <td>0.000000</td>
+      <td>0.594</td>
+      <td>-8.642</td>
+      <td>0.2540</td>
+      <td>131.050</td>
+      <td>0.875</td>
+      <td>Rap</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>35.0</td>
+      <td>0.0278</td>
+      <td>0.460</td>
+      <td>276880.0</td>
+      <td>0.8990</td>
+      <td>0.000000</td>
+      <td>0.267</td>
+      <td>-2.894</td>
+      <td>0.0481</td>
+      <td>158.000</td>
+      <td>0.650</td>
+      <td>Anime</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">music_dummies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">music_df</span><span class="p">[</span><span class="s1">'genre'</span><span class="p">],</span> <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">music_dummies</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>   Anime  Blues  Classical  Country  Electronic  Hip-Hop  Jazz  Rap  Rock
+0      0      0          1        0           0        0     0    0     0
+1      0      0          1        0           0        0     0    0     0
+2      0      0          0        0           0        0     0    1     0
+3      0      0          0        0           0        0     0    1     0
+4      1      0          0        0           0        0     0    0     0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">music_dummies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">music_df</span><span class="p">,</span> <span class="n">music_dummies</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">music_dummies</span> <span class="o">=</span> <span class="n">music_dummies</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"genre"</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">music_dummies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">music_df</span><span class="p">,</span> <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">music_dummies</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Index(['popularity', 'acousticness', 'danceability', 'duration_ms', 'energy',
+       'instrumentalness', 'liveness', 'loudness', 'speechiness', 'tempo',
+       'valence', 'genre_Anime', 'genre_Blues', 'genre_Classical',
+       'genre_Country', 'genre_Electronic', 'genre_Hip-Hop', 'genre_Jazz',
+       'genre_Rap', 'genre_Rock'],
+      dtype='object')
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span><span class="p">,</span> <span class="n">KFold</span><span class="p">,</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">music_dummies</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"popularity"</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">music_dummies</span><span class="p">[</span><span class="s2">"popularity"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">linreg</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<span class="n">linreg_cv</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">linreg</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">kf</span><span class="p">,</span>
+<span class="n">scoring</span><span class="o">=</span><span class="s2">"neg_mean_squared_error"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="n">linreg_cv</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[8.80667539 9.85254103 8.32772187 9.63119153 9.81925038]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Creating-dummy-variables-(Exercise)">
+<a class="anchor" href="#Creating-dummy-variables-(Exercise)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Creating dummy variables (Exercise)<a class="anchor-link" href="#Creating-dummy-variables-(Exercise)"> </a>
+</h3>
+<p>Being able to include categorical features in the model building process can enhance performance as they may add information that contributes to prediction accuracy.</p>
+<p>The music_df dataset has been preloaded for you, and its shape is printed. Also, pandas has been imported as pd.</p>
+<p>Now you will create a new DataFrame containing the original columns of music_df plus dummy variables from the "genre" column.</p>
+<p>Instructions:</p>
+<ul>
+<li>Use a relevant function, passing the entire music_df DataFrame, to create music_dummies, dropping the first binary column.</li>
+<li>Print the shape of music_dummies.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">music_dummies</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">music_df</span><span class="p">,</span> <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="c1"># Print the new DataFrame's shape</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Shape of music_dummies: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">music_dummies</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Shape of music_dummies: (1000, 20)
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As there were ten values in the "genre" column, nine new columns were added by a call of pd.get_dummies() using drop_first=True. After dropping the original "genre" column, there are still eight new columns in the DataFrame!</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Regression-with-categorical-features-(Exercise)">
+<a class="anchor" href="#Regression-with-categorical-features-(Exercise)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Regression with categorical features (Exercise)<a class="anchor-link" href="#Regression-with-categorical-features-(Exercise)"> </a>
+</h3>
+<p>Now you have created music_dummies, containing binary features for each song's genre, it's time to build a ridge regression model to predict song popularity.</p>
+<p>music_dummies has been preloaded for you, along with Ridge, cross_val_score, numpy as np, and a KFold object stored as kf.</p>
+<p>The model will be evaluated by calculating the average RMSE, but first, you will need to convert the scores for each fold to positive values and take their square root. This metric shows the average error of our model's predictions, so it can be compared against the standard deviation of the target value—"popularity".</p>
+<p>Instructions:</p>
+<ul>
+<li>Create X, containing all features in music_dummies, and y, consisting of the "popularity" column, respectively.</li>
+<li>Instantiate a ridge regression model, setting alpha equal to 0.2.</li>
+<li>Perform cross-validation on X and y using the ridge model, setting cv equal to kf, and using negative mean squared error as the scoring metric.</li>
+<li>Print the RMSE values by converting negative scores to positive and taking the square</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Ridge</span>
+<span class="c1"># Create X and y</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">music_dummies</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'popularity'</span><span class="p">],</span> <span class="n">axis</span> <span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">music_dummies</span><span class="p">[</span><span class="s1">'popularity'</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="c1"># Instantiate a ridge model</span>
+<span class="n">ridge</span> <span class="o">=</span> <span class="n">Ridge</span><span class="p">(</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.2</span><span class="p">)</span>
+
+<span class="c1"># Perform cross-validation</span>
+<span class="n">scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">ridge</span><span class="p">,</span> <span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">kf</span><span class="p">,</span> <span class="n">scoring</span><span class="o">=</span><span class="s2">"neg_mean_squared_error"</span><span class="p">)</span>
+
+<span class="c1"># Calculate RMSE</span>
+<span class="n">rmse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="o">-</span><span class="n">scores</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Average RMSE: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rmse</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Standard Deviation of the target array: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">y</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Average RMSE: 9.420689379783706
+Standard Deviation of the target array: 15.042007312855555
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Great work! An average RMSE of approximately 9.4 is lower than the standard deviation of the target variable (song popularity), suggesting the model is reasonably accurate.</p>
+
 </div>
 </div>
 </div>
@@ -255,60 +933,783 @@ window.onload = wrap_img;
 <h2 id="4.2-Handling-missing-data">
 <a class="anchor" href="#4.2-Handling-missing-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2 Handling missing data<a class="anchor-link" href="#4.2-Handling-missing-data"> </a>
 </h2>
+<ul>
+<li>Missing data</li>
+<li>No value for a feature in a particular row</li>
+<li>This can occur because:<ul>
+<li>There may have been no observation</li>
+<li>The data might be corrupt</li>
+</ul>
+</li>
+<li>We need to deal with missing data</li>
+</ul>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/missing_1.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/missing_2.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/missing_3.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/missing_4.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/missing_5.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/missing_6.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/missing_7.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Dropping-missing-data">
 <a class="anchor" href="#Dropping-missing-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Dropping missing data<a class="anchor-link" href="#Dropping-missing-data"> </a>
 </h3>
+<p>Over the next three exercises, you are going to tidy the music_df dataset. You will create a pipeline to impute missing values and build a KNN classifier model, then use it to predict whether a song is of the "Rock" genre.</p>
+<p>In this exercise specifically, you will drop missing values accounting for less than 5% of the dataset, and convert the "genre" column into a binary feature.</p>
+<p>Instructions:</p>
+<ul>
+<li>Print the number of missing values for each column in the music_df dataset, sorted in ascending order.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">music_df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Remove values for all columns with 50 or fewer missing values.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">music_df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">())</span>
+<span class="n">lessthan50NanCols</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">music_df</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">music_df</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">50</span><span class="p">]</span>
+
+<span class="c1"># Remove values where less than 5% are missing</span>
+<span class="n">music_df</span> <span class="o">=</span> <span class="n">music_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span> <span class="o">=</span> <span class="n">lessthan50NanCols</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Convert music_df["genre"] to values of 1 if the row contains "Rock", otherwise change the value to 0.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">music_df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">())</span>
+
+<span class="c1"># Remove values where less than 5% are missing</span>
+<span class="n">music_df</span> <span class="o">=</span> <span class="n">music_df</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">"genre"</span><span class="p">,</span> <span class="s2">"popularity"</span><span class="p">,</span> <span class="s2">"loudness"</span><span class="p">,</span> <span class="s2">"liveness"</span><span class="p">,</span> <span class="s2">"tempo"</span><span class="p">])</span>
+
+<span class="c1"># Convert genre to a binary feature</span>
+<span class="n">music_df</span><span class="p">[</span><span class="s2">"genre"</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">music_df</span><span class="p">[</span><span class="s2">"genre"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Rock"</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">music_df</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sort_values</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Shape of the `music_df`: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">music_df</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Pipeline-for-song-genre-prediction:-I">
 <a class="anchor" href="#Pipeline-for-song-genre-prediction:-I" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pipeline for song genre prediction: I<a class="anchor-link" href="#Pipeline-for-song-genre-prediction:-I"> </a>
 </h3>
+<p>Now it's time to build a pipeline. It will contain steps to impute missing values using the mean for each feature and build a KNN model for the classification of song genre.</p>
+<p>The modified music_df dataset that you created in the previous exercise has been preloaded for you, along with KNeighborsClassifier and train_test_split.</p>
+<p>Instructions:</p>
+<ul>
+<li>Import SimpleImputer and Pipeline.</li>
+<li>Instantiate an imputer.</li>
+<li>Instantiate a KNN classifier with three neighbors.</li>
+<li>Create steps, a list of tuples containing the imputer variable you created, called "imputer", followed by the knn model you created,</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
+<span class="kn">from</span> <span class="nn">sklearn.impute</span> <span class="kn">import</span> <span class="n">SimpleImputer</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+
+<span class="c1"># Instantiate an imputer</span>
+<span class="n">imputer</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">"most_frequent"</span><span class="p">)</span>
+
+<span class="c1"># Instantiate a knn model</span>
+<span class="n">knn</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+
+<span class="c1"># Build steps for the pipeline</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"imputer"</span><span class="p">,</span> <span class="n">imputer</span><span class="p">),</span> 
+         <span class="p">(</span><span class="s2">"knn"</span><span class="p">,</span> <span class="n">knn</span><span class="p">)]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Pipeline-for-song-genre-prediction:-II">
 <a class="anchor" href="#Pipeline-for-song-genre-prediction:-II" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pipeline for song genre prediction: II<a class="anchor-link" href="#Pipeline-for-song-genre-prediction:-II"> </a>
 </h3>
+<p>Having set up the steps of the pipeline in the previous exercise, you will now use it on the music_df dataset to classify the genre of songs. What makes pipelines so incredibly useful is the simple interface that they provide.</p>
+<p>X_train, X_test, y_train, and y_test have been preloaded for you, and confusion_matrix has been imported from sklearn.metrics.</p>
+<p>Instructions:</p>
+<ul>
+<li>Create a pipeline using the steps you previously defined.</li>
+<li>Fit the pipeline to the training data.</li>
+<li>Make predictions on the test set.</li>
+<li>Calculate and print the confusion matrix.</li>
+</ul>
+
 </div>
 </div>
 </div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">imp_mean</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s2">"mean"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">steps</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"imputer"</span><span class="p">,</span> <span class="n">imp_mean</span><span class="p">),</span>
+        <span class="p">(</span><span class="s2">"knn"</span><span class="p">,</span> <span class="n">knn</span><span class="p">)]</span>
+
+<span class="c1"># Create the pipeline</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
+
+<span class="c1"># Fit the pipeline to the training data</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Make predictions on the test set</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Print the confusion matrix</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="4.3-Centering-and-scaling">
 <a class="anchor" href="#4.3-Centering-and-scaling" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.3 Centering and scaling<a class="anchor-link" href="#4.3-Centering-and-scaling"> </a>
 </h2>
-<h3 id="Centering-and-scaling-for-regression">
-<a class="anchor" href="#Centering-and-scaling-for-regression" aria-hidden="true"><span class="octicon octicon-link"></span></a>Centering and scaling for regression<a class="anchor-link" href="#Centering-and-scaling-for-regression"> </a>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/scale1.png" alt=""></p>
+<h3 id="Why-scale-our-data?">
+<a class="anchor" href="#Why-scale-our-data?" aria-hidden="true"><span class="octicon octicon-link"></span></a>Why scale our data?<a class="anchor-link" href="#Why-scale-our-data?"> </a>
 </h3>
-<h3 id="Centering-and-scaling-for-classification">
-<a class="anchor" href="#Centering-and-scaling-for-classification" aria-hidden="true"><span class="octicon octicon-link"></span></a>Centering and scaling for classification<a class="anchor-link" href="#Centering-and-scaling-for-classification"> </a>
+<ul>
+<li>Many models use some form of distance to inform them</li>
+<li>Features on larger scales can disproportionately influence the model</li>
+<li>Example: KNN uses distance explicitly when making predictions</li>
+<li>We want features to be on a similar scale</li>
+<li>Normalizing or standardizing (scaling and centering)</li>
+</ul>
+<h3 id="How-to-scale-our-data">
+<a class="anchor" href="#How-to-scale-our-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to scale our data<a class="anchor-link" href="#How-to-scale-our-data"> </a>
 </h3>
+<ul>
+<li>Subtract the mean and divide by variance<ul>
+<li>All features are centered around zero and have a variance of one</li>
+<li>This is called <strong>standardization</strong>
+</li>
+</ul>
+</li>
+<li>Can also subtract the minimum and divide by the range<ul>
+<li>Minimum zero and maximum one</li>
+</ul>
+</li>
+<li>Can also normarmalize so the data ranges from -1 to +1</li>
+<li>See scikit-learn docs for further details</li>
+</ul>
+<h3 id="Scaling-in-scikit-learn">
+<a class="anchor" href="#Scaling-in-scikit-learn" aria-hidden="true"><span class="octicon octicon-link"></span></a>Scaling in scikit-learn<a class="anchor-link" href="#Scaling-in-scikit-learn"> </a>
+</h3>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">music_df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"genre"</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">music_df</span><span class="p">[</span><span class="s2">"genre"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">))</span>
+</pre></div>
+<h3 id="Scaling-in-a-pipeline">
+<a class="anchor" href="#Scaling-in-a-pipeline" aria-hidden="true"><span class="octicon octicon-link"></span></a>Scaling in a pipeline<a class="anchor-link" href="#Scaling-in-a-pipeline"> </a>
+</h3>
+<div class="highlight"><pre><span></span><span class="n">steps</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">'scaler'</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),(</span><span class="s1">'knn'</span><span class="p">,</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">6</span><span class="p">))]</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
+
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
+
+<span class="n">knn_scaled</span> <span class="o">=</span> <span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">knn_scaled</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">knn_scaled</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</pre></div>
+<h3 id="Comparing-performance-using-unscaled-data">
+<a class="anchor" href="#Comparing-performance-using-unscaled-data" aria-hidden="true"><span class="octicon octicon-link"></span></a>Comparing performance using unscaled data<a class="anchor-link" href="#Comparing-performance-using-unscaled-data"> </a>
+</h3>
+<div class="highlight"><pre><span></span><span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
+<span class="n">knn_unscaled</span> <span class="o">=</span> <span class="n">KNeighborsClassifier</span><span class="p">(</span><span class="n">n_neighbors</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">knn_unscaled</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</pre></div>
+
 </div>
 </div>
 </div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="CV-and-scaling-in-a-pipeline">
+<a class="anchor" href="#CV-and-scaling-in-a-pipeline" aria-hidden="true"><span class="octicon octicon-link"></span></a>CV and scaling in a pipeline<a class="anchor-link" href="#CV-and-scaling-in-a-pipeline"> </a>
+</h3>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="n">steps</span> <span class="o">=</span> <span class="p">[(</span><span class="s1">'scaler'</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),(</span><span class="s1">'knn'</span><span class="p">,</span> <span class="n">KNeighborsClassifier</span><span class="p">())]</span>
+
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"knn__n_neighbors"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">50</span><span class="p">)}</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">random_state</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
+
+<span class="n">cv</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">parameters</span><span class="p">)</span>
+<span class="n">cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">cv</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Centering-and-scaling-for-regression-(Exercise)">
+<a class="anchor" href="#Centering-and-scaling-for-regression-(Exercise)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Centering and scaling for regression (Exercise)<a class="anchor-link" href="#Centering-and-scaling-for-regression-(Exercise)"> </a>
+</h3>
+<p>Now you have seen the benefits of scaling your data, you will use a pipeline to preprocess the music_df features and build a lasso regression model to predict a song's loudness.</p>
+<p>X_train, X_test, y_train, and y_test have been created from the music_df dataset, where the target is "loudness" and the features are all other columns in the dataset. Lasso and Pipeline have also been imported for you.</p>
+<p>Note that "genre" has been converted to a binary feature where 1 indicates a rock song, and 0 represents other genres.</p>
+<p>Instructions:</p>
+<ul>
+<li>Import StandardScaler.</li>
+<li>Create the steps for the pipeline object, a StandardScaler object called "scaler", and a lasso model called "lasso" with alpha set to 0.5.</li>
+<li>Instantiate a pipeline with steps to scale and build a lasso regression model.</li>
+<li>Calculate the R-squared value on the test data.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">Lasso</span>
+
+<span class="c1"># Create pipeline steps</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"scaler"</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+         <span class="p">(</span><span class="s2">"lasso"</span><span class="p">,</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">))]</span>
+
+<span class="c1"># Instantiate the pipeline</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
+<span class="n">pipeline</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+
+<span class="c1"># Calculate and print R-squared</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">pipeline</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Centering-and-scaling-for--classification-(Exercise)">
+<a class="anchor" href="#Centering-and-scaling-for--classification-(Exercise)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Centering and scaling for  classification (Exercise)<a class="anchor-link" href="#Centering-and-scaling-for--classification-(Exercise)"> </a>
+</h3>
+<p>Now you will bring together scaling and model building into a pipeline for cross-validation.</p>
+<p>Your task is to build a pipeline to scale features in the music_df dataset and perform grid search cross-validation using a logistic regression model with different values for the hyperparameter C. The target variable here is "genre", which contains binary values for rock as 1 and any other genre as 0.</p>
+<p>StandardScaler, LogisticRegression, and GridSearchCV have all been imported for you.</p>
+<p>Instructions:</p>
+<ul>
+<li>Build the steps for the pipeline: a StandardScaler() object named "scaler", and a logistic regression model named "logreg".</li>
+<li>Create the parameters, searching 20 equally spaced float values ranging from 0.001 to 1.0 for the logistic regression model's C hyperparameter within the pipeline.</li>
+<li>Instantiate the grid search object.</li>
+<li>Fit the grid search object to the training data.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">GridSearchCV</span>
+
+<span class="c1"># Build the steps</span>
+<span class="n">steps</span> <span class="o">=</span> <span class="p">[</span>   
+            <span class="p">(</span><span class="s2">"scaler"</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span>
+            <span class="p">(</span><span class="s2">"logreg"</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">())</span>
+         <span class="p">]</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
+
+<span class="c1"># Create the parameter space</span>
+<span class="n">parameters</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"logreg__C"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">20</span><span class="p">)}</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> 
+                                                    <span class="n">random_state</span><span class="o">=</span><span class="mi">21</span><span class="p">)</span>
+
+<span class="c1"># Instantiate the grid search object</span>
+<span class="n">cv</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">parameters</span><span class="p">)</span>
+
+<span class="c1"># Fit to the training data</span>
+<span class="n">cv</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cv</span><span class="o">.</span><span class="n">best_score_</span><span class="p">,</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">cv</span><span class="o">.</span><span class="n">best_params_</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="4.4-Evaluating-multiple-models">
 <a class="anchor" href="#4.4-Evaluating-multiple-models" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.4 Evaluating multiple models<a class="anchor-link" href="#4.4-Evaluating-multiple-models"> </a>
 </h2>
-<h3 id="Visualizing-regression-model-performance">
-<a class="anchor" href="#Visualizing-regression-model-performance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visualizing regression model performance<a class="anchor-link" href="#Visualizing-regression-model-performance"> </a>
+<p>Different models for different problems</p>
+<h3 id="Some-guiding-principles">
+<a class="anchor" href="#Some-guiding-principles" aria-hidden="true"><span class="octicon octicon-link"></span></a>Some guiding principles<a class="anchor-link" href="#Some-guiding-principles"> </a>
 </h3>
-<h3 id="Predicting-on-the-test-set">
-<a class="anchor" href="#Predicting-on-the-test-set" aria-hidden="true"><span class="octicon octicon-link"></span></a>Predicting on the test set<a class="anchor-link" href="#Predicting-on-the-test-set"> </a>
+<ul>
+<li>
+<p>Size of the dataset</p>
+<ul>
+<li>Fewer features = simpler model, faster training time</li>
+<li>Some models require large amounts of data to perform well</li>
+</ul>
+</li>
+<li>
+<p>Interpretability</p>
+<ul>
+<li>Some models are easier to explain, which can be important for stakeholders</li>
+<li>Linear regression has high interpretability, as we can understand the coefficients</li>
+</ul>
+</li>
+<li>
+<p>Flexibility</p>
+<ul>
+<li>May improve accuracy, by making fewer assumptions about data</li>
+<li>KNN is a more flexible model, doesn't assume any linear relationships</li>
+</ul>
+</li>
+</ul>
+<h3 id="It's-all-in-the-metrics">
+<a class="anchor" href="#It's-all-in-the-metrics" aria-hidden="true"><span class="octicon octicon-link"></span></a>It's all in the metrics<a class="anchor-link" href="#It's-all-in-the-metrics"> </a>
 </h3>
-<h3 id="Visualizing-classification-model-performance">
-<a class="anchor" href="#Visualizing-classification-model-performance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visualizing classification model performance<a class="anchor-link" href="#Visualizing-classification-model-performance"> </a>
+<ul>
+<li>
+<p>Regression model performance:</p>
+<ul>
+<li>RMSE</li>
+<li>R-squared</li>
+</ul>
+</li>
+<li>
+<p>Classification model performance:</p>
+<ul>
+<li>Accuracy</li>
+<li>Confusion matrix</li>
+<li>Precision, recall, F1-score</li>
+<li>ROC AUC</li>
+</ul>
+</li>
+<li>
+<p>Train several models and evaluate performance out of the box</p>
+</li>
+</ul>
+<h3 id="A-note-on-scaling">
+<a class="anchor" href="#A-note-on-scaling" aria-hidden="true"><span class="octicon octicon-link"></span></a>A note on scaling<a class="anchor-link" href="#A-note-on-scaling"> </a>
 </h3>
-<h3 id="Pipeline-for-predicting-song-popularity">
-<a class="anchor" href="#Pipeline-for-predicting-song-popularity" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pipeline for predicting song popularity<a class="anchor-link" href="#Pipeline-for-predicting-song-popularity"> </a>
+<ul>
+<li>Models a(ected by scaling:<ul>
+<li>KNN</li>
+<li>Linear Regression (plus Ridge, Lasso)</li>
+<li>Logistic Regression</li>
+<li>Artificial Neural Network</li>
+</ul>
+</li>
+<li>Best to scale our data before evaluating models</li>
+</ul>
+<p>&lt;/br&gt;</p>
+<h3 id="Evaluating-classification-models">
+<a class="anchor" href="#Evaluating-classification-models" aria-hidden="true"><span class="octicon octicon-link"></span></a>Evaluating classification models<a class="anchor-link" href="#Evaluating-classification-models"> </a>
 </h3>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
+<span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span><span class="p">,</span> <span class="n">KFold</span><span class="p">,</span> <span class="n">train_test_split</span>
+<span class="kn">from</span> <span class="nn">sklearn.neighbors</span> <span class="kn">import</span> <span class="n">KNeighborsClassifier</span>
+<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+<span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">music</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"genre"</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">music</span><span class="p">[</span><span class="s2">"genre"</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
+<span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
+<span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+</pre></div>
+<p>&lt;/br&gt;</p>
+<h3 id="Evaluating-classification-models">
+<a class="anchor" href="#Evaluating-classification-models" aria-hidden="true"><span class="octicon octicon-link"></span></a>Evaluating classification models<a class="anchor-link" href="#Evaluating-classification-models"> </a>
+</h3>
+<div class="highlight"><pre><span></span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span>  
+            <span class="s2">"Logistic Regression"</span><span class="p">:</span> <span class="n">LogisticRegression</span><span class="p">(),</span>
+            <span class="s2">"KNN"</span><span class="p">:</span> <span class="n">KNeighborsClassifier</span><span class="p">(),</span>
+            <span class="s2">"Decision Tree"</span><span class="p">:</span> <span class="n">DecisionTreeClassifier</span><span class="p">()</span>
+        <span class="p">}</span>
+
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+    <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">cv_results</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">kf</span><span class="p">)</span>
+    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cv_results</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/viz.png" alt=""></p>
+
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Visualizing-regression-model-performance-(Exercise)">
+<a class="anchor" href="#Visualizing-regression-model-performance-(Exercise)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visualizing regression model performance (Exercise)<a class="anchor-link" href="#Visualizing-regression-model-performance-(Exercise)"> </a>
+</h3>
+<p>Now you have seen how to evaluate multiple models out of the box, you will build three regression models to predict a song's "energy" levels.</p>
+<p>The music_df dataset has had dummy variables for "genre" added. Also, feature and target arrays have been created, and these have been split into X_train, X_test, y_train, and y_test.</p>
+<p>The following have been imported for you: LinearRegression, Ridge, Lasso, cross_val_score, and KFold.</p>
+<p>Instructions:</p>
+<ul>
+<li>Write a for loop using model as the iterator, and model.values() as the iterable.</li>
+<li>Perform cross-validation on the training features and the training target array using the model, setting cv equal to the KFold object.</li>
+<li>Append the model's cross-validation scores to the results list.</li>
+<li>Create a box plot displaying the results, with the x-axis labels as the names of the models.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span>
+            <span class="s2">"Linear Regression"</span><span class="p">:</span> <span class="n">LinearRegression</span><span class="p">(),</span> 
+            <span class="s2">"Ridge"</span><span class="p">:</span> <span class="n">Ridge</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">),</span> 
+            <span class="s2">"Lasso"</span><span class="p">:</span> <span class="n">Lasso</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+            <span class="p">}</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Loop through the models' values</span>
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+  <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  
+  <span class="c1"># Perform cross-validation</span>
+  <span class="n">cv_scores</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">kf</span><span class="p">)</span>
+  
+  <span class="c1"># Append the results</span>
+  <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cv_scores</span><span class="p">)</span>
+
+<span class="c1"># Create a box plot of the results</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Predicting-on-the-test-set-(Exercise)">
+<a class="anchor" href="#Predicting-on-the-test-set-(Exercise)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Predicting on the test set (Exercise)<a class="anchor-link" href="#Predicting-on-the-test-set-(Exercise)"> </a>
+</h3>
+<p>In the last exercise, linear regression and ridge appeared to produce similar results. It would be appropriate to select either of those models; however, you can check predictive performance on the test set to see if either one can outperform the other.</p>
+<p>You will use root mean squared error (RMSE) as the metric. The dictionary models, containing the names and instances of the two models, has been preloaded for you along with the training and target arrays X_train_scaled, X_test_scaled, y_train, and y_test.</p>
+<p>Instructions:</p>
+<ul>
+<li>Import mean_squared_error.</li>
+<li>Fit the model to the scaled training features and the training labels.</li>
+<li>Make predictions using the scaled test features.</li>
+<li>Calculate RMSE by passing the test set labels and the predicted labels.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
+
+<span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+  
+  <span class="c1"># Fit the model to the training data</span>
+  <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+  
+  <span class="c1"># Make predictions on the test set</span>
+  <span class="n">y_pred</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test_scaled</span><span class="p">)</span>
+  
+  <span class="c1"># Calculate the test_rmse</span>
+  <span class="n">test_rmse</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">,</span> <span class="n">squared</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+  <span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="si">{}</span><span class="s2"> Test Set RMSE: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">test_rmse</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Visualizing-classification-model-performance-(Exercise)">
+<a class="anchor" href="#Visualizing-classification-model-performance-(Exercise)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Visualizing classification model performance (Exercise)<a class="anchor-link" href="#Visualizing-classification-model-performance-(Exercise)"> </a>
+</h3>
+<p>In this exercise, you will be solving a classification problem where the "popularity" column in the music_df dataset has been converted to binary values, with 1 representing popularity more than or equal to the median for the "popularity" column, and 0 indicating popularity below the median.</p>
+<p>Your task is to build and visualize the results of three different models to classify whether a song is popular or not.</p>
+<p>The data has been split, scaled, and preloaded for you as X_train_scaled, X_test_scaled, y_train, and y_test. Additionally, KNeighborsClassifier, DecisionTreeClassifier, and LogisticRegression have been imported.</p>
+<p>Instructions:</p>
+<ul>
+<li>Create a dictionary of "Logistic Regression", "KNN", and "Decision Tree Classifier", setting the dictionary's values to a call of each model.</li>
+<li>Loop through the values in models.</li>
+<li>Instantiate a KFold object to perform 6 splits, setting shuffle to True and random_state to 12.</li>
+<li>Perform cross-validation using the model, the scaled training features, the target training set, and setting cv equal to kf.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"Logistic Regression"</span><span class="p">:</span> <span class="n">LogisticRegression</span><span class="p">(),</span> 
+          <span class="s2">"KNN"</span><span class="p">:</span> <span class="n">KNeighborsClassifier</span><span class="p">(),</span>
+          <span class="s2">"Decision Tree Classifier"</span><span class="p">:</span> <span class="n">DecisionTreeClassifier</span><span class="p">()}</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Loop through the models' values</span>
+<span class="k">for</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+  
+  <span class="c1"># Instantiate a KFold object</span>
+  <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+  
+  <span class="c1"># Perform cross-validation</span>
+  <span class="n">cv_results</span> <span class="o">=</span> <span class="n">cross_val_score</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">X_train_scaled</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">cv</span><span class="o">=</span><span class="n">kf</span><span class="p">)</span>
+  <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">cv_results</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Pipeline-for-predicting-song-popularity-(Exercise)">
+<a class="anchor" href="#Pipeline-for-predicting-song-popularity-(Exercise)" aria-hidden="true"><span class="octicon octicon-link"></span></a>Pipeline for predicting song popularity (Exercise)<a class="anchor-link" href="#Pipeline-for-predicting-song-popularity-(Exercise)"> </a>
+</h3>
+<p>For the final exercise, you will build a pipeline to impute missing values, scale features, and perform hyperparameter tuning of a logistic regression model. The aim is to find the best parameters and accuracy when predicting song genre!</p>
+<p>All the models and objects required to build the pipeline have been preloaded for you.</p>
+<p>Instructions:</p>
+<ul>
+<li>Create the steps for the pipeline by calling a simple imputer, a standard scaler, and a logistic regression model.</li>
+<li>Create a pipeline object, and pass the steps variable.</li>
+<li>Instantiate a grid search object to perform cross-validation using the pipeline and the parameters.</li>
+<li>Print the best parameters and compute and print the test set accuracy score for the grid search object.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">steps</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"imp_mean"</span><span class="p">,</span> <span class="n">SimpleImputer</span><span class="p">()),</span> 
+         <span class="p">(</span><span class="s2">"scaler"</span><span class="p">,</span> <span class="n">StandardScaler</span><span class="p">()),</span> 
+         <span class="p">(</span><span class="s2">"logreg"</span><span class="p">,</span> <span class="n">LogisticRegression</span><span class="p">())]</span>
+
+<span class="c1"># Set up pipeline</span>
+<span class="n">pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">(</span><span class="n">steps</span><span class="p">)</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"logreg__solver"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"newton-cg"</span><span class="p">,</span> <span class="s2">"saga"</span><span class="p">,</span> <span class="s2">"lbfgs"</span><span class="p">],</span>
+         <span class="s2">"logreg__C"</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">,</span> <span class="mi">10</span><span class="p">)}</span>
+
+<span class="c1"># Create the GridSearchCV object</span>
+<span class="n">tuning</span> <span class="o">=</span> <span class="n">GridSearchCV</span><span class="p">(</span><span class="n">pipeline</span><span class="p">,</span> <span class="n">param_grid</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+<span class="n">tuning</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">y_pred</span> <span class="o">=</span> <span class="n">tuning</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
+
+<span class="c1"># Compute and print performance</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"Tuned Logistic Regression Parameters: </span><span class="si">{}</span><span class="s2">, Accuracy: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">tuning</span><span class="o">.</span><span class="n">best_params_</span><span class="p">,</span> <span class="n">tuning</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">X_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered">
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="4.5-Congratulations">
 <a class="anchor" href="#4.5-Congratulations" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.5 Congratulations<a class="anchor-link" href="#4.5-Congratulations"> </a>
 </h2>
+<p>What you've covered:</p>
+<ul>
+<li>Using supervised learning techniques to build predictive models</li>
+<li>For both regression and classi,cation problems</li>
+<li>Underfitting and overfittng</li>
+<li>How to split data</li>
+<li>Cross-validation</li>
+<li>Data preprocessing techniques</li>
+<li>Model selection</li>
+<li>Hyperparameter tuning</li>
+<li>Model performance evaluation</li>
+<li>Using pipelines</li>
+</ul>
+
 </div>
 </div>
 </div>
