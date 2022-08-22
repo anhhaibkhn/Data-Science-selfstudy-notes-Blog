@@ -48,7 +48,7 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.1-Feature-Engineering">3.1 Feature Engineering<a class="anchor-link" href="#3.1-Feature-Engineering"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/solution_workflow2.png" alt="Solution Workflow"></p>
+<h2 id="Feature-Engineering">Feature Engineering<a class="anchor-link" href="#Feature-Engineering"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/solution_workflow2.png" alt="Solution Workflow"></p>
 <p>Like a Marathon, we iterate the following processs:</p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/modeling.png" alt="Modeling"></p>
 <p>Feature Engineering with Domain Knowledge:</p>
@@ -71,7 +71,7 @@ etc.</li>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.1.1-Arithmetical-features">3.1.1 Arithmetical features<a class="anchor-link" href="#3.1.1-Arithmetical-features"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/Arithm_features.png" alt=""></p>
+<h3 id="Arithmetical-features">Arithmetical features<a class="anchor-link" href="#Arithmetical-features"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/Arithm_features.png" alt=""></p>
 <p>Arithmetical features (Exercise):</p>
 <p>To practice creating new features, you will be working with a subsample from the Kaggle competition called "House Prices: Advanced Regression Techniques". The goal of this competition is to predict the price of the house based on its properties. It's a regression problem with Root Mean Squared Error as an evaluation metric.</p>
 <p>Your goal is to create new features and determine whether they improve your validation score. To get the validation score from 5-fold cross-validation, you're given the get_kfold_rmse() function. Use it with the train DataFrame, available in your workspace, as an argument.</p>
@@ -190,7 +190,7 @@ RMSE with number of bathrooms: 34506.78
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.1.2-Date-features">3.1.2 Date features<a class="anchor-link" href="#3.1.2-Date-features"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/date_features.png" alt=""></p>
+<h3 id="Date-features">Date features<a class="anchor-link" href="#Date-features"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/date_features.png" alt=""></p>
 <p>then we can use pandas dt method, to get the attributes which we want.</p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/date_features2.png" alt=""></p>
 
@@ -270,7 +270,7 @@ RMSE with number of bathrooms: 34506.78
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.1.3-Categorical-features">3.1.3 Categorical features<a class="anchor-link" href="#3.1.3-Categorical-features"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/categorical_features.png" alt=""></p>
+<h3 id="Categorical-features">Categorical features<a class="anchor-link" href="#Categorical-features"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/categorical_features.png" alt=""></p>
 <p>Example:</p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/categorical_features2.png" alt=""></p>
 <p>Label encoding is working, but it may affect to the results since it creates ranking data:</p>
@@ -287,7 +287,7 @@ RMSE with number of bathrooms: 34506.78
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.2-Encoding">3.2 Encoding<a class="anchor-link" href="#3.2-Encoding"> </a></h2><h3 id="3.2.1-Label-encoding">3.2.1 Label encoding<a class="anchor-link" href="#3.2.1-Label-encoding"> </a></h3><p>Label encoding (Exercise):</p>
+<h2 id="Encoding">Encoding<a class="anchor-link" href="#Encoding"> </a></h2><h3 id="Label-encoding">Label encoding<a class="anchor-link" href="#Label-encoding"> </a></h3><p>Label encoding (Exercise):</p>
 <p>Let's work on categorical variables encoding. You will again work with a subsample from the House Prices Kaggle competition.</p>
 <p>Your objective is to encode categorical features "RoofStyle" and "CentralAir" using label encoding. The train and test DataFrames are already available in your workspace.</p>
 <p>Instructions:</p>
@@ -432,7 +432,7 @@ RMSE with number of bathrooms: 34506.78
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.2-One-Hot-encoding">3.2.2 One-Hot encoding<a class="anchor-link" href="#3.2.2-One-Hot-encoding"> </a></h3><p>One-Hot encoding (Exercise)
+<h3 id="One-Hot-encoding">One-Hot encoding<a class="anchor-link" href="#One-Hot-encoding"> </a></h3><p>One-Hot encoding (Exercise)
 The problem with label encoding is that it implicitly assumes that there is a ranking dependency between the categories. So, let's change the encoding method for the features "RoofStyle" and "CentralAir" to one-hot encoding. Again, the train and test DataFrames from House Prices Kaggle competition are already available in your workspace.</p>
 <p>Recall that if you're dealing with binary features (categorical features with only two categories) it is suggested to apply label encoder only.</p>
 <p>Your goal is to determine which of the mentioned features is not binary, and to apply one-hot encoding only to this one.</p>
@@ -610,7 +610,7 @@ Which of the features is binary?
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.3-Target-encoding">3.2.3 Target encoding<a class="anchor-link" href="#3.2.3-Target-encoding"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/target_encode.png" alt=""></p>
+<h3 id="Target-encoding">Target encoding<a class="anchor-link" href="#Target-encoding"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/target_encode.png" alt=""></p>
 <p>High cardinality categorical features:</p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/high_cardinality_problem.png" alt=""></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/mean_target_encoding1.png" alt=""></p>
@@ -632,7 +632,7 @@ Which of the features is binary?
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.4-Mean-target-encoding">3.2.4 Mean target encoding<a class="anchor-link" href="#3.2.4-Mean-target-encoding"> </a></h3><p>Mean target encoding (Exercise):</p>
+<h3 id="Mean-target-encoding">Mean target encoding<a class="anchor-link" href="#Mean-target-encoding"> </a></h3><p>Mean target encoding (Exercise):</p>
 <p>First of all, you will create a function that implements mean target encoding. Remember that you need to develop the two following steps:</p>
 <p>Calculate the mean on the train, apply to the test
 Split train into K folds. Calculate the out-of-fold mean for each fold, apply to this particular fold
@@ -762,7 +762,7 @@ Each of these steps will be implemented in a separate function: test_mean_target
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.3-Cross-Validation">3.3 Cross Validation<a class="anchor-link" href="#3.3-Cross-Validation"> </a></h2><h3 id="3.3.1-K-fold-cross-validation">3.3.1 K-fold cross-validation<a class="anchor-link" href="#3.3.1-K-fold-cross-validation"> </a></h3><p>K-fold cross-validation (Exercise)</p>
+<h2 id="Cross-Validation">Cross Validation<a class="anchor-link" href="#Cross-Validation"> </a></h2><h3 id="K-fold-cross-validation">K-fold cross-validation<a class="anchor-link" href="#K-fold-cross-validation"> </a></h3><p>K-fold cross-validation (Exercise)</p>
 <p>You will work with a binary classification problem on a subsample from Kaggle playground competition. The objective of this competition is to predict whether a famous basketball player Kobe Bryant scored a basket or missed a particular shot.</p>
 <p>Train data is available in your workspace as bryant_shots DataFrame. It contains data on 10,000 shots with its properties and a target variable "shot_made_flag" -- whether shot was scored or not.</p>
 <p>One of the features in the data is "game_id" -- a particular game where the shot was made. There are 541 distinct games. So, you deal with a <strong>high-cardinality</strong> categorical feature. Let's encode it using <strong>a target mean</strong>!</p>
@@ -1332,7 +1332,7 @@ memory usage: 781.4+ KB
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.3.2-Beyond-binary-classification">3.3.2 Beyond binary classification<a class="anchor-link" href="#3.3.2-Beyond-binary-classification"> </a></h3><p>Beyond binary classification (Exercise)</p>
+<h3 id="Beyond-binary-classification">Beyond binary classification<a class="anchor-link" href="#Beyond-binary-classification"> </a></h3><p>Beyond binary classification (Exercise)</p>
 <p>Of course, binary classification is just a single special case. Target encoding could be applied to any target variable type:</p>
 <p>For binary classification usually mean target encoding is used
 For regression mean could be changed to median, quartiles, etc.
@@ -1455,7 +1455,7 @@ The mean_target_encoding() function you've created could be used for any target 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.4-Missing-Data">3.4 Missing Data<a class="anchor-link" href="#3.4-Missing-Data"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/missing_data.png" alt=""></p>
+<h2 id="Missing-Data">Missing Data<a class="anchor-link" href="#Missing-Data"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/missing_data.png" alt=""></p>
 <ul>
 <li>Mean/median imputation</li>
 </ul>
@@ -1472,7 +1472,7 @@ The mean_target_encoding() function you've created could be used for any target 
 <li>New category imputation</li>
 </ul>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/impute4.png" alt=""></p>
-<h3 id="3.4.1-Find-Missing-Data">3.4.1 Find Missing Data<a class="anchor-link" href="#3.4.1-Find-Missing-Data"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/find_missing.png" alt=""></p>
+<h3 id="Find-Missing-Data">Find Missing Data<a class="anchor-link" href="#Find-Missing-Data"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/find_missing.png" alt=""></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/numerical_impute.png" alt=""></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/categorical_impute.png" alt=""></p>
 
@@ -1554,7 +1554,7 @@ dtype: int64
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.4.2-Imputing-Missing-Data">3.4.2 Imputing Missing Data<a class="anchor-link" href="#3.4.2-Imputing-Missing-Data"> </a></h3><p>Impute missing data (Exercise)</p>
+<h3 id="Imputing-Missing-Data">Imputing Missing Data<a class="anchor-link" href="#Imputing-Missing-Data"> </a></h3><p>Impute missing data (Exercise)</p>
 <p>You've found that "price" and "building_id" columns have missing values in the Rental Listing Inquiries dataset. So, before passing the data to the models you need to impute these values.</p>
 <p>Numerical feature "price" will be encoded with a mean value of non-missing prices.</p>
 <p>Imputing categorical feature "building_id" with the most frequent category is a bad idea, because it would mean that all the apartments with a missing "building_id" are located in the most popular building. The better idea is to impute it with a new category.</p>

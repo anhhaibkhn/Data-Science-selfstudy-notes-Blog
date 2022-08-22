@@ -28,7 +28,7 @@ layout: notebook
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Chapter-1---Classification">Chapter 1 - Classification<a class="anchor-link" href="#Chapter-1---Classification"> </a></h1><h2 id="1.1-Machine-learning-with-scikit-learn">1.1 Machine learning with scikit-learn<a class="anchor-link" href="#1.1-Machine-learning-with-scikit-learn"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ml1.png" alt=""></p>
+<h1 id="Chapter-1---Classification">Chapter 1 - Classification<a class="anchor-link" href="#Chapter-1---Classification"> </a></h1><h2 id="Machine-learning-with-scikit-learn">Machine learning with scikit-learn<a class="anchor-link" href="#Machine-learning-with-scikit-learn"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ml1.png" alt=""></p>
 <p>Example:</p>
 <ul>
 <li>An email is spam or not, books classification, etc.</li>
@@ -47,7 +47,7 @@ layout: notebook
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.2-The-classification-challenge">1.2 The classification challenge<a class="anchor-link" href="#1.2-The-classification-challenge"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ml10.png" alt=""></p>
+<h2 id="The-classification-challenge">The classification challenge<a class="anchor-link" href="#The-classification-challenge"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ml10.png" alt=""></p>
 <p>k-Nearest Neighbors</p>
 <ul>
 <li>Predict the label of a data point by:<ul>
@@ -388,35 +388,12 @@ Instructions:</p>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-<div class="output_area">
-
-<div class="output_subarea output_text output_error">
-<pre>
-<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
-<span class="ansi-red-intense-fg ansi-bold">NameError</span>                                 Traceback (most recent call last)
-<span class="ansi-green-intense-fg ansi-bold">c:\Users\nguyenngochai\Self_study\Data-Science-selfstudy-notes-Blog\_notebooks\Supervised Learning with scikit-learn\2022-08-17-Chapter_1 Classification.ipynb Cell 10</span> in <span class="ansi-cyan-fg">&lt;cell line: 1&gt;</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
-<span class="ansi-green-intense-fg ansi-bold">----&gt; &lt;a href=&#39;vscode-notebook-cell:/c%3A/Users/nguyenngochai/Self_study/Data-Science-selfstudy-notes-Blog/_notebooks/Supervised%20Learning%20with%20scikit-learn/2022-08-17-Chapter_1%20Classification.ipynb#X12sZmlsZQ%3D%3D?line=0&#39;&gt;1&lt;/a&gt;</span> X_new = np.array([[30.0, 17.5],
-<span class="ansi-green-fg">      &lt;a href=&#39;vscode-notebook-cell:/c%3A/Users/nguyenngochai/Self_study/Data-Science-selfstudy-notes-Blog/_notebooks/Supervised%20Learning%20with%20scikit-learn/2022-08-17-Chapter_1%20Classification.ipynb#X12sZmlsZQ%3D%3D?line=1&#39;&gt;2&lt;/a&gt;</span>                   [107.0, 24.1],
-<span class="ansi-green-fg">      &lt;a href=&#39;vscode-notebook-cell:/c%3A/Users/nguyenngochai/Self_study/Data-Science-selfstudy-notes-Blog/_notebooks/Supervised%20Learning%20with%20scikit-learn/2022-08-17-Chapter_1%20Classification.ipynb#X12sZmlsZQ%3D%3D?line=2&#39;&gt;3&lt;/a&gt;</span>                   [213.0, 10.9]])
-<span class="ansi-green-fg">      &lt;a href=&#39;vscode-notebook-cell:/c%3A/Users/nguyenngochai/Self_study/Data-Science-selfstudy-notes-Blog/_notebooks/Supervised%20Learning%20with%20scikit-learn/2022-08-17-Chapter_1%20Classification.ipynb#X12sZmlsZQ%3D%3D?line=4&#39;&gt;5&lt;/a&gt;</span> # Predict the labels for the X_new
-<span class="ansi-green-fg">      &lt;a href=&#39;vscode-notebook-cell:/c%3A/Users/nguyenngochai/Self_study/Data-Science-selfstudy-notes-Blog/_notebooks/Supervised%20Learning%20with%20scikit-learn/2022-08-17-Chapter_1%20Classification.ipynb#X12sZmlsZQ%3D%3D?line=5&#39;&gt;6&lt;/a&gt;</span> y_pred = knn.predict(X_new)
-
-<span class="ansi-red-intense-fg ansi-bold">NameError</span>: name &#39;np&#39; is not defined</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div>
     {% endraw %}
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.3-Measuring-model-performance">1.3 Measuring model performance<a class="anchor-link" href="#1.3-Measuring-model-performance"> </a></h2><p>In classification, accuracy is a commonly used metric</p>
+<h2 id="Measuring-model-performance">Measuring model performance<a class="anchor-link" href="#Measuring-model-performance"> </a></h2><p>In classification, accuracy is a commonly used metric</p>
 <p>{% raw %}
 $$ Accuracy = \frac{TP+TN}{TP+TN+FP+FN} $$
 {% endraw %}</p>

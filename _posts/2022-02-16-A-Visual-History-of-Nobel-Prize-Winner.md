@@ -38,7 +38,7 @@ layout: notebook
 </div>
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.-The-most-Nobel-of-Prizes">1. The most Nobel of Prizes<a class="anchor-link" href="#1.-The-most-Nobel-of-Prizes"> </a></h2><p><img style="float: right;margin:5px 20px 5px 1px; max-width:250px" src="https://assets.datacamp.com/production/project_441/img/Nobel_Prize.png"></p>
+<h2 id="The-most-Nobel-of-Prizes">The most Nobel of Prizes<a class="anchor-link" href="#The-most-Nobel-of-Prizes"> </a></h2><p><img style="float: right;margin:5px 20px 5px 1px; max-width:250px" src="https://assets.datacamp.com/production/project_441/img/Nobel_Prize.png"></p>
 <p>The Nobel Prize is perhaps the world's most well known scientific award. Except for the honor, prestige and substantial prize money the recipient also gets a gold medal showing Alfred Nobel (1833 - 1896) who established the prize. Every year it's given to scientists and scholars in the categories chemistry, literature, physics, physiology or medicine, economics, and peace. The first Nobel Prize was handed out in 1901, and at that time the Prize was very Eurocentric and male-focused, but nowadays it's not biased in any way whatsoever. Surely. Right?</p>
 <p>Well, we're going to find out! The Nobel Foundation has made a dataset available of all prize winners from the start of the prize, in 1901, to 2016. Let's load it in and take a look.</p>
 </div>
@@ -255,7 +255,7 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.-So,-who-gets-the-Nobel-Prize?">2. So, who gets the Nobel Prize?<a class="anchor-link" href="#2.-So,-who-gets-the-Nobel-Prize?"> </a></h2><p>Just looking at the first couple of prize winners, or Nobel laureates as they are also called, we already see a celebrity: Wilhelm Conrad Röntgen, the guy who discovered X-rays. And actually, we see that all of the winners in 1901 were guys that came from Europe. But that was back in 1901, looking at all winners in the dataset, from 1901 to 2016, which sex and which country is the most commonly represented? </p>
+<h2 id="So,-who-gets-the-Nobel-Prize?">So, who gets the Nobel Prize?<a class="anchor-link" href="#So,-who-gets-the-Nobel-Prize?"> </a></h2><p>Just looking at the first couple of prize winners, or Nobel laureates as they are also called, we already see a celebrity: Wilhelm Conrad Röntgen, the guy who discovered X-rays. And actually, we see that all of the winners in 1901 were guys that came from Europe. But that was back in 1901, looking at all winners in the dataset, from 1901 to 2016, which sex and which country is the most commonly represented? </p>
 <p>(For <em>country</em>, we will use the <code>birth_country</code> of the winner, as the <code>organization_country</code> is <code>NaN</code> for all shared Nobel Prizes.)</p>
 </div>
 </div>
@@ -337,7 +337,7 @@ Name: birth_country, dtype: int64</pre>
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.-USA-dominance">3. USA dominance<a class="anchor-link" href="#3.-USA-dominance"> </a></h2><p>Not so surprising perhaps: the most common Nobel laureate between 1901 and 2016 was a man born in the United States of America. But in 1901 all the winners were European. When did the USA start to dominate the Nobel Prize charts?</p>
+<h2 id="USA-dominance">USA dominance<a class="anchor-link" href="#USA-dominance"> </a></h2><p>Not so surprising perhaps: the most common Nobel laureate between 1901 and 2016 was a man born in the United States of America. But in 1901 all the winners were European. When did the USA start to dominate the Nobel Prize charts?</p>
 </div>
 </div>
 </div>
@@ -467,7 +467,7 @@ Name: birth_country, dtype: int64</pre>
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.-USA-dominance,-visualized">4. USA dominance, visualized<a class="anchor-link" href="#4.-USA-dominance,-visualized"> </a></h2><p>A table is OK, but to <em>see</em> when the USA started to dominate the Nobel charts we need a plot!</p>
+<h2 id="USA-dominance,-visualized">USA dominance, visualized<a class="anchor-link" href="#USA-dominance,-visualized"> </a></h2><p>A table is OK, but to <em>see</em> when the USA started to dominate the Nobel charts we need a plot!</p>
 </div>
 </div>
 </div>
@@ -519,7 +519,7 @@ Name: birth_country, dtype: int64</pre>
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="5.-What-is-the-gender-of-a-typical-Nobel-Prize-winner?">5. What is the gender of a typical Nobel Prize winner?<a class="anchor-link" href="#5.-What-is-the-gender-of-a-typical-Nobel-Prize-winner?"> </a></h2><p>So the USA became the dominating winner of the Nobel Prize first in the 1930s and had kept the leading position ever since. But one group that was in the lead from the start, and never seems to let go, are <em>men</em>. Maybe it shouldn't come as a shock that there is some imbalance between how many male and female prize winners there are, but how significant is this imbalance? And is it better or worse within specific prize categories like physics, medicine, literature, etc.?</p>
+<h2 id="What-is-the-gender-of-a-typical-Nobel-Prize-winner?">What is the gender of a typical Nobel Prize winner?<a class="anchor-link" href="#What-is-the-gender-of-a-typical-Nobel-Prize-winner?"> </a></h2><p>So the USA became the dominating winner of the Nobel Prize first in the 1930s and had kept the leading position ever since. But one group that was in the lead from the start, and never seems to let go, are <em>men</em>. Maybe it shouldn't come as a shock that there is some imbalance between how many male and female prize winners there are, but how significant is this imbalance? And is it better or worse within specific prize categories like physics, medicine, literature, etc.?</p>
 </div>
 </div>
 </div>
@@ -581,7 +581,7 @@ Name: birth_country, dtype: int64</pre>
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="6.-The-first-woman-to-win-the-Nobel-Prize">6. The first woman to win the Nobel Prize<a class="anchor-link" href="#6.-The-first-woman-to-win-the-Nobel-Prize"> </a></h2><p>The plot above is a bit messy as the lines are overplotting. But it does show some interesting trends and patterns. Overall the imbalance is pretty large with physics, economics, and chemistry having the largest imbalance. Medicine has a somewhat positive trend, and since the 1990s the literature prize is also now more balanced. The big outlier is the peace prize during the 2010s, but keep in mind that this just covers the years 2010 to 2016.</p>
+<h2 id="The-first-woman-to-win-the-Nobel-Prize">The first woman to win the Nobel Prize<a class="anchor-link" href="#The-first-woman-to-win-the-Nobel-Prize"> </a></h2><p>The plot above is a bit messy as the lines are overplotting. But it does show some interesting trends and patterns. Overall the imbalance is pretty large with physics, economics, and chemistry having the largest imbalance. Medicine has a somewhat positive trend, and since the 1990s the literature prize is also now more balanced. The big outlier is the peace prize during the 2010s, but keep in mind that this just covers the years 2010 to 2016.</p>
 <p>Given this imbalance, who was the first woman to receive a Nobel Prize? And in what category?</p>
 </div>
 </div>
@@ -690,7 +690,7 @@ Name: birth_country, dtype: int64</pre>
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="7.-Repeat-laureates">7. Repeat laureates<a class="anchor-link" href="#7.-Repeat-laureates"> </a></h2><p>For most scientists/writers/activists a Nobel Prize would be the crowning achievement of a long career. But for some people, one is just not enough, and few have gotten it more than once. Who are these lucky few? (Having won no Nobel Prize myself, I'll assume it's just about luck.)</p>
+<h2 id="Repeat-laureates">Repeat laureates<a class="anchor-link" href="#Repeat-laureates"> </a></h2><p>For most scientists/writers/activists a Nobel Prize would be the crowning achievement of a long career. But for some people, one is just not enough, and few have gotten it more than once. Who are these lucky few? (Having won no Nobel Prize myself, I'll assume it's just about luck.)</p>
 </div>
 </div>
 </div>
@@ -1086,7 +1086,7 @@ Name: birth_country, dtype: int64</pre>
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="8.-How-old-are-you-when-you-get-the-prize?">8. How old are you when you get the prize?<a class="anchor-link" href="#8.-How-old-are-you-when-you-get-the-prize?"> </a></h2><p>The list of repeat winners contains some illustrious names! We again meet Marie Curie, who got the prize in physics for discovering radiation and in chemistry for isolating radium and polonium. John Bardeen got it twice in physics for transistors and superconductivity, Frederick Sanger got it twice in chemistry, and Linus Carl Pauling got it first in chemistry and later in peace for his work in promoting nuclear disarmament. We also learn that organizations also get the prize as both the Red Cross and the UNHCR have gotten it twice.</p>
+<h2 id="How-old-are-you-when-you-get-the-prize?">How old are you when you get the prize?<a class="anchor-link" href="#How-old-are-you-when-you-get-the-prize?"> </a></h2><p>The list of repeat winners contains some illustrious names! We again meet Marie Curie, who got the prize in physics for discovering radiation and in chemistry for isolating radium and polonium. John Bardeen got it twice in physics for transistors and superconductivity, Frederick Sanger got it twice in chemistry, and Linus Carl Pauling got it first in chemistry and later in peace for his work in promoting nuclear disarmament. We also learn that organizations also get the prize as both the Red Cross and the UNHCR have gotten it twice.</p>
 <p>But how old are you generally when you get the prize?</p>
 </div>
 </div>
@@ -1143,7 +1143,7 @@ Name: birth_country, dtype: int64</pre>
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="9.-Age-differences-between-prize-categories">9. Age differences between prize categories<a class="anchor-link" href="#9.-Age-differences-between-prize-categories"> </a></h2><p>The plot above shows us a lot! We see that people use to be around 55 when they received the price, but nowadays the average is closer to 65. But there is a large spread in the laureates' ages, and while most are 50+, some are very young.</p>
+<h2 id="Age-differences-between-prize-categories">Age differences between prize categories<a class="anchor-link" href="#Age-differences-between-prize-categories"> </a></h2><p>The plot above shows us a lot! We see that people use to be around 55 when they received the price, but nowadays the average is closer to 65. But there is a large spread in the laureates' ages, and while most are 50+, some are very young.</p>
 <p>We also see that the density of points is much high nowadays than in the early 1900s -- nowadays many more of the prizes are shared, and so there are many more winners. We also see that there was a disruption in awarded prizes around the Second World War (1939 - 1945). </p>
 <p>Let's look at age trends within different prize categories.</p>
 </div>
@@ -1196,7 +1196,7 @@ Name: birth_country, dtype: int64</pre>
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="10.-Oldest-and-youngest-winners">10. Oldest and youngest winners<a class="anchor-link" href="#10.-Oldest-and-youngest-winners"> </a></h2><p>More plots with lots of exciting stuff going on! We see that both winners of the chemistry, medicine, and physics prize have gotten older over time. The trend is strongest for physics: the average age used to be below 50, and now it's almost 70. Literature and economics are more stable. We also see that economics is a newer category. But peace shows an opposite trend where winners are getting younger! </p>
+<h2 id="Oldest-and-youngest-winners">Oldest and youngest winners<a class="anchor-link" href="#Oldest-and-youngest-winners"> </a></h2><p>More plots with lots of exciting stuff going on! We see that both winners of the chemistry, medicine, and physics prize have gotten older over time. The trend is strongest for physics: the average age used to be below 50, and now it's almost 70. Literature and economics are more stable. We also see that economics is a newer category. But peace shows an opposite trend where winners are getting younger! </p>
 <p>In the peace category we also a winner around 2010 that seems exceptionally young. This begs the questions, who are the oldest and youngest people ever to have won a Nobel Prize?</p>
 </div>
 </div>
@@ -1386,7 +1386,7 @@ Name: birth_country, dtype: int64</pre>
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="11.-You-get-a-prize!">11. You get a prize!<a class="anchor-link" href="#11.-You-get-a-prize!"> </a></h2><p><img style="float: right;margin:20px 20px 20px 20px; max-width:200px" src="https://assets.datacamp.com/production/project_441/img/paint_nobel_prize.png"></p>
+<h2 id="You-get-a-prize!">You get a prize!<a class="anchor-link" href="#You-get-a-prize!"> </a></h2><p><img style="float: right;margin:20px 20px 20px 20px; max-width:200px" src="https://assets.datacamp.com/production/project_441/img/paint_nobel_prize.png"></p>
 <p>Hey! You get a prize for making it to the very end of this notebook! It might not be a Nobel Prize, but I made it myself in paint so it should count for something. But don't despair, Leonid Hurwicz was 90 years old when he got his prize, so it might not be too late for you. Who knows.</p>
 <p>Before you leave, what was again the name of the youngest winner ever who in 2014 got the prize for "[her] struggle against the suppression of children and young people and for the right of all children to education"?</p>
 </div>

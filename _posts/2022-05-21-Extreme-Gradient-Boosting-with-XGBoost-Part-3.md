@@ -2,7 +2,7 @@
 keywords: fastai
 description: Chapter 3 - Fine-tuning your XGBoost model
 title: Extreme Gradient Boosting with XGBoost - Part 3 (DataCamp interactive course)
-toc: false
+toc: true
 branch: master
 badges: true
 comments: true
@@ -62,7 +62,7 @@ layout: notebook
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="3.1.1-Why-tune-your-model-?">3.1.1 Why tune your model ?<a class="anchor-link" href="#3.1.1-Why-tune-your-model-?"> </a></h4>
+<h4 id="Why-tune-your-model-?">Why tune your model ?<a class="anchor-link" href="#Why-tune-your-model-?"> </a></h4>
 </div>
 </div>
 </div>
@@ -443,7 +443,7 @@ Name: test-rmse-mean, dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="3.1.2-Tuning-the-number-of-boosting-rounds">3.1.2 Tuning the number of boosting rounds<a class="anchor-link" href="#3.1.2-Tuning-the-number-of-boosting-rounds"> </a></h4><p>Let's start with parameter tuning by seeing how the number of boosting rounds (number of trees you build) impacts the out-of-sample performance of your XGBoost model. You'll use <strong>xgb.cv()</strong> inside a for loop and build one model per num_boost_round parameter.</p>
+<h4 id="Tuning-the-number-of-boosting-rounds">Tuning the number of boosting rounds<a class="anchor-link" href="#Tuning-the-number-of-boosting-rounds"> </a></h4><p>Let's start with parameter tuning by seeing how the number of boosting rounds (number of trees you build) impacts the out-of-sample performance of your XGBoost model. You'll use <strong>xgb.cv()</strong> inside a for loop and build one model per num_boost_round parameter.</p>
 <p>Here, you'll continue working with the Ames housing dataset. The features are available in the array X, and the target vector is contained in y.</p>
 <ul>
 <li>Instructions: <ul>
@@ -526,7 +526,7 @@ Name: test-rmse-mean, dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="3.1.3-Automated-boosting-round-selection-using-early_stopping">3.1.3 Automated boosting round selection using early_stopping<a class="anchor-link" href="#3.1.3-Automated-boosting-round-selection-using-early_stopping"> </a></h4><p>Now, instead of attempting to cherry pick the best possible number of boosting rounds, you can very easily have XGBoost automatically select the number of boosting rounds for you within <strong>xgb.cv()</strong>. This is done using a technique called <strong>early stopping</strong>.</p>
+<h4 id="Automated-boosting-round-selection-using-early_stopping">Automated boosting round selection using early_stopping<a class="anchor-link" href="#Automated-boosting-round-selection-using-early_stopping"> </a></h4><p>Now, instead of attempting to cherry pick the best possible number of boosting rounds, you can very easily have XGBoost automatically select the number of boosting rounds for you within <strong>xgb.cv()</strong>. This is done using a technique called <strong>early stopping</strong>.</p>
 <p>Early stopping works by testing the XGBoost model after every boosting round against a hold-out dataset and stopping the creation of additional boosting rounds (thereby finishing training of the model early) if the hold-out metric ("rmse" in our case) does not improve for a given number of rounds. Here you will use the early_stopping_rounds parameter in xgb.cv() with a large possible number of boosting rounds (50). Bear in mind that if the holdout metric continuously improves up through when num_boost_rounds is reached, then early stopping does not occur.</p>
 <p>Here, the DMatrix and parameter dictionary have been created for you. Your task is to use cross-validation with early stopping. Go for it!</p>
 <ul>
@@ -598,7 +598,7 @@ Name: test-rmse-mean, dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="3.2.1-Tunable-parameters-in-XGBoost">3.2.1 Tunable parameters in XGBoost<a class="anchor-link" href="#3.2.1-Tunable-parameters-in-XGBoost"> </a></h4><ul>
+<h4 id="Tunable-parameters-in-XGBoost">Tunable parameters in XGBoost<a class="anchor-link" href="#Tunable-parameters-in-XGBoost"> </a></h4><ul>
 <li>Common tree tunable parameters<ul>
 <li>learning rate: learning rate/eta</li>
 <li>gamma: min loss reduction to create new tree split</li>
@@ -624,7 +624,7 @@ Name: test-rmse-mean, dtype: float64
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="3.2.2-Tuning-eta">3.2.2 Tuning eta<a class="anchor-link" href="#3.2.2-Tuning-eta"> </a></h4><p>It's time to practice tuning other XGBoost hyperparameters in earnest and observing their effect on model performance! You'll begin by tuning the "eta", also known as the learning rate.</p>
+<h4 id="Tuning-eta">Tuning eta<a class="anchor-link" href="#Tuning-eta"> </a></h4><p>It's time to practice tuning other XGBoost hyperparameters in earnest and observing their effect on model performance! You'll begin by tuning the "eta", also known as the learning rate.</p>
 <p>The learning rate in XGBoost is a parameter that can range between 0 and 1, with higher values of "eta" penalizing feature weights more strongly, causing much stronger regularization.</p>
 <ul>
 <li><p>Instructions</p>
@@ -800,7 +800,7 @@ Name: test-rmse-mean, dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="3.2.4-Tuning-colsample_bytree">3.2.4 Tuning colsample_bytree<a class="anchor-link" href="#3.2.4-Tuning-colsample_bytree"> </a></h4><p>Now, it's time to tune "colsample_bytree". You've already seen this if you've ever worked with scikit-learn's RandomForestClassifier or RandomForestRegressor, where it just was called max_features. In both xgboost and sklearn, this parameter (although named differently) simply specifies the fraction of features to choose from at every split in a given tree. In xgboost, colsample_bytree must be specified as a float between 0 and 1.</p>
+<h4 id="Tuning-colsample_bytree">Tuning colsample_bytree<a class="anchor-link" href="#Tuning-colsample_bytree"> </a></h4><p>Now, it's time to tune "colsample_bytree". You've already seen this if you've ever worked with scikit-learn's RandomForestClassifier or RandomForestRegressor, where it just was called max_features. In both xgboost and sklearn, this parameter (although named differently) simply specifies the fraction of features to choose from at every split in a given tree. In xgboost, colsample_bytree must be specified as a float between 0 and 1.</p>
 <ul>
 <li>Instructions<ul>
 <li>Create a list called colsample_bytree_vals to store the values 0.1, 0.5, 0.8, and 1.</li>
@@ -885,7 +885,7 @@ Name: test-rmse-mean, dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="3.3.1-Review-of-grid-search-and-random-search">3.3.1 Review of grid search and random search<a class="anchor-link" href="#3.3.1-Review-of-grid-search-and-random-search"> </a></h4>
+<h4 id="Review-of-grid-search-and-random-search">Review of grid search and random search<a class="anchor-link" href="#Review-of-grid-search-and-random-search"> </a></h4>
 </div>
 </div>
 </div>
@@ -1040,7 +1040,7 @@ Lowest RMSE found:  28875.728215978015
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="3.3.2-Grid-search-with-XGBoost">3.3.2 Grid search with XGBoost<a class="anchor-link" href="#3.3.2-Grid-search-with-XGBoost"> </a></h4><p>Now that you've learned how to tune parameters individually with XGBoost, let's take your parameter tuning to the next level by using scikit-learn's GridSearch and RandomizedSearch capabilities with internal cross-validation using the GridSearchCV and RandomizedSearchCV functions. You will use these to find the best model exhaustively from a collection of possible parameter values across multiple parameters simultaneously. Let's get to work, starting with GridSearchCV!</p>
+<h4 id="Grid-search-with-XGBoost">Grid search with XGBoost<a class="anchor-link" href="#Grid-search-with-XGBoost"> </a></h4><p>Now that you've learned how to tune parameters individually with XGBoost, let's take your parameter tuning to the next level by using scikit-learn's GridSearch and RandomizedSearch capabilities with internal cross-validation using the GridSearchCV and RandomizedSearchCV functions. You will use these to find the best model exhaustively from a collection of possible parameter values across multiple parameters simultaneously. Let's get to work, starting with GridSearchCV!</p>
 <ul>
 <li>Instructions<ul>
 <li>Create a parameter grid called gbm_param_grid that contains a list of "colsample_bytree" values (0.3, 0.7), a list with a single value for "n_estimators" (50), and a list of 2 "max_depth" (2, 5) values.</li>
@@ -1111,7 +1111,7 @@ Lowest RMSE found:  28986.18703093561
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="3.3.3-Random-search-with-XGBoost">3.3.3 Random search with XGBoost<a class="anchor-link" href="#3.3.3-Random-search-with-XGBoost"> </a></h4><p>Often, GridSearchCV can be really time consuming, so in practice, you may want to use RandomizedSearchCV instead, as you will do in this exercise. The good news is you only have to make a few modifications to your GridSearchCV code to do RandomizedSearchCV. The key difference is you have to specify a param_distributions parameter instead of a param_grid parameter.</p>
+<h4 id="Random-search-with-XGBoost">Random search with XGBoost<a class="anchor-link" href="#Random-search-with-XGBoost"> </a></h4><p>Often, GridSearchCV can be really time consuming, so in practice, you may want to use RandomizedSearchCV instead, as you will do in this exercise. The good news is you only have to make a few modifications to your GridSearchCV code to do RandomizedSearchCV. The key difference is you have to specify a param_distributions parameter instead of a param_grid parameter.</p>
 <ul>
 <li>Instructions<ul>
 <li>Create a parameter grid called gbm_param_grid that contains a list with a single value for 'n_estimators' (25), and a list of 'max_depth' values between 2 and 11 for 'max_depth' - use range(2, 12) for this.</li>

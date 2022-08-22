@@ -28,7 +28,7 @@ layout: notebook
         
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.-Meet-Professor-William-Sharpe">1. Meet Professor William Sharpe<a class="anchor-link" href="#1.-Meet-Professor-William-Sharpe"> </a></h2><p>An investment may make sense if we expect it to return more money than it costs. But returns are only part of the story because they are risky - there may be a range of possible outcomes. How does one compare different investments that may deliver similar results on average, but exhibit different levels of risks?</p>
+<h2 id="Meet-Professor-William-Sharpe">Meet Professor William Sharpe<a class="anchor-link" href="#Meet-Professor-William-Sharpe"> </a></h2><p>An investment may make sense if we expect it to return more money than it costs. But returns are only part of the story because they are risky - there may be a range of possible outcomes. How does one compare different investments that may deliver similar results on average, but exhibit different levels of risks?</p>
 <p><img style="float: left ; margin: 5px 20px 5px 1px;" width="200" src="https://assets.datacamp.com/production/project_66/img/sharpe.jpeg"></p>
 <p>Enter William Sharpe. He introduced the <a href="https://web.stanford.edu/~wfsharpe/art/sr/sr.htm"><em>reward-to-variability ratio</em></a> in 1966 that soon came to be called the Sharpe Ratio. It compares the expected returns for two investment opportunities and calculates the additional return per unit of risk an investor could obtain by choosing one over the other. In particular, it looks at the difference in returns for two investments and compares the average difference to the standard deviation (as a measure of risk) of this difference. A higher Sharpe ratio means that the reward will be higher for a given amount of risk. It is common to compare a specific opportunity against a benchmark that represents an entire category of investments.</p>
 <p>The Sharpe ratio has been one of the most popular risk/return measures in finance, not least because it's so simple to use. It also helped that Professor Sharpe won a Nobel Memorial Prize in Economics in 1990 for his work on the capital asset pricing model (CAPM).</p>
@@ -109,7 +109,7 @@ Date
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.-A-first-glance-at-the-data">2. A first glance at the data<a class="anchor-link" href="#2.-A-first-glance-at-the-data"> </a></h2><p>Let's take a look the data to find out how many observations and variables we have at our disposal.</p>
+<h2 id="A-first-glance-at-the-data">A first glance at the data<a class="anchor-link" href="#A-first-glance-at-the-data"> </a></h2><p>Let's take a look the data to find out how many observations and variables we have at our disposal.</p>
 </div>
 </div>
 </div>
@@ -185,7 +185,7 @@ memory usage: 3.9 KB
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.-Plot-&amp;-summarize-daily-prices-for-Amazon-and-Facebook">3. Plot &amp; summarize daily prices for Amazon and Facebook<a class="anchor-link" href="#3.-Plot-&amp;-summarize-daily-prices-for-Amazon-and-Facebook"> </a></h2><p>Before we compare an investment in either Facebook or Amazon with the index of the 500 largest companies in the US, let's visualize the data, so we better understand what we're dealing with.</p>
+<h2 id="Plot-&amp;-summarize-daily-prices-for-Amazon-and-Facebook">Plot &amp; summarize daily prices for Amazon and Facebook<a class="anchor-link" href="#Plot-&amp;-summarize-daily-prices-for-Amazon-and-Facebook"> </a></h2><p>Before we compare an investment in either Facebook or Amazon with the index of the 500 largest companies in the US, let's visualize the data, so we better understand what we're dealing with.</p>
 </div>
 </div>
 </div>
@@ -304,7 +304,7 @@ memory usage: 3.9 KB
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.-Visualize-&amp;-summarize-daily-values-for-the-S&amp;P-500">4. Visualize &amp; summarize daily values for the S&amp;P 500<a class="anchor-link" href="#4.-Visualize-&amp;-summarize-daily-values-for-the-S&amp;P-500"> </a></h2><p>Let's also take a closer look at the value of the S&amp;P 500, our benchmark.</p>
+<h2 id="Visualize-&amp;-summarize-daily-values-for-the-S&amp;P-500">Visualize &amp; summarize daily values for the S&amp;P 500<a class="anchor-link" href="#Visualize-&amp;-summarize-daily-values-for-the-S&amp;P-500"> </a></h2><p>Let's also take a closer look at the value of the S&amp;P 500, our benchmark.</p>
 </div>
 </div>
 </div>
@@ -415,7 +415,7 @@ memory usage: 3.9 KB
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="5.-The-inputs-for-the-Sharpe-Ratio:-Starting-with-Daily-Stock-Returns">5. The inputs for the Sharpe Ratio: Starting with Daily Stock Returns<a class="anchor-link" href="#5.-The-inputs-for-the-Sharpe-Ratio:-Starting-with-Daily-Stock-Returns"> </a></h2><p>The Sharpe Ratio uses the difference in returns between the two investment opportunities under consideration.</p>
+<h2 id="The-inputs-for-the-Sharpe-Ratio:-Starting-with-Daily-Stock-Returns">The inputs for the Sharpe Ratio: Starting with Daily Stock Returns<a class="anchor-link" href="#The-inputs-for-the-Sharpe-Ratio:-Starting-with-Daily-Stock-Returns"> </a></h2><p>The Sharpe Ratio uses the difference in returns between the two investment opportunities under consideration.</p>
 <p>However, our data show the historical value of each investment, not the return. To calculate the return, we need to calculate the percentage change in value from one day to the next. We'll also take a look at the summary statistics because these will become our inputs as we calculate the Sharpe Ratio. Can you already guess the result?</p>
 </div>
 </div>
@@ -538,7 +538,7 @@ memory usage: 3.9 KB
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="6.-Daily-S&amp;P-500-returns">6. Daily S&amp;P 500 returns<a class="anchor-link" href="#6.-Daily-S&amp;P-500-returns"> </a></h2><p>For the S&amp;P 500, calculating daily returns works just the same way, we just need to make sure we select it as a <code>Series</code> using single brackets <code>[]</code> and not as a <code>DataFrame</code> to facilitate the calculations in the next step.</p>
+<h2 id="Daily-S&amp;P-500-returns">Daily S&amp;P 500 returns<a class="anchor-link" href="#Daily-S&amp;P-500-returns"> </a></h2><p>For the S&amp;P 500, calculating daily returns works just the same way, we just need to make sure we select it as a <code>Series</code> using single brackets <code>[]</code> and not as a <code>DataFrame</code> to facilitate the calculations in the next step.</p>
 </div>
 </div>
 </div>
@@ -605,7 +605,7 @@ Name: S&amp;P 500, dtype: float64</pre>
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="7.-Calculating-Excess-Returns-for-Amazon-and-Facebook-vs.-S&amp;P-500">7. Calculating Excess Returns for Amazon and Facebook vs. S&amp;P 500<a class="anchor-link" href="#7.-Calculating-Excess-Returns-for-Amazon-and-Facebook-vs.-S&amp;P-500"> </a></h2><p>Next, we need to calculate the relative performance of stocks vs. the S&amp;P 500 benchmark. This is calculated as the difference in returns between <code>stock_returns</code> and <code>sp_returns</code> for each day.</p>
+<h2 id="Calculating-Excess-Returns-for-Amazon-and-Facebook-vs.-S&amp;P-500">Calculating Excess Returns for Amazon and Facebook vs. S&amp;P 500<a class="anchor-link" href="#Calculating-Excess-Returns-for-Amazon-and-Facebook-vs.-S&amp;P-500"> </a></h2><p>Next, we need to calculate the relative performance of stocks vs. the S&amp;P 500 benchmark. This is calculated as the difference in returns between <code>stock_returns</code> and <code>sp_returns</code> for each day.</p>
 </div>
 </div>
 </div>
@@ -752,7 +752,7 @@ Date
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="8.-The-Sharpe-Ratio,-Step-1:-The-Average-Difference-in-Daily-Returns-Stocks-vs-S&amp;P-500">8. The Sharpe Ratio, Step 1: The Average Difference in Daily Returns Stocks vs S&amp;P 500<a class="anchor-link" href="#8.-The-Sharpe-Ratio,-Step-1:-The-Average-Difference-in-Daily-Returns-Stocks-vs-S&amp;P-500"> </a></h2><p>Now we can finally start computing the Sharpe Ratio. First we need to calculate the average of the <code>excess_returns</code>. This tells us how much more or less the investment yields per day compared to the benchmark.</p>
+<h2 id="The-Sharpe-Ratio,-Step-1:-The-Average-Difference-in-Daily-Returns-Stocks-vs-S&amp;P-500">The Sharpe Ratio, Step 1: The Average Difference in Daily Returns Stocks vs S&amp;P 500<a class="anchor-link" href="#The-Sharpe-Ratio,-Step-1:-The-Average-Difference-in-Daily-Returns-Stocks-vs-S&amp;P-500"> </a></h2><p>Now we can finally start computing the Sharpe Ratio. First we need to calculate the average of the <code>excess_returns</code>. This tells us how much more or less the investment yields per day compared to the benchmark.</p>
 </div>
 </div>
 </div>
@@ -825,7 +825,7 @@ dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="9.-The-Sharpe-Ratio,-Step-2:-Standard-Deviation-of-the-Return-Difference">9. The Sharpe Ratio, Step 2: Standard Deviation of the Return Difference<a class="anchor-link" href="#9.-The-Sharpe-Ratio,-Step-2:-Standard-Deviation-of-the-Return-Difference"> </a></h2><p>It looks like there was quite a bit of a difference between average daily returns for Amazon and Facebook.</p>
+<h2 id="The-Sharpe-Ratio,-Step-2:-Standard-Deviation-of-the-Return-Difference">The Sharpe Ratio, Step 2: Standard Deviation of the Return Difference<a class="anchor-link" href="#The-Sharpe-Ratio,-Step-2:-Standard-Deviation-of-the-Return-Difference"> </a></h2><p>It looks like there was quite a bit of a difference between average daily returns for Amazon and Facebook.</p>
 <p>Next, we calculate the standard deviation of the <code>excess_returns</code>. This shows us the amount of risk an investment in the stocks implies as compared to an investment in the S&amp;P 500.</p>
 </div>
 </div>
@@ -881,7 +881,7 @@ dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="10.-Putting-it-all-together">10. Putting it all together<a class="anchor-link" href="#10.-Putting-it-all-together"> </a></h2><p>Now we just need to compute the ratio of <code>avg_excess_returns</code> and <code>sd_excess_returns</code>. The result is now finally the <em>Sharpe ratio</em> and indicates how much more (or less) return the investment opportunity under consideration yields per unit of risk.</p>
+<h2 id="Putting-it-all-together">Putting it all together<a class="anchor-link" href="#Putting-it-all-together"> </a></h2><p>Now we just need to compute the ratio of <code>avg_excess_returns</code> and <code>sd_excess_returns</code>. The result is now finally the <em>Sharpe ratio</em> and indicates how much more (or less) return the investment opportunity under consideration yields per unit of risk.</p>
 <p>The Sharpe Ratio is often <em>annualized</em> by multiplying it by the square root of the number of periods. We have used daily data as input, so we'll use the square root of the number of trading days (5 days, 52 weeks, minus a few holidays): √252</p>
 </div>
 </div>
@@ -941,7 +941,7 @@ dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="11.-Conclusion">11. Conclusion<a class="anchor-link" href="#11.-Conclusion"> </a></h2><p>Given the two Sharpe ratios, which investment should we go for? In 2016, Amazon had a Sharpe ratio twice as high as Facebook. This means that an investment in Amazon returned twice as much compared to the S&amp;P 500 for each unit of risk an investor would have assumed. In other words, in risk-adjusted terms, the investment in Amazon would have been more attractive.</p>
+<h2 id="Conclusion">Conclusion<a class="anchor-link" href="#Conclusion"> </a></h2><p>Given the two Sharpe ratios, which investment should we go for? In 2016, Amazon had a Sharpe ratio twice as high as Facebook. This means that an investment in Amazon returned twice as much compared to the S&amp;P 500 for each unit of risk an investor would have assumed. In other words, in risk-adjusted terms, the investment in Amazon would have been more attractive.</p>
 <p>This difference was mostly driven by differences in return rather than risk between Amazon and Facebook. The risk of choosing Amazon over FB (as measured by the standard deviation) was only slightly higher so that the higher Sharpe ratio for Amazon ends up higher mainly due to the higher average daily returns for Amazon. </p>
 <p>When faced with investment alternatives that offer both different returns and risks, the Sharpe Ratio helps to make a decision by adjusting the returns by the differences in risk and allows an investor to compare investment opportunities on equal terms, that is, on an 'apples-to-apples' basis.</p>
 </div>

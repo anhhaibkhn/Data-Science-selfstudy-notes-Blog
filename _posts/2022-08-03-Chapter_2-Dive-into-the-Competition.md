@@ -28,7 +28,7 @@ layout: notebook
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.1-Understand-the-problem">2.1 Understand the problem<a class="anchor-link" href="#2.1-Understand-the-problem"> </a></h2><ul>
+<h2 id="Understand-the-problem">Understand the problem<a class="anchor-link" href="#Understand-the-problem"> </a></h2><ul>
 <li>Solution workflow </li>
 </ul>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/images/solution_workflow.png" alt="sw"></p>
@@ -126,7 +126,7 @@ Sklearn LogLoss: 1.10801
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.2-Initial-EDA">2.2 Initial EDA<a class="anchor-link" href="#2.2-Initial-EDA"> </a></h2><p>Goals of EDA:</p>
+<h2 id="Initial-EDA">Initial EDA<a class="anchor-link" href="#Initial-EDA"> </a></h2><p>Goals of EDA:</p>
 <ul>
 <li>Size of the data</li>
 <li>Properties of the target variable</li>
@@ -141,7 +141,7 @@ Sklearn LogLoss: 1.10801
 <li>Problem type: Classification ( 3 classes: 'high', 'medium', 'low' )</li>
 <li>Metric: Multi-class log loss</li>
 </ul>
-<h3 id="2.2.1-EDA.-Part-I">2.2.1 EDA. Part I<a class="anchor-link" href="#2.2.1-EDA.-Part-I"> </a></h3>
+<h3 id="EDA.-Part-I">EDA. Part I<a class="anchor-link" href="#EDA.-Part-I"> </a></h3>
 </div>
 </div>
 </div>
@@ -574,7 +574,7 @@ Name: interest_level, dtype: int64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.2.2-EDA.-Part-II">2.2.2 EDA. Part II<a class="anchor-link" href="#2.2.2-EDA.-Part-II"> </a></h3><p>Draw some plots</p>
+<h3 id="EDA.-Part-II">EDA. Part II<a class="anchor-link" href="#EDA.-Part-II"> </a></h3><p>Draw some plots</p>
 
 </div>
 </div>
@@ -691,7 +691,7 @@ Name: interest_level, dtype: int64</pre>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.2.3-EDA-Statistic">2.2.3 EDA Statistic<a class="anchor-link" href="#2.2.3-EDA-Statistic"> </a></h3><p>As mentioned in the slides, you'll work with New York City taxi fare prediction data. You'll start with finding some basic statistics about the data. Then you'll move forward to plot some dependencies and generate hypotheses on them.</p>
+<h3 id="EDA-Statistic">EDA Statistic<a class="anchor-link" href="#EDA-Statistic"> </a></h3><p>As mentioned in the slides, you'll work with New York City taxi fare prediction data. You'll start with finding some basic statistics about the data. Then you'll move forward to plot some dependencies and generate hypotheses on them.</p>
 <p>The train and test DataFrames are already available in your workspace.</p>
 <p>Instructions:</p>
 <ul>
@@ -863,7 +863,7 @@ Name: passenger_count, dtype: int64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.2.4-EDA-plots-I">2.2.4 EDA plots I<a class="anchor-link" href="#2.2.4-EDA-plots-I"> </a></h3><p>After generating a couple of basic statistics, it's time to come up with and validate some ideas about the data dependencies. Again, the train DataFrame from the taxi competition is already available in your workspace.</p>
+<h3 id="EDA-plots-I">EDA plots I<a class="anchor-link" href="#EDA-plots-I"> </a></h3><p>After generating a couple of basic statistics, it's time to come up with and validate some ideas about the data dependencies. Again, the train DataFrame from the taxi competition is already available in your workspace.</p>
 <p>To begin with, let's make a scatterplot plotting the relationship between the fare amount and the distance of the ride. Intuitively, the longer the ride, the higher its price.</p>
 <p>To get the distance in kilometers between two geo-coordinates, you will use Haversine distance. Its calculation is available with the haversine_distance() function defined for you. The function expects train DataFrame as input.</p>
 <p>Instructions:</p>
@@ -969,7 +969,7 @@ Name: passenger_count, dtype: int64
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.2.5-EDA-plots-II">2.2.5 EDA plots II<a class="anchor-link" href="#2.2.5-EDA-plots-II"> </a></h3><p>Another idea that comes to mind is that the price of a ride could change during the day.</p>
+<h3 id="EDA-plots-II">EDA plots II<a class="anchor-link" href="#EDA-plots-II"> </a></h3><p>Another idea that comes to mind is that the price of a ride could change during the day.</p>
 <p>Your goal is to plot the median fare amount for each hour of the day as a simple line plot. The hour feature is calculated for you. Don't worry if you do not know how to work with the date features. We will explore them in the chapter on Feature Engineering.</p>
 <p>Instructions:</p>
 <ul>
@@ -1035,7 +1035,7 @@ Name: passenger_count, dtype: int64
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.3-Local-validation">2.3 Local validation<a class="anchor-link" href="#2.3-Local-validation"> </a></h2><ul>
+<h2 id="Local-validation">Local validation<a class="anchor-link" href="#Local-validation"> </a></h2><ul>
 <li>Motivation</li>
 </ul>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/local_validation_motivation.png" alt="Motivation"></p>
@@ -1057,7 +1057,7 @@ Name: passenger_count, dtype: int64
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.3.1-K-fold-cross-validation">2.3.1 K-fold cross-validation<a class="anchor-link" href="#2.3.1-K-fold-cross-validation"> </a></h3><p>You will start by getting hands-on experience in the most commonly used K-fold cross-validation.</p>
+<h3 id="K-fold-cross-validation">K-fold cross-validation<a class="anchor-link" href="#K-fold-cross-validation"> </a></h3><p>You will start by getting hands-on experience in the most commonly used K-fold cross-validation.</p>
 <p>The data you'll be working with is from the "Two sigma connect: rental listing inquiries" Kaggle competition. The competition problem is a multi-class classification of the rental listings into 3 classes: low interest, medium interest and high interest. For faster performance, you will work with a subsample consisting of 1,000 observations.</p>
 <p>You need to implement a K-fold validation strategy and look at the sizes of each fold obtained. train DataFrame is already available in your workspace.</p>
 <p>Instructions:</p>
@@ -1141,7 +1141,7 @@ Medium interest listings in CV test: 73
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.3.2-Stratified-K-fold">2.3.2 Stratified K-fold<a class="anchor-link" href="#2.3.2-Stratified-K-fold"> </a></h3><p>As you've just noticed, you have a pretty different target variable distribution among the folds due to the random splits. It's not crucial for this particular competition, but could be an issue for the classification competitions with the highly imbalanced target variable.</p>
+<h3 id="Stratified-K-fold">Stratified K-fold<a class="anchor-link" href="#Stratified-K-fold"> </a></h3><p>As you've just noticed, you have a pretty different target variable distribution among the folds due to the random splits. It's not crucial for this particular competition, but could be an issue for the classification competitions with the highly imbalanced target variable.</p>
 <p>To overcome this, let's implement the stratified K-fold strategy with the stratification on the target variable. train DataFrame is already available in your workspace.</p>
 <p>Instructions:</p>
 <ul>
@@ -1223,7 +1223,7 @@ Medium interest listings in CV test: 75
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.4-Validation-usage">2.4 Validation usage<a class="anchor-link" href="#2.4-Validation-usage"> </a></h2><ul>
+<h2 id="Validation-usage">Validation usage<a class="anchor-link" href="#Validation-usage"> </a></h2><ul>
 <li>Data Leakage</li>
 </ul>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/data_leakage.png" alt="Data Leakage"></p>
@@ -1251,7 +1251,7 @@ Medium interest listings in CV test: 75
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.4.1-Time-K-fold">2.4.1 Time K-fold<a class="anchor-link" href="#2.4.1-Time-K-fold"> </a></h3><p>Remember the "Store Item Demand Forecasting Challenge" where you are given store-item sales data, and have to predict future sales?</p>
+<h3 id="Time-K-fold">Time K-fold<a class="anchor-link" href="#Time-K-fold"> </a></h3><p>Remember the "Store Item Demand Forecasting Challenge" where you are given store-item sales data, and have to predict future sales?</p>
 <p>It's a competition with time series data. So, time K-fold cross-validation should be applied. Your goal is to create this cross-validation strategy and make sure that it works as expected.</p>
 <p>Note that the train DataFrame is already available in your workspace, and that TimeSeriesSplit has been imported from sklearn.model_selection.</p>
 <p>Instructions:</p>
@@ -1334,7 +1334,7 @@ Test date range: from 2017-12-24 to 2017-12-31
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.4.2-Overall-validation-score">2.4.2 Overall validation score<a class="anchor-link" href="#2.4.2-Overall-validation-score"> </a></h3><p>Now it's time to get the actual model performance using cross-validation! How does our store item demand prediction model perform?</p>
+<h3 id="Overall-validation-score">Overall validation score<a class="anchor-link" href="#Overall-validation-score"> </a></h3><p>Now it's time to get the actual model performance using cross-validation! How does our store item demand prediction model perform?</p>
 <p>Your task is to take the Mean Squared Error (MSE) for each fold separately, and then combine these results into a single number.</p>
 <p>For simplicity, you're given get_fold_mse() function that for each cross-validation split fits a Random Forest model and returns a list of MSE scores by fold. get_fold_mse() accepts two arguments: train and TimeSeriesSplit object.</p>
 <p>Instructions 1/3</p>

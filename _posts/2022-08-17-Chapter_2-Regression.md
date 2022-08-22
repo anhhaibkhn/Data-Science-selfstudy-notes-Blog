@@ -52,7 +52,7 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Chapter-2---Regression">Chapter 2 - Regression<a class="anchor-link" href="#Chapter-2---Regression"> </a></h1><h2 id="2.1-Introduction-to-regression">2.1 Introduction to regression<a class="anchor-link" href="#2.1-Introduction-to-regression"> </a></h2>
+<h2 id="Introduction-to-regression">Introduction to regression<a class="anchor-link" href="#Introduction-to-regression"> </a></h2>
 </div>
 </div>
 </div>
@@ -426,7 +426,7 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.1.1-Creating-features">2.1.1 Creating features<a class="anchor-link" href="#2.1.1-Creating-features"> </a></h3><p>In this chapter, you will work with a dataset called sales_df, which contains information on advertising campaign expenditure across different media types, and the number of dollars generated in sales for the respective campaign. The dataset has been preloaded for you. Here are the first two rows:</p>
+<h3 id="Creating-features">Creating features<a class="anchor-link" href="#Creating-features"> </a></h3><p>In this chapter, you will work with a dataset called sales_df, which contains information on advertising campaign expenditure across different media types, and the number of dollars generated in sales for the respective campaign. The dataset has been preloaded for you. Here are the first two rows:</p>
 <table>
 <thead><tr>
 <th></th>
@@ -611,7 +611,7 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.1.2-Building-a-linear-regression-model">2.1.2 Building a linear regression model<a class="anchor-link" href="#2.1.2-Building-a-linear-regression-model"> </a></h3><p>Now you have created your feature and target arrays, you will train a linear regression model on all feature and target values.</p>
+<h3 id="Building-a-linear-regression-model">Building a linear regression model<a class="anchor-link" href="#Building-a-linear-regression-model"> </a></h3><p>Now you have created your feature and target arrays, you will train a linear regression model on all feature and target values.</p>
 <p>As the goal is to assess the relationship between the feature and target values there is no need to split the data into training and test sets.</p>
 <p>X and y have been preloaded for you as follows:</p>
 
@@ -680,7 +680,7 @@ X = sales_df["radio"].values.reshape(-1, 1)</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.1.3-Visualizing-a-linear-regression-model">2.1.3 Visualizing a linear regression model<a class="anchor-link" href="#2.1.3-Visualizing-a-linear-regression-model"> </a></h3><p>Now you have built your linear regression model and trained it using all available observations, you can visualize how well the model fits the data. This allows you to interpret the relationship between radio advertising expenditure and sales values.</p>
+<h3 id="Visualizing-a-linear-regression-model">Visualizing a linear regression model<a class="anchor-link" href="#Visualizing-a-linear-regression-model"> </a></h3><p>Now you have built your linear regression model and trained it using all available observations, you can visualize how well the model fits the data. This allows you to interpret the relationship between radio advertising expenditure and sales values.</p>
 <p>The variables X, an array of radio values, y, an array of sales values, and predictions, an array of the model's predicted values for y given X, have all been preloaded for you from the previous exercise.</p>
 <p>Instructions:</p>
 <ul>
@@ -748,7 +748,7 @@ X = sales_df["radio"].values.reshape(-1, 1)</code></pre>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.2-The-basics-of-linear-regression">2.2 The basics of linear regression<a class="anchor-link" href="#2.2-The-basics-of-linear-regression"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/regression1.png" alt=""></p>
+<h2 id="The-basics-of-linear-regression">The basics of linear regression<a class="anchor-link" href="#The-basics-of-linear-regression"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/regression1.png" alt=""></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/regression2.png" alt=""></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/regression3.png" alt=""></p>
 <p>To advoice, the positive Residuals cancel out the negative ones, we use Residual Sum of Squares (RSS). We aim to minimize the RSS.</p>
@@ -1033,7 +1033,7 @@ RMSE: 2944.433199600097
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.3-Cross-validation">2.3 Cross-validation<a class="anchor-link" href="#2.3-Cross-validation"> </a></h2><p>Cross-validation motivation:</p>
+<h2 id="Cross-validation">Cross-validation<a class="anchor-link" href="#Cross-validation"> </a></h2><p>Cross-validation motivation:</p>
 <ul>
 <li>Model performance is dependent on the way we split up the data</li>
 <li>Not representative of the model's ability to generalize to unseen data<blockquote><p>Solution:Cross-validation!
@@ -1265,7 +1265,7 @@ RMSE: 2944.433199600097
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.4-Regularized-regression">2.4 Regularized regression<a class="anchor-link" href="#2.4-Regularized-regression"> </a></h2><p>Why regularize?</p>
+<h2 id="Regularized-regression">Regularized regression<a class="anchor-link" href="#Regularized-regression"> </a></h2><p>Why regularize?</p>
 <ul>
 <li>Recall: Linear regression minimizes a loss function</li>
 <li>It chooses a coefficient, a, for each feature variable, plus b</li>

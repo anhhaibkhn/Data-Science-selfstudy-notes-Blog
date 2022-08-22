@@ -167,7 +167,7 @@ Final RMSE: 4.211871629016008
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.1.1-Exploratory-data-analysis">4.1.1 Exploratory data analysis<a class="anchor-link" href="#4.1.1-Exploratory-data-analysis"> </a></h4><p>Before diving into the nitty gritty of pipelines and preprocessing, let's do some exploratory analysis of the original, unprocessed Ames housing dataset. When you worked with this data in previous chapters, we preprocessed it for you so you could focus on the core XGBoost concepts. In this chapter, you'll do the preprocessing yourself!</p>
+<h4 id="Exploratory-data-analysis">Exploratory data analysis<a class="anchor-link" href="#Exploratory-data-analysis"> </a></h4><p>Before diving into the nitty gritty of pipelines and preprocessing, let's do some exploratory analysis of the original, unprocessed Ames housing dataset. When you worked with this data in previous chapters, we preprocessed it for you so you could focus on the core XGBoost concepts. In this chapter, you'll do the preprocessing yourself!</p>
 <p>A smaller version of this original, unprocessed dataset has been pre-loaded into a pandas DataFrame called df. Your task is to explore df in the Shell and pick the option that is incorrect. The larger purpose of this exercise is to understand the kinds of transformations you will need to perform in order to be able to use XGBoost.</p>
 
 </div>
@@ -247,7 +247,7 @@ None
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.1.2-Encoding-categorical-columns-I:-LabelEncoder">4.1.2 Encoding categorical columns I: LabelEncoder<a class="anchor-link" href="#4.1.2-Encoding-categorical-columns-I:-LabelEncoder"> </a></h4><p>Now that you've seen what will need to be done to get the housing data ready for XGBoost, let's go through the process step-by-step.</p>
+<h4 id="Encoding-categorical-columns-I:-LabelEncoder">Encoding categorical columns I: LabelEncoder<a class="anchor-link" href="#Encoding-categorical-columns-I:-LabelEncoder"> </a></h4><p>Now that you've seen what will need to be done to get the housing data ready for XGBoost, let's go through the process step-by-step.</p>
 <p>First, you will need to fill in missing values - as you saw previously, the column LotFrontage has many missing values. Then, you will need to encode any categorical columns in the dataset using one-hot encoding so that they are encoded numerically. You can watch this video from Supervised Learning with scikit-learn for a refresher on the idea.</p>
 <p>The data has five categorical columns: MSZoning, PavedDrive, Neighborhood, BldgType, and HouseStyle. Scikit-learn has a LabelEncoder function that converts the values in each categorical column into integers. You'll practice using this here.</p>
 <ul>
@@ -375,7 +375,7 @@ None
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.1.3-Encoding-categorical-columns-II:-OneHotEncoder">4.1.3 Encoding categorical columns II: OneHotEncoder<a class="anchor-link" href="#4.1.3-Encoding-categorical-columns-II:-OneHotEncoder"> </a></h4><p>Okay - so you have your categorical columns encoded numerically. Can you now move onto using pipelines and XGBoost? Not yet! In the categorical columns of this dataset, there is no natural ordering between the entries. As an example: Using LabelEncoder, the CollgCr Neighborhood was encoded as 5, while the Veenker Neighborhood was encoded as 24, and Crawfor as 6. Is Veenker "greater" than Crawfor and CollgCr? No - and allowing the model to assume this natural ordering may result in poor performance.</p>
+<h4 id="Encoding-categorical-columns-II:-OneHotEncoder">Encoding categorical columns II: OneHotEncoder<a class="anchor-link" href="#Encoding-categorical-columns-II:-OneHotEncoder"> </a></h4><p>Okay - so you have your categorical columns encoded numerically. Can you now move onto using pipelines and XGBoost? Not yet! In the categorical columns of this dataset, there is no natural ordering between the entries. As an example: Using LabelEncoder, the CollgCr Neighborhood was encoded as 5, while the Veenker Neighborhood was encoded as 24, and Crawfor as 6. Is Veenker "greater" than Crawfor and CollgCr? No - and allowing the model to assume this natural ordering may result in poor performance.</p>
 <p>As a result, there is another step needed: You have to apply a one-hot encoding to create binary, or "dummy" variables. You can do this using scikit-learn's OneHotEncoder.</p>
 <ul>
 <li>Instructions<ul>
@@ -467,7 +467,7 @@ None
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.1.4-Encoding-categorical-columns-III:-DictVectorizer">4.1.4 Encoding categorical columns III: DictVectorizer<a class="anchor-link" href="#4.1.4-Encoding-categorical-columns-III:-DictVectorizer"> </a></h4><p>Alright, one final trick before you dive into pipelines. The two step process you just went through - <strong>LabelEncoder</strong> followed by <strong>OneHotEncoder</strong> - can be simplified by using a <strong>DictVectorizer</strong>.</p>
+<h4 id="Encoding-categorical-columns-III:-DictVectorizer">Encoding categorical columns III: DictVectorizer<a class="anchor-link" href="#Encoding-categorical-columns-III:-DictVectorizer"> </a></h4><p>Alright, one final trick before you dive into pipelines. The two step process you just went through - <strong>LabelEncoder</strong> followed by <strong>OneHotEncoder</strong> - can be simplified by using a <strong>DictVectorizer</strong>.</p>
 <p>Using a DictVectorizer on a DataFrame that has been converted to a dictionary allows you to get label encoding as well as one-hot encoding in one go.</p>
 <p>Your task is to work through this strategy in this exercise!</p>
 <ul>
@@ -614,7 +614,7 @@ memory usage: 239.7+ KB
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.1.5-Preprocessing-within-a-pipeline">4.1.5 Preprocessing within a pipeline<a class="anchor-link" href="#4.1.5-Preprocessing-within-a-pipeline"> </a></h4><p>Now that you've seen what steps need to be taken individually to properly process the Ames housing data, let's use the much cleaner and more succinct DictVectorizer approach and put it alongside an XGBoostRegressor inside of a scikit-learn pipeline.</p>
+<h4 id="Preprocessing-within-a-pipeline">Preprocessing within a pipeline<a class="anchor-link" href="#Preprocessing-within-a-pipeline"> </a></h4><p>Now that you've seen what steps need to be taken individually to properly process the Ames housing data, let's use the much cleaner and more succinct DictVectorizer approach and put it alongside an XGBoostRegressor inside of a scikit-learn pipeline.</p>
 <ul>
 <li><p>Instructions</p>
 <ul>
@@ -687,7 +687,7 @@ memory usage: 239.7+ KB
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.2-Incorporating-XGBoost-into-pipelines">4.2 Incorporating XGBoost into pipelines<a class="anchor-link" href="#4.2-Incorporating-XGBoost-into-pipelines"> </a></h3><h4 id="4.2.1-Cross-validating-ur-XGBoost-model">4.2.1 Cross-validating ur XGBoost model<a class="anchor-link" href="#4.2.1-Cross-validating-ur-XGBoost-model"> </a></h4><p>In this exercise, you'll go one step further by using the pipeline you've created to preprocess and cross-validate your model.</p>
+<h2 id="Incorporating-XGBoost-into-pipelines">Incorporating XGBoost into pipelines<a class="anchor-link" href="#Incorporating-XGBoost-into-pipelines"> </a></h2><h4 id="Cross-validating-ur-XGBoost-model">Cross-validating ur XGBoost model<a class="anchor-link" href="#Cross-validating-ur-XGBoost-model"> </a></h4><p>In this exercise, you'll go one step further by using the pipeline you've created to preprocess and cross-validate your model.</p>
 <ul>
 <li><p>Instructions</p>
 <ul>
@@ -750,7 +750,7 @@ memory usage: 239.7+ KB
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.2.2-Kidney-disease-case-study-I:-Categorical-Imputer">4.2.2 Kidney disease case study I: Categorical Imputer<a class="anchor-link" href="#4.2.2-Kidney-disease-case-study-I:-Categorical-Imputer"> </a></h4><p>You'll now continue your exploration of using pipelines with a dataset that requires significantly more wrangling. The chronic kidney disease dataset contains both categorical and numeric features, but contains lots of missing values. The goal here is to predict who has chronic kidney disease given various blood indicators as features.</p>
+<h4 id="Kidney-disease-case-study-I:-Categorical-Imputer">Kidney disease case study I: Categorical Imputer<a class="anchor-link" href="#Kidney-disease-case-study-I:-Categorical-Imputer"> </a></h4><p>You'll now continue your exploration of using pipelines with a dataset that requires significantly more wrangling. The chronic kidney disease dataset contains both categorical and numeric features, but contains lots of missing values. The goal here is to predict who has chronic kidney disease given various blood indicators as features.</p>
 <p>As Sergey mentioned in the video, you'll be introduced to a new library, sklearn_pandas, that allows you to chain many more processing steps inside of a pipeline than are currently supported in scikit-learn. Specifically, you'll be able to impute missing categorical values directly using the Categorical_Imputer() class in sklearn_pandas, and the DataFrameMapper() class to apply any arbitrary sklearn-compatible transformer on DataFrame columns, where the resulting output can be either a NumPy array or DataFrame.</p>
 <p>We've also created a transformer called a Dictifier that encapsulates converting a DataFrame using .to_dict("records") without you having to do it explicitly (and so that it works in a pipeline). Finally, we've also provided the list of feature names in kidney_feature_names, the target name in kidney_target_name, the features in X, and the target in y.</p>
 <p>In this exercise, your task is to apply the CategoricalImputer to impute all of the categorical columns in the dataset. You can refer to how the numeric imputation mapper was created as a template. Notice the keyword arguments input_df=True and df_out=True? This is so that you can work with DataFrames instead of arrays. By default, the transformers are passed a numpy array of the selected columns as input, and as a result, the output of the DataFrame mapper is also an array. Scikit-learn transformers have historically been designed to work with numpy arrays, not pandas DataFrames, even though their basic indexing interfaces are similar.</p>
@@ -1202,7 +1202,7 @@ dtype: int64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.2.3-Kidney-disease-case-study-II:-Feature-Union">4.2.3 Kidney disease case study II: Feature Union<a class="anchor-link" href="#4.2.3-Kidney-disease-case-study-II:-Feature-Union"> </a></h4><p>Having separately imputed numeric as well as categorical columns, your task is now to use scikit-learn's FeatureUnion to concatenate their results, which are contained in two separate transformer objects - numeric_imputation_mapper, and categorical_imputation_mapper, respectively.</p>
+<h4 id="Kidney-disease-case-study-II:-Feature-Union">Kidney disease case study II: Feature Union<a class="anchor-link" href="#Kidney-disease-case-study-II:-Feature-Union"> </a></h4><p>Having separately imputed numeric as well as categorical columns, your task is now to use scikit-learn's FeatureUnion to concatenate their results, which are contained in two separate transformer objects - numeric_imputation_mapper, and categorical_imputation_mapper, respectively.</p>
 <p>You may have already encountered FeatureUnion in Machine Learning with the Experts: School Budgets. Just like with pipelines, you have to pass it a list of (string, transformer) tuples, where the first half of each tuple is the name of the transformer.</p>
 <ul>
 <li><p>Instructions</p>
@@ -1241,7 +1241,7 @@ dtype: int64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.2.4-Kidney-disease-case-study-III:-Full-pipeline">4.2.4 Kidney disease case study III: Full pipeline<a class="anchor-link" href="#4.2.4-Kidney-disease-case-study-III:-Full-pipeline"> </a></h4><p>It's time to piece together all of the transforms along with an XGBClassifier to build the full pipeline!</p>
+<h4 id="Kidney-disease-case-study-III:-Full-pipeline">Kidney disease case study III: Full pipeline<a class="anchor-link" href="#Kidney-disease-case-study-III:-Full-pipeline"> </a></h4><p>It's time to piece together all of the transforms along with an XGBClassifier to build the full pipeline!</p>
 <p>Besides the numeric_categorical_union that you created in the previous exercise, there are two other transforms needed: the Dictifier() transform which we created for you, and the DictVectorizer().</p>
 <p>After creating the pipeline, your task is to cross-validate it to see how well it performs.</p>
 <ul>

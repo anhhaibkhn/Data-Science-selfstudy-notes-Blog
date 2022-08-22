@@ -52,7 +52,7 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.1-How-good-is-your-model?">3.1 How good is your model?<a class="anchor-link" href="#3.1-How-good-is-your-model?"> </a></h2><p>Classification metrics</p>
+<h2 id="How-good-is-your-model?">How good is your model?<a class="anchor-link" href="#How-good-is-your-model?"> </a></h2><p>Classification metrics</p>
 <ul>
 <li>Measuring model performance with accuracy:</li>
 <li>Fraction of correctly classified samples</li>
@@ -636,7 +636,7 @@ weighted avg       0.63      0.65      0.64       231
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.2-Logistic-regression-and-the-ROC-curve">3.2 Logistic regression and the ROC curve<a class="anchor-link" href="#3.2-Logistic-regression-and-the-ROC-curve"> </a></h2><p>Logistic regression for binary classification</p>
+<h2 id="Logistic-regression-and-the-ROC-curve">Logistic regression and the ROC curve<a class="anchor-link" href="#Logistic-regression-and-the-ROC-curve"> </a></h2><p>Logistic regression for binary classification</p>
 <ul>
 <li>Logistic regression is used for classi,cation problems</li>
 <li>Logistic regression outputs probabilities</li>
@@ -1104,7 +1104,7 @@ weighted avg       0.74      0.74      0.74       231
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.3-Hyperparameter-tuning">3.3 Hyperparameter tuning<a class="anchor-link" href="#3.3-Hyperparameter-tuning"> </a></h2><h3 id="Hyperparameter-tuning">Hyperparameter tuning<a class="anchor-link" href="#Hyperparameter-tuning"> </a></h3><ul>
+<h2 id="Hyperparameter-tuning">Hyperparameter tuning<a class="anchor-link" href="#Hyperparameter-tuning"> </a></h2><h3 id="Hyperparameter-tuning">Hyperparameter tuning<a class="anchor-link" href="#Hyperparameter-tuning"> </a></h3><ul>
 <li>Ridge/lasso regression: Choosing <code>alpha</code></li>
 <li>KNN: Choosing <code>n_neighbors</code></li>
 <li>Hyperparameters: Parameters we specify before fitting the model<ul>

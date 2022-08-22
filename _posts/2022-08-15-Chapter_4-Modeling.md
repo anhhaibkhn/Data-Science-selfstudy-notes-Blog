@@ -48,7 +48,7 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.1-Baseline-model">4.1 Baseline model<a class="anchor-link" href="#4.1-Baseline-model"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/modeling_stage.png" alt=""></p>
+<h2 id="Baseline-model">Baseline model<a class="anchor-link" href="#Baseline-model"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/modeling_stage.png" alt=""></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/base_line1.png" alt=""></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/base_line2.png" alt=""></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/base_line3.png" alt=""></p>
@@ -62,7 +62,7 @@ layout: notebook
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.1.1-Replicate-validation-score">4.1.1 Replicate validation score<a class="anchor-link" href="#4.1.1-Replicate-validation-score"> </a></h3><p>Replicate validation score (Exercise)</p>
+<h3 id="Replicate-validation-score">Replicate validation score<a class="anchor-link" href="#Replicate-validation-score"> </a></h3><p>Replicate validation score (Exercise)</p>
 <p>You've seen both validation and Public Leaderboard scores in the video. However, the code examples are available only for the test data. To get the validation scores you have to repeat the same process on the holdout set.</p>
 <p>Throughout this chapter, you will work with New York City Taxi competition data. The problem is to predict the fare amount for a taxi ride in New York City. The competition metric is the root mean squared error.</p>
 <p>The first goal is to evaluate the Baseline model on the validation data. You will replicate the simplest Baseline based on the mean of "fare_amount". Recall that as a validation strategy we used a 30% holdout split with validation_train as train and validation_test as holdout DataFrames. Both of them are available in your workspace.</p>
@@ -154,7 +154,7 @@ layout: notebook
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.1.2-Baseline-based-on-the-date">4.1.2 Baseline based on the date<a class="anchor-link" href="#4.1.2-Baseline-based-on-the-date"> </a></h3><p>Baseline based on the date (Exercise)
+<h3 id="Baseline-based-on-the-date">Baseline based on the date<a class="anchor-link" href="#Baseline-based-on-the-date"> </a></h3><p>Baseline based on the date (Exercise)
 We've already built 3 different baseline models. To get more practice, let's build a couple more. The first model is based on the grouping variables. It's clear that the ride fare could depend on the part of the day. For example, prices could be higher during the rush hours.</p>
 <p>Your goal is to build a baseline model that will assign the average "fare_amount" for the corresponding hour. For now, you will create the model for the whole train data and make predictions for the test dataset.</p>
 <p>The train and test DataFrames are available in your workspace. Moreover, the "pickup_datetime" column in both DataFrames is already converted to a datetime object for you.</p>
@@ -262,7 +262,7 @@ We've already built 3 different baseline models. To get more practice, let's bui
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.1.3-Baseline-based-on-the-gradient-boosting">4.1.3 Baseline based on the gradient boosting<a class="anchor-link" href="#4.1.3-Baseline-based-on-the-gradient-boosting"> </a></h3><p>Baseline based on the gradient boosting (Exercise).</p>
+<h3 id="Baseline-based-on-the-gradient-boosting">Baseline based on the gradient boosting<a class="anchor-link" href="#Baseline-based-on-the-gradient-boosting"> </a></h3><p>Baseline based on the gradient boosting (Exercise).</p>
 <p>Let's build a final baseline based on the Random Forest. You've seen a huge score improvement moving from the grouping baseline to the Gradient Boosting in the video. Now, you will use sklearn's Random Forest to further improve this score.</p>
 <p>The goal of this exercise is to take numeric features and train a Random Forest model without any tuning. After that, you could make test predictions and validate the result on the Public Leaderboard. Note that you've already got an "hour" feature which could also be used as an input to the model.</p>
 <p>Instructions:</p>
@@ -360,7 +360,7 @@ We've already built 3 different baseline models. To get more practice, let's bui
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.2-Hyperparameter-tuning">4.2 Hyperparameter tuning<a class="anchor-link" href="#4.2-Hyperparameter-tuning"> </a></h2><p>Once we have the baseline models results, we can start creating new features.</p>
+<h2 id="Hyperparameter-tuning">Hyperparameter tuning<a class="anchor-link" href="#Hyperparameter-tuning"> </a></h2><p>Once we have the baseline models results, we can start creating new features.</p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/iterations.png" alt=""></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/competition_stategy.png" alt=""></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tuning1.png" alt=""></p>
@@ -372,7 +372,7 @@ We've already built 3 different baseline models. To get more practice, let's bui
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.2.1-Grid-search">4.2.1 Grid search<a class="anchor-link" href="#4.2.1-Grid-search"> </a></h3><p>Grid search (Exercise):
+<h3 id="Grid-search">Grid search<a class="anchor-link" href="#Grid-search"> </a></h3><p>Grid search (Exercise):
 Recall that we've created a baseline Gradient Boosting model in the previous lesson. Your goal now is to find the best max_depth hyperparameter value for this Gradient Boosting model. This hyperparameter limits the number of nodes in each individual tree. You will be using K-fold cross-validation to measure the local performance of the model for each hyperparameter value.</p>
 <p>You're given a function get_cv_score(), which takes the train dataset and dictionary of the model parameters as arguments and returns the overall validation RMSE score over 3-fold cross-validation.</p>
 <p>Instructions:</p>
@@ -469,7 +469,7 @@ Recall that we've created a baseline Gradient Boosting model in the previous les
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.2.2-2D-grid-search">4.2.2 2D grid search<a class="anchor-link" href="#4.2.2-2D-grid-search"> </a></h3><p>2D grid search(Exercise)</p>
+<h3 id="2D-grid-search">2D grid search<a class="anchor-link" href="#2D-grid-search"> </a></h3><p>2D grid search(Exercise)</p>
 <p>The drawback of tuning each hyperparameter independently is a potential dependency between different hyperparameters. The better approach is to try all the possible hyperparameter combinations. However, in such cases, the grid search space is rapidly expanding. For example, if we have 2 parameters with 10 possible values, it will yield 100 experiment runs.</p>
 <p>Your goal is to find the best hyperparameter couple of max_depth and subsample for the Gradient Boosting model. subsample is a fraction of observations to be used for fitting the individual trees.</p>
 <p>You're given a function get_cv_score(), which takes the train dataset and dictionary of the model parameters as arguments and returns the overall validation RMSE score over 3-fold cross-validation.</p>
@@ -571,7 +571,7 @@ Recall that we've created a baseline Gradient Boosting model in the previous les
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.3-Model-ensembling">4.3 Model ensembling<a class="anchor-link" href="#4.3-Model-ensembling"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ensemble1.png" alt=""></p>
+<h2 id="Model-ensembling">Model ensembling<a class="anchor-link" href="#Model-ensembling"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ensemble1.png" alt=""></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ensemble2.png" alt=""></p>
 <p>Blending appoach is to find an average of multiple models predictions.</p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ensemble3.png" alt=""></p>
@@ -592,7 +592,7 @@ Recall that we've created a baseline Gradient Boosting model in the previous les
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.3.1-Model-blending">4.3.1 Model blending<a class="anchor-link" href="#4.3.1-Model-blending"> </a></h3><p>Model blending (Exercise)
+<h3 id="Model-blending">Model blending<a class="anchor-link" href="#Model-blending"> </a></h3><p>Model blending (Exercise)
 You will start creating model ensembles with a blending technique.</p>
 <p>Your goal is to train 2 different models on the New York City Taxi competition data. Make predictions on the test data and then blend them using a simple arithmetic mean.</p>
 <p>The train and test DataFrames are already available in your workspace. features is a list of columns to be used for training and it is also available in your workspace. The target variable name is "fare_amount".</p>
@@ -686,7 +686,7 @@ You will start creating model ensembles with a blending technique.</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.3.2-Model-stacking-I">4.3.2 Model stacking I<a class="anchor-link" href="#4.3.2-Model-stacking-I"> </a></h3><p>Model stacking I (Exercise):
+<h3 id="Model-stacking-I">Model stacking I<a class="anchor-link" href="#Model-stacking-I"> </a></h3><p>Model stacking I (Exercise):
 Now it's time for stacking. To implement the stacking approach, you will follow the 6 steps we've discussed in the previous video:</p>
 <ol>
 <li>Split train data into two parts</li>
@@ -769,7 +769,7 @@ Now it's time for stacking. To implement the stacking approach, you will follow 
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.3.3-Model-stacking-II">4.3.3 Model stacking II<a class="anchor-link" href="#4.3.3-Model-stacking-II"> </a></h3><p>OK, what you've done so far in the stacking implementation:</p>
+<h3 id="Model-stacking-II">Model stacking II<a class="anchor-link" href="#Model-stacking-II"> </a></h3><p>OK, what you've done so far in the stacking implementation:</p>
 <ol>
 <li>Split train data into two parts</li>
 <li>Train multiple models on Part 1</li>
@@ -839,12 +839,12 @@ Now it's time for stacking. To implement the stacking approach, you will follow 
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.4.-Final-tips">4.4. Final tips<a class="anchor-link" href="#4.4.-Final-tips"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tip1.png" alt=""></p>
+<h2 id="Final-tips">Final tips<a class="anchor-link" href="#Final-tips"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tip1.png" alt=""></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tip2.png" alt=""></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tip3.png" alt=""></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tip4.png" alt=""></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tip5.png" alt=""></p>
-<h3 id="4.4.1-Testing-Kaggle-forum-ideas">4.4.1 Testing Kaggle forum ideas<a class="anchor-link" href="#4.4.1-Testing-Kaggle-forum-ideas"> </a></h3><p>Testing Kaggle forum ideas(Exercise)
+<h3 id="Testing-Kaggle-forum-ideas">Testing Kaggle forum ideas<a class="anchor-link" href="#Testing-Kaggle-forum-ideas"> </a></h3><p>Testing Kaggle forum ideas(Exercise)
 Unfortunately, not all the Forum posts and Kernels are necessarily useful for your model. So instead of blindly incorporating ideas into your pipeline, you should test them first.</p>
 <p>You're given a function get_cv_score(), which takes a train dataset as an argument and returns the overall validation root mean squared error over 3-fold cross-validation. The train DataFrame is already available in your workspace.</p>
 <p>You should try different suggestions from the Kaggle Forum and check whether they improve your validation score.</p>
@@ -996,14 +996,14 @@ Unfortunately, not all the Forum posts and Kernels are necessarily useful for yo
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.4.2-Select-final-submissions">4.4.2 Select final submissions<a class="anchor-link" href="#4.4.2-Select-final-submissions"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/submision_choice.png" alt=""></p>
+<h3 id="Select-final-submissions">Select final submissions<a class="anchor-link" href="#Select-final-submissions"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/submision_choice.png" alt=""></p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.5-Final-thoughts">4.5 Final thoughts<a class="anchor-link" href="#4.5-Final-thoughts"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/summary1.png" alt=""></p>
+<h3 id="Final-thoughts">Final thoughts<a class="anchor-link" href="#Final-thoughts"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/summary1.png" alt=""></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/summary2.png" alt=""></p>
 
 </div>

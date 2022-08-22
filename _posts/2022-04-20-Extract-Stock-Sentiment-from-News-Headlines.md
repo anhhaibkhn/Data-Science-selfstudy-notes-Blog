@@ -28,7 +28,7 @@ layout: notebook
         
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.-Searching-for-gold-inside-HTML-files">1. Searching for gold inside HTML files<a class="anchor-link" href="#1.-Searching-for-gold-inside-HTML-files"> </a></h2><p>It used to take days for financial news to spread via radio, newspapers, and word of mouth. Now, in the age of the internet, it takes seconds. Did you know news articles are <em>automatically</em> being generated from figures and earnings call streams? Hedge funds and independent traders are using data science to process this wealth of information in the quest for profit.</p>
+<h2 id="Searching-for-gold-inside-HTML-files">Searching for gold inside HTML files<a class="anchor-link" href="#Searching-for-gold-inside-HTML-files"> </a></h2><p>It used to take days for financial news to spread via radio, newspapers, and word of mouth. Now, in the age of the internet, it takes seconds. Did you know news articles are <em>automatically</em> being generated from figures and earnings call streams? Hedge funds and independent traders are using data science to process this wealth of information in the quest for profit.</p>
 <p>In this notebook, we will generate investing insight by applying <a href="https://en.wikipedia.org/wiki/Sentiment_analysis">sentiment analysis</a> on financial news headlines from <a href="https://finviz.com">FINVIZ.com</a>. Using this <a href="https://en.wikipedia.org/wiki/Natural_language_processing">natural language processing</a> technique, we can understand the emotion behind the headlines and predict whether the market <em>feels</em> good or bad about a stock. It would then be possible to make educated guesses on how certain stocks will perform and trade accordingly. (And hopefully, make money!)</p>
 <p><img src="https://assets.datacamp.com/production/project_611/img/fb_headlines.png" alt="Facebook headlines from FINVIZ.com"></p>
 <p>Why headlines? And why from FINVIZ?</p>
@@ -79,7 +79,7 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.-What-is-inside-those-files-anyway?">2. What is inside those files anyway?<a class="anchor-link" href="#2.-What-is-inside-those-files-anyway?"> </a></h2><p>We've grabbed the table that contains the headlines from each stock's HTML file, but before we start parsing those tables further, we need to understand how the data in that table is structured. We have a few options for this:</p>
+<h2 id="What-is-inside-those-files-anyway?">What is inside those files anyway?<a class="anchor-link" href="#What-is-inside-those-files-anyway?"> </a></h2><p>We've grabbed the table that contains the headlines from each stock's HTML file, but before we start parsing those tables further, we need to understand how the data in that table is structured. We have a few options for this:</p>
 <ul>
 <li>Open the HTML file with a text editor (preferably one with syntax highlighting, like <a href="http://www.sublimetext.com/">Sublime Text</a>) and explore it there</li>
 <li>Use your browser's <a href="https://addons.mozilla.org/en-US/firefox/addon/web-developer/">webdev toolkit</a> to explore the HTML</li>
@@ -151,7 +151,7 @@ Tesla&#39;s People Problem and the Inscrutable Musk: 2 Things That Make You Go H
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.-Extra,-extra!-Extract-the-news-headlines">3. Extra, extra! Extract the news headlines<a class="anchor-link" href="#3.-Extra,-extra!-Extract-the-news-headlines"> </a></h2><p>As we saw above, the interesting data inside each table row (<code>&lt;tr&gt;</code>) is in the text inside the <code>&lt;td&gt;</code> and <code>&lt;a&gt;</code> tags. Let's now actually parse the data for <strong>all</strong> tables in a comfortable data structure.</p>
+<h2 id="Extra,-extra!-Extract-the-news-headlines">Extra, extra! Extract the news headlines<a class="anchor-link" href="#Extra,-extra!-Extract-the-news-headlines"> </a></h2><p>As we saw above, the interesting data inside each table row (<code>&lt;tr&gt;</code>) is in the text inside the <code>&lt;td&gt;</code> and <code>&lt;a&gt;</code> tags. Let's now actually parse the data for <strong>all</strong> tables in a comfortable data structure.</p>
 </div>
 </div>
 </div>
@@ -198,7 +198,7 @@ Tesla&#39;s People Problem and the Inscrutable Musk: 2 Things That Make You Go H
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.-Make-NLTK-think-like-a-financial-journalist">4. Make NLTK think like a financial journalist<a class="anchor-link" href="#4.-Make-NLTK-think-like-a-financial-journalist"> </a></h2><p>Sentiment analysis is very sensitive to context. As an example, saying <em>"This is so addictive!"</em> often means something positive if the context is a video game you are enjoying with your friends, but it very often means something negative when we are talking about opioids. Remember that the reason we chose headlines is so we can try to extract sentiment from financial journalists, who like most professionals, have their own lingo. Let's now make NLTK think like a financial journalist by adding some new words and sentiment values to our lexicon.</p>
+<h2 id="Make-NLTK-think-like-a-financial-journalist">Make NLTK think like a financial journalist<a class="anchor-link" href="#Make-NLTK-think-like-a-financial-journalist"> </a></h2><p>Sentiment analysis is very sensitive to context. As an example, saying <em>"This is so addictive!"</em> often means something positive if the context is a video game you are enjoying with your friends, but it very often means something negative when we are talking about opioids. Remember that the reason we chose headlines is so we can try to extract sentiment from financial journalists, who like most professionals, have their own lingo. Let's now make NLTK think like a financial journalist by adding some new words and sentiment values to our lexicon.</p>
 </div>
 </div>
 </div>
@@ -235,7 +235,7 @@ Tesla&#39;s People Problem and the Inscrutable Musk: 2 Things That Make You Go H
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="5.-BREAKING-NEWS:-NLTK-Crushes-Sentiment-Estimates">5. BREAKING NEWS: NLTK Crushes Sentiment Estimates<a class="anchor-link" href="#5.-BREAKING-NEWS:-NLTK-Crushes-Sentiment-Estimates"> </a></h2><p>Now that we have the data and the algorithm loaded, we will get to the core of the matter: programmatically predicting sentiment out of news headlines! Luckily for us, VADER is very high level so, in this case, we will not adjust the model further<sup>*</sup> other than the lexicon additions from before.</p>
+<h2 id="BREAKING-NEWS:-NLTK-Crushes-Sentiment-Estimates">BREAKING NEWS: NLTK Crushes Sentiment Estimates<a class="anchor-link" href="#BREAKING-NEWS:-NLTK-Crushes-Sentiment-Estimates"> </a></h2><p>Now that we have the data and the algorithm loaded, we will get to the core of the matter: programmatically predicting sentiment out of news headlines! Luckily for us, VADER is very high level so, in this case, we will not adjust the model further<sup>*</sup> other than the lexicon additions from before.</p>
 <p><sup>*</sup>VADER "out-of-the-box" with some extra lexicon would likely translate into <strong>heavy losses</strong> with real money. A real sentiment analysis tool with chances of being profitable will require a very extensive and dedicated to finance news lexicon. Furthermore, it might also not be enough using a pre-packaged model like VADER.</p>
 </div>
 </div>
@@ -299,7 +299,7 @@ Tesla&#39;s People Problem and the Inscrutable Musk: 2 Things That Make You Go H
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="6.-Plot-all-the-sentiment-in-subplots">6. Plot all the sentiment in subplots<a class="anchor-link" href="#6.-Plot-all-the-sentiment-in-subplots"> </a></h2><p>Now that we have the scores, let's start plotting the results. We will start by plotting the time series for the stocks we have.</p>
+<h2 id="Plot-all-the-sentiment-in-subplots">Plot all the sentiment in subplots<a class="anchor-link" href="#Plot-all-the-sentiment-in-subplots"> </a></h2><p>Now that we have the scores, let's start plotting the results. We will start by plotting the time series for the stocks we have.</p>
 </div>
 </div>
 </div>
@@ -371,7 +371,7 @@ Tesla&#39;s People Problem and the Inscrutable Musk: 2 Things That Make You Go H
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="7.-Weekends-and-duplicates">7. Weekends and duplicates<a class="anchor-link" href="#7.-Weekends-and-duplicates"> </a></h2><p>What happened to Tesla on November 22nd? Since we happen to have the headlines inside our <code>DataFrame</code>, a quick peek reveals that there are a few problems with that particular day: </p>
+<h2 id="Weekends-and-duplicates">Weekends and duplicates<a class="anchor-link" href="#Weekends-and-duplicates"> </a></h2><p>What happened to Tesla on November 22nd? Since we happen to have the headlines inside our <code>DataFrame</code>, a quick peek reveals that there are a few problems with that particular day: </p>
 <ul>
 <li>There are only 5 headlines for that day.</li>
 <li>Two headlines are verbatim the same as another but from another news outlet.</li>
@@ -421,7 +421,7 @@ Tesla&#39;s People Problem and the Inscrutable Musk: 2 Things That Make You Go H
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="8.-Sentiment-on-one-single-trading-day-and-stock">8. Sentiment on one single trading day and stock<a class="anchor-link" href="#8.-Sentiment-on-one-single-trading-day-and-stock"> </a></h2><p>Just to understand the possibilities of this dataset and get a better feel of the data, let's focus on one trading day and one single stock. We will make an informative plot where we will see the smallest grain possible: headline and subscores.</p>
+<h2 id="Sentiment-on-one-single-trading-day-and-stock">Sentiment on one single trading day and stock<a class="anchor-link" href="#Sentiment-on-one-single-trading-day-and-stock"> </a></h2><p>Just to understand the possibilities of this dataset and get a better feel of the data, let's focus on one trading day and one single stock. We will make an informative plot where we will see the smallest grain possible: headline and subscores.</p>
 </div>
 </div>
 </div>
@@ -554,7 +554,7 @@ time
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="9.-Visualize-the-single-day">9. Visualize the single day<a class="anchor-link" href="#9.-Visualize-the-single-day"> </a></h2><p>We will make a plot to visualize the positive, negative and neutral scores for a single day of trading and a single stock. This is just one of the many ways to visualize this dataset.</p>
+<h2 id="Visualize-the-single-day">Visualize the single day<a class="anchor-link" href="#Visualize-the-single-day"> </a></h2><p>We will make a plot to visualize the positive, negative and neutral scores for a single day of trading and a single stock. This is just one of the many ways to visualize this dataset.</p>
 </div>
 </div>
 </div>

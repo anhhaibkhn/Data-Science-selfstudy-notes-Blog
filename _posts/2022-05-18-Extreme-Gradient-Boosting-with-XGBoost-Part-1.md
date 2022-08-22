@@ -28,7 +28,7 @@ layout: notebook
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.1-Introduction">1.1 Introduction<a class="anchor-link" href="#1.1-Introduction"> </a></h2><ul>
+<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction"> </a></h2><ul>
 <li>Supervised Learning<ul>
 <li>Relies on labeled data</li>
 <li>Have some understanding of past behavior</li>
@@ -55,7 +55,7 @@ layout: notebook
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.2-Introducing-XGBosst">1.2 Introducing XGBosst<a class="anchor-link" href="#1.2-Introducing-XGBosst"> </a></h2><ul>
+<h2 id="Introducing-XGBosst">Introducing XGBosst<a class="anchor-link" href="#Introducing-XGBosst"> </a></h2><ul>
 <li><p>What is XGBoost? (Extreme Gradient Boosting)</p>
 <ul>
 <li>Optimized gradient-boosting machine learning library</li>
@@ -72,7 +72,7 @@ layout: notebook
 </ul>
 </li>
 </ul>
-<h3 id="1.2.1-XGBoost:-Fit/Predict">1.2.1 XGBoost: Fit/Predict<a class="anchor-link" href="#1.2.1-XGBoost:-Fit/Predict"> </a></h3><p>It's time to create your first XGBoost model! As Sergey showed you in the video, you can use the scikit-learn .fit() / .predict() paradigm that you are already familiar to build your XGBoost models, as the xgboost library has a scikit-learn compatible API!</p>
+<h3 id="XGBoost:-Fit/Predict">XGBoost: Fit/Predict<a class="anchor-link" href="#XGBoost:-Fit/Predict"> </a></h3><p>It's time to create your first XGBoost model! As Sergey showed you in the video, you can use the scikit-learn .fit() / .predict() paradigm that you are already familiar to build your XGBoost models, as the xgboost library has a scikit-learn compatible API!</p>
 <p>Here, you'll be working with churn data. This dataset contains imaginary data from a ride-sharing app with user behaviors over their first month of app usage in a set of imaginary cities as well as whether they used the service 5 months after sign-up.</p>
 <p>Your goal is to use the first month's worth of data to predict whether the app's users will remain users of the service at the 5 month mark. This is a typical setup for a churn prediction problem. To do this, you'll split the data into training and test sets, fit a small xgboost model on the training set, and evaluate its performance on the test set by computing its accuracy.</p>
 <p>Instructions:</p>
@@ -357,7 +357,7 @@ None
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.2.2-What-is-a-decision-tree?">1.2.2 What is a decision tree?<a class="anchor-link" href="#1.2.2-What-is-a-decision-tree?"> </a></h3><ul>
+<h3 id="What-is-a-decision-tree?">What is a decision tree?<a class="anchor-link" href="#What-is-a-decision-tree?"> </a></h3><ul>
 <li><p>Decision trees as base learners</p>
 <ul>
 <li>Base learner : Individual learning algorithm in an ensemble algorithm</li>
@@ -450,7 +450,7 @@ accuracy: 0.9649122807017544
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.3-What-is-Boosting">1.3 What is Boosting<a class="anchor-link" href="#1.3-What-is-Boosting"> </a></h2><ul>
+<h2 id="What-is-Boosting">What is Boosting<a class="anchor-link" href="#What-is-Boosting"> </a></h2><ul>
 <li><p>Boosting overview</p>
 <ul>
 <li>Not a specific machine learning algorithm</li>
@@ -480,7 +480,7 @@ accuracy: 0.9649122807017544
 </ul>
 </li>
 </ul>
-<h3 id="1.3.1-Accuracy">1.3.1 Accuracy<a class="anchor-link" href="#1.3.1-Accuracy"> </a></h3><p>You'll now practice using XGBoost's learning API through its baked in cross-validation capabilities. As Sergey discussed in the previous video, XGBoost gets its lauded performance and efficiency gains by utilizing its own optimized data structure for datasets called a DMatrix.</p>
+<h3 id="Accuracy">Accuracy<a class="anchor-link" href="#Accuracy"> </a></h3><p>You'll now practice using XGBoost's learning API through its baked in cross-validation capabilities. As Sergey discussed in the previous video, XGBoost gets its lauded performance and efficiency gains by utilizing its own optimized data structure for datasets called a DMatrix.</p>
 <p>In the previous exercise, the input datasets were converted into DMatrix data on the fly, but when you use the xgboost cv object, you have to first explicitly convert your data into a DMatrix. So, that's what you will do here before running cross-validation on churn_data.</p>
 
 </div>
@@ -623,7 +623,7 @@ accuracy: 0.9649122807017544
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.3.2-Measuring-AUC">1.3.2 Measuring AUC<a class="anchor-link" href="#1.3.2-Measuring-AUC"> </a></h3><p>Now that you've used cross-validation to compute average out-of-sample accuracy (after converting from an error), it's very easy to compute any other metric you might be interested in. All you have to do is pass it (or a list of metrics) in as an argument to the metrics parameter of xgb.cv().</p>
+<h3 id="Measuring-AUC">Measuring AUC<a class="anchor-link" href="#Measuring-AUC"> </a></h3><p>Now that you've used cross-validation to compute average out-of-sample accuracy (after converting from an error), it's very easy to compute any other metric you might be interested in. All you have to do is pass it (or a list of metrics) in as an argument to the metrics parameter of xgb.cv().</p>
 <p>Your job in this exercise is to compute another common metric used in binary classification - the area under the curve ("auc").</p>
 
 </div>
@@ -748,7 +748,7 @@ accuracy: 0.9649122807017544
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.4-When-should-I-use-XGBoost?">1.4 When should I use XGBoost?<a class="anchor-link" href="#1.4-When-should-I-use-XGBoost?"> </a></h2><h3 id="1.4.1-When-to-use-XGBoost">1.4.1 When to use XGBoost<a class="anchor-link" href="#1.4.1-When-to-use-XGBoost"> </a></h3><ul>
+<h2 id="When-should-I-use-XGBoost?">When should I use XGBoost?<a class="anchor-link" href="#When-should-I-use-XGBoost?"> </a></h2><h3 id="When-to-use-XGBoost">When to use XGBoost<a class="anchor-link" href="#When-to-use-XGBoost"> </a></h3><ul>
 <li>You have a large number of training samples<ul>
 <li>Greater than 1000 training samples and less 100 features</li>
 <li>The number of features &lt; number of training samples</li>
@@ -759,7 +759,7 @@ accuracy: 0.9649122807017544
 </ul>
 </li>
 </ul>
-<h3 id="1.4.2-When-to-NOT-use-XGBoost">1.4.2 When to NOT use XGBoost<a class="anchor-link" href="#1.4.2-When-to-NOT-use-XGBoost"> </a></h3><ul>
+<h3 id="When-to-NOT-use-XGBoost">When to NOT use XGBoost<a class="anchor-link" href="#When-to-NOT-use-XGBoost"> </a></h3><ul>
 <li>Image recognition</li>
 <li>Computer vision</li>
 <li>Natural language processing and understanding problems</li>

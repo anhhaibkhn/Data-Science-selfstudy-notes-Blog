@@ -17,6 +17,8 @@ Hi, and Welcome to my GitHub [Blog](https://anhhaibkhn.github.io/Data-Science-se
 All of my posts here are the memo from my self-study courses, articles, and books. I hope that some of these practices will help you along in your own journey of learning data science.
 
 
+If you find the blog posts useful, please give the <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog" target="_blank"><strong>GitHub blog repo</strong></a> a star to show your support and share it to others. Thank you! (´･ω･｀)ゞ ｱﾘｶﾞﾄｳ ﾖﾛｼｸ♪. Also, please let me know in the comments section of the posts if you have any questions.
+
 ## To start writing content, here are some helpful links:
 
 - [Writing Blogs With Jupyter](https://github.com/fastai/fastpages#writing-blog-posts-with-jupyter)

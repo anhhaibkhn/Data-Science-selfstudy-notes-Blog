@@ -52,7 +52,7 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Chapter-4---Preprocessing-and-Pipelines">Chapter 4 - Preprocessing and Pipelines<a class="anchor-link" href="#Chapter-4---Preprocessing-and-Pipelines"> </a></h1><h2 id="4.1-Preprocessing-data">4.1 Preprocessing data<a class="anchor-link" href="#4.1-Preprocessing-data"> </a></h2><p>scikit-learn requirements:</p>
+<h2 id="Preprocessing-data">Preprocessing data<a class="anchor-link" href="#Preprocessing-data"> </a></h2><p>scikit-learn requirements:</p>
 <ul>
 <li>Numeric data</li>
 <li>No missing values</li>
@@ -705,7 +705,7 @@ Standard Deviation of the target array: 15.042007312855555
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.2-Handling-missing-data">4.2 Handling missing data<a class="anchor-link" href="#4.2-Handling-missing-data"> </a></h2><ul>
+<h2 id="Handling-missing-data">Handling missing data<a class="anchor-link" href="#Handling-missing-data"> </a></h2><ul>
 <li>Missing data</li>
 <li>No value for a feature in a particular row</li>
 <li>This can occur because:<ul>
@@ -929,7 +929,7 @@ Standard Deviation of the target array: 15.042007312855555
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.3-Centering-and-scaling">4.3 Centering and scaling<a class="anchor-link" href="#4.3-Centering-and-scaling"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/scale1.png" alt=""></p>
+<h2 id="Centering-and-scaling">Centering and scaling<a class="anchor-link" href="#Centering-and-scaling"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/scale1.png" alt=""></p>
 <h3 id="Why-scale-our-data?">Why scale our data?<a class="anchor-link" href="#Why-scale-our-data?"> </a></h3><ul>
 <li>Many models use some form of distance to inform them</li>
 <li>Features on larger scales can disproportionately influence the model</li>
@@ -1100,7 +1100,7 @@ Standard Deviation of the target array: 15.042007312855555
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.4-Evaluating-multiple-models">4.4 Evaluating multiple models<a class="anchor-link" href="#4.4-Evaluating-multiple-models"> </a></h2><p>Different models for different problems</p>
+<h2 id="Evaluating-multiple-models">Evaluating multiple models<a class="anchor-link" href="#Evaluating-multiple-models"> </a></h2><p>Different models for different problems</p>
 <h3 id="Some-guiding-principles">Some guiding principles<a class="anchor-link" href="#Some-guiding-principles"> </a></h3><ul>
 <li><p>Size of the dataset</p>
 <ul>
@@ -1149,7 +1149,6 @@ Standard Deviation of the target array: 15.042007312855555
 </li>
 <li>Best to scale our data before evaluating models</li>
 </ul>
-<p>&lt;/br&gt;</p>
 <h3 id="Evaluating-classification-models">Evaluating classification models<a class="anchor-link" href="#Evaluating-classification-models"> </a></h3><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">StandardScaler</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span><span class="p">,</span> <span class="n">KFold</span><span class="p">,</span> <span class="n">train_test_split</span>
@@ -1164,7 +1163,6 @@ Standard Deviation of the target array: 15.042007312855555
 <span class="n">X_train_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 <span class="n">X_test_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
 </pre></div>
-<p>&lt;/br&gt;</p>
 <h3 id="Evaluating-classification-models">Evaluating classification models<a class="anchor-link" href="#Evaluating-classification-models"> </a></h3><div class="highlight"><pre><span></span><span class="n">models</span> <span class="o">=</span> <span class="p">{</span>  
             <span class="s2">&quot;Logistic Regression&quot;</span><span class="p">:</span> <span class="n">LogisticRegression</span><span class="p">(),</span>
             <span class="s2">&quot;KNN&quot;</span><span class="p">:</span> <span class="n">KNeighborsClassifier</span><span class="p">(),</span>
@@ -1377,8 +1375,7 @@ Standard Deviation of the target array: 15.042007312855555
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.5-Congratulations">4.5 Congratulations<a class="anchor-link" href="#4.5-Congratulations"> </a></h2><p>What you've covered:</p>
-<ul>
+<h2 id="What-you've-covered">What you've covered<a class="anchor-link" href="#What-you've-covered"> </a></h2><ul>
 <li>Using supervised learning techniques to build predictive models</li>
 <li>For both regression and classi,cation problems</li>
 <li>Underfitting and overfittng</li>

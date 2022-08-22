@@ -28,7 +28,7 @@ layout: notebook
         
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.-List-Darwin's-bibliography.">1. List Darwin's bibliography.<a class="anchor-link" href="#1.-List-Darwin's-bibliography."> </a></h2><p>
+<h2 id="List-Darwin's-bibliography.">List Darwin's bibliography.<a class="anchor-link" href="#List-Darwin's-bibliography."> </a></h2><p>
 Retrieve a list of all text files (*.txt) present in the datasets/ folder using <strong>glob.glob()</strong>. Store them in files.
 Sort files alphabetically using the sort() method.</p><p><img src="https://assets.datacamp.com/production/project_607/img/CharlesDarwin.jpg" alt="Charles Darwin" width="300px"></p>
 <p>Charles Darwin is one of the few universal figures of science. His most renowned work is without a doubt his "<em>On the Origin of Species</em>" published in 1859 which introduced the concept of natural selection. But Darwin wrote many other books on a wide range of topics, including geology, plants or his personal life. In this notebook, we will automatically detect how closely related his books are to each other.</p>
@@ -79,7 +79,7 @@ Sort files alphabetically using the sort() method.</p><p><img src="https://asset
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.-Load-the-contents-of-each-book-into-Python">2. Load the contents of each book into Python<a class="anchor-link" href="#2.-Load-the-contents-of-each-book-into-Python"> </a></h2><p>As a first step, we need to load the content of these books into Python and do some basic pre-processing to facilitate the downstream analyses. We call such a collection of texts <strong>a corpus</strong>. We will also store the titles for these books for future reference and print their respective length to get a gauge for their contents.</p>
+<h2 id="Load-the-contents-of-each-book-into-Python">Load the contents of each book into Python<a class="anchor-link" href="#Load-the-contents-of-each-book-into-Python"> </a></h2><p>As a first step, we need to load the content of these books into Python and do some basic pre-processing to facilitate the downstream analyses. We call such a collection of texts <strong>a corpus</strong>. We will also store the titles for these books for future reference and print their respective length to get a gauge for their contents.</p>
 </div>
 </div>
 </div>
@@ -140,7 +140,7 @@ Sort files alphabetically using the sort() method.</p><p><img src="https://asset
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.-Find-&quot;On-the-Origin-of-Species&quot;">3. Find "On the Origin of Species"<a class="anchor-link" href="#3.-Find-&quot;On-the-Origin-of-Species&quot;"> </a></h2><p>For the next parts of this analysis, we will often check the results returned by our method for a given book. For consistency, we will refer to Darwin's most famous book: "<em>On the Origin of Species</em>." Let's find to which index this book is associated.</p>
+<h2 id="Find-&quot;On-the-Origin-of-Species&quot;">Find "On the Origin of Species"<a class="anchor-link" href="#Find-&quot;On-the-Origin-of-Species&quot;"> </a></h2><p>For the next parts of this analysis, we will often check the results returned by our method for a given book. For consistency, we will refer to Darwin's most famous book: "<em>On the Origin of Species</em>." Let's find to which index this book is associated.</p>
 </div>
 </div>
 </div>
@@ -185,7 +185,7 @@ Sort files alphabetically using the sort() method.</p><p><img src="https://asset
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.-Tokenize-the-corpus">4. Tokenize the corpus<a class="anchor-link" href="#4.-Tokenize-the-corpus"> </a></h2><p>As a next step, we need to transform the corpus into a format that is easier to deal with for the downstream analyses. We will tokenize our corpus, i.e., transform each text into a list of the individual words (called tokens) it is made of. To check the output of our process, we will print the first 20 tokens of "<em>On the Origin of Species</em>".</p>
+<h2 id="Tokenize-the-corpus">Tokenize the corpus<a class="anchor-link" href="#Tokenize-the-corpus"> </a></h2><p>As a next step, we need to transform the corpus into a format that is easier to deal with for the downstream analyses. We will tokenize our corpus, i.e., transform each text into a list of the individual words (called tokens) it is made of. To check the output of our process, we will print the first 20 tokens of "<em>On the Origin of Species</em>".</p>
 </div>
 </div>
 </div>
@@ -235,7 +235,7 @@ Sort files alphabetically using the sort() method.</p><p><img src="https://asset
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="5.-Stemming-of-the-tokenized-corpus">5. Stemming of the tokenized corpus<a class="anchor-link" href="#5.-Stemming-of-the-tokenized-corpus"> </a></h2><p>If you have read <em>On the Origin of Species</em>, you will have noticed that Charles Darwin can use different words to refer to a similar concept. For example, the concept of selection can be described by words such as <em>selection</em>, <em>selective</em>, <em>select</em> or <em>selects</em>. This will dilute the weight given to this concept in the book and potentially bias the results of the analysis.</p>
+<h2 id="Stemming-of-the-tokenized-corpus">Stemming of the tokenized corpus<a class="anchor-link" href="#Stemming-of-the-tokenized-corpus"> </a></h2><p>If you have read <em>On the Origin of Species</em>, you will have noticed that Charles Darwin can use different words to refer to a similar concept. For example, the concept of selection can be described by words such as <em>selection</em>, <em>selective</em>, <em>select</em> or <em>selects</em>. This will dilute the weight given to this concept in the book and potentially bias the results of the analysis.</p>
 <p>To solve this issue, it is a common practice to use a <strong>stemming process</strong>, which will group together the inflected forms of a word so they can be analysed as a single item: <strong>the stem</strong>. In our <em>On the Origin of Species</em> example, the words related to the concept of selection would be gathered under the <em>select</em> stem.</p>
 <p>As we are analysing 20 full books, the stemming algorithm can take several minutes to run and, in order to make the process faster, we will directly load the final results from a pickle file and review the method used to generate it.</p>
 </div>
@@ -290,7 +290,7 @@ NotebookApp.rate_limit_window=3.0 (secs)
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="6.-Building-a-bag-of-words-model">6. Building a bag-of-words model<a class="anchor-link" href="#6.-Building-a-bag-of-words-model"> </a></h2><p>Now that we have transformed the texts into stemmed tokens, we need to build models that will be useable by downstream algorithms.</p>
+<h2 id="Building-a-bag-of-words-model">Building a bag-of-words model<a class="anchor-link" href="#Building-a-bag-of-words-model"> </a></h2><p>Now that we have transformed the texts into stemmed tokens, we need to build models that will be useable by downstream algorithms.</p>
 <p>First, we need to will create a universe of all words contained in our corpus of Charles Darwin's books, which we call <em>a dictionary</em>. Then, using the stemmed tokens and the dictionary, we will create <strong>bag-of-words models</strong> (BoW) of each of our texts. The BoW models will represent our books as a list of all uniques tokens they contain associated with their respective number of occurrences. </p>
 <p>To better understand the structure of such a model, we will print the five first elements of one of the "<em>On the Origin of Species</em>" BoW model.</p>
 </div>
@@ -325,7 +325,7 @@ NotebookApp.rate_limit_window=3.0 (secs)
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="7.-The-most-common-words-of-a-given-book">7. The most common words of a given book<a class="anchor-link" href="#7.-The-most-common-words-of-a-given-book"> </a></h2><p>The results returned by the bag-of-words model is certainly easy to use for a computer but hard to interpret for a human. It is not straightforward to understand which stemmed tokens are present in a given book from Charles Darwin, and how many occurrences we can find.</p>
+<h2 id="The-most-common-words-of-a-given-book">The most common words of a given book<a class="anchor-link" href="#The-most-common-words-of-a-given-book"> </a></h2><p>The results returned by the bag-of-words model is certainly easy to use for a computer but hard to interpret for a human. It is not straightforward to understand which stemmed tokens are present in a given book from Charles Darwin, and how many occurrences we can find.</p>
 <p>In order to better understand how the model has been generated and visualize its content, we will transform it into a DataFrame and display the 10 most common stems for the book "<em>On the Origin of Species</em>".</p>
 </div>
 </div>
@@ -391,7 +391,7 @@ NotebookApp.rate_limit_window=3.0 (secs)
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="8.-Build-a-tf-idf-model">8. Build a tf-idf model<a class="anchor-link" href="#8.-Build-a-tf-idf-model"> </a></h2><p>If it wasn't for the presence of the stem "<em>speci</em>", we would have a hard time to guess this BoW model comes from the <em>On the Origin of Species</em> book. The most recurring words are, apart from few exceptions, very common and unlikely to carry any information peculiar to the given book. We need to use an additional step in order to determine which tokens are the most specific to a book.</p>
+<h2 id="Build-a-tf-idf-model">Build a tf-idf model<a class="anchor-link" href="#Build-a-tf-idf-model"> </a></h2><p>If it wasn't for the presence of the stem "<em>speci</em>", we would have a hard time to guess this BoW model comes from the <em>On the Origin of Species</em> book. The most recurring words are, apart from few exceptions, very common and unlikely to carry any information peculiar to the given book. We need to use an additional step in order to determine which tokens are the most specific to a book.</p>
 <p>To do so, we will use a <strong>tf-idf model</strong> (term frequency–inverse document frequency). This model defines the importance of each word depending on how frequent it is in this text and how infrequent it is in all the other documents. As a result, a high tf-idf score for a word will indicate that this word is specific to this text.</p>
 <p>After computing those scores, we will print the 10 words most specific to the "<em>On the Origin of Species</em>" book (i.e., the 10 words with the highest tf-idf score).</p>
 </div>
@@ -423,7 +423,7 @@ NotebookApp.rate_limit_window=3.0 (secs)
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="9.-The-results-of-the-tf-idf-model">9. The results of the tf-idf model<a class="anchor-link" href="#9.-The-results-of-the-tf-idf-model"> </a></h2><p>Once again, the format of those results is hard to interpret for a human. Therefore, we will transform it into a more readable version and display the 10 most specific words for the "<em>On the Origin of Species</em>" book.</p>
+<h2 id="The-results-of-the-tf-idf-model">The results of the tf-idf model<a class="anchor-link" href="#The-results-of-the-tf-idf-model"> </a></h2><p>Once again, the format of those results is hard to interpret for a human. Therefore, we will transform it into a more readable version and display the 10 most specific words for the "<em>On the Origin of Species</em>" book.</p>
 </div>
 </div>
 </div>
@@ -482,7 +482,7 @@ NotebookApp.rate_limit_window=3.0 (secs)
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="10.-Compute-distance-between-texts">10. Compute distance between texts<a class="anchor-link" href="#10.-Compute-distance-between-texts"> </a></h2><p>The results of the tf-idf algorithm now return stemmed tokens which are specific to each book. We can, for example, see that topics such as selection, breeding or domestication are defining "<em>On the Origin of Species</em>" (and yes, in this book, Charles Darwin talks quite a lot about pigeons too). Now that we have a model associating tokens to how specific they are to each book, we can measure how related to books are between each other.</p>
+<h2 id="Compute-distance-between-texts">Compute distance between texts<a class="anchor-link" href="#Compute-distance-between-texts"> </a></h2><p>The results of the tf-idf algorithm now return stemmed tokens which are specific to each book. We can, for example, see that topics such as selection, breeding or domestication are defining "<em>On the Origin of Species</em>" (and yes, in this book, Charles Darwin talks quite a lot about pigeons too). Now that we have a model associating tokens to how specific they are to each book, we can measure how related to books are between each other.</p>
 <p>To this purpose, we will use a measure of similarity called <strong>cosine similarity</strong> and we will visualize the results as a distance matrix, i.e., a matrix showing all pairwise distances between Darwin's books.</p>
 </div>
 </div>
@@ -1037,7 +1037,7 @@ NotebookApp.rate_limit_window=3.0 (secs)
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="11.-The-book-most-similar-to-&quot;On-the-Origin-of-Species&quot;">11. The book most similar to "On the Origin of Species"<a class="anchor-link" href="#11.-The-book-most-similar-to-&quot;On-the-Origin-of-Species&quot;"> </a></h2><p>We now have a matrix containing all the similarity measures between any pair of books from Charles Darwin! We can now use this matrix to quickly extract the information we need, i.e., the distance between one book and one or several others. </p>
+<h2 id="The-book-most-similar-to-&quot;On-the-Origin-of-Species&quot;">The book most similar to "On the Origin of Species"<a class="anchor-link" href="#The-book-most-similar-to-&quot;On-the-Origin-of-Species&quot;"> </a></h2><p>We now have a matrix containing all the similarity measures between any pair of books from Charles Darwin! We can now use this matrix to quickly extract the information we need, i.e., the distance between one book and one or several others. </p>
 <p>As a first step, we will display which books are the most similar to "<em>On the Origin of Species</em>," more specifically we will produce a bar chart showing all books ranked by how similar they are to Darwin's landmark work.</p>
 </div>
 </div>
@@ -1103,7 +1103,7 @@ NotebookApp.rate_limit_window=3.0 (secs)
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="12.-Which-books-have-similar-content?">12. Which books have similar content?<a class="anchor-link" href="#12.-Which-books-have-similar-content?"> </a></h2><p>This turns out to be extremely useful if we want to determine a given book's most similar work. For example, we have just seen that if you enjoyed "<em>On the Origin of Species</em>," you can read books discussing similar concepts such as "<em>The Variation of Animals and Plants under Domestication</em>" or "<em>The Descent of Man, and Selection in Relation to Sex</em>." If you are familiar with Darwin's work, these suggestions will likely seem natural to you. Indeed, <em>On the Origin of Species</em> has a whole chapter about domestication and <em>The Descent of Man, and Selection in Relation to Sex</em> applies the theory of natural selection to human evolution. Hence, the results make sense.</p>
+<h2 id="Which-books-have-similar-content?">Which books have similar content?<a class="anchor-link" href="#Which-books-have-similar-content?"> </a></h2><p>This turns out to be extremely useful if we want to determine a given book's most similar work. For example, we have just seen that if you enjoyed "<em>On the Origin of Species</em>," you can read books discussing similar concepts such as "<em>The Variation of Animals and Plants under Domestication</em>" or "<em>The Descent of Man, and Selection in Relation to Sex</em>." If you are familiar with Darwin's work, these suggestions will likely seem natural to you. Indeed, <em>On the Origin of Species</em> has a whole chapter about domestication and <em>The Descent of Man, and Selection in Relation to Sex</em> applies the theory of natural selection to human evolution. Hence, the results make sense.</p>
 <p>However, we now want to have a better understanding of the big picture and see how Darwin's books are generally related to each other (in terms of topics discussed). To this purpose, we will represent the whole similarity matrix as a dendrogram, which is a standard tool to display such data. <strong>This last approach will display all the information about book similarities at once.</strong> For example, we can find a book's closest relative but, also, we can visualize which groups of books have similar topics (e.g., the cluster about Charles Darwin personal life with his autobiography and letters). If you are familiar with Darwin's bibliography, the results should not surprise you too much, which indicates the method gives good results. Otherwise, next time you read one of the author's book, you will know which other books to read next in order to learn more about the topics it addressed.</p>
 </div>
 </div>

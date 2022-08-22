@@ -36,7 +36,7 @@ layout: notebook
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.1-Regression-Overview">2.1 Regression Overview<a class="anchor-link" href="#2.1-Regression-Overview"> </a></h2><ul>
+<h2 id="Regression-Overview">Regression Overview<a class="anchor-link" href="#Regression-Overview"> </a></h2><ul>
 <li><p>Common regression metrics</p>
 <ul>
 <li>Root Mean Squared Error (RMSE)</li>
@@ -52,7 +52,7 @@ layout: notebook
 </ul>
 </li>
 </ul>
-<h2 id="2.2-Objective-(loss)-functions-and-base-learners">2.2 Objective (loss) functions and base learners<a class="anchor-link" href="#2.2-Objective-(loss)-functions-and-base-learners"> </a></h2><ul>
+<h2 id="Objective-(loss)-functions-and-base-learners">Objective (loss) functions and base learners<a class="anchor-link" href="#Objective-(loss)-functions-and-base-learners"> </a></h2><ul>
 <li>Objective functions and Why we use them<ul>
 <li>Quantifies how far off a prediction is from the actual result</li>
 <li>Measures the difference between estimated and true values for some collection of data</li>
@@ -297,7 +297,7 @@ RMSE: 28106.463641
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.2.1-Decision-trees-as-base-learners">2.2.1 Decision trees as base learners<a class="anchor-link" href="#2.2.1-Decision-trees-as-base-learners"> </a></h3><p>It's now time to build an XGBoost model to predict house prices - not in Boston, Massachusetts, as you saw in the video, but in Ames, Iowa! This dataset of housing prices has been pre-loaded into a DataFrame called df. If you explore it in the Shell, you'll see that there are a variety of features about the house and its location in the city.</p>
+<h3 id="Decision-trees-as-base-learners">Decision trees as base learners<a class="anchor-link" href="#Decision-trees-as-base-learners"> </a></h3><p>It's now time to build an XGBoost model to predict house prices - not in Boston, Massachusetts, as you saw in the video, but in Ames, Iowa! This dataset of housing prices has been pre-loaded into a DataFrame called df. If you explore it in the Shell, you'll see that there are a variety of features about the house and its location in the city.</p>
 <p>In this exercise, your goal is to use trees as base learners. By default, XGBoost uses trees as base learners, so you don't have to specify that you want to use trees here with booster="gbtree".</p>
 <p>Instructions:</p>
 <ul>
@@ -356,7 +356,7 @@ RMSE: 28106.463641
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.2.2-Linear-base-learners">2.2.2 Linear base learners<a class="anchor-link" href="#2.2.2-Linear-base-learners"> </a></h3><p>Now that you've used trees as base models in XGBoost, let's use the other kind of base model that can be used with XGBoost - a linear learner. This model, although not as commonly used in XGBoost, allows you to create a regularized linear regression using XGBoost's powerful learning API. However, because it's uncommon, you have to use XGBoost's own non-scikit-learn compatible functions to build the model, such as <code>xgb.train()</code>.</p>
+<h3 id="Linear-base-learners">Linear base learners<a class="anchor-link" href="#Linear-base-learners"> </a></h3><p>Now that you've used trees as base models in XGBoost, let's use the other kind of base model that can be used with XGBoost - a linear learner. This model, although not as commonly used in XGBoost, allows you to create a regularized linear regression using XGBoost's powerful learning API. However, because it's uncommon, you have to use XGBoost's own non-scikit-learn compatible functions to build the model, such as <code>xgb.train()</code>.</p>
 <p>In order to do this you must create the parameter dictionary that describes the kind of booster you want to use (similarly to how you created the dictionary in Chapter 1 when you used <code>xgb.cv()</code>). The key-value pair that defines the booster type (base model) you need is <code>"booster":"gblinear"</code>.</p>
 <p>Once you've created the model, you can use the <code>.train()</code> and <code>.predict()</code> methods of the model just like you've done in the past.</p>
 
@@ -409,7 +409,7 @@ RMSE: 28106.463641
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.2.3-Evaluating-model-quality">2.2.3 Evaluating model quality<a class="anchor-link" href="#2.2.3-Evaluating-model-quality"> </a></h3><p>It's now time to begin evaluating model quality.</p>
+<h3 id="Evaluating-model-quality">Evaluating model quality<a class="anchor-link" href="#Evaluating-model-quality"> </a></h3><p>It's now time to begin evaluating model quality.</p>
 <p>Here, you will compare the RMSE and MAE of a cross-validated XGBoost model on the Ames housing data. As in previous exercises, all necessary modules have been pre-loaded and the data is available in the DataFrame df</p>
 <ul>
 <li>Instructions 1/2<ul>
@@ -537,7 +537,7 @@ Name: test-mae-mean, dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.3-Regularization-and-base-learners-in-XGBoost">2.3 Regularization and base learners in XGBoost<a class="anchor-link" href="#2.3-Regularization-and-base-learners-in-XGBoost"> </a></h2><ul>
+<h2 id="Regularization-and-base-learners-in-XGBoost">Regularization and base learners in XGBoost<a class="anchor-link" href="#Regularization-and-base-learners-in-XGBoost"> </a></h2><ul>
 <li>Regularization in XGBoost<ul>
 <li>Regularization is a control on model complexity</li>
 <li>Want models that are both accurate and as simple as possible</li>
@@ -627,7 +627,7 @@ Name: test-mae-mean, dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.3.1-Using-regularization-in-XGBoost">2.3.1 Using regularization in XGBoost<a class="anchor-link" href="#2.3.1-Using-regularization-in-XGBoost"> </a></h3><p>Having seen an example of l1 regularization in the video, you'll now vary the <code>l2 regularization</code> penalty - also known as "lambda",
+<h3 id="Using-regularization-in-XGBoost">Using regularization in XGBoost<a class="anchor-link" href="#Using-regularization-in-XGBoost"> </a></h3><p>Having seen an example of l1 regularization in the video, you'll now vary the <code>l2 regularization</code> penalty - also known as "lambda",
 and see its effect on overall model performance on the Ames housing dataset.</p>
 
 </div>
@@ -697,7 +697,7 @@ and see its effect on overall model performance on the Ames housing dataset.</p>
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.3.2-Visualizing-individual-XGBoost-trees">2.3.2 Visualizing individual XGBoost trees<a class="anchor-link" href="#2.3.2-Visualizing-individual-XGBoost-trees"> </a></h3><p>Now that you've used XGBoost to both build and evaluate regression as well as classification models, you should get a handle on how to visually explore your models. Here, you will visualize individual trees from the fully boosted model that XGBoost creates using the entire housing dataset.<br>
+<h3 id="Visualizing-individual-XGBoost-trees">Visualizing individual XGBoost trees<a class="anchor-link" href="#Visualizing-individual-XGBoost-trees"> </a></h3><p>Now that you've used XGBoost to both build and evaluate regression as well as classification models, you should get a handle on how to visually explore your models. Here, you will visualize individual trees from the fully boosted model that XGBoost creates using the entire housing dataset.<br>
 <br/></p>
 <p>XGBoost has a <code>plot_tree()</code> function that makes this type of visualization easy. Once you train a model using the XGBoost learning API, you can pass it to the <code>plot_tree()</code> function along with the number of trees you want to plot using the num_trees argument.</p>
 
@@ -792,7 +792,7 @@ and see its effect on overall model performance on the Ames housing dataset.</p>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="2.3.3-Visualizing-feature-importances:-What-features-are-most-important-in-my-dataset">2.3.3 Visualizing feature importances: What features are most important in my dataset<a class="anchor-link" href="#2.3.3-Visualizing-feature-importances:-What-features-are-most-important-in-my-dataset"> </a></h3><p>Another way to visualize your XGBoost models is to examine the importance of each feature column in the original dataset within the model.</p>
+<h3 id="Visualizing-feature-importances:-What-features-are-most-important-in-my-dataset">Visualizing feature importances: What features are most important in my dataset<a class="anchor-link" href="#Visualizing-feature-importances:-What-features-are-most-important-in-my-dataset"> </a></h3><p>Another way to visualize your XGBoost models is to examine the importance of each feature column in the original dataset within the model.</p>
 <p>One simple way of doing this involves counting the number of times each feature is split on across all boosting rounds (trees) in the model, and then visualizing the result as a bar graph, with the features ordered according to how many times they appear. XGBoost has a <code>plot_importance()</code> function that allows you to do exactly this, and you'll get a chance to use it in this exercise!</p>
 
 </div>

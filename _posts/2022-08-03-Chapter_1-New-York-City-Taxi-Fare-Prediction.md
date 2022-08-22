@@ -28,7 +28,7 @@ layout: notebook
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.1--Competitions-overview">1.1  Competitions overview<a class="anchor-link" href="#1.1--Competitions-overview"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/competition_overview.png" alt="Competition Overview"></p>
+<h2 id="Competitions-overview">Competitions overview<a class="anchor-link" href="#Competitions-overview"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/competition_overview.png" alt="Competition Overview"></p>
 <ul>
 <li>Explore train and test data</li>
 </ul>
@@ -41,7 +41,7 @@ layout: notebook
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.1.1--Explore-Train-Data">1.1.1  Explore Train Data<a class="anchor-link" href="#1.1.1--Explore-Train-Data"> </a></h3><p>You will work with another Kaggle competition called "Store Item Demand Forecasting Challenge". In this competition, you are given 5 years of store-item sales data, and asked to predict 3 months of sales for 50 different items in 10 different stores.</p>
+<h3 id="Explore-Train-Data">Explore Train Data<a class="anchor-link" href="#Explore-Train-Data"> </a></h3><p>You will work with another Kaggle competition called "Store Item Demand Forecasting Challenge". In this competition, you are given 5 years of store-item sales data, and asked to predict 3 months of sales for 50 different items in 10 different stores.</p>
 <p>To begin, let's explore the train data for this competition. For the faster performance, you will work with a subset of the train data containing only a single month history.</p>
 <p>Your initial goal is to read the input data and take the first look at it.</p>
 <p>Instructions:</p>
@@ -180,7 +180,7 @@ layout: notebook
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.1.2-Explore-test-data">1.1.2 Explore test data<a class="anchor-link" href="#1.1.2-Explore-test-data"> </a></h3><p>Having looked at the train data, let's explore the test data in the "Store Item Demand Forecasting Challenge". Remember, that the test dataset generally contains one column less than the train one.</p>
+<h3 id="Explore-test-data">Explore test data<a class="anchor-link" href="#Explore-test-data"> </a></h3><p>Having looked at the train data, let's explore the test data in the "Store Item Demand Forecasting Challenge". Remember, that the test dataset generally contains one column less than the train one.</p>
 <p>This column, together with the output format, is presented in the sample submission file. Before making any progress in the competition, you should get familiar with the expected output.</p>
 <p>That is why, let's look at the columns of the test dataset and compare it to the train columns. Additionally, let's explore the format of the sample submission. The train DataFrame is available in your worksp</p>
 <p>Instructions:</p>
@@ -306,7 +306,7 @@ Test columns: [&#39;id&#39;, &#39;date&#39;, &#39;store&#39;, &#39;item&#39;]
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.2--Prepare-for-your-first-submission">1.2  Prepare for your first submission<a class="anchor-link" href="#1.2--Prepare-for-your-first-submission"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/submission.png" alt="Competition Submission"></p>
+<h2 id="Prepare-for-your-first-submission">Prepare for your first submission<a class="anchor-link" href="#Prepare-for-your-first-submission"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/submission.png" alt="Competition Submission"></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/taxi_dataset2.png" alt="Competition Dataset"></p>
 
 </div>
@@ -716,7 +716,7 @@ Test columns: [&#39;id&#39;, &#39;date&#39;, &#39;store&#39;, &#39;item&#39;]
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.2.1--Determine-a-problem-type">1.2.1  Determine a problem type<a class="anchor-link" href="#1.2.1--Determine-a-problem-type"> </a></h3><p>You will keep working on the Store Item Demand Forecasting Challenge. Recall that you are given a history of store-item sales data, and asked to predict 3 months of the future sales.</p>
+<h3 id="Determine-a-problem-type">Determine a problem type<a class="anchor-link" href="#Determine-a-problem-type"> </a></h3><p>You will keep working on the Store Item Demand Forecasting Challenge. Recall that you are given a history of store-item sales data, and asked to predict 3 months of the future sales.</p>
 <p>Before building a model, you should determine the problem type you are addressing. The goal of this exercise is to look at the distribution of the target variable, and select the correct problem type you will be building a model for.</p>
 <p>The train DataFrame is already available in your workspace. It has the target variable column called "sales". Also, matplotlib.pyplot is already imported as plt.</p>
 
@@ -767,7 +767,7 @@ Test columns: [&#39;id&#39;, &#39;date&#39;, &#39;store&#39;, &#39;item&#39;]
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.2.2--Train-a-simple-model">1.2.2  Train a simple model<a class="anchor-link" href="#1.2.2--Train-a-simple-model"> </a></h3><p>As you determined, you are dealing with a regression problem. So, now you're ready to build a model for a subsequent submission. But now, instead of building the simplest Linear Regression model as in the slides, let's build an out-of-box Random Forest model.</p>
+<h3 id="Train-a-simple-model">Train a simple model<a class="anchor-link" href="#Train-a-simple-model"> </a></h3><p>As you determined, you are dealing with a regression problem. So, now you're ready to build a model for a subsequent submission. But now, instead of building the simplest Linear Regression model as in the slides, let's build an out-of-box Random Forest model.</p>
 <p>You will use the RandomForestRegressor class from the scikit-learn library.</p>
 <p>Your objective is to train a Random Forest model with default parameters on the "store" and "item" features.</p>
 <p>Instructions:</p>
@@ -823,7 +823,7 @@ Test columns: [&#39;id&#39;, &#39;date&#39;, &#39;store&#39;, &#39;item&#39;]
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.2.3-Prepare-a-submission">1.2.3 Prepare a submission<a class="anchor-link" href="#1.2.3-Prepare-a-submission"> </a></h3><p>You've already built a model on the training data from the Kaggle Store Item Demand Forecasting Challenge. Now, it's time to make predictions on the test data and create a submission file in the specified format.</p>
+<h3 id="Prepare-a-submission">Prepare a submission<a class="anchor-link" href="#Prepare-a-submission"> </a></h3><p>You've already built a model on the training data from the Kaggle Store Item Demand Forecasting Challenge. Now, it's time to make predictions on the test data and create a submission file in the specified format.</p>
 <p>Your goal is to read the test data, make predictions, and save these in the format specified in the "sample_submission.csv" file. The rf object you created in the previous exercise is available in your workspace.</p>
 <p>Note that starting from now and for the rest of the course, pandas library will be always imported for you and could be accessed as pd.</p>
 <p>Instructions:</p>
@@ -952,13 +952,13 @@ Test columns: [&#39;id&#39;, &#39;date&#39;, &#39;store&#39;, &#39;item&#39;]
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.3--Public-vs-Private-Leaderboard">1.3  Public vs Private Leaderboard<a class="anchor-link" href="#1.3--Public-vs-Private-Leaderboard"> </a></h2>
+<h2 id="Public-vs-Private-Leaderboard">Public vs Private Leaderboard<a class="anchor-link" href="#Public-vs-Private-Leaderboard"> </a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.3.1-Public-vs-Private-Leaderboard">1.3.1 Public vs Private Leaderboard<a class="anchor-link" href="#1.3.1-Public-vs-Private-Leaderboard"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/competition_metrics.png" alt="Competition metrics"></p>
+<h3 id="Public-vs-Private-Leaderboard">Public vs Private Leaderboard<a class="anchor-link" href="#Public-vs-Private-Leaderboard"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/competition_metrics.png" alt="Competition metrics"></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images//test_split.png" alt="Test Split"></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/leaderboards.png" alt="Leaders Board"></p>
 <p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/overfitting.png" alt="Over Fitting"></p>
@@ -1084,7 +1084,7 @@ Test columns: [&#39;id&#39;, &#39;date&#39;, &#39;store&#39;, &#39;item&#39;]
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.3.2-Train-XGBoost-models">1.3.2 Train XGBoost models<a class="anchor-link" href="#1.3.2-Train-XGBoost-models"> </a></h3><p>Every Machine Learning method could potentially overfit. You will see it on this example with XGBoost. Again, you are working with the Store Item Demand Forecasting Challenge. The train DataFrame is available in your workspace.</p>
+<h3 id="Train-XGBoost-models">Train XGBoost models<a class="anchor-link" href="#Train-XGBoost-models"> </a></h3><p>Every Machine Learning method could potentially overfit. You will see it on this example with XGBoost. Again, you are working with the Store Item Demand Forecasting Challenge. The train DataFrame is available in your workspace.</p>
 <p>Firstly, let's train multiple XGBoost models with different sets of hyperparameters using XGBoost's learning API. The single hyperparameter you will change is:</p>
 <p>max_depth - maximum depth of a tree. Increasing this value will make the model more complex and more likely to overfit.
 Instructions:</p>
@@ -1202,7 +1202,7 @@ None
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.3.3-Explore-overfitting-XGBoost">1.3.3 Explore overfitting XGBoost<a class="anchor-link" href="#1.3.3-Explore-overfitting-XGBoost"> </a></h3><p>Having trained 3 XGBoost models with different maximum depths, you will now evaluate their quality. For this purpose, you will measure the quality of each model on both the train data and the test data. As you know by now, the train data is the data models have been trained on. The test data is the next month sales data that models have never seen before.</p>
+<h3 id="Explore-overfitting-XGBoost">Explore overfitting XGBoost<a class="anchor-link" href="#Explore-overfitting-XGBoost"> </a></h3><p>Having trained 3 XGBoost models with different maximum depths, you will now evaluate their quality. For this purpose, you will measure the quality of each model on both the train data and the test data. As you know by now, the train data is the data models have been trained on. The test data is the next month sales data that models have never seen before.</p>
 <p>The goal of this exercise is to determine whether any of the models trained is overfitting. To measure the quality of the models you will use Mean Squared Error (MSE). It's available in sklearn.metrics as mean_squared_error() function that takes two arguments: true values and predicted values.</p>
 <p>train and test DataFrames together with 3 models trained (xg_depth_2, xg_depth_8, xg_depth_15) are available in your workspace.</p>
 <ul>

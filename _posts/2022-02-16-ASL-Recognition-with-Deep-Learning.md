@@ -28,7 +28,7 @@ layout: notebook
         
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.-American-Sign-Language-(ASL)">1. American Sign Language (ASL)<a class="anchor-link" href="#1.-American-Sign-Language-(ASL)"> </a></h2><p><p>American Sign Language (ASL) is the primary language used by many deaf individuals in North America, and it is also used by hard-of-hearing and hearing individuals.  The language is as rich as spoken languages and employs signs made with the hand, along with facial gestures and bodily postures.</p></p>
+<h2 id="American-Sign-Language-(ASL)">American Sign Language (ASL)<a class="anchor-link" href="#American-Sign-Language-(ASL)"> </a></h2><p><p>American Sign Language (ASL) is the primary language used by many deaf individuals in North America, and it is also used by hard-of-hearing and hearing individuals.  The language is as rich as spoken languages and employs signs made with the hand, along with facial gestures and bodily postures.</p></p>
 <p><p><img src="https://assets.datacamp.com/production/project_509/img/asl.png" alt="american sign language"></p></p>
 <p><p>A lot of recent progress has been made towards developing computer vision systems that translate sign language to spoken language.  This technology  often relies on complex neural network architectures that can detect subtle patterns in streaming video.  However, as a first step, towards understanding how to build a translation system, we can reduce the size of the problem by translating individual letters, instead of sentences.</p></p>
 <p><p><strong>In this notebook</strong>, we will train a convolutional neural network to classify images of American Sign Language (ASL) letters.  After loading, examining, and preprocessing the data, we will train the network and test its performance.</p></p>
@@ -68,7 +68,7 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.-Visualize-the-training-data">2. Visualize the training data<a class="anchor-link" href="#2.-Visualize-the-training-data"> </a></h2><p>Now we'll begin by creating a list of string-valued labels containing the letters that appear in the dataset.  Then, we visualize the first several images in the training data, along with their corresponding labels.</p>
+<h2 id="Visualize-the-training-data">Visualize the training data<a class="anchor-link" href="#Visualize-the-training-data"> </a></h2><p>Now we'll begin by creating a list of string-valued labels containing the letters that appear in the dataset.  Then, we visualize the first several images in the training data, along with their corresponding labels.</p>
 </div>
 </div>
 </div>
@@ -116,7 +116,7 @@ layout: notebook
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.-Examine-the-dataset">3. Examine the dataset<a class="anchor-link" href="#3.-Examine-the-dataset"> </a></h2><p>Let's examine how many images of each letter can be found in the dataset.</p>
+<h2 id="Examine-the-dataset">Examine the dataset<a class="anchor-link" href="#Examine-the-dataset"> </a></h2><p>Let's examine how many images of each letter can be found in the dataset.</p>
 <p>Remember that dataset has already been split into training and test sets for you, where <code>x_train</code> and <code>x_test</code> contain the images, and <code>y_train</code> and <code>y_test</code> contain their corresponding labels.</p>
 <p>Each entry in <code>y_train</code> and <code>y_test</code> is one of <code>0</code>, <code>1</code>, or <code>2</code>, corresponding to the letters <code>'A'</code>, <code>'B'</code>, and <code>'C'</code>, respectively.</p>
 <p>We will use the arrays <code>y_train</code> and <code>y_test</code> to verify that both the training and test sets each have roughly equal proportions of each letter.</p>
@@ -176,7 +176,7 @@ Test set:
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.-One-hot-encode-the-data">4. One-hot encode the data<a class="anchor-link" href="#4.-One-hot-encode-the-data"> </a></h2><p><p>Currently, our labels for each of the letters are encoded as categorical integers, where <code>'A'</code>, <code>'B'</code> and <code>'C'</code> are encoded as <code>0</code>, <code>1</code>, and <code>2</code>, respectively.  However, recall that Keras models do not accept labels in this format, and we must first one-hot encode the labels before supplying them to a Keras model.</p></p>
+<h2 id="One-hot-encode-the-data">One-hot encode the data<a class="anchor-link" href="#One-hot-encode-the-data"> </a></h2><p><p>Currently, our labels for each of the letters are encoded as categorical integers, where <code>'A'</code>, <code>'B'</code> and <code>'C'</code> are encoded as <code>0</code>, <code>1</code>, and <code>2</code>, respectively.  However, recall that Keras models do not accept labels in this format, and we must first one-hot encode the labels before supplying them to a Keras model.</p></p>
 <p><p>This conversion will turn the one-dimensional array of labels into a two-dimensional array.</p></p>
 <p><p><img src="https://assets.datacamp.com/production/project_509/img/onehot.png" alt="one-hot encoding"></p></p>
 <p><p>Each row in the two-dimensional array of one-hot encoded labels corresponds to a different image.  The row has a <code>1</code> in the column that corresponds to the correct label, and <code>0</code> elsewhere.  </p></p>
@@ -214,7 +214,7 @@ Test set:
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="5.-Define-the-model">5. Define the model<a class="anchor-link" href="#5.-Define-the-model"> </a></h2><p>Now it's time to define a convolutional neural network to classify the data.</p>
+<h2 id="Define-the-model">Define the model<a class="anchor-link" href="#Define-the-model"> </a></h2><p>Now it's time to define a convolutional neural network to classify the data.</p>
 <p>This network accepts an image of an American Sign Language letter as input.  The output layer returns the network's predicted probabilities that the image belongs in each category.</p>
 </div>
 </div>
@@ -289,7 +289,7 @@ _________________________________________________________________
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="6.-Compile-the-model">6. Compile the model<a class="anchor-link" href="#6.-Compile-the-model"> </a></h2><p>After we have defined a neural network in Keras, the next step is to compile it! </p>
+<h2 id="Compile-the-model">Compile the model<a class="anchor-link" href="#Compile-the-model"> </a></h2><p>After we have defined a neural network in Keras, the next step is to compile it! </p>
 </div>
 </div>
 </div>
@@ -314,7 +314,7 @@ _________________________________________________________________
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="7.-Train-the-model">7. Train the model<a class="anchor-link" href="#7.-Train-the-model"> </a></h2><p>Once we have compiled the model, we're ready to fit it to the training data.</p>
+<h2 id="Train-the-model">Train the model<a class="anchor-link" href="#Train-the-model"> </a></h2><p>Once we have compiled the model, we're ready to fit it to the training data.</p>
 </div>
 </div>
 </div>
@@ -358,7 +358,7 @@ Epoch 2/2
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="8.-Test-the-model">8. Test the model<a class="anchor-link" href="#8.-Test-the-model"> </a></h2><p>To evaluate the model, we'll use the test dataset.  This will tell us how the network performs when classifying images it has never seen before!</p>
+<h2 id="Test-the-model">Test the model<a class="anchor-link" href="#Test-the-model"> </a></h2><p>To evaluate the model, we'll use the test dataset.  This will tell us how the network performs when classifying images it has never seen before!</p>
 <p>If the classification accuracy on the test dataset is similar to the training dataset, this is a good sign that the model did not overfit to the training data.  </p>
 </div>
 </div>
@@ -399,7 +399,7 @@ Epoch 2/2
 
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="9.-Visualize-mistakes">9. Visualize mistakes<a class="anchor-link" href="#9.-Visualize-mistakes"> </a></h2><p>Hooray!  Our network gets very high accuracy on the test set!  </p>
+<h2 id="Visualize-mistakes">Visualize mistakes<a class="anchor-link" href="#Visualize-mistakes"> </a></h2><p>Hooray!  Our network gets very high accuracy on the test set!  </p>
 <p>The final step is to take a look at the images that were incorrectly classified by the model.  Do any of the mislabeled images look relatively difficult to classify, even to the human eye?  </p>
 <p>Sometimes, it's possible to review the images to discover special characteristics that are confusing to the model.  However, it is also often the case that it's hard to interpret what the model had in mind!</p>
 </div>
