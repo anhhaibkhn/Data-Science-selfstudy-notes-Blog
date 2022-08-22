@@ -19,15 +19,39 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebSite","description":"A collection of jupyter notebooks and datasets for practicing Data Science skills.","headline":"About Me","name":"Self-study Data Science Projects notes Blog","url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/about/"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://unpkg.com/@primer/css@17.3.0/dist/primer.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+
+    var i = 0, j = 0, k = 0;
+
+    document.querySelectorAll('h2, h3, h4').forEach((heading) => {
+
+        if (heading.localName == 'h2') {
+            i++; j = 0; k = 0;
+            heading.setAttribute('data-before', `${i}. `)
+        }
+        if (heading.localName == 'h3') {
+            j++; k = 0;
+            heading.setAttribute('data-before', `${i}.${j}. `)
+        }
+        if (heading.localName == 'h4') {
+            k++;
+            heading.setAttribute('data-before', `${i}.${j}.${k}. `)
+        }
+    });
+});
+</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" integrity="sha512-J8je2SgrCzA7hNBeiCJiA6oETHTTdp3We3EriOgJp6POycGLcDXj5dSwWlAPQcYGeaQ4N3uf30aOg/Nt5pxW2g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" integrity="sha512-1kNZVA50gKlorLAWU83+SdOAUwABzfFFQ4WuOAZTeS/UhNhnm9zU7rDv/Q5NEzSnr5u2L6uhR/+8icjjmHjSnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" integrity="sha512-CzIEOUs11SQ7tekLhEe5gil9kDip4RTJZVf7pSjlxOdVaYYHEcQflhunPz2Q/onNC4slL9jpKjvNgzPAAxEpew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         renderMathInElement( document.body, {
+        globalGroup: true,
         delimiters: [
             {left: "$$", right: "$$", display: true},
             {left: "[%", right: "%]", display: true},
@@ -67,6 +91,7 @@ window.onload = wrap_img;
     elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
     });
 </script>
+
 </head>
 <body><header class="site-header">
 
@@ -85,44 +110,33 @@ window.onload = wrap_img;
 </header>
 <main class="page-content" aria-label="Content">
       <div class="wrapper">
-        <article class="post">
+        <p><img style="float: left;margin:5px 20px 5px 1px" src="/Data-Science-selfstudy-notes-Blog/images/kuma_nyako.jpg" width="200px" alt="Image Source: いがらしゆり-igarashi yuri" /></p>
 
-  <header class="post-header">
-    <h1 class="post-title">About Me</h1>
-  </header>
-
-  <div class="post-content">
-    <p><img style="float: left;margin:5px 20px 5px 1px" src="/Data-Science-selfstudy-notes-Blog/images/kuma_nyako.jpg" width="200px" alt="Image Source: いがらしゆり-igarashi yuri" /></p>
-
-<p>Hi! I am Hai Nguyen (o￣∇￣)ノ♪.</p>
-
-<p style="text-align: justify"> 
+<p style="text-align: justify; margin-left: 220px;font-size: 18px;"> 
+Hi! I am Hai Nguyen (o￣∇￣)ノ♪. 
+<br />
 I came from Bac Ninh in Vietnam. In 2014, I graduated from Hanoi University of Science and Technology (<a href="https://en.hust.edu.vn/" target="_blank">HUST</a>) majoring in Electronics and Telecommunications. I had spent 5 years working in several industrial fields (Embedded System Software, Factory Automation, Database) in both Vietnam and Japan. In 2019, I decided to pursue my graduate study at Ritsumeikan University. In 2021, I got my Master's Degree from Ritsumeikan majoring in <a href="http://en.ritsumei.ac.jp/gsise/" target="_blank">Advance Information and Science Engineering</a>.　
-(｡・∀・)ﾖﾛｼｸ♪　</p>
+</p>
 
-<p style="text-align: justify"> 
-Currently, I am working as a python developer in the Research Department of (<a href="https://www.ics-p.net/" target="_blank"><strong>ICS Partners</strong></a>), which is located in Kyoto Research Park (<a href="http://www.krp.co.jp/" target="_blank"><strong>KRP</strong></a>).
-My role is to apply machine learning &amp; NLP algorithms to develop Computer Vision Web APIs for building Robotic Process Automation (RPA) products.（￣～￣）ξ</p>
+<p style="text-align: justify; margin-left: 220px;font-size: 18px;"> 
+Currently, I am working as a python developer in the Research Department of <a href="https://www.ics-p.net/" target="_blank"><strong>ICS Partners</strong></a>, which is located in Kyoto Research Park (<a href="http://www.krp.co.jp/" target="_blank"><strong>KRP</strong></a>).
+My role is to apply machine learning &amp; NLP algorithms to develop Computer Vision Web APIs for building Robotic Process Automation (RPA) products.
 
-<p style="text-align: justify"> 
-My research interests cover the following topics Machine Learning, Deep Learning, Natural Language Processing, Data Science and OpenCV-OCR.　(*・ω・)ゞ⌒☆　</p>
+My research interests cover the following topics Machine Learning, Deep Learning, Natural Language Processing, Data Science and OpenCV-OCR.</p>
 
-<p style="text-align: justify"> 
-In my spare time, I enjoy playing badminton, gardening, hiking, camping, and studying new languages. Aside from my mother tongue (Vietnamese), I use Japanese for daily working communications and use my broken English (￣▽￣；) to talk to my wife at home. In the future, I wish to learn German &amp; Chinese out of my own interests. Besides, some Tagalog should also come in handy to communicate with my wife's family.</p>
+<p style="text-align: justify; margin-left: 220px;font-size: 18px;"> 
+In my spare time, I enjoy playing badminton, gardening, hiking, camping, and studying new languages. I’m looking to collaborate with other data science enthusiasts. Feel free to follow me on (<a href="https://github.com/anhhaibkhn" target="_blank"><strong>GitHub</strong></a>) or connect with me on <a href="https://www.linkedin.com/in/nguyen-hai-b1ab8042" target="_blank"><strong>LinkedIn</strong></a>.</p>
 
-<p>Feel free to follow me on <a href="https://github.com/anhhaibkhn">GitHub</a> or connect with me on <a href="https://www.linkedin.com/in/nguyen-hai-b1ab8042">LinkedIn</a>.　(ﾉ＾▽＾)ﾉ～～～～～</p>
+<p style="text-align: justify; margin-left: 220px;font-size: 18px;"> 
+This website (powered by <a href="https://github.com/fastai/fastpages" target="_blank"><strong>fastpages</strong></a>) is the memo  of my own self-practices notebooks from Data Science related online courses or books. If you find the blog posts useful, please give the <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog" target="_blank"><strong>GitHub blog repo</strong></a> a star to show your support and share it to others. Thank you! (´･ω･｀)ゞ ｱﾘｶﾞﾄｳ ﾖﾛｼｸ♪. <br />
 
-<p style="text-align: justify"> 
-This website (powered by <a href="https://github.com/fastai/fastpages" target="_blank"><strong>fastpages</strong></a>) is the memo  of my own self-practices notebooks from Data Science related online courses or books. So it may contain some obsolete contents due to the latest updated time of the notebooks. If you find something, or have a question about the contents, just feel free to contact me through <a href="mailto:nguyenngochaibkhn@gmail.com" target="_blank" font-weight="bold"><strong>mail</strong></a> or comment it in each page (comments are linked to my github with <a href="https://utteranc.es/" target="_blank"><strong>utteranc.es</strong></a>)</p>
+<br />
+If you have a question about the contents, just feel free to contact me through <a href="mailto:nguyenngochaibkhn@gmail.com" target="_blank" font-weight="bold"><strong>mail</strong></a> or comment it in each page (comments are linked to my github with <a href="https://utteranc.es/" target="_blank"><strong>utteranc.es</strong></a>)</p>
 
-<p>	ε=┏(*`＞ω&lt;)┛ｼﾞｬｧﾈ </p>
+<p style="margin-left: 220px; text-align: center;"><br />	ε=┏(*`＞ω&lt;)┛ｼﾞｬｧﾈ </p>
 
 <!-- [^1]: See the datails of my experience [cv](UPDATING: /Data-Science-selfstudy-notes-Blog/assets/attach/resume_hainguyen_20220803.pdf) -->
 <!-- [^2]: I also have a companion blog with [vietnamese](UPDATING https://my_vietnamese_blog.com/). -->
-
-  </div>
-
-</article>
 
       </div>
     </main><footer class="site-footer h-card">

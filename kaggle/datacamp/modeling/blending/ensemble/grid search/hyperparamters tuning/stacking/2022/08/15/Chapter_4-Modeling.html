@@ -23,15 +23,39 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hai Nguyen"},"dateModified":"2022-08-15T00:00:00-05:00","datePublished":"2022-08-15T00:00:00-05:00","description":"Modeling - Time to bring everything together and build some models! In this last chapter, you will build a base model before tuning some hyperparameters and improving your results with ensembles. You will then get some final tips and tricks to help you compete more efficiently.","headline":"Winning a Kaggle Competition in Python - Part 4","image":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/winning_kaggle_p4.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/kaggle/datacamp/modeling/blending/ensemble/grid%20search/hyperparamters%20tuning/stacking/2022/08/15/Chapter_4-Modeling.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/kaggle/datacamp/modeling/blending/ensemble/grid%20search/hyperparamters%20tuning/stacking/2022/08/15/Chapter_4-Modeling.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://unpkg.com/@primer/css@17.3.0/dist/primer.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+
+    var i = 0, j = 0, k = 0;
+
+    document.querySelectorAll('h2, h3, h4').forEach((heading) => {
+
+        if (heading.localName == 'h2') {
+            i++; j = 0; k = 0;
+            heading.setAttribute('data-before', `${i}. `)
+        }
+        if (heading.localName == 'h3') {
+            j++; k = 0;
+            heading.setAttribute('data-before', `${i}.${j}. `)
+        }
+        if (heading.localName == 'h4') {
+            k++;
+            heading.setAttribute('data-before', `${i}.${j}.${k}. `)
+        }
+    });
+});
+</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" integrity="sha512-J8je2SgrCzA7hNBeiCJiA6oETHTTdp3We3EriOgJp6POycGLcDXj5dSwWlAPQcYGeaQ4N3uf30aOg/Nt5pxW2g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" integrity="sha512-1kNZVA50gKlorLAWU83+SdOAUwABzfFFQ4WuOAZTeS/UhNhnm9zU7rDv/Q5NEzSnr5u2L6uhR/+8icjjmHjSnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" integrity="sha512-CzIEOUs11SQ7tekLhEe5gil9kDip4RTJZVf7pSjlxOdVaYYHEcQflhunPz2Q/onNC4slL9jpKjvNgzPAAxEpew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         renderMathInElement( document.body, {
+        globalGroup: true,
         delimiters: [
             {left: "$$", right: "$$", display: true},
             {left: "[%", right: "%]", display: true},
@@ -71,8 +95,48 @@ window.onload = wrap_img;
     elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
     });
 </script>
+
 </head>
-<body><header class="site-header">
+<body>
+
+    <main class="page-content" aria-label="Content" style="padding-top: 0;">
+        <div class="Layout">
+    
+      <div class="Layout-sidebar">
+        <div id="toc" class="pt-3 pl-3 sticky">
+          <b><a href="#">Winning a Kaggle Competition in Python - Part 4</a></b>
+          <ol id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Baseline-model">Baseline model </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#Replicate-validation-score">Replicate validation score </a></li>
+<li class="toc-entry toc-h3"><a href="#Baseline-based-on-the-date">Baseline based on the date </a></li>
+<li class="toc-entry toc-h3"><a href="#Baseline-based-on-the-gradient-boosting">Baseline based on the gradient boosting </a></li>
+</ol>
+</li>
+<li class="toc-entry toc-h2"><a href="#Hyperparameter-tuning">Hyperparameter tuning </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#Grid-search">Grid search </a></li>
+<li class="toc-entry toc-h3"><a href="#2D-grid-search">2D grid search </a></li>
+</ol>
+</li>
+<li class="toc-entry toc-h2"><a href="#Model-ensembling">Model ensembling </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#Model-blending">Model blending </a></li>
+<li class="toc-entry toc-h3"><a href="#Model-stacking-I">Model stacking I </a></li>
+<li class="toc-entry toc-h3"><a href="#Model-stacking-II">Model stacking II </a></li>
+</ol>
+</li>
+<li class="toc-entry toc-h2"><a href="#Final-tips">Final tips </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#Testing-Kaggle-forum-ideas">Testing Kaggle forum ideas </a></li>
+<li class="toc-entry toc-h3"><a href="#Select-final-submissions">Select final submissions </a></li>
+<li class="toc-entry toc-h3"><a href="#Final-thoughts">Final thoughts </a></li>
+</ol>
+</li>
+</ol>
+        </div>
+      </div>
+    <div class="Layout-main"><header class="site-header">
 
   <div class="wrapper"><a class="site-title" rel="author" href="/Data-Science-selfstudy-notes-Blog/">Self-study Data Science Projects notes Blog</a><nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
@@ -87,113 +151,77 @@ window.onload = wrap_img;
         <div class="trigger"><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/about/">About Me</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/search/">Search</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/categories/">Tags</a></div>
       </nav></div>
 </header>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Winning a Kaggle Competition in Python - Part 4</h1><p class="page-description">Modeling - Time to bring everything together and build some models! In this last chapter, you will build a base model before tuning some hyperparameters and improving your results with ensembles. You will then get some final tips and tricks to help you compete more efficiently.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-08-15T00:00:00-05:00" itemprop="datePublished">
-        Aug 15, 2022
-      </time>• 
-          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-            <span class="p-author h-card" itemprop="name">Hai Nguyen</span></span>
-       • <span class="read-time" title="Estimated read time">
-    
-    
-      13 min read
-    
-</span></p>
-
-    
-      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
       
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Kaggle">Kaggle</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Datacamp">Datacamp</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Modeling">Modeling</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Blending">Blending</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Ensemble">Ensemble</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Grid Search">Grid Search</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Hyperparamters Tuning">Hyperparamters Tuning</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Stacking">Stacking</a>
         
-      
-      </p>
-    
-
-    
-      
-        <div class="pb-5 d-flex flex-justify-center">
-          <div class="px-2">
+          <div class="pb-5 d-flex flex-wrap flex-justify-start" style="padding-left: 52px">
+            <div class="px-2">
 
     <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/Winning a Kaggle Competition in Python/2022-08-15-Chapter_4 Modeling.ipynb" role="button" target="_blank">
 <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/github.svg" alt="View On GitHub">
     </a>
 </div>
 
-          <div class="px-2">
+            <div class="px-2">
     <a href="https://mybinder.org/v2/gh/anhhaibkhn/Data-Science-selfstudy-notes-Blog/master?filepath=_notebooks%2FWinning+a+Kaggle+Competition+in+Python%2F2022-08-15-Chapter_4+Modeling.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/binder.svg" alt="Open In Binder"/>
     </a>
 </div>
 
-          <div class="px-2">
+            <div class="px-2">
     <a href="https://colab.research.google.com/github/anhhaibkhn/Data-Science-selfstudy-notes-Blog/blob/master/_notebooks/Winning a Kaggle Competition in Python/2022-08-15-Chapter_4 Modeling.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/colab.svg" alt="Open In Colab"/>
     </a>
 </div>
-          <div class="px-2">
-  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fanhhaibkhn%2FData-Science-selfstudy-notes-Blog%2Fblob%2Fmaster%2F_notebooks%2FWinning+a+Kaggle+Competition+in+Python%2F2022-08-15-Chapter_4+Modeling.ipynb" target="_blank">
-      <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
-  </a>
-</div>
+          </div>
+        <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">Winning a Kaggle Competition in Python - Part 4</h1><p class="page-description">Modeling - Time to bring everything together and build some models! In this last chapter, you will build a base model before tuning some hyperparameters and improving your results with ensembles. You will then get some final tips and tricks to help you compete more efficiently.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-08-15T00:00:00-05:00" itemprop="datePublished">
+            Aug 15, 2022
+          </time>• 
+              <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <span class="p-author h-card" itemprop="name">Hai Nguyen</span></span>
+           • <span class="read-time" title="Estimated read time">
+    
+    
+      13 min read
+    
+</span></p>
 
-        </div>
+        
+          <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i>
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Kaggle">Kaggle</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Datacamp">Datacamp</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Modeling">Modeling</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Blending">Blending</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Ensemble">Ensemble</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Grid Search">Grid Search</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Hyperparamters Tuning">Hyperparamters Tuning</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Stacking">Stacking</a>
+            
+          
+          </p>
+        
+
+
       </header>
 
-  <div class="post-content e-content" itemprop="articleBody">
-    <ul id="toc" class="section-nav">
-<li class="toc-entry toc-h2"><a href="#4.1-Baseline-model">4.1 Baseline model </a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#4.1.1-Replicate-validation-score">4.1.1 Replicate validation score </a></li>
-<li class="toc-entry toc-h3"><a href="#4.1.2-Baseline-based-on-the-date">4.1.2 Baseline based on the date </a></li>
-<li class="toc-entry toc-h3"><a href="#4.1.3-Baseline-based-on-the-gradient-boosting">4.1.3 Baseline based on the gradient boosting </a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#4.2-Hyperparameter-tuning">4.2 Hyperparameter tuning </a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#4.2.1-Grid-search">4.2.1 Grid search </a></li>
-<li class="toc-entry toc-h3"><a href="#4.2.2-2D-grid-search">4.2.2 2D grid search </a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#4.3-Model-ensembling">4.3 Model ensembling </a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#4.3.1-Model-blending">4.3.1 Model blending </a></li>
-<li class="toc-entry toc-h3"><a href="#4.3.2-Model-stacking-I">4.3.2 Model stacking I </a></li>
-<li class="toc-entry toc-h3"><a href="#4.3.3-Model-stacking-II">4.3.3 Model stacking II </a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#4.4.-Final-tips">4.4. Final tips </a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#4.4.1-Testing-Kaggle-forum-ideas">4.4.1 Testing Kaggle forum ideas </a></li>
-<li class="toc-entry toc-h3"><a href="#4.4.2-Select-final-submissions">4.4.2 Select final submissions </a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#4.5-Final-thoughts">4.5 Final thoughts </a></li>
-</ul><!--
+      <div class="post-content e-content" itemprop="articleBody">
+        <!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
@@ -212,7 +240,7 @@ window.onload = wrap_img;
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.expand_frame_repr'</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.expand_frame_repr&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -222,31 +250,23 @@ window.onload = wrap_img;
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.1-Baseline-model">
-<a class="anchor" href="#4.1-Baseline-model" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.1 Baseline model<a class="anchor-link" href="#4.1-Baseline-model"> </a>
-</h2>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/modeling_stage.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/base_line1.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/base_line2.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/base_line3.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/base_line4.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/base_line5.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/intermediate_results.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/corralation_validation_strategy.png" alt=""></p>
+<h2 id="Baseline-model">Baseline model<a class="anchor-link" href="#Baseline-model"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/modeling_stage.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/base_line1.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/base_line2.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/base_line3.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/base_line4.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/base_line5.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/intermediate_results.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/corralation_validation_strategy.png" alt="" /></p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.1.1-Replicate-validation-score">
-<a class="anchor" href="#4.1.1-Replicate-validation-score" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.1.1 Replicate validation score<a class="anchor-link" href="#4.1.1-Replicate-validation-score"> </a>
-</h3>
-<p>Replicate validation score (Exercise)</p>
+<h3 id="Replicate-validation-score">Replicate validation score<a class="anchor-link" href="#Replicate-validation-score"> </a></h3><p>Replicate validation score (Exercise)</p>
 <p>You've seen both validation and Public Leaderboard scores in the video. However, the code examples are available only for the test data. To get the validation scores you have to repeat the same process on the holdout set.</p>
 <p>Throughout this chapter, you will work with New York City Taxi competition data. The problem is to predict the fare amount for a taxi ride in New York City. The competition metric is the root mean squared error.</p>
 <p>The first goal is to evaluate the Baseline model on the validation data. You will replicate the simplest Baseline based on the mean of "fare_amount". Recall that as a validation strategy we used a 30% holdout split with validation_train as train and validation_test as holdout DataFrames. Both of them are available in your workspace.</p>
@@ -271,8 +291,8 @@ window.onload = wrap_img;
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
-<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./datasets/taxi_train_chapter_4.csv'</span><span class="p">)</span>
-<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./datasets/taxi_test_chapter_4.csv'</span><span class="p">)</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/taxi_train_chapter_4.csv&#39;</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/taxi_test_chapter_4.csv&#39;</span><span class="p">)</span>
 
 <span class="n">validation_train</span><span class="p">,</span> <span class="n">validation_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
 </pre></div>
@@ -298,14 +318,14 @@ window.onload = wrap_img;
 
 
 <span class="c1"># Calculate the mean fare_amount on the validation_train data</span>
-<span class="n">naive_prediction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">validation_train</span><span class="p">[</span><span class="s1">'fare_amount'</span><span class="p">])</span>
+<span class="n">naive_prediction</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">validation_train</span><span class="p">[</span><span class="s1">&#39;fare_amount&#39;</span><span class="p">])</span>
 
 <span class="c1"># Assign naive prediction to all the holdout observations</span>
-<span class="n">validation_test</span><span class="p">[</span><span class="s1">'pred'</span><span class="p">]</span> <span class="o">=</span> <span class="n">naive_prediction</span>
+<span class="n">validation_test</span><span class="p">[</span><span class="s1">&#39;pred&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">naive_prediction</span>
 
 <span class="c1"># Measure the local RMSE</span>
-<span class="n">rmse</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">validation_test</span><span class="p">[</span><span class="s1">'fare_amount'</span><span class="p">],</span> <span class="n">validation_test</span><span class="p">[</span><span class="s1">'pred'</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'Validation RMSE for Baseline I model: </span><span class="si">{:.3f}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rmse</span><span class="p">))</span>
+<span class="n">rmse</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">validation_test</span><span class="p">[</span><span class="s1">&#39;fare_amount&#39;</span><span class="p">],</span> <span class="n">validation_test</span><span class="p">[</span><span class="s1">&#39;pred&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Validation RMSE for Baseline I model: </span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rmse</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -329,21 +349,16 @@ window.onload = wrap_img;
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>It's exactly the same number you've seen in the slides, well done! So, to avoid overfitting you should fully replicate your models using the validation data. Go forward to create a couple of other baselines!</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.1.2-Baseline-based-on-the-date">
-<a class="anchor" href="#4.1.2-Baseline-based-on-the-date" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.1.2 Baseline based on the date<a class="anchor-link" href="#4.1.2-Baseline-based-on-the-date"> </a>
-</h3>
-<p>Baseline based on the date (Exercise)
+<h3 id="Baseline-based-on-the-date">Baseline based on the date<a class="anchor-link" href="#Baseline-based-on-the-date"> </a></h3><p>Baseline based on the date (Exercise)
 We've already built 3 different baseline models. To get more practice, let's build a couple more. The first model is based on the grouping variables. It's clear that the ride fare could depend on the part of the day. For example, prices could be higher during the rush hours.</p>
 <p>Your goal is to build a baseline model that will assign the average "fare_amount" for the corresponding hour. For now, you will create the model for the whole train data and make predictions for the test dataset.</p>
 <p>The train and test DataFrames are available in your workspace. Moreover, the "pickup_datetime" column in both DataFrames is already converted to a datetime object for you.</p>
@@ -365,12 +380,12 @@ We've already built 3 different baseline models. To get more practice, let's bui
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">[</span><span class="s1">'pickup_datetime'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">'pickup_datetime'</span><span class="p">])</span>
-<span class="n">test</span><span class="p">[</span><span class="s1">'pickup_datetime'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">'pickup_datetime'</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">])</span>
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">])</span>
 
 <span class="c1"># Get pickup hour from the pickup_datetime column</span>
-<span class="n">train</span><span class="p">[</span><span class="s1">'hour'</span><span class="p">]</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">'pickup_datetime'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
-<span class="n">test</span><span class="p">[</span><span class="s1">'hour'</span><span class="p">]</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">'pickup_datetime'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
+<span class="n">train</span><span class="p">[</span><span class="s1">&#39;hour&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;hour&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
 </pre></div>
 
     </div>
@@ -387,13 +402,13 @@ We've already built 3 different baseline models. To get more practice, let's bui
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hour_groups</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'hour'</span><span class="p">)[</span><span class="s1">'fare_amount'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">hour_groups</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;hour&#39;</span><span class="p">)[</span><span class="s1">&#39;fare_amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
 <span class="c1"># Make predictions on the test set</span>
-<span class="n">test</span><span class="p">[</span><span class="s1">'fare_amount'</span><span class="p">]</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">hour</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">hour_groups</span><span class="p">)</span>
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;fare_amount&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">hour</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">hour_groups</span><span class="p">)</span>
 
 <span class="c1"># Write predictions</span>
-<span class="n">test</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span><span class="s1">'fare_amount'</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'hour_mean_sub.csv'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">test</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;fare_amount&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;hour_mean_sub.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -410,22 +425,22 @@ We've already built 3 different baseline models. To get more practice, let's bui
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">[</span><span class="s1">'pickup_datetime'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">'pickup_datetime'</span><span class="p">])</span>
-<span class="n">test</span><span class="p">[</span><span class="s1">'pickup_datetime'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">'pickup_datetime'</span><span class="p">])</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">])</span>
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">])</span>
 
 <span class="n">validation_train</span><span class="p">,</span> <span class="n">validation_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
 
-<span class="n">validation_train</span><span class="p">[</span><span class="s1">'hour'</span><span class="p">]</span> <span class="o">=</span> <span class="n">validation_train</span><span class="p">[</span><span class="s1">'pickup_datetime'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
-<span class="n">validation_test</span><span class="p">[</span><span class="s1">'hour'</span><span class="p">]</span> <span class="o">=</span> <span class="n">validation_test</span><span class="p">[</span><span class="s1">'pickup_datetime'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
+<span class="n">validation_train</span><span class="p">[</span><span class="s1">&#39;hour&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validation_train</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
+<span class="n">validation_test</span><span class="p">[</span><span class="s1">&#39;hour&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validation_test</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
 
-<span class="n">hour_groups_val</span> <span class="o">=</span> <span class="n">validation_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'hour'</span><span class="p">)[</span><span class="s1">'fare_amount'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">hour_groups_val</span> <span class="o">=</span> <span class="n">validation_train</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;hour&#39;</span><span class="p">)[</span><span class="s1">&#39;fare_amount&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 
 <span class="c1"># Make predictions on the test set</span>
-<span class="n">validation_test</span><span class="p">[</span><span class="s1">'pred2'</span><span class="p">]</span> <span class="o">=</span> <span class="n">validation_test</span><span class="o">.</span><span class="n">hour</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">hour_groups_val</span><span class="p">)</span>
+<span class="n">validation_test</span><span class="p">[</span><span class="s1">&#39;pred2&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">validation_test</span><span class="o">.</span><span class="n">hour</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">hour_groups_val</span><span class="p">)</span>
 
 <span class="c1"># Measure the local RMSE</span>
-<span class="n">rmse2</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">validation_test</span><span class="p">[</span><span class="s1">'fare_amount'</span><span class="p">],</span> <span class="n">validation_test</span><span class="p">[</span><span class="s1">'pred2'</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'Validation RMSE for Baseline II model: </span><span class="si">{:.3f}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rmse2</span><span class="p">))</span>
+<span class="n">rmse2</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">validation_test</span><span class="p">[</span><span class="s1">&#39;fare_amount&#39;</span><span class="p">],</span> <span class="n">validation_test</span><span class="p">[</span><span class="s1">&#39;pred2&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Validation RMSE for Baseline II model: </span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rmse2</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -449,13 +464,9 @@ We've already built 3 different baseline models. To get more practice, let's bui
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.1.3-Baseline-based-on-the-gradient-boosting">
-<a class="anchor" href="#4.1.3-Baseline-based-on-the-gradient-boosting" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.1.3 Baseline based on the gradient boosting<a class="anchor-link" href="#4.1.3-Baseline-based-on-the-gradient-boosting"> </a>
-</h3>
-<p>Baseline based on the gradient boosting (Exercise).</p>
+<h3 id="Baseline-based-on-the-gradient-boosting">Baseline based on the gradient boosting<a class="anchor-link" href="#Baseline-based-on-the-gradient-boosting"> </a></h3><p>Baseline based on the gradient boosting (Exercise).</p>
 <p>Let's build a final baseline based on the Random Forest. You've seen a huge score improvement moving from the grouping baseline to the Gradient Boosting in the video. Now, you will use sklearn's Random Forest to further improve this score.</p>
 <p>The goal of this exercise is to take numeric features and train a Random Forest model without any tuning. After that, you could make test predictions and validate the result on the Public Leaderboard. Note that you've already got an "hour" feature which could also be used as an input to the model.</p>
 <p>Instructions:</p>
@@ -478,18 +489,18 @@ We've already built 3 different baseline models. To get more practice, let's bui
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
 
 <span class="c1"># Select only numeric features</span>
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'pickup_longitude'</span><span class="p">,</span> <span class="s1">'pickup_latitude'</span><span class="p">,</span> <span class="s1">'dropoff_longitude'</span><span class="p">,</span>
-            <span class="s1">'dropoff_latitude'</span><span class="p">,</span> <span class="s1">'passenger_count'</span><span class="p">,</span> <span class="s1">'hour'</span><span class="p">]</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pickup_longitude&#39;</span><span class="p">,</span> <span class="s1">&#39;pickup_latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;dropoff_longitude&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dropoff_latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;passenger_count&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">]</span>
 
 <span class="c1"># Train a Random Forest model</span>
 <span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">()</span>
 <span class="n">rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="n">features</span><span class="p">],</span> <span class="n">train</span><span class="o">.</span><span class="n">fare_amount</span><span class="p">)</span>
 
 <span class="c1"># Make predictions on the test data</span>
-<span class="n">test</span><span class="p">[</span><span class="s1">'fare_amount'</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;fare_amount&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
 
 <span class="c1"># Write predictions</span>
-<span class="n">test</span><span class="p">[[</span><span class="s1">'id'</span><span class="p">,</span><span class="s1">'fare_amount'</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">'rf_sub.csv'</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">test</span><span class="p">[[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span><span class="s1">&#39;fare_amount&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="s1">&#39;rf_sub.csv&#39;</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -509,18 +520,18 @@ We've already built 3 different baseline models. To get more practice, let's bui
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
 
 <span class="c1"># Select only numeric features</span>
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'pickup_longitude'</span><span class="p">,</span> <span class="s1">'pickup_latitude'</span><span class="p">,</span> <span class="s1">'dropoff_longitude'</span><span class="p">,</span>
-            <span class="s1">'dropoff_latitude'</span><span class="p">,</span> <span class="s1">'passenger_count'</span><span class="p">,</span> <span class="s1">'hour'</span><span class="p">]</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pickup_longitude&#39;</span><span class="p">,</span> <span class="s1">&#39;pickup_latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;dropoff_longitude&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dropoff_latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;passenger_count&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">]</span>
 
 <span class="c1"># Train a Random Forest model</span>
 <span class="n">rf2</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">()</span>
 <span class="n">rf2</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">validation_train</span><span class="p">[</span><span class="n">features</span><span class="p">],</span> <span class="n">validation_train</span><span class="o">.</span><span class="n">fare_amount</span><span class="p">)</span>
 
-<span class="n">validation_test</span><span class="p">[</span><span class="s1">'pred3'</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">validation_test</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
+<span class="n">validation_test</span><span class="p">[</span><span class="s1">&#39;pred3&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">validation_test</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
 
 <span class="c1"># Measure the local RMSE</span>
-<span class="n">rmse3</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">validation_test</span><span class="p">[</span><span class="s1">'fare_amount'</span><span class="p">],</span> <span class="n">validation_test</span><span class="p">[</span><span class="s1">'pred3'</span><span class="p">]))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'Validation RMSE for Baseline III model: </span><span class="si">{:.3f}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rmse3</span><span class="p">))</span>
+<span class="n">rmse3</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">validation_test</span><span class="p">[</span><span class="s1">&#39;fare_amount&#39;</span><span class="p">],</span> <span class="n">validation_test</span><span class="p">[</span><span class="s1">&#39;pred3&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Validation RMSE for Baseline III model: </span><span class="si">{:.3f}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">rmse3</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -544,37 +555,28 @@ We've already built 3 different baseline models. To get more practice, let's bui
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Congratulations! This final baseline achieves the 1051st place on the Public Leaderboard which is slightly better than the Gradient Boosting from the video. So, now you know how to build fast and simple baseline models to validate your initial pipeline.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.2-Hyperparameter-tuning">
-<a class="anchor" href="#4.2-Hyperparameter-tuning" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2 Hyperparameter tuning<a class="anchor-link" href="#4.2-Hyperparameter-tuning"> </a>
-</h2>
-<p>Once we have the baseline models results, we can start creating new features.</p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/iterations.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/competition_stategy.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tuning1.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tuning2.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tuning3.png" alt=""></p>
+<h2 id="Hyperparameter-tuning">Hyperparameter tuning<a class="anchor-link" href="#Hyperparameter-tuning"> </a></h2><p>Once we have the baseline models results, we can start creating new features.</p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/iterations.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/competition_stategy.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tuning1.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tuning2.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tuning3.png" alt="" /></p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.2.1-Grid-search">
-<a class="anchor" href="#4.2.1-Grid-search" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2.1 Grid search<a class="anchor-link" href="#4.2.1-Grid-search"> </a>
-</h3>
-<p>Grid search (Exercise):
+<h3 id="Grid-search">Grid search<a class="anchor-link" href="#Grid-search"> </a></h3><p>Grid search (Exercise):
 Recall that we've created a baseline Gradient Boosting model in the previous lesson. Your goal now is to find the best max_depth hyperparameter value for this Gradient Boosting model. This hyperparameter limits the number of nodes in each individual tree. You will be using K-fold cross-validation to measure the local performance of the model for each hyperparameter value.</p>
 <p>You're given a function get_cv_score(), which takes the train dataset and dictionary of the model parameters as arguments and returns the overall validation RMSE score over 3-fold cross-validation.</p>
 <p>Instructions:</p>
@@ -612,7 +614,7 @@ Recall that we've created a baseline Gradient Boosting model in the previous les
         <span class="c1"># Make predictions on the test data</span>
         <span class="n">pred</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">cv_test</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
     
-        <span class="n">fold_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">cv_test</span><span class="p">[</span><span class="s1">'fare_amount'</span><span class="p">],</span> <span class="n">pred</span><span class="p">))</span>
+        <span class="n">fold_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">cv_test</span><span class="p">[</span><span class="s1">&#39;fare_amount&#39;</span><span class="p">],</span> <span class="n">pred</span><span class="p">))</span>
         <span class="n">rmse_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fold_score</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rmse_scores</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">rmse_scores</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
@@ -638,7 +640,7 @@ Recall that we've created a baseline Gradient Boosting model in the previous les
 <span class="c1"># For each value in the grid</span>
 <span class="k">for</span> <span class="n">max_depth_candidate</span> <span class="ow">in</span> <span class="n">max_depth_grid</span><span class="p">:</span>
     <span class="c1"># Specify parameters for the model</span>
-    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'max_depth'</span><span class="p">:</span> <span class="n">max_depth_candidate</span><span class="p">}</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="n">max_depth_candidate</span><span class="p">}</span>
 
     <span class="c1"># Calculate validation score for a particular hyperparameter</span>
     <span class="n">validation_score</span> <span class="o">=</span> <span class="n">get_cv_score</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
@@ -669,13 +671,9 @@ Recall that we've created a baseline Gradient Boosting model in the previous les
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.2.2-2D-grid-search">
-<a class="anchor" href="#4.2.2-2D-grid-search" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.2.2 2D grid search<a class="anchor-link" href="#4.2.2-2D-grid-search"> </a>
-</h3>
-<p>2D grid search(Exercise)</p>
+<h3 id="2D-grid-search">2D grid search<a class="anchor-link" href="#2D-grid-search"> </a></h3><p>2D grid search(Exercise)</p>
 <p>The drawback of tuning each hyperparameter independently is a potential dependency between different hyperparameters. The better approach is to try all the possible hyperparameter combinations. However, in such cases, the grid search space is rapidly expanding. For example, if we have 2 parameters with 10 possible values, it will yield 100 experiment runs.</p>
 <p>Your goal is to find the best hyperparameter couple of max_depth and subsample for the Gradient Boosting model. subsample is a fraction of observations to be used for fitting the individual trees.</p>
 <p>You're given a function get_cv_score(), which takes the train dataset and dictionary of the model parameters as arguments and returns the overall validation RMSE score over 3-fold cross-validation.</p>
@@ -705,8 +703,8 @@ Recall that we've created a baseline Gradient Boosting model in the previous les
 
 <span class="c1"># For each couple in the grid</span>
 <span class="k">for</span> <span class="n">max_depth_candidate</span><span class="p">,</span> <span class="n">subsample_candidate</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">max_depth_grid</span><span class="p">,</span> <span class="n">subsample_grid</span><span class="p">):</span>
-    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'max_depth'</span><span class="p">:</span> <span class="n">max_depth_candidate</span><span class="p">,</span>
-              <span class="s1">'subsample'</span><span class="p">:</span> <span class="n">subsample_candidate</span><span class="p">}</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;max_depth&#39;</span><span class="p">:</span> <span class="n">max_depth_candidate</span><span class="p">,</span>
+              <span class="s1">&#39;subsample&#39;</span><span class="p">:</span> <span class="n">subsample_candidate</span><span class="p">}</span>
     <span class="n">validation_score</span> <span class="o">=</span> <span class="n">get_cv_score</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">params</span><span class="p">)</span>
     <span class="c1"># Save the results for each couple</span>
     <span class="n">results</span><span class="p">[(</span><span class="n">max_depth_candidate</span><span class="p">,</span> <span class="n">subsample_candidate</span><span class="p">)]</span> <span class="o">=</span> <span class="n">validation_score</span>   
@@ -775,38 +773,30 @@ Recall that we've created a baseline Gradient Boosting model in the previous les
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.3-Model-ensembling">
-<a class="anchor" href="#4.3-Model-ensembling" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.3 Model ensembling<a class="anchor-link" href="#4.3-Model-ensembling"> </a>
-</h2>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ensemble1.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ensemble2.png" alt=""></p>
+<h2 id="Model-ensembling">Model ensembling<a class="anchor-link" href="#Model-ensembling"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ensemble1.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ensemble2.png" alt="" /></p>
 <p>Blending appoach is to find an average of multiple models predictions.</p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ensemble3.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ensemble4.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ensemble5.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/stacking.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ensemble3.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ensemble4.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/ensemble5.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/stacking.png" alt="" /></p>
 <p>To demonstrate the above 6 steps:</p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/stacking2.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/stacking2.png" alt="" /></p>
 <p>Train 3 models A, B and C on part 1 set</p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/stacking3.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/stacking3.png" alt="" /></p>
 <p>Then use 3 models A, B and C to predict on both the train_validation (part 2) and test sets.</p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/stacking4.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/stacking5.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/stacking6.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/stacking4.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/stacking5.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/stacking6.png" alt="" /></p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.3.1-Model-blending">
-<a class="anchor" href="#4.3.1-Model-blending" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.3.1 Model blending<a class="anchor-link" href="#4.3.1-Model-blending"> </a>
-</h3>
-<p>Model blending (Exercise)
+<h3 id="Model-blending">Model blending<a class="anchor-link" href="#Model-blending"> </a></h3><p>Model blending (Exercise)
 You will start creating model ensembles with a blending technique.</p>
 <p>Your goal is to train 2 different models on the New York City Taxi competition data. Make predictions on the test data and then blend them using a simple arithmetic mean.</p>
 <p>The train and test DataFrames are already available in your workspace. features is a list of columns to be used for training and it is also available in your workspace. The target variable name is "fare_amount".</p>
@@ -831,10 +821,10 @@ You will start creating model ensembles with a blending technique.</p>
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">GradientBoostingRegressor</span><span class="p">,</span> <span class="n">RandomForestRegressor</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> 
 
-<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./datasets/taxi_train_distance.csv'</span><span class="p">)</span>
-<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./datasets/taxi_test_distance.csv'</span><span class="p">)</span>
-<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'pickup_longitude'</span><span class="p">,</span> <span class="s1">'pickup_latitude'</span><span class="p">,</span> <span class="s1">'dropoff_longitude'</span><span class="p">,</span> <span class="s1">'dropoff_latitude'</span><span class="p">,</span> 
-            <span class="s1">'passenger_count'</span><span class="p">,</span> <span class="s1">'distance_km'</span><span class="p">,</span> <span class="s1">'hour'</span><span class="p">]</span>
+<span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/taxi_train_distance.csv&#39;</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/taxi_test_distance.csv&#39;</span><span class="p">)</span>
+<span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pickup_longitude&#39;</span><span class="p">,</span> <span class="s1">&#39;pickup_latitude&#39;</span><span class="p">,</span> <span class="s1">&#39;dropoff_longitude&#39;</span><span class="p">,</span> <span class="s1">&#39;dropoff_latitude&#39;</span><span class="p">,</span> 
+            <span class="s1">&#39;passenger_count&#39;</span><span class="p">,</span> <span class="s1">&#39;distance_km&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">]</span>
 </pre></div>
 
     </div>
@@ -859,12 +849,12 @@ You will start creating model ensembles with a blending technique.</p>
 <span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="n">features</span><span class="p">],</span> <span class="n">train</span><span class="o">.</span><span class="n">fare_amount</span><span class="p">)</span>
 
 <span class="c1"># Make predictions on the test data</span>
-<span class="n">test</span><span class="p">[</span><span class="s1">'gb_pred'</span><span class="p">]</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
-<span class="n">test</span><span class="p">[</span><span class="s1">'rf_pred'</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;gb_pred&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;rf_pred&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
 
 <span class="c1"># Find mean of model predictions</span>
-<span class="n">test</span><span class="p">[</span><span class="s1">'blend'</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">'gb_pred'</span><span class="p">]</span> <span class="o">+</span><span class="n">test</span><span class="p">[</span><span class="s1">'rf_pred'</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">test</span><span class="p">[[</span><span class="s1">'gb_pred'</span><span class="p">,</span> <span class="s1">'rf_pred'</span><span class="p">,</span> <span class="s1">'blend'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;blend&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;gb_pred&#39;</span><span class="p">]</span> <span class="o">+</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;rf_pred&#39;</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">test</span><span class="p">[[</span><span class="s1">&#39;gb_pred&#39;</span><span class="p">,</span> <span class="s1">&#39;rf_pred&#39;</span><span class="p">,</span> <span class="s1">&#39;blend&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -891,21 +881,16 @@ You will start creating model ensembles with a blending technique.</p>
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Blending allows you to get additional score improvements almost for free just by averaging multiple models predictions. Now, let's explore model stacking!</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.3.2-Model-stacking-I">
-<a class="anchor" href="#4.3.2-Model-stacking-I" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.3.2 Model stacking I<a class="anchor-link" href="#4.3.2-Model-stacking-I"> </a>
-</h3>
-<p>Model stacking I (Exercise):
+<h3 id="Model-stacking-I">Model stacking I<a class="anchor-link" href="#Model-stacking-I"> </a></h3><p>Model stacking I (Exercise):
 Now it's time for stacking. To implement the stacking approach, you will follow the 6 steps we've discussed in the previous video:</p>
 <ol>
 <li>Split train data into two parts</li>
@@ -952,8 +937,7 @@ Now it's time for stacking. To implement the stacking approach, you will follow 
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>Make Gradient Boosting and Random Forest predictions on the part_2 data.</li>
@@ -971,13 +955,13 @@ Now it's time for stacking. To implement the stacking approach, you will follow 
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">part_2</span> <span class="o">=</span> <span class="n">part_2</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">part_2</span><span class="p">[</span><span class="s1">'gb_pred'</span><span class="p">]</span> <span class="o">=</span> <span class="n">gb2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">part_2</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
-<span class="n">part_2</span><span class="p">[</span><span class="s1">'rf_pred'</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">part_2</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
+<span class="n">part_2</span><span class="p">[</span><span class="s1">&#39;gb_pred&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gb2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">part_2</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
+<span class="n">part_2</span><span class="p">[</span><span class="s1">&#39;rf_pred&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">part_2</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
 
 <span class="c1"># Make predictions on the test data</span>
 <span class="n">test</span> <span class="o">=</span> <span class="n">test</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">test</span><span class="p">[</span><span class="s1">'gb_pred'</span><span class="p">]</span> <span class="o">=</span> <span class="n">gb2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
-<span class="n">test</span><span class="p">[</span><span class="s1">'rf_pred'</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;gb_pred&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">gb2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;rf_pred&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rf2</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -987,13 +971,9 @@ Now it's time for stacking. To implement the stacking approach, you will follow 
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.3.3-Model-stacking-II">
-<a class="anchor" href="#4.3.3-Model-stacking-II" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.3.3 Model stacking II<a class="anchor-link" href="#4.3.3-Model-stacking-II"> </a>
-</h3>
-<p>OK, what you've done so far in the stacking implementation:</p>
+<h3 id="Model-stacking-II">Model stacking II<a class="anchor-link" href="#Model-stacking-II"> </a></h3><p>OK, what you've done so far in the stacking implementation:</p>
 <ol>
 <li>Split train data into two parts</li>
 <li>Train multiple models on Part 1</li>
@@ -1024,10 +1004,10 @@ Now it's time for stacking. To implement the stacking approach, you will follow 
 <span class="n">lr</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">(</span><span class="n">fit_intercept</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Train 2nd level model on the Part 2 data</span>
-<span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">part_2</span><span class="p">[[</span><span class="s1">'gb_pred'</span><span class="p">,</span> <span class="s1">'rf_pred'</span><span class="p">]],</span> <span class="n">part_2</span><span class="o">.</span><span class="n">fare_amount</span><span class="p">)</span>
+<span class="n">lr</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">part_2</span><span class="p">[[</span><span class="s1">&#39;gb_pred&#39;</span><span class="p">,</span> <span class="s1">&#39;rf_pred&#39;</span><span class="p">]],</span> <span class="n">part_2</span><span class="o">.</span><span class="n">fare_amount</span><span class="p">)</span>
 
 <span class="c1"># Make stacking predictions on the test data</span>
-<span class="n">test</span><span class="p">[</span><span class="s1">'stacking'</span><span class="p">]</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">[[</span><span class="s1">'gb_pred'</span><span class="p">,</span> <span class="s1">'rf_pred'</span><span class="p">]])</span>
+<span class="n">test</span><span class="p">[</span><span class="s1">&#39;stacking&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">lr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">test</span><span class="p">[[</span><span class="s1">&#39;gb_pred&#39;</span><span class="p">,</span> <span class="s1">&#39;rf_pred&#39;</span><span class="p">]])</span>
 
 <span class="c1"># Look at the model coefficients</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">lr</span><span class="o">.</span><span class="n">coef_</span><span class="p">)</span>
@@ -1054,29 +1034,21 @@ Now it's time for stacking. To implement the stacking approach, you will follow 
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Congratulations, now your toolbox contains ensembling techniques! Usually, the 2nd level model is some simple model like Linear or Logistic Regressions. Also, note that you were not using intercept in the Linear Regression just to combine pure model predictions.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.4.-Final-tips">
-<a class="anchor" href="#4.4.-Final-tips" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.4. Final tips<a class="anchor-link" href="#4.4.-Final-tips"> </a>
-</h2>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tip1.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tip2.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tip3.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tip4.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tip5.png" alt=""></p>
-<h3 id="4.4.1-Testing-Kaggle-forum-ideas">
-<a class="anchor" href="#4.4.1-Testing-Kaggle-forum-ideas" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.4.1 Testing Kaggle forum ideas<a class="anchor-link" href="#4.4.1-Testing-Kaggle-forum-ideas"> </a>
-</h3>
-<p>Testing Kaggle forum ideas(Exercise)
+<h2 id="Final-tips">Final tips<a class="anchor-link" href="#Final-tips"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tip1.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tip2.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tip3.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tip4.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tip5.png" alt="" /></p>
+<h3 id="Testing-Kaggle-forum-ideas">Testing Kaggle forum ideas<a class="anchor-link" href="#Testing-Kaggle-forum-ideas"> </a></h3><p>Testing Kaggle forum ideas(Exercise)
 Unfortunately, not all the Forum posts and Kernels are necessarily useful for your model. So instead of blindly incorporating ideas into your pipeline, you should test them first.</p>
 <p>You're given a function get_cv_score(), which takes a train dataset as an argument and returns the overall validation root mean squared error over 3-fold cross-validation. The train DataFrame is already available in your workspace.</p>
 <p>You should try different suggestions from the Kaggle Forum and check whether they improve your validation score.</p>
@@ -1098,9 +1070,9 @@ Unfortunately, not all the Forum posts and Kernels are necessarily useful for yo
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">mean_squared_error</span>
 <span class="k">def</span> <span class="nf">get_cv_score</span><span class="p">(</span><span class="n">train</span><span class="p">):</span>
-    <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">'pickup_longitude'</span><span class="p">,</span> <span class="s1">'pickup_latitude'</span><span class="p">,</span>
-            <span class="s1">'dropoff_longitude'</span><span class="p">,</span> <span class="s1">'dropoff_latitude'</span><span class="p">,</span>
-            <span class="s1">'passenger_count'</span><span class="p">,</span> <span class="s1">'distance_km'</span><span class="p">,</span> <span class="s1">'hour'</span><span class="p">,</span> <span class="s1">'weird_feature'</span><span class="p">]</span>
+    <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;pickup_longitude&#39;</span><span class="p">,</span> <span class="s1">&#39;pickup_latitude&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;dropoff_longitude&#39;</span><span class="p">,</span> <span class="s1">&#39;dropoff_latitude&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;passenger_count&#39;</span><span class="p">,</span> <span class="s1">&#39;distance_km&#39;</span><span class="p">,</span> <span class="s1">&#39;hour&#39;</span><span class="p">,</span> <span class="s1">&#39;weird_feature&#39;</span><span class="p">]</span>
     
     <span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">features</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">train</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
     
@@ -1119,7 +1091,7 @@ Unfortunately, not all the Forum posts and Kernels are necessarily useful for yo
         <span class="c1"># Make predictions on the test data</span>
         <span class="n">pred</span> <span class="o">=</span> <span class="n">gb</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">cv_test</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
     
-        <span class="n">fold_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">cv_test</span><span class="p">[</span><span class="s1">'fare_amount'</span><span class="p">],</span> <span class="n">pred</span><span class="p">))</span>
+        <span class="n">fold_score</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">mean_squared_error</span><span class="p">(</span><span class="n">cv_test</span><span class="p">[</span><span class="s1">&#39;fare_amount&#39;</span><span class="p">],</span> <span class="n">pred</span><span class="p">))</span>
         <span class="n">rmse_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">fold_score</span><span class="p">)</span>
     
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">rmse_scores</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">rmse_scores</span><span class="p">),</span> <span class="mi">5</span><span class="p">)</span>
@@ -1139,13 +1111,13 @@ Unfortunately, not all the Forum posts and Kernels are necessarily useful for yo
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">new_train_1</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'passenger_count'</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">new_train_1</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">&#39;passenger_count&#39;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Compare validation scores</span>
 <span class="n">initial_score</span> <span class="o">=</span> <span class="n">get_cv_score</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
 <span class="n">new_score</span> <span class="o">=</span> <span class="n">get_cv_score</span><span class="p">(</span><span class="n">new_train_1</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">'Initial score is </span><span class="si">{}</span><span class="s1"> and the new score is </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">initial_score</span><span class="p">,</span> <span class="n">new_score</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Initial score is </span><span class="si">{}</span><span class="s1"> and the new score is </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">initial_score</span><span class="p">,</span> <span class="n">new_score</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -1169,8 +1141,7 @@ Unfortunately, not all the Forum posts and Kernels are necessarily useful for yo
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>This first suggestion worked.</p>
 <ul>
@@ -1190,13 +1161,13 @@ Unfortunately, not all the Forum posts and Kernels are necessarily useful for yo
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">new_train_2</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Find sum of pickup latitude and ride distance</span>
-<span class="n">new_train_2</span><span class="p">[</span><span class="s1">'weird_feature'</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_train_2</span><span class="p">[</span><span class="s1">'pickup_latitude'</span><span class="p">]</span> <span class="o">+</span> <span class="n">new_train_2</span><span class="p">[</span><span class="s1">'distance_km'</span><span class="p">]</span>
+<span class="n">new_train_2</span><span class="p">[</span><span class="s1">&#39;weird_feature&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_train_2</span><span class="p">[</span><span class="s1">&#39;pickup_latitude&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">new_train_2</span><span class="p">[</span><span class="s1">&#39;distance_km&#39;</span><span class="p">]</span>
 
 <span class="c1"># Compare validation scores</span>
 <span class="n">initial_score</span> <span class="o">=</span> <span class="n">get_cv_score</span><span class="p">(</span><span class="n">train</span><span class="p">)</span>
 <span class="n">new_score</span> <span class="o">=</span> <span class="n">get_cv_score</span><span class="p">(</span><span class="n">new_train_2</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s1">'Initial score is </span><span class="si">{}</span><span class="s1"> and the new score is </span><span class="si">{}</span><span class="s1">'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">initial_score</span><span class="p">,</span> <span class="n">new_score</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Initial score is </span><span class="si">{}</span><span class="s1"> and the new score is </span><span class="si">{}</span><span class="s1">&#39;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">initial_score</span><span class="p">,</span> <span class="n">new_score</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -1220,33 +1191,24 @@ Unfortunately, not all the Forum posts and Kernels are necessarily useful for yo
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Be aware that not all the ideas shared publicly could work for you! In this particular case, dropping the "passenger_count" feature helped, while finding the sum of pickup latitude and ride distance did not. The last action you perform in any Kaggle competition is selecting final submissions. Go on to practice it!</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.4.2-Select-final-submissions">
-<a class="anchor" href="#4.4.2-Select-final-submissions" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.4.2 Select final submissions<a class="anchor-link" href="#4.4.2-Select-final-submissions"> </a>
-</h3>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/submision_choice.png" alt=""></p>
+<h3 id="Select-final-submissions">Select final submissions<a class="anchor-link" href="#Select-final-submissions"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/submision_choice.png" alt="" /></p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.5-Final-thoughts">
-<a class="anchor" href="#4.5-Final-thoughts" aria-hidden="true"><span class="octicon octicon-link"></span></a>4.5 Final thoughts<a class="anchor-link" href="#4.5-Final-thoughts"> </a>
-</h2>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/summary1.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/summary2.png" alt=""></p>
+<h3 id="Final-thoughts">Final thoughts<a class="anchor-link" href="#Final-thoughts"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/summary1.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/summary2.png" alt="" /></p>
 
 </div>
 </div>
@@ -1255,7 +1217,7 @@ Unfortunately, not all the Forum posts and Kernels are necessarily useful for yo
 
 
 
-  </div><!-- from https://github.com/utterance/utterances -->
+      </div><!-- from https://github.com/utterance/utterances -->
 <script src="https://utteranc.es/client.js"
         repo="anhhaibkhn/Data-Science-selfstudy-notes-Blog"
         issue-term="title"
@@ -1264,10 +1226,7 @@ Unfortunately, not all the Forum posts and Kernels are necessarily useful for yo
         crossorigin="anonymous"
         async>
 </script><a class="u-url" href="/Data-Science-selfstudy-notes-Blog/kaggle/datacamp/modeling/blending/ensemble/grid%20search/hyperparamters%20tuning/stacking/2022/08/15/Chapter_4-Modeling.html" hidden></a>
-</article>
-
-      </div>
-    </main><footer class="site-footer h-card">
+    </article><footer class="site-footer h-card">
   <data class="u-url" href="/Data-Science-selfstudy-notes-Blog/"></data>
 
   <div class="wrapper">
@@ -1293,6 +1252,13 @@ Unfortunately, not all the Forum posts and Kernels are necessarily useful for yo
   </div>
 
 </footer>
-</body>
+</div>
+
+
+</div>
+
+    </main>
+
+  </body>
 
 </html>

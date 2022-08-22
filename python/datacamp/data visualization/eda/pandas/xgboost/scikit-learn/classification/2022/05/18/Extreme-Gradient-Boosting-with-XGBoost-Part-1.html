@@ -23,15 +23,39 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hai Nguyen"},"dateModified":"2022-05-18T00:00:00-05:00","datePublished":"2022-05-18T00:00:00-05:00","description":"Chapter 1 - Classification with XGBoost","headline":"Extreme Gradient Boosting with XGBoost - Part 1 (DataCamp interactive course)","image":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/xgb_part1.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/datacamp/data%20visualization/eda/pandas/xgboost/scikit-learn/classification/2022/05/18/Extreme-Gradient-Boosting-with-XGBoost-Part-1.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/datacamp/data%20visualization/eda/pandas/xgboost/scikit-learn/classification/2022/05/18/Extreme-Gradient-Boosting-with-XGBoost-Part-1.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://unpkg.com/@primer/css@17.3.0/dist/primer.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+
+    var i = 0, j = 0, k = 0;
+
+    document.querySelectorAll('h2, h3, h4').forEach((heading) => {
+
+        if (heading.localName == 'h2') {
+            i++; j = 0; k = 0;
+            heading.setAttribute('data-before', `${i}. `)
+        }
+        if (heading.localName == 'h3') {
+            j++; k = 0;
+            heading.setAttribute('data-before', `${i}.${j}. `)
+        }
+        if (heading.localName == 'h4') {
+            k++;
+            heading.setAttribute('data-before', `${i}.${j}.${k}. `)
+        }
+    });
+});
+</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" integrity="sha512-J8je2SgrCzA7hNBeiCJiA6oETHTTdp3We3EriOgJp6POycGLcDXj5dSwWlAPQcYGeaQ4N3uf30aOg/Nt5pxW2g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" integrity="sha512-1kNZVA50gKlorLAWU83+SdOAUwABzfFFQ4WuOAZTeS/UhNhnm9zU7rDv/Q5NEzSnr5u2L6uhR/+8icjjmHjSnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" integrity="sha512-CzIEOUs11SQ7tekLhEe5gil9kDip4RTJZVf7pSjlxOdVaYYHEcQflhunPz2Q/onNC4slL9jpKjvNgzPAAxEpew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         renderMathInElement( document.body, {
+        globalGroup: true,
         delimiters: [
             {left: "$$", right: "$$", display: true},
             {left: "[%", right: "%]", display: true},
@@ -71,8 +95,40 @@ window.onload = wrap_img;
     elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
     });
 </script>
+
 </head>
-<body><header class="site-header">
+<body>
+
+    <main class="page-content" aria-label="Content" style="padding-top: 0;">
+        <div class="Layout">
+    
+      <div class="Layout-sidebar">
+        <div id="toc" class="pt-3 pl-3 sticky">
+          <b><a href="#">Extreme Gradient Boosting with XGBoost - Part 1 (DataCamp interactive course)</a></b>
+          <ol id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Introduction">Introduction </a></li>
+<li class="toc-entry toc-h2"><a href="#Introducing-XGBosst">Introducing XGBosst </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#XGBoost:-Fit/Predict">XGBoost: Fit/Predict </a></li>
+<li class="toc-entry toc-h3"><a href="#What-is-a-decision-tree?">What is a decision tree? </a></li>
+</ol>
+</li>
+<li class="toc-entry toc-h2"><a href="#What-is-Boosting">What is Boosting </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#Accuracy">Accuracy </a></li>
+<li class="toc-entry toc-h3"><a href="#Measuring-AUC">Measuring AUC </a></li>
+</ol>
+</li>
+<li class="toc-entry toc-h2"><a href="#When-should-I-use-XGBoost?">When should I use XGBoost? </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#When-to-use-XGBoost">When to use XGBoost </a></li>
+<li class="toc-entry toc-h3"><a href="#When-to-NOT-use-XGBoost">When to NOT use XGBoost </a></li>
+</ol>
+</li>
+</ol>
+        </div>
+      </div>
+    <div class="Layout-main"><header class="site-header">
 
   <div class="wrapper"><a class="site-title" rel="author" href="/Data-Science-selfstudy-notes-Blog/">Self-study Data Science Projects notes Blog</a><nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
@@ -87,105 +143,77 @@ window.onload = wrap_img;
         <div class="trigger"><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/about/">About Me</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/search/">Search</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/categories/">Tags</a></div>
       </nav></div>
 </header>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Extreme Gradient Boosting with XGBoost - Part 1 (DataCamp interactive course)</h1><p class="page-description">Chapter 1 - Classification with XGBoost</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-05-18T00:00:00-05:00" itemprop="datePublished">
-        May 18, 2022
-      </time>• 
-          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-            <span class="p-author h-card" itemprop="name">Hai Nguyen</span></span>
-       • <span class="read-time" title="Estimated read time">
-    
-    
-      8 min read
-    
-</span></p>
-
-    
-      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
       
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Python">Python</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Datacamp">Datacamp</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Data Visualization">Data Visualization</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#EDA">EDA</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Pandas">Pandas</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#XGBoost">XGBoost</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#scikit-learn">scikit-learn</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Classification">Classification</a>
         
-      
-      </p>
-    
-
-    
-      
-        <div class="pb-5 d-flex flex-justify-center">
-          <div class="px-2">
+          <div class="pb-5 d-flex flex-wrap flex-justify-start" style="padding-left: 52px">
+            <div class="px-2">
 
     <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/Extreme Gradient Boosting with XGBoost/2022-05-18-Extreme Gradient Boosting with XGBoost-Part 1.ipynb" role="button" target="_blank">
 <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/github.svg" alt="View On GitHub">
     </a>
 </div>
 
-          <div class="px-2">
+            <div class="px-2">
     <a href="https://mybinder.org/v2/gh/anhhaibkhn/Data-Science-selfstudy-notes-Blog/master?filepath=_notebooks%2FExtreme+Gradient+Boosting+with+XGBoost%2F2022-05-18-Extreme+Gradient+Boosting+with+XGBoost-Part+1.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/binder.svg" alt="Open In Binder"/>
     </a>
 </div>
 
-          <div class="px-2">
+            <div class="px-2">
     <a href="https://colab.research.google.com/github/anhhaibkhn/Data-Science-selfstudy-notes-Blog/blob/master/_notebooks/Extreme Gradient Boosting with XGBoost/2022-05-18-Extreme Gradient Boosting with XGBoost-Part 1.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/colab.svg" alt="Open In Colab"/>
     </a>
 </div>
-          <div class="px-2">
-  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fanhhaibkhn%2FData-Science-selfstudy-notes-Blog%2Fblob%2Fmaster%2F_notebooks%2FExtreme+Gradient+Boosting+with+XGBoost%2F2022-05-18-Extreme+Gradient+Boosting+with+XGBoost-Part+1.ipynb" target="_blank">
-      <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
-  </a>
-</div>
+          </div>
+        <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">Extreme Gradient Boosting with XGBoost - Part 1 (DataCamp interactive course)</h1><p class="page-description">Chapter 1 - Classification with XGBoost</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-05-18T00:00:00-05:00" itemprop="datePublished">
+            May 18, 2022
+          </time>• 
+              <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <span class="p-author h-card" itemprop="name">Hai Nguyen</span></span>
+           • <span class="read-time" title="Estimated read time">
+    
+    
+      8 min read
+    
+</span></p>
 
-        </div>
+        
+          <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i>
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Python">Python</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Datacamp">Datacamp</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Data Visualization">Data Visualization</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#EDA">EDA</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Pandas">Pandas</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#XGBoost">XGBoost</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#scikit-learn">scikit-learn</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Classification">Classification</a>
+            
+          
+          </p>
+        
+
+
       </header>
 
-  <div class="post-content e-content" itemprop="articleBody">
-    <ul id="toc" class="section-nav">
-<li class="toc-entry toc-h2"><a href="#1.1-Introduction">1.1 Introduction </a></li>
-<li class="toc-entry toc-h2"><a href="#1.2-Introducing-XGBosst">1.2 Introducing XGBosst </a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#1.2.1-XGBoost:-Fit/Predict">1.2.1 XGBoost: Fit/Predict </a></li>
-<li class="toc-entry toc-h3"><a href="#1.2.2-What-is-a-decision-tree?">1.2.2 What is a decision tree? </a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#1.3-What-is-Boosting">1.3 What is Boosting </a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#1.3.1-Accuracy">1.3.1 Accuracy </a></li>
-<li class="toc-entry toc-h3"><a href="#1.3.2-Measuring-AUC">1.3.2 Measuring AUC </a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#1.4-When-should-I-use-XGBoost?">1.4 When should I use XGBoost? </a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#1.4.1-When-to-use-XGBoost">1.4.1 When to use XGBoost </a></li>
-<li class="toc-entry toc-h3"><a href="#1.4.2-When-to-NOT-use-XGBoost">1.4.2 When to NOT use XGBoost </a></li>
-</ul>
-</li>
-</ul><!--
+      <div class="post-content e-content" itemprop="articleBody">
+        <!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
@@ -194,13 +222,9 @@ window.onload = wrap_img;
 
 <div class="container" id="notebook-container">
         
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.1-Introduction">
-<a class="anchor" href="#1.1-Introduction" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.1 Introduction<a class="anchor-link" href="#1.1-Introduction"> </a>
-</h2>
-<ul>
+<h2 id="Introduction">Introduction<a class="anchor-link" href="#Introduction"> </a></h2><ul>
 <li>Supervised Learning<ul>
 <li>Relies on labeled data</li>
 <li>Have some understanding of past behavior</li>
@@ -225,23 +249,17 @@ window.onload = wrap_img;
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.2-Introducing-XGBosst">
-<a class="anchor" href="#1.2-Introducing-XGBosst" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.2 Introducing XGBosst<a class="anchor-link" href="#1.2-Introducing-XGBosst"> </a>
-</h2>
-<ul>
-<li>
-<p>What is XGBoost? (Extreme Gradient Boosting)</p>
+<h2 id="Introducing-XGBosst">Introducing XGBosst<a class="anchor-link" href="#Introducing-XGBosst"> </a></h2><ul>
+<li><p>What is XGBoost? (Extreme Gradient Boosting)</p>
 <ul>
 <li>Optimized gradient-boosting machine learning library</li>
 <li>Originally written in C++</li>
 <li>Has APIs in several languages: Python, R, Scala, Julia, Java</li>
 </ul>
 </li>
-<li>
-<p>What makes XGBoost so popular?</p>
+<li><p>What makes XGBoost so popular?</p>
 <ul>
 <li>Speed and performance</li>
 <li>Core algorithm is parallelizable</li>
@@ -250,10 +268,7 @@ window.onload = wrap_img;
 </ul>
 </li>
 </ul>
-<h3 id="1.2.1-XGBoost:-Fit/Predict">
-<a class="anchor" href="#1.2.1-XGBoost:-Fit/Predict" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.2.1 XGBoost: Fit/Predict<a class="anchor-link" href="#1.2.1-XGBoost:-Fit/Predict"> </a>
-</h3>
-<p>It's time to create your first XGBoost model! As Sergey showed you in the video, you can use the scikit-learn .fit() / .predict() paradigm that you are already familiar to build your XGBoost models, as the xgboost library has a scikit-learn compatible API!</p>
+<h3 id="XGBoost:-Fit/Predict">XGBoost: Fit/Predict<a class="anchor-link" href="#XGBoost:-Fit/Predict"> </a></h3><p>It's time to create your first XGBoost model! As Sergey showed you in the video, you can use the scikit-learn .fit() / .predict() paradigm that you are already familiar to build your XGBoost models, as the xgboost library has a scikit-learn compatible API!</p>
 <p>Here, you'll be working with churn data. This dataset contains imaginary data from a ride-sharing app with user behaviors over their first month of app usage in a set of imaginary cities as well as whether they used the service 5 months after sign-up.</p>
 <p>Your goal is to use the first month's worth of data to predict whether the app's users will remain users of the service at the 5 month mark. This is a typical setup for a churn prediction problem. To do this, you'll split the data into training and test sets, fit a small xgboost model on the training set, and evaluate its performance on the test set by computing its accuracy.</p>
 <p>Instructions:</p>
@@ -291,7 +306,7 @@ window.onload = wrap_img;
 
 
 <div class="output_text output_subarea output_execute_result">
-<pre>'1.6.1'</pre>
+<pre>&#39;1.6.1&#39;</pre>
 </div>
 
 </div>
@@ -313,8 +328,8 @@ window.onload = wrap_img;
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
 
-<span class="c1"># churn_data = pd.read_csv("datasets/churn.csv") # This dataset is not the one that was used in the course. </span>
-<span class="n">churn_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"datasets/churn_data.csv"</span><span class="p">)</span>
+<span class="c1"># churn_data = pd.read_csv(&quot;datasets/churn.csv&quot;) # This dataset is not the one that was used in the course. </span>
+<span class="n">churn_data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;datasets/churn_data.csv&quot;</span><span class="p">)</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="n">churn_data</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
 <span class="n">churn_data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -330,7 +345,7 @@ window.onload = wrap_img;
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>&lt;class 'pandas.core.frame.DataFrame'&gt;
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 RangeIndex: 50000 entries, 0 to 49999
 Data columns (total 13 columns):
  #   Column                       Non-Null Count  Dtype  
@@ -502,7 +517,7 @@ None
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
 
 <span class="c1"># Instantiate the XGBClassifier: xg_cl</span>
-<span class="n">xg_cl</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBClassifier</span><span class="p">(</span><span class="n">objective</span><span class="o">=</span><span class="s1">'binary:logistic'</span><span class="p">,</span> <span class="n">eval_metric</span> <span class="o">=</span><span class="s2">"error"</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span> <span class="n">use_label_encoder</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">xg_cl</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">XGBClassifier</span><span class="p">(</span><span class="n">objective</span><span class="o">=</span><span class="s1">&#39;binary:logistic&#39;</span><span class="p">,</span> <span class="n">eval_metric</span> <span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span> <span class="n">use_label_encoder</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Fit the classifier to the training set</span>
 <span class="n">xg_cl</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
@@ -512,7 +527,7 @@ None
 
 <span class="c1"># Compute the accuracy: accuracy</span>
 <span class="n">accuracy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">preds</span><span class="o">==</span><span class="n">y_test</span><span class="p">))</span><span class="o">/</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"accuracy: </span><span class="si">%f</span><span class="s2">"</span> <span class="o">%</span> <span class="p">(</span><span class="n">accuracy</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;accuracy: </span><span class="si">%f</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">accuracy</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -536,23 +551,17 @@ None
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.2.2-What-is-a-decision-tree?">
-<a class="anchor" href="#1.2.2-What-is-a-decision-tree?" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.2.2 What is a decision tree?<a class="anchor-link" href="#1.2.2-What-is-a-decision-tree?"> </a>
-</h3>
-<ul>
-<li>
-<p>Decision trees as base learners</p>
+<h3 id="What-is-a-decision-tree?">What is a decision tree?<a class="anchor-link" href="#What-is-a-decision-tree?"> </a></h3><ul>
+<li><p>Decision trees as base learners</p>
 <ul>
 <li>Base learner : Individual learning algorithm in an ensemble algorithm</li>
 <li>Composed of a series of binary questions</li>
 <li>Predictions happen at the "leaves" of the tree</li>
 </ul>
 </li>
-<li>
-<p>CART: Classification And Regression Trees:</p>
+<li><p>CART: Classification And Regression Trees:</p>
 <ul>
 <li>Each leaf always contains a real-valued score</li>
 <li>Can later be converted into categories</li>
@@ -579,20 +588,20 @@ None
 <span class="kn">from</span> <span class="nn">sklearn.tree</span> <span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
 
 <span class="c1"># load the breast cancer dataset</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"datasets/breast_cancer_classification_data.csv"</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">diagnosis_type</span> <span class="o">=</span> <span class="p">{</span><span class="s1">'M'</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">'B'</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;datasets/breast_cancer_classification_data.csv&quot;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">diagnosis_type</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;M&#39;</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
 <span class="n">df</span><span class="o">.</span><span class="n">diagnosis</span> <span class="o">=</span> <span class="p">[</span><span class="n">diagnosis_type</span><span class="p">[</span><span class="n">item</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">diagnosis</span><span class="p">]</span>
 
 <span class="c1"># Droping the column has NaN</span>
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
     <span class="n">null_num</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">any</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">null_num</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"col </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="n">null_num</span><span class="si">}</span><span class="s2"> null values"</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Droping </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;col </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> has </span><span class="si">{</span><span class="n">null_num</span><span class="si">}</span><span class="s2"> null values&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Droping </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">col</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
-<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">"diagnosis"</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">df</span><span class="o">.</span><span class="n">diagnosis</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"X.shape: </span><span class="si">{}</span><span class="s2">, y.shape: </span><span class="si">{}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
+<span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s2">&quot;diagnosis&quot;</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">df</span><span class="o">.</span><span class="n">diagnosis</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;X.shape: </span><span class="si">{}</span><span class="s2">, y.shape: </span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
 
 <span class="c1"># Create the training and test sets</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
@@ -608,7 +617,7 @@ None
 
 <span class="c1"># Compute the accuracy of the predictions: accuracy</span>
 <span class="n">accuracy</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_pred_4</span><span class="o">==</span><span class="n">y_test</span><span class="p">))</span><span class="o">/</span><span class="n">y_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"accuracy:"</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;accuracy:&quot;</span><span class="p">,</span> <span class="n">accuracy</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -635,39 +644,31 @@ accuracy: 0.9649122807017544
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.3-What-is-Boosting">
-<a class="anchor" href="#1.3-What-is-Boosting" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3 What is Boosting<a class="anchor-link" href="#1.3-What-is-Boosting"> </a>
-</h2>
-<ul>
-<li>
-<p>Boosting overview</p>
+<h2 id="What-is-Boosting">What is Boosting<a class="anchor-link" href="#What-is-Boosting"> </a></h2><ul>
+<li><p>Boosting overview</p>
 <ul>
 <li>Not a specific machine learning algorithm</li>
 <li>Concept that can be applied to a set of machine learning models "Meta-algorithm"</li>
 <li>Ensemble meta-algorithm used to convert many weak learners into a strong learner</li>
 </ul>
 </li>
-<li>
-<p>Weak learners and strong learners</p>
+<li><p>Weak learners and strong learners</p>
 <ul>
 <li>Weak learner: ML algorithm that is slightly better than chance</li>
 <li>Boosting converts a collection of weak learners into a strong learner</li>
 <li>Strong learner: Any algorithm that can be tuned to achieve good performance.</li>
 </ul>
 </li>
-<li>
-<p>How boosting is accomplished?</p>
+<li><p>How boosting is accomplished?</p>
 <ul>
 <li>Iteratively learning a set of week models on subsets of the data</li>
 <li>Weighting each weak prediction according to each weak learner's performance</li>
 <li>Combine the weighted predictions to obtain a single weighted prediction that is much better than the individual predictions themselves!</li>
 </ul>
 </li>
-<li>
-<p>Model evaluation through cross-validation</p>
+<li><p>Model evaluation through cross-validation</p>
 <ul>
 <li>Cross-validation: Robust method for estimating the performance of a model on unseen data</li>
 <li>Generates many non-overlapping train/test splits on training data</li>
@@ -675,10 +676,7 @@ accuracy: 0.9649122807017544
 </ul>
 </li>
 </ul>
-<h3 id="1.3.1-Accuracy">
-<a class="anchor" href="#1.3.1-Accuracy" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.1 Accuracy<a class="anchor-link" href="#1.3.1-Accuracy"> </a>
-</h3>
-<p>You'll now practice using XGBoost's learning API through its baked in cross-validation capabilities. As Sergey discussed in the previous video, XGBoost gets its lauded performance and efficiency gains by utilizing its own optimized data structure for datasets called a DMatrix.</p>
+<h3 id="Accuracy">Accuracy<a class="anchor-link" href="#Accuracy"> </a></h3><p>You'll now practice using XGBoost's learning API through its baked in cross-validation capabilities. As Sergey discussed in the previous video, XGBoost gets its lauded performance and efficiency gains by utilizing its own optimized data structure for datasets called a DMatrix.</p>
 <p>In the previous exercise, the input datasets were converted into DMatrix data on the fly, but when you use the xgboost cv object, you have to first explicitly convert your data into a DMatrix. So, that's what you will do here before running cross-validation on churn_data.</p>
 
 </div>
@@ -698,18 +696,18 @@ accuracy: 0.9649122807017544
 <span class="n">churn_dmatrix</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
 
 <span class="c1"># Create the parameter dictionary: params</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"objective"</span><span class="p">:</span><span class="s2">"reg:logistic"</span><span class="p">,</span> <span class="s2">"max_depth"</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;objective&quot;</span><span class="p">:</span><span class="s2">&quot;reg:logistic&quot;</span><span class="p">,</span> <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
 
 <span class="c1"># Perform cross-validation: cv_results</span>
 <span class="n">cv_results</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">dtrain</span><span class="o">=</span><span class="n">churn_dmatrix</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> 
                   <span class="n">nfold</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
-                  <span class="n">metrics</span><span class="o">=</span><span class="s2">"error"</span><span class="p">,</span> <span class="n">as_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+                  <span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;error&quot;</span><span class="p">,</span> <span class="n">as_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
 
 <span class="c1"># Print cv_results</span>
 <span class="n">display</span><span class="p">(</span><span class="n">cv_results</span><span class="p">)</span>
 
 <span class="c1"># Print the accuracy</span>
-<span class="nb">print</span><span class="p">(((</span><span class="mi">1</span><span class="o">-</span><span class="n">cv_results</span><span class="p">[</span><span class="s2">"test-error-mean"</span><span class="p">])</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(((</span><span class="mi">1</span><span class="o">-</span><span class="n">cv_results</span><span class="p">[</span><span class="s2">&quot;test-error-mean&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]))</span>
 </pre></div>
 
     </div>
@@ -722,7 +720,7 @@ accuracy: 0.9649122807017544
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>&lt;class 'pandas.core.frame.DataFrame'&gt;
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 </pre>
 </div>
 </div>
@@ -812,21 +810,16 @@ accuracy: 0.9649122807017544
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>cv_results stores the training and test mean and standard deviation of the error per boosting round (tree built) as a DataFrame. From cv_results, the final round 'test-error-mean' is extracted and converted into an accuracy, where accuracy is 1-error. The final accuracy of around 75% is an improvement from earlier!</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="1.3.2-Measuring-AUC">
-<a class="anchor" href="#1.3.2-Measuring-AUC" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.3.2 Measuring AUC<a class="anchor-link" href="#1.3.2-Measuring-AUC"> </a>
-</h3>
-<p>Now that you've used cross-validation to compute average out-of-sample accuracy (after converting from an error), it's very easy to compute any other metric you might be interested in. All you have to do is pass it (or a list of metrics) in as an argument to the metrics parameter of xgb.cv().</p>
+<h3 id="Measuring-AUC">Measuring AUC<a class="anchor-link" href="#Measuring-AUC"> </a></h3><p>Now that you've used cross-validation to compute average out-of-sample accuracy (after converting from an error), it's very easy to compute any other metric you might be interested in. All you have to do is pass it (or a list of metrics) in as an argument to the metrics parameter of xgb.cv().</p>
 <p>Your job in this exercise is to compute another common metric used in binary classification - the area under the curve ("auc").</p>
 
 </div>
@@ -841,13 +834,13 @@ accuracy: 0.9649122807017544
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cv_results</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">dtrain</span><span class="o">=</span><span class="n">churn_dmatrix</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">,</span> 
                   <span class="n">nfold</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">num_boost_round</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> 
-                  <span class="n">metrics</span><span class="o">=</span><span class="s2">"auc"</span><span class="p">,</span> <span class="n">as_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
+                  <span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;auc&quot;</span><span class="p">,</span> <span class="n">as_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
 
 <span class="c1"># Print cv_results</span>
 <span class="n">display</span><span class="p">(</span><span class="n">cv_results</span><span class="p">)</span>
 
 <span class="c1"># Print the AUC</span>
-<span class="nb">print</span><span class="p">((</span><span class="n">cv_results</span><span class="p">[</span><span class="s2">"test-auc-mean"</span><span class="p">])</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">((</span><span class="n">cv_results</span><span class="p">[</span><span class="s2">&quot;test-auc-mean&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -942,24 +935,16 @@ accuracy: 0.9649122807017544
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Fantastic! An AUC of 0.84 is quite strong. As you have seen, XGBoost's learning API makes it very easy to compute any metric you may be interested in. In Chapter 3, you'll learn about techniques to fine-tune your XGBoost models to improve their performance even further. For now, it's time to learn a little about exactly when to use XGBoost.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.4-When-should-I-use-XGBoost?">
-<a class="anchor" href="#1.4-When-should-I-use-XGBoost?" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.4 When should I use XGBoost?<a class="anchor-link" href="#1.4-When-should-I-use-XGBoost?"> </a>
-</h2>
-<h3 id="1.4.1-When-to-use-XGBoost">
-<a class="anchor" href="#1.4.1-When-to-use-XGBoost" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.4.1 When to use XGBoost<a class="anchor-link" href="#1.4.1-When-to-use-XGBoost"> </a>
-</h3>
-<ul>
+<h2 id="When-should-I-use-XGBoost?">When should I use XGBoost?<a class="anchor-link" href="#When-should-I-use-XGBoost?"> </a></h2><h3 id="When-to-use-XGBoost">When to use XGBoost<a class="anchor-link" href="#When-to-use-XGBoost"> </a></h3><ul>
 <li>You have a large number of training samples<ul>
 <li>Greater than 1000 training samples and less 100 features</li>
 <li>The number of features &lt; number of training samples</li>
@@ -970,10 +955,7 @@ accuracy: 0.9649122807017544
 </ul>
 </li>
 </ul>
-<h3 id="1.4.2-When-to-NOT-use-XGBoost">
-<a class="anchor" href="#1.4.2-When-to-NOT-use-XGBoost" aria-hidden="true"><span class="octicon octicon-link"></span></a>1.4.2 When to NOT use XGBoost<a class="anchor-link" href="#1.4.2-When-to-NOT-use-XGBoost"> </a>
-</h3>
-<ul>
+<h3 id="When-to-NOT-use-XGBoost">When to NOT use XGBoost<a class="anchor-link" href="#When-to-NOT-use-XGBoost"> </a></h3><ul>
 <li>Image recognition</li>
 <li>Computer vision</li>
 <li>Natural language processing and understanding problems</li>
@@ -987,7 +969,7 @@ accuracy: 0.9649122807017544
 
 
 
-  </div><!-- from https://github.com/utterance/utterances -->
+      </div><!-- from https://github.com/utterance/utterances -->
 <script src="https://utteranc.es/client.js"
         repo="anhhaibkhn/Data-Science-selfstudy-notes-Blog"
         issue-term="title"
@@ -996,10 +978,7 @@ accuracy: 0.9649122807017544
         crossorigin="anonymous"
         async>
 </script><a class="u-url" href="/Data-Science-selfstudy-notes-Blog/python/datacamp/data%20visualization/eda/pandas/xgboost/scikit-learn/classification/2022/05/18/Extreme-Gradient-Boosting-with-XGBoost-Part-1.html" hidden></a>
-</article>
-
-      </div>
-    </main><footer class="site-footer h-card">
+    </article><footer class="site-footer h-card">
   <data class="u-url" href="/Data-Science-selfstudy-notes-Blog/"></data>
 
   <div class="wrapper">
@@ -1025,6 +1004,13 @@ accuracy: 0.9649122807017544
   </div>
 
 </footer>
-</body>
+</div>
+
+
+</div>
+
+    </main>
+
+  </body>
 
 </html>

@@ -23,15 +23,39 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hai Nguyen"},"dateModified":"2022-02-16T00:00:00-06:00","datePublished":"2022-02-16T00:00:00-06:00","description":"Build a machine learning model to predict if a credit card application will get approved","headline":"Predicting Credit Card Approvals (Datacamp course)","image":"https://assets.datacamp.com/production/project_558/img/credit_card.jpg","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/datacamp/python/eda/matplotlib/jupyter%20notebook/pandas/scikit-learn/data%20visualization/churn/modeling/2022/02/16/Predicting-Credit-Card-Approvals.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/datacamp/python/eda/matplotlib/jupyter%20notebook/pandas/scikit-learn/data%20visualization/churn/modeling/2022/02/16/Predicting-Credit-Card-Approvals.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://unpkg.com/@primer/css@17.3.0/dist/primer.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+
+    var i = 0, j = 0, k = 0;
+
+    document.querySelectorAll('h2, h3, h4').forEach((heading) => {
+
+        if (heading.localName == 'h2') {
+            i++; j = 0; k = 0;
+            heading.setAttribute('data-before', `${i}. `)
+        }
+        if (heading.localName == 'h3') {
+            j++; k = 0;
+            heading.setAttribute('data-before', `${i}.${j}. `)
+        }
+        if (heading.localName == 'h4') {
+            k++;
+            heading.setAttribute('data-before', `${i}.${j}.${k}. `)
+        }
+    });
+});
+</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" integrity="sha512-J8je2SgrCzA7hNBeiCJiA6oETHTTdp3We3EriOgJp6POycGLcDXj5dSwWlAPQcYGeaQ4N3uf30aOg/Nt5pxW2g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" integrity="sha512-1kNZVA50gKlorLAWU83+SdOAUwABzfFFQ4WuOAZTeS/UhNhnm9zU7rDv/Q5NEzSnr5u2L6uhR/+8icjjmHjSnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" integrity="sha512-CzIEOUs11SQ7tekLhEe5gil9kDip4RTJZVf7pSjlxOdVaYYHEcQflhunPz2Q/onNC4slL9jpKjvNgzPAAxEpew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         renderMathInElement( document.body, {
+        globalGroup: true,
         delimiters: [
             {left: "$$", right: "$$", display: true},
             {left: "[%", right: "%]", display: true},
@@ -71,8 +95,34 @@ window.onload = wrap_img;
     elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
     });
 </script>
+
 </head>
-<body><header class="site-header">
+<body>
+
+    <main class="page-content" aria-label="Content" style="padding-top: 0;">
+        <div class="Layout">
+    
+      <div class="Layout-sidebar">
+        <div id="toc" class="pt-3 pl-3 sticky">
+          <b><a href="#">Predicting Credit Card Approvals (Datacamp course)</a></b>
+          <ol id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Project-Description:">Project Description: </a></li>
+<li class="toc-entry toc-h2"><a href="#Credit-card-applications">Credit card applications </a></li>
+<li class="toc-entry toc-h2"><a href="#Inspecting-the-applications">Inspecting the applications </a></li>
+<li class="toc-entry toc-h2"><a href="#Handling-the-missing-values-(part-i)">Handling the missing values (part i) </a></li>
+<li class="toc-entry toc-h2"><a href="#Handling-the-missing-values-(part-ii)">Handling the missing values (part ii) </a></li>
+<li class="toc-entry toc-h2"><a href="#Handling-the-missing-values-(part-iii)">Handling the missing values (part iii) </a></li>
+<li class="toc-entry toc-h2"><a href="#Preprocessing-the-data-(part-i)">Preprocessing the data (part i) </a></li>
+<li class="toc-entry toc-h2"><a href="#Splitting-the-dataset-into-train-and-test-sets">Splitting the dataset into train and test sets </a></li>
+<li class="toc-entry toc-h2"><a href="#Preprocessing-the-data-(part-ii)">Preprocessing the data (part ii) </a></li>
+<li class="toc-entry toc-h2"><a href="#Fitting-a-logistic-regression-model-to-the-train-set">Fitting a logistic regression model to the train set </a></li>
+<li class="toc-entry toc-h2"><a href="#Making-predictions-and-evaluating-performance">Making predictions and evaluating performance </a></li>
+<li class="toc-entry toc-h2"><a href="#Grid-searching-and-making-the-model-perform-better">Grid searching and making the model perform better </a></li>
+<li class="toc-entry toc-h2"><a href="#Finding-the-best-performing-model">Finding the best performing model </a></li>
+</ol>
+        </div>
+      </div>
+    <div class="Layout-main"><header class="site-header">
 
   <div class="wrapper"><a class="site-title" rel="author" href="/Data-Science-selfstudy-notes-Blog/">Self-study Data Science Projects notes Blog</a><nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
@@ -87,105 +137,83 @@ window.onload = wrap_img;
         <div class="trigger"><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/about/">About Me</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/search/">Search</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/categories/">Tags</a></div>
       </nav></div>
 </header>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Predicting Credit Card Approvals (Datacamp course)</h1><p class="page-description">Build a machine learning model to predict if a credit card application will get approved</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-02-16T00:00:00-06:00" itemprop="datePublished">
-        Feb 16, 2022
-      </time>• 
-          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-            <span class="p-author h-card" itemprop="name">Hai Nguyen</span></span>
-       • <span class="read-time" title="Estimated read time">
-    
-    
-      25 min read
-    
-</span></p>
-
-    
-      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
       
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Datacamp">Datacamp</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Python">Python</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#EDA">EDA</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Matplotlib">Matplotlib</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Jupyter notebook">Jupyter notebook</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Pandas">Pandas</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#scikit-learn">scikit-learn</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Data Visualization">Data Visualization</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Churn">Churn</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Modeling">Modeling</a>
         
-      
-      </p>
-    
-
-    
-      
-        <div class="pb-5 d-flex flex-justify-center">
-          <div class="px-2">
+          <div class="pb-5 d-flex flex-wrap flex-justify-start" style="padding-left: 52px">
+            <div class="px-2">
 
     <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/Predicting Credit Card Approvals/2022-02-16-Predicting Credit Card Approvals.ipynb" role="button" target="_blank">
 <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/github.svg" alt="View On GitHub">
     </a>
 </div>
 
-          <div class="px-2">
+            <div class="px-2">
     <a href="https://mybinder.org/v2/gh/anhhaibkhn/Data-Science-selfstudy-notes-Blog/master?filepath=_notebooks%2FPredicting+Credit+Card+Approvals%2F2022-02-16-Predicting+Credit+Card+Approvals.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/binder.svg" alt="Open In Binder"/>
     </a>
 </div>
 
-          <div class="px-2">
+            <div class="px-2">
     <a href="https://colab.research.google.com/github/anhhaibkhn/Data-Science-selfstudy-notes-Blog/blob/master/_notebooks/Predicting Credit Card Approvals/2022-02-16-Predicting Credit Card Approvals.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/colab.svg" alt="Open In Colab"/>
     </a>
 </div>
-          <div class="px-2">
-  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fanhhaibkhn%2FData-Science-selfstudy-notes-Blog%2Fblob%2Fmaster%2F_notebooks%2FPredicting+Credit+Card+Approvals%2F2022-02-16-Predicting+Credit+Card+Approvals.ipynb" target="_blank">
-      <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
-  </a>
-</div>
+          </div>
+        <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">Predicting Credit Card Approvals (Datacamp course)</h1><p class="page-description">Build a machine learning model to predict if a credit card application will get approved</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-02-16T00:00:00-06:00" itemprop="datePublished">
+            Feb 16, 2022
+          </time>• 
+              <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <span class="p-author h-card" itemprop="name">Hai Nguyen</span></span>
+           • <span class="read-time" title="Estimated read time">
+    
+    
+      25 min read
+    
+</span></p>
 
-        </div>
+        
+          <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i>
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Datacamp">Datacamp</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Python">Python</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#EDA">EDA</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Matplotlib">Matplotlib</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Jupyter notebook">Jupyter notebook</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Pandas">Pandas</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#scikit-learn">scikit-learn</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Data Visualization">Data Visualization</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Churn">Churn</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Modeling">Modeling</a>
+            
+          
+          </p>
+        
+
+
       </header>
 
-  <div class="post-content e-content" itemprop="articleBody">
-    <ul id="toc" class="section-nav">
-<li class="toc-entry toc-h2"><a href="#Project-Description:">Project Description: </a></li>
-<li class="toc-entry toc-h2"><a href="#1.-Credit-card-applications">1. Credit card applications </a></li>
-<li class="toc-entry toc-h2"><a href="#2.-Inspecting-the-applications">2. Inspecting the applications </a></li>
-<li class="toc-entry toc-h2"><a href="#3.-Handling-the-missing-values-(part-i)">3. Handling the missing values (part i) </a></li>
-<li class="toc-entry toc-h2"><a href="#4.-Handling-the-missing-values-(part-ii)">4. Handling the missing values (part ii) </a></li>
-<li class="toc-entry toc-h2"><a href="#5.-Handling-the-missing-values-(part-iii)">5. Handling the missing values (part iii) </a></li>
-<li class="toc-entry toc-h2"><a href="#6.-Preprocessing-the-data-(part-i)">6. Preprocessing the data (part i) </a></li>
-<li class="toc-entry toc-h2"><a href="#7.-Splitting-the-dataset-into-train-and-test-sets">7. Splitting the dataset into train and test sets </a></li>
-<li class="toc-entry toc-h2"><a href="#8.-Preprocessing-the-data-(part-ii)">8. Preprocessing the data (part ii) </a></li>
-<li class="toc-entry toc-h2"><a href="#9.-Fitting-a-logistic-regression-model-to-the-train-set">9. Fitting a logistic regression model to the train set </a></li>
-<li class="toc-entry toc-h2"><a href="#10.-Making-predictions-and-evaluating-performance">10. Making predictions and evaluating performance </a></li>
-<li class="toc-entry toc-h2"><a href="#11.-Grid-searching-and-making-the-model-perform-better">11. Grid searching and making the model perform better </a></li>
-<li class="toc-entry toc-h2"><a href="#12.-Finding-the-best-performing-model">12. Finding the best performing model </a></li>
-</ul><!--
+      <div class="post-content e-content" itemprop="articleBody">
+        <!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
@@ -194,26 +222,18 @@ window.onload = wrap_img;
 
 <div class="container" id="notebook-container">
         
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Project-Description:">
-<a class="anchor" href="#Project-Description:" aria-hidden="true"><span class="octicon octicon-link"></span></a>Project Description:<a class="anchor-link" href="#Project-Description:"> </a>
-</h2>
-<p>Commercial banks receive a lot of applications for credit cards. Many of them get rejected for many reasons, like high loan balances, low income levels, or too many inquiries on an individual's credit report, for example. Manually analyzing these applications is mundane, error-prone, and time-consuming (and time is money!). Luckily, this task can be automated with the power of machine learning and pretty much every commercial bank does so nowadays. In this project, you will build an automatic credit card approval predictor using machine learning techniques, just like the real banks do.</p>
+<h2 id="Project-Description:">Project Description:<a class="anchor-link" href="#Project-Description:"> </a></h2><p>Commercial banks receive a lot of applications for credit cards. Many of them get rejected for many reasons, like high loan balances, low income levels, or too many inquiries on an individual's credit report, for example. Manually analyzing these applications is mundane, error-prone, and time-consuming (and time is money!). Luckily, this task can be automated with the power of machine learning and pretty much every commercial bank does so nowadays. In this project, you will build an automatic credit card approval predictor using machine learning techniques, just like the real banks do.</p>
 <p>The dataset used in this project is the <a href="http://archive.ics.uci.edu/ml/datasets/credit+approval">Credit Card Approval dataset</a> from the UCI Machine Learning Repository.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered celltag_context">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="1.-Credit-card-applications">
-<a class="anchor" href="#1.-Credit-card-applications" aria-hidden="true"><span class="octicon octicon-link"></span></a>1. Credit card applications<a class="anchor-link" href="#1.-Credit-card-applications"> </a>
-</h2>
-<p>Commercial banks receive <em>a lot</em> of applications for credit cards. Many of them get rejected for many reasons, like high loan balances, low income levels, or too many inquiries on an individual's credit report, for example. Manually analyzing these applications is mundane, error-prone, and time-consuming (and time is money!). Luckily, this task can be automated with the power of machine learning and pretty much every commercial bank does so nowadays. In this notebook, we will build an automatic credit card approval predictor using machine learning techniques, just like the real banks do.</p>
-<p><img src="https://assets.datacamp.com/production/project_558/img/credit_card.jpg" alt="Credit card being held in hand"></p>
+<h2 id="Credit-card-applications">Credit card applications<a class="anchor-link" href="#Credit-card-applications"> </a></h2><p>Commercial banks receive <em>a lot</em> of applications for credit cards. Many of them get rejected for many reasons, like high loan balances, low income levels, or too many inquiries on an individual's credit report, for example. Manually analyzing these applications is mundane, error-prone, and time-consuming (and time is money!). Luckily, this task can be automated with the power of machine learning and pretty much every commercial bank does so nowadays. In this notebook, we will build an automatic credit card approval predictor using machine learning techniques, just like the real banks do.</p>
+<p><img src="https://assets.datacamp.com/production/project_558/img/credit_card.jpg" alt="Credit card being held in hand" /></p>
 <p>We'll use the <a href="http://archive.ics.uci.edu/ml/datasets/credit+approval">Credit Card Approval dataset</a> from the UCI Machine Learning Repository. The structure of this notebook is as follows:</p>
 <ul>
 <li>First, we will start off by loading and viewing the dataset.</li>
@@ -237,7 +257,7 @@ window.onload = wrap_img;
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="c1"># Load dataset</span>
-<span class="n">cc_apps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span> <span class="p">(</span><span class="s2">"datasets/cc_approvals.data"</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">cc_apps</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span> <span class="p">(</span><span class="s2">&quot;datasets/cc_approvals.data&quot;</span><span class="p">,</span> <span class="n">header</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 
 <span class="c1"># Inspect data</span>
 <span class="c1"># ... YOUR CODE FOR TASK 1 ...</span>
@@ -270,13 +290,9 @@ window.onload = wrap_img;
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered celltag_context">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="2.-Inspecting-the-applications">
-<a class="anchor" href="#2.-Inspecting-the-applications" aria-hidden="true"><span class="octicon octicon-link"></span></a>2. Inspecting the applications<a class="anchor-link" href="#2.-Inspecting-the-applications"> </a>
-</h2>
-<p>The output may appear a bit confusing at its first sight, but let's try to figure out the most important features of a credit card application. The features of this dataset have been anonymized to protect the privacy, but <a href="http://rstudio-pubs-static.s3.amazonaws.com/73039_9946de135c0a49daa7a0a9eda4a67a72.html">this blog</a> gives us a pretty good overview of the probable features. The probable features in a typical credit card application are <code>Gender</code>, <code>Age</code>, <code>Debt</code>, <code>Married</code>, <code>BankCustomer</code>, <code>EducationLevel</code>, <code>Ethnicity</code>, <code>YearsEmployed</code>, <code>PriorDefault</code>, <code>Employed</code>, <code>CreditScore</code>, <code>DriversLicense</code>, <code>Citizen</code>, <code>ZipCode</code>, <code>Income</code> and finally the <code>ApprovalStatus</code>. This gives us a pretty good starting point, and we can map these features with respect to the columns in the output.   </p>
+<h2 id="Inspecting-the-applications">Inspecting the applications<a class="anchor-link" href="#Inspecting-the-applications"> </a></h2><p>The output may appear a bit confusing at its first sight, but let's try to figure out the most important features of a credit card application. The features of this dataset have been anonymized to protect the privacy, but <a href="http://rstudio-pubs-static.s3.amazonaws.com/73039_9946de135c0a49daa7a0a9eda4a67a72.html">this blog</a> gives us a pretty good overview of the probable features. The probable features in a typical credit card application are <code>Gender</code>, <code>Age</code>, <code>Debt</code>, <code>Married</code>, <code>BankCustomer</code>, <code>EducationLevel</code>, <code>Ethnicity</code>, <code>YearsEmployed</code>, <code>PriorDefault</code>, <code>Employed</code>, <code>CreditScore</code>, <code>DriversLicense</code>, <code>Citizen</code>, <code>ZipCode</code>, <code>Income</code> and finally the <code>ApprovalStatus</code>. This gives us a pretty good starting point, and we can map these features with respect to the columns in the output.   </p>
 <p>As we can see from our first glance at the data, the dataset has a mixture of numerical and non-numerical features. This can be fixed with some preprocessing, but before we do that, let's learn about the dataset a bit more to see if there are other dataset issues that need to be fixed.</p>
 </div>
 </div>
@@ -291,13 +307,13 @@ window.onload = wrap_img;
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">cc_apps_description</span> <span class="o">=</span> <span class="n">cc_apps</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cc_apps_description</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Print DataFrame information</span>
 <span class="n">cc_apps_info</span> <span class="o">=</span> <span class="n">cc_apps</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cc_apps_info</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="c1"># Inspect missing values in the dataset</span>
 <span class="c1"># ... YOUR CODE FOR TASK 2 ...</span>
@@ -325,7 +341,7 @@ min      0.000000    0.000000    0.00000       0.000000
 max     28.000000   28.500000   67.00000  100000.000000
 
 
-&lt;class 'pandas.core.frame.DataFrame'&gt;
+&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 RangeIndex: 690 entries, 0 to 689
 Data columns (total 16 columns):
 0     690 non-null object
@@ -377,13 +393,9 @@ None
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered celltag_context">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.-Handling-the-missing-values-(part-i)">
-<a class="anchor" href="#3.-Handling-the-missing-values-(part-i)" aria-hidden="true"><span class="octicon octicon-link"></span></a>3. Handling the missing values (part i)<a class="anchor-link" href="#3.-Handling-the-missing-values-(part-i)"> </a>
-</h2>
-<p>We've uncovered some issues that will affect the performance of our machine learning model(s) if they go unchanged:</p>
+<h2 id="Handling-the-missing-values-(part-i)">Handling the missing values (part i)<a class="anchor-link" href="#Handling-the-missing-values-(part-i)"> </a></h2><p>We've uncovered some issues that will affect the performance of our machine learning model(s) if they go unchanged:</p>
 <ul>
 <li>Our dataset contains both numeric and non-numeric data (specifically data that are of <code>float64</code>, <code>int64</code> and <code>object</code> types). Specifically, the features 2, 7, 10 and 14 contain numeric values (of types float64, float64, int64 and int64 respectively) and all the other features contain non-numeric values.</li>
 <li>The dataset also contains values from several ranges. Some features have a value range of 0 - 28, some have a range of 2 - 67, and some have a range of 1017 - 100000. Apart from these, we can get useful statistical information (like <code>mean</code>, <code>max</code>, and <code>min</code>) about the features that have numerical values. </li>
@@ -405,8 +417,8 @@ None
 <span class="c1"># Inspect missing values in the dataset</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">cc_apps</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">17</span><span class="p">))</span>
 
-<span class="c1"># Replace the '?'s with NaN</span>
-<span class="n">cc_apps</span> <span class="o">=</span> <span class="n">cc_apps</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">'?'</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
+<span class="c1"># Replace the &#39;?&#39;s with NaN</span>
+<span class="n">cc_apps</span> <span class="o">=</span> <span class="n">cc_apps</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;?&#39;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">nan</span><span class="p">)</span>
 
 <span class="c1"># Inspect the missing values again</span>
 <span class="c1"># ... YOUR CODE FOR TASK 3 ...</span>
@@ -469,13 +481,9 @@ None
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered celltag_context">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="4.-Handling-the-missing-values-(part-ii)">
-<a class="anchor" href="#4.-Handling-the-missing-values-(part-ii)" aria-hidden="true"><span class="octicon octicon-link"></span></a>4. Handling the missing values (part ii)<a class="anchor-link" href="#4.-Handling-the-missing-values-(part-ii)"> </a>
-</h2>
-<p>We replaced all the question marks with NaNs. This is going to help us in the next missing value treatment that we are going to perform.</p>
+<h2 id="Handling-the-missing-values-(part-ii)">Handling the missing values (part ii)<a class="anchor-link" href="#Handling-the-missing-values-(part-ii)"> </a></h2><p>We replaced all the question marks with NaNs. This is going to help us in the next missing value treatment that we are going to perform.</p>
 <p>An important question that gets raised here is <em>why are we giving so much importance to missing values</em>? Can't they be just ignored? Ignoring missing values can affect the performance of a machine learning model heavily. While ignoring the missing values our machine learning model may miss out on information about the dataset that may be useful for its training. Then, there are many models which cannot handle missing values implicitly such as LDA. </p>
 <p>So, to avoid this problem, we are going to impute the missing values with a strategy called mean imputation.</p>
 </div>
@@ -1716,13 +1724,9 @@ None
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered celltag_context">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="5.-Handling-the-missing-values-(part-iii)">
-<a class="anchor" href="#5.-Handling-the-missing-values-(part-iii)" aria-hidden="true"><span class="octicon octicon-link"></span></a>5. Handling the missing values (part iii)<a class="anchor-link" href="#5.-Handling-the-missing-values-(part-iii)"> </a>
-</h2>
-<p>We have successfully taken care of the missing values present in the numeric columns. There are still some missing values to be imputed for columns 0, 1, 3, 4, 5, 6 and 13. All of these columns contain non-numeric data and this why the mean imputation strategy would not work here. This needs a different treatment. </p>
+<h2 id="Handling-the-missing-values-(part-iii)">Handling the missing values (part iii)<a class="anchor-link" href="#Handling-the-missing-values-(part-iii)"> </a></h2><p>We have successfully taken care of the missing values present in the numeric columns. There are still some missing values to be imputed for columns 0, 1, 3, 4, 5, 6 and 13. All of these columns contain non-numeric data and this why the mean imputation strategy would not work here. This needs a different treatment. </p>
 <p>We are going to impute these missing values with the most frequent values as present in the respective columns. This is <a href="https://www.datacamp.com/community/tutorials/categorical-data">good practice</a> when it comes to imputing missing values for categorical data in general.</p>
 </div>
 </div>
@@ -1736,7 +1740,7 @@ None
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cc_apps</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
     <span class="c1"># Check if the column is of object type</span>
-    <span class="k">if</span> <span class="n">cc_apps</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="s1">'object'</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cc_apps</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="s1">&#39;object&#39;</span><span class="p">:</span>
         <span class="c1"># Impute with the most frequent value</span>
         <span class="n">cc_apps</span> <span class="o">=</span> <span class="n">cc_apps</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="n">cc_apps</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
 
@@ -1766,13 +1770,9 @@ None
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered celltag_context">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="6.-Preprocessing-the-data-(part-i)">
-<a class="anchor" href="#6.-Preprocessing-the-data-(part-i)" aria-hidden="true"><span class="octicon octicon-link"></span></a>6. Preprocessing the data (part i)<a class="anchor-link" href="#6.-Preprocessing-the-data-(part-i)"> </a>
-</h2>
-<p>The missing values are now successfully handled.</p>
+<h2 id="Preprocessing-the-data-(part-i)">Preprocessing the data (part i)<a class="anchor-link" href="#Preprocessing-the-data-(part-i)"> </a></h2><p>The missing values are now successfully handled.</p>
 <p>There is still some minor but essential data preprocessing needed before we proceed towards building our machine learning model. We are going to divide these remaining preprocessing steps into three main tasks:</p>
 <ol>
 <li>Convert the non-numeric data into numeric.</li>
@@ -1799,7 +1799,7 @@ None
 <span class="c1"># Iterate over all the values of each column and extract their dtypes</span>
 <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">cc_apps</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
     <span class="c1"># Compare if the dtype is object</span>
-    <span class="k">if</span> <span class="n">cc_apps</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="s1">'object'</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">cc_apps</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtypes</span> <span class="o">==</span> <span class="s1">&#39;object&#39;</span><span class="p">:</span>
     <span class="c1"># Use LabelEncoder to do the numeric transformation</span>
         <span class="n">le</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">cc_apps</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
         <span class="n">cc_apps</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">=</span><span class="n">le</span><span class="o">.</span><span class="n">transform</span><span class="p">(</span><span class="n">cc_apps</span><span class="p">[</span><span class="n">col</span><span class="p">])</span>
@@ -1812,13 +1812,9 @@ None
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered celltag_context">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="7.-Splitting-the-dataset-into-train-and-test-sets">
-<a class="anchor" href="#7.-Splitting-the-dataset-into-train-and-test-sets" aria-hidden="true"><span class="octicon octicon-link"></span></a>7. Splitting the dataset into train and test sets<a class="anchor-link" href="#7.-Splitting-the-dataset-into-train-and-test-sets"> </a>
-</h2>
-<p>We have successfully converted all the non-numeric values to numeric ones.</p>
+<h2 id="Splitting-the-dataset-into-train-and-test-sets">Splitting the dataset into train and test sets<a class="anchor-link" href="#Splitting-the-dataset-into-train-and-test-sets"> </a></h2><p>We have successfully converted all the non-numeric values to numeric ones.</p>
 <p>Now, we will split our data into train set and test set to prepare our data for two different phases of machine learning modeling: training and testing. Ideally, no information from the test data should be used to scale the training data or should be used to direct the training process of a machine learning model. Hence, we first split the data and then apply the scaling.</p>
 <p>Also, features like <code>DriversLicense</code> and <code>ZipCode</code> are not as important as the other features in the dataset for predicting credit card approvals. We should drop them to design our machine learning model with the best set of features. In Data Science literature, this is often referred to as <em>feature selection</em>. </p>
 </div>
@@ -1855,13 +1851,9 @@ None
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered celltag_context">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="8.-Preprocessing-the-data-(part-ii)">
-<a class="anchor" href="#8.-Preprocessing-the-data-(part-ii)" aria-hidden="true"><span class="octicon octicon-link"></span></a>8. Preprocessing the data (part ii)<a class="anchor-link" href="#8.-Preprocessing-the-data-(part-ii)"> </a>
-</h2>
-<p>The data is now split into two separate sets - train and test sets respectively. We are only left with one final preprocessing step of scaling before we can fit a machine learning model to the data. </p>
+<h2 id="Preprocessing-the-data-(part-ii)">Preprocessing the data (part ii)<a class="anchor-link" href="#Preprocessing-the-data-(part-ii)"> </a></h2><p>The data is now split into two separate sets - train and test sets respectively. We are only left with one final preprocessing step of scaling before we can fit a machine learning model to the data. </p>
 <p>Now, let's try to understand what these scaled values mean in the real world. Let's use <code>CreditScore</code> as an example. The credit score of a person is their creditworthiness based on their credit history. The higher this number, the more financially trustworthy a person is considered to be. So, a <code>CreditScore</code> of 1 is the highest since we're rescaling all the values to the range of 0-1.</p>
 </div>
 </div>
@@ -1889,13 +1881,9 @@ None
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered celltag_context">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="9.-Fitting-a-logistic-regression-model-to-the-train-set">
-<a class="anchor" href="#9.-Fitting-a-logistic-regression-model-to-the-train-set" aria-hidden="true"><span class="octicon octicon-link"></span></a>9. Fitting a logistic regression model to the train set<a class="anchor-link" href="#9.-Fitting-a-logistic-regression-model-to-the-train-set"> </a>
-</h2>
-<p>Essentially, predicting if a credit card application will be approved or not is a <a href="https://en.wikipedia.org/wiki/Statistical_classification">classification</a> task. <a href="http://archive.ics.uci.edu/ml/machine-learning-databases/credit-screening/crx.names">According to UCI</a>, our dataset contains more instances that correspond to "Denied" status than instances corresponding to "Approved" status. Specifically, out of 690 instances, there are 383 (55.5%) applications that got denied and 307 (44.5%) applications that got approved. </p>
+<h2 id="Fitting-a-logistic-regression-model-to-the-train-set">Fitting a logistic regression model to the train set<a class="anchor-link" href="#Fitting-a-logistic-regression-model-to-the-train-set"> </a></h2><p>Essentially, predicting if a credit card application will be approved or not is a <a href="https://en.wikipedia.org/wiki/Statistical_classification">classification</a> task. <a href="http://archive.ics.uci.edu/ml/machine-learning-databases/credit-screening/crx.names">According to UCI</a>, our dataset contains more instances that correspond to "Denied" status than instances corresponding to "Approved" status. Specifically, out of 690 instances, there are 383 (55.5%) applications that got denied and 307 (44.5%) applications that got approved. </p>
 <p>This gives us a benchmark. A good machine learning model should be able to accurately predict the status of the applications with respect to these statistics.</p>
 <p>Which model should we pick? A question to ask is: <em>are the features that affect the credit card approval decision process correlated with each other?</em> Although we can measure correlation, that is outside the scope of this notebook, so we'll rely on our intuition that they indeed are correlated for now. Because of this correlation, we'll take advantage of the fact that generalized linear models perform well in these cases. Let's start our machine learning modeling with a Logistic Regression model (a generalized linear model).</p>
 </div>
@@ -1931,8 +1919,8 @@ None
 
 <div class="output_text output_subarea output_execute_result">
 <pre>LogisticRegression(C=1.0, class_weight=None, dual=False, fit_intercept=True,
-          intercept_scaling=1, max_iter=100, multi_class='ovr', n_jobs=1,
-          penalty='l2', random_state=None, solver='liblinear', tol=0.0001,
+          intercept_scaling=1, max_iter=100, multi_class=&#39;ovr&#39;, n_jobs=1,
+          penalty=&#39;l2&#39;, random_state=None, solver=&#39;liblinear&#39;, tol=0.0001,
           verbose=0, warm_start=False)</pre>
 </div>
 
@@ -1944,13 +1932,9 @@ None
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered celltag_context">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="10.-Making-predictions-and-evaluating-performance">
-<a class="anchor" href="#10.-Making-predictions-and-evaluating-performance" aria-hidden="true"><span class="octicon octicon-link"></span></a>10. Making predictions and evaluating performance<a class="anchor-link" href="#10.-Making-predictions-and-evaluating-performance"> </a>
-</h2>
-<p>But how well does our model perform? </p>
+<h2 id="Making-predictions-and-evaluating-performance">Making predictions and evaluating performance<a class="anchor-link" href="#Making-predictions-and-evaluating-performance"> </a></h2><p>But how well does our model perform? </p>
 <p>We will now evaluate our model on the test set with respect to <a href="https://developers.google.com/machine-learning/crash-course/classification/accuracy">classification accuracy</a>. But we will also take a look the model's <a href="http://www.dataschool.io/simple-guide-to-confusion-matrix-terminology/">confusion matrix</a>. In the case of predicting credit card applications, it is equally important to see if our machine learning model is able to predict the approval status of the applications as denied that originally got denied. If our model is not performing well in this aspect, then it might end up approving the application that should have been approved. The confusion matrix helps us to view our model's performance from these aspects.  </p>
 </div>
 </div>
@@ -1968,7 +1952,7 @@ None
 <span class="n">y_pred</span> <span class="o">=</span> <span class="n">logreg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">rescaledX_test</span><span class="p">)</span>
 
 <span class="c1"># Get the accuracy score of logreg model and print it</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Accuracy of logistic regression classifier: "</span><span class="p">,</span> <span class="n">logreg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">rescaledX_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Accuracy of logistic regression classifier: &quot;</span><span class="p">,</span> <span class="n">logreg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">rescaledX_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">))</span>
 
 <span class="c1"># Print the confusion matrix of the logreg model</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">y_pred</span><span class="p">))</span>
@@ -1997,20 +1981,12 @@ None
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered celltag_context">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="11.-Grid-searching-and-making-the-model-perform-better">
-<a class="anchor" href="#11.-Grid-searching-and-making-the-model-perform-better" aria-hidden="true"><span class="octicon octicon-link"></span></a>11. Grid searching and making the model perform better<a class="anchor-link" href="#11.-Grid-searching-and-making-the-model-perform-better"> </a>
-</h2>
-<p></p>
-<p>Our model was pretty good! It was able to yield an accuracy score of almost 84%.</p>
-<p></p>
-<p>For the confusion matrix, the first element of the of the first row of the confusion matrix denotes the true negatives meaning the number of negative instances (denied applications) predicted by the model correctly. And the last element of the second row of the confusion matrix denotes the true positives meaning the number of positive instances (approved applications) predicted by the model correctly.</p>
-<p></p>
-<p>Let's see if we can do better. We can perform a <a href="https://machinelearningmastery.com/how-to-tune-algorithm-parameters-with-scikit-learn/">grid search</a> of the model parameters to improve the model's ability to predict credit card approvals.</p>
-<p></p>
-<p><a href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">scikit-learn's implementation of logistic regression</a> consists of different hyperparameters but we will grid search over the following two:</p>
+<h2 id="Grid-searching-and-making-the-model-perform-better">Grid searching and making the model perform better<a class="anchor-link" href="#Grid-searching-and-making-the-model-perform-better"> </a></h2><p><p>Our model was pretty good! It was able to yield an accuracy score of almost 84%.</p></p>
+<p><p>For the confusion matrix, the first element of the of the first row of the confusion matrix denotes the true negatives meaning the number of negative instances (denied applications) predicted by the model correctly. And the last element of the second row of the confusion matrix denotes the true positives meaning the number of positive instances (approved applications) predicted by the model correctly.</p></p>
+<p><p>Let's see if we can do better. We can perform a <a href="https://machinelearningmastery.com/how-to-tune-algorithm-parameters-with-scikit-learn/">grid search</a> of the model parameters to improve the model's ability to predict credit card approvals.</p></p>
+<p><p><a href="http://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html">scikit-learn's implementation of logistic regression</a> consists of different hyperparameters but we will grid search over the following two:</p></p>
 <ul>
 <li>tol</li>
 <li>max_iter</li>
@@ -2042,13 +2018,9 @@ None
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered celltag_context">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="12.-Finding-the-best-performing-model">
-<a class="anchor" href="#12.-Finding-the-best-performing-model" aria-hidden="true"><span class="octicon octicon-link"></span></a>12. Finding the best performing model<a class="anchor-link" href="#12.-Finding-the-best-performing-model"> </a>
-</h2>
-<p>We have defined the grid of hyperparameter values and converted them into a single dictionary format which <code>GridSearchCV()</code> expects as one of its parameters. Now, we will begin the grid search to see which values perform best.</p>
+<h2 id="Finding-the-best-performing-model">Finding the best performing model<a class="anchor-link" href="#Finding-the-best-performing-model"> </a></h2><p>We have defined the grid of hyperparameter values and converted them into a single dictionary format which <code>GridSearchCV()</code> expects as one of its parameters. Now, we will begin the grid search to see which values perform best.</p>
 <p>We will instantiate <code>GridSearchCV()</code> with our earlier <code>logreg</code> model with all the data we have. Instead of passing train and test sets separately, we will supply <code>X</code> (scaled version) and <code>y</code>. We will also instruct <code>GridSearchCV()</code> to perform a <a href="https://www.dataschool.io/machine-learning-with-scikit-learn/">cross-validation</a> of five folds.</p>
 <p>We'll end the notebook by storing the best-achieved score and the respective best parameters.</p>
 <p>While building this credit card predictor, we tackled some of the most widely-known preprocessing steps such as <strong>scaling</strong>, <strong>label encoding</strong>, and <strong>missing value imputation</strong>. We finished with some <strong>machine learning</strong> to predict if a person's application for a credit card would get approved or not given some information about that person.</p>
@@ -2072,7 +2044,7 @@ None
 
 <span class="c1"># Summarize results</span>
 <span class="n">best_score</span><span class="p">,</span> <span class="n">best_params</span> <span class="o">=</span> <span class="n">grid_model_result</span><span class="o">.</span><span class="n">best_score_</span><span class="p">,</span> <span class="n">grid_model_result</span><span class="o">.</span><span class="n">best_params_</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"Best: </span><span class="si">%f</span><span class="s2"> using </span><span class="si">%s</span><span class="s2">"</span> <span class="o">%</span><span class="p">(</span><span class="n">best_score</span><span class="p">,</span> <span class="n">best_params</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Best: </span><span class="si">%f</span><span class="s2"> using </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span><span class="p">(</span><span class="n">best_score</span><span class="p">,</span> <span class="n">best_params</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -2085,7 +2057,7 @@ None
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Best: 0.853623 using {'max_iter': 100, 'tol': 0.01}
+<pre>Best: 0.853623 using {&#39;max_iter&#39;: 100, &#39;tol&#39;: 0.01}
 </pre>
 </div>
 </div>
@@ -2100,7 +2072,7 @@ None
 
 
 
-  </div><!-- from https://github.com/utterance/utterances -->
+      </div><!-- from https://github.com/utterance/utterances -->
 <script src="https://utteranc.es/client.js"
         repo="anhhaibkhn/Data-Science-selfstudy-notes-Blog"
         issue-term="title"
@@ -2109,10 +2081,7 @@ None
         crossorigin="anonymous"
         async>
 </script><a class="u-url" href="/Data-Science-selfstudy-notes-Blog/datacamp/python/eda/matplotlib/jupyter%20notebook/pandas/scikit-learn/data%20visualization/churn/modeling/2022/02/16/Predicting-Credit-Card-Approvals.html" hidden></a>
-</article>
-
-      </div>
-    </main><footer class="site-footer h-card">
+    </article><footer class="site-footer h-card">
   <data class="u-url" href="/Data-Science-selfstudy-notes-Blog/"></data>
 
   <div class="wrapper">
@@ -2138,6 +2107,13 @@ None
   </div>
 
 </footer>
-</body>
+</div>
+
+
+</div>
+
+    </main>
+
+  </body>
 
 </html>

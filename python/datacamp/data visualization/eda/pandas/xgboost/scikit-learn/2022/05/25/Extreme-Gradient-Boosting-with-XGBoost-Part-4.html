@@ -23,15 +23,39 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hai Nguyen"},"dateModified":"2022-05-25T00:00:00-05:00","datePublished":"2022-05-25T00:00:00-05:00","description":"Chapter 4 - Using XGBoost in pipelines","headline":"Extreme Gradient Boosting with XGBoost - Part 4 (DataCamp interactive course)","image":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/xgb_part4.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/datacamp/data%20visualization/eda/pandas/xgboost/scikit-learn/2022/05/25/Extreme-Gradient-Boosting-with-XGBoost-Part-4.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/datacamp/data%20visualization/eda/pandas/xgboost/scikit-learn/2022/05/25/Extreme-Gradient-Boosting-with-XGBoost-Part-4.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://unpkg.com/@primer/css@17.3.0/dist/primer.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+
+    var i = 0, j = 0, k = 0;
+
+    document.querySelectorAll('h2, h3, h4').forEach((heading) => {
+
+        if (heading.localName == 'h2') {
+            i++; j = 0; k = 0;
+            heading.setAttribute('data-before', `${i}. `)
+        }
+        if (heading.localName == 'h3') {
+            j++; k = 0;
+            heading.setAttribute('data-before', `${i}.${j}. `)
+        }
+        if (heading.localName == 'h4') {
+            k++;
+            heading.setAttribute('data-before', `${i}.${j}.${k}. `)
+        }
+    });
+});
+</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" integrity="sha512-J8je2SgrCzA7hNBeiCJiA6oETHTTdp3We3EriOgJp6POycGLcDXj5dSwWlAPQcYGeaQ4N3uf30aOg/Nt5pxW2g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" integrity="sha512-1kNZVA50gKlorLAWU83+SdOAUwABzfFFQ4WuOAZTeS/UhNhnm9zU7rDv/Q5NEzSnr5u2L6uhR/+8icjjmHjSnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" integrity="sha512-CzIEOUs11SQ7tekLhEe5gil9kDip4RTJZVf7pSjlxOdVaYYHEcQflhunPz2Q/onNC4slL9jpKjvNgzPAAxEpew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         renderMathInElement( document.body, {
+        globalGroup: true,
         delimiters: [
             {left: "$$", right: "$$", display: true},
             {left: "[%", right: "%]", display: true},
@@ -71,8 +95,13 @@ window.onload = wrap_img;
     elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
     });
 </script>
+
 </head>
-<body><header class="site-header">
+<body>
+
+    <main class="page-content" aria-label="Content" style="padding-top: 0;">
+        <div class="Layout">
+    <div class="Layout-main"><header class="site-header">
 
   <div class="wrapper"><a class="site-title" rel="author" href="/Data-Science-selfstudy-notes-Blog/">Self-study Data Science Projects notes Blog</a><nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
@@ -87,82 +116,74 @@ window.onload = wrap_img;
         <div class="trigger"><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/about/">About Me</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/search/">Search</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/categories/">Tags</a></div>
       </nav></div>
 </header>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Extreme Gradient Boosting with XGBoost - Part 4 (DataCamp interactive course)</h1><p class="page-description">Chapter 4 - Using XGBoost in pipelines</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-05-25T00:00:00-05:00" itemprop="datePublished">
-        May 25, 2022
-      </time>• 
-          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-            <span class="p-author h-card" itemprop="name">Hai Nguyen</span></span>
-       • <span class="read-time" title="Estimated read time">
-    
-    
-      26 min read
-    
-</span></p>
-
-    
-      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
       
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Python">Python</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Datacamp">Datacamp</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Data Visualization">Data Visualization</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#EDA">EDA</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Pandas">Pandas</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#XGBoost">XGBoost</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#scikit-learn">scikit-learn</a>
         
-      
-      </p>
-    
-
-    
-      
-        <div class="pb-5 d-flex flex-justify-center">
-          <div class="px-2">
+          <div class="pb-5 d-flex flex-wrap flex-justify-start" style="padding-left: 52px">
+            <div class="px-2">
 
     <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/Extreme Gradient Boosting with XGBoost/2022-05-25-Extreme Gradient Boosting with XGBoost-Part 4.ipynb" role="button" target="_blank">
 <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/github.svg" alt="View On GitHub">
     </a>
 </div>
 
-          <div class="px-2">
+            <div class="px-2">
     <a href="https://mybinder.org/v2/gh/anhhaibkhn/Data-Science-selfstudy-notes-Blog/master?filepath=_notebooks%2FExtreme+Gradient+Boosting+with+XGBoost%2F2022-05-25-Extreme+Gradient+Boosting+with+XGBoost-Part+4.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/binder.svg" alt="Open In Binder"/>
     </a>
 </div>
 
-          <div class="px-2">
+            <div class="px-2">
     <a href="https://colab.research.google.com/github/anhhaibkhn/Data-Science-selfstudy-notes-Blog/blob/master/_notebooks/Extreme Gradient Boosting with XGBoost/2022-05-25-Extreme Gradient Boosting with XGBoost-Part 4.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/colab.svg" alt="Open In Colab"/>
     </a>
 </div>
-          <div class="px-2">
-  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fanhhaibkhn%2FData-Science-selfstudy-notes-Blog%2Fblob%2Fmaster%2F_notebooks%2FExtreme+Gradient+Boosting+with+XGBoost%2F2022-05-25-Extreme+Gradient+Boosting+with+XGBoost-Part+4.ipynb" target="_blank">
-      <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
-  </a>
-</div>
+          </div>
+        <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">Extreme Gradient Boosting with XGBoost - Part 4 (DataCamp interactive course)</h1><p class="page-description">Chapter 4 - Using XGBoost in pipelines</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-05-25T00:00:00-05:00" itemprop="datePublished">
+            May 25, 2022
+          </time>• 
+              <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <span class="p-author h-card" itemprop="name">Hai Nguyen</span></span>
+           • <span class="read-time" title="Estimated read time">
+    
+    
+      26 min read
+    
+</span></p>
 
-        </div>
+        
+          <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i>
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Python">Python</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Datacamp">Datacamp</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Data Visualization">Data Visualization</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#EDA">EDA</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Pandas">Pandas</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#XGBoost">XGBoost</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#scikit-learn">scikit-learn</a>
+            
+          
+          </p>
+        
+
+
       </header>
 
-  <div class="post-content e-content" itemprop="articleBody">
-    <!--
+      <div class="post-content e-content" itemprop="articleBody">
+        <!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
@@ -312,7 +333,7 @@ Final RMSE: 4.211871629016008
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.1.1-Exploratory-data-analysis">4.1.1 Exploratory data analysis<a class="anchor-link" href="#4.1.1-Exploratory-data-analysis"> </a></h4><p>Before diving into the nitty gritty of pipelines and preprocessing, let's do some exploratory analysis of the original, unprocessed Ames housing dataset. When you worked with this data in previous chapters, we preprocessed it for you so you could focus on the core XGBoost concepts. In this chapter, you'll do the preprocessing yourself!</p>
+<h4 id="Exploratory-data-analysis">Exploratory data analysis<a class="anchor-link" href="#Exploratory-data-analysis"> </a></h4><p>Before diving into the nitty gritty of pipelines and preprocessing, let's do some exploratory analysis of the original, unprocessed Ames housing dataset. When you worked with this data in previous chapters, we preprocessed it for you so you could focus on the core XGBoost concepts. In this chapter, you'll do the preprocessing yourself!</p>
 <p>A smaller version of this original, unprocessed dataset has been pre-loaded into a pandas DataFrame called df. Your task is to explore df in the Shell and pick the option that is incorrect. The larger purpose of this exercise is to understand the kinds of transformations you will need to perform in order to be able to use XGBoost.</p>
 
 </div>
@@ -392,7 +413,7 @@ None
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.1.2-Encoding-categorical-columns-I:-LabelEncoder">4.1.2 Encoding categorical columns I: LabelEncoder<a class="anchor-link" href="#4.1.2-Encoding-categorical-columns-I:-LabelEncoder"> </a></h4><p>Now that you've seen what will need to be done to get the housing data ready for XGBoost, let's go through the process step-by-step.</p>
+<h4 id="Encoding-categorical-columns-I:-LabelEncoder">Encoding categorical columns I: LabelEncoder<a class="anchor-link" href="#Encoding-categorical-columns-I:-LabelEncoder"> </a></h4><p>Now that you've seen what will need to be done to get the housing data ready for XGBoost, let's go through the process step-by-step.</p>
 <p>First, you will need to fill in missing values - as you saw previously, the column LotFrontage has many missing values. Then, you will need to encode any categorical columns in the dataset using one-hot encoding so that they are encoded numerically. You can watch this video from Supervised Learning with scikit-learn for a refresher on the idea.</p>
 <p>The data has five categorical columns: MSZoning, PavedDrive, Neighborhood, BldgType, and HouseStyle. Scikit-learn has a LabelEncoder function that converts the values in each categorical column into integers. You'll practice using this here.</p>
 <ul>
@@ -520,7 +541,7 @@ None
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.1.3-Encoding-categorical-columns-II:-OneHotEncoder">4.1.3 Encoding categorical columns II: OneHotEncoder<a class="anchor-link" href="#4.1.3-Encoding-categorical-columns-II:-OneHotEncoder"> </a></h4><p>Okay - so you have your categorical columns encoded numerically. Can you now move onto using pipelines and XGBoost? Not yet! In the categorical columns of this dataset, there is no natural ordering between the entries. As an example: Using LabelEncoder, the CollgCr Neighborhood was encoded as 5, while the Veenker Neighborhood was encoded as 24, and Crawfor as 6. Is Veenker "greater" than Crawfor and CollgCr? No - and allowing the model to assume this natural ordering may result in poor performance.</p>
+<h4 id="Encoding-categorical-columns-II:-OneHotEncoder">Encoding categorical columns II: OneHotEncoder<a class="anchor-link" href="#Encoding-categorical-columns-II:-OneHotEncoder"> </a></h4><p>Okay - so you have your categorical columns encoded numerically. Can you now move onto using pipelines and XGBoost? Not yet! In the categorical columns of this dataset, there is no natural ordering between the entries. As an example: Using LabelEncoder, the CollgCr Neighborhood was encoded as 5, while the Veenker Neighborhood was encoded as 24, and Crawfor as 6. Is Veenker "greater" than Crawfor and CollgCr? No - and allowing the model to assume this natural ordering may result in poor performance.</p>
 <p>As a result, there is another step needed: You have to apply a one-hot encoding to create binary, or "dummy" variables. You can do this using scikit-learn's OneHotEncoder.</p>
 <ul>
 <li>Instructions<ul>
@@ -612,7 +633,7 @@ None
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.1.4-Encoding-categorical-columns-III:-DictVectorizer">4.1.4 Encoding categorical columns III: DictVectorizer<a class="anchor-link" href="#4.1.4-Encoding-categorical-columns-III:-DictVectorizer"> </a></h4><p>Alright, one final trick before you dive into pipelines. The two step process you just went through - <strong>LabelEncoder</strong> followed by <strong>OneHotEncoder</strong> - can be simplified by using a <strong>DictVectorizer</strong>.</p>
+<h4 id="Encoding-categorical-columns-III:-DictVectorizer">Encoding categorical columns III: DictVectorizer<a class="anchor-link" href="#Encoding-categorical-columns-III:-DictVectorizer"> </a></h4><p>Alright, one final trick before you dive into pipelines. The two step process you just went through - <strong>LabelEncoder</strong> followed by <strong>OneHotEncoder</strong> - can be simplified by using a <strong>DictVectorizer</strong>.</p>
 <p>Using a DictVectorizer on a DataFrame that has been converted to a dictionary allows you to get label encoding as well as one-hot encoding in one go.</p>
 <p>Your task is to work through this strategy in this exercise!</p>
 <ul>
@@ -759,7 +780,7 @@ memory usage: 239.7+ KB
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.1.5-Preprocessing-within-a-pipeline">4.1.5 Preprocessing within a pipeline<a class="anchor-link" href="#4.1.5-Preprocessing-within-a-pipeline"> </a></h4><p>Now that you've seen what steps need to be taken individually to properly process the Ames housing data, let's use the much cleaner and more succinct DictVectorizer approach and put it alongside an XGBoostRegressor inside of a scikit-learn pipeline.</p>
+<h4 id="Preprocessing-within-a-pipeline">Preprocessing within a pipeline<a class="anchor-link" href="#Preprocessing-within-a-pipeline"> </a></h4><p>Now that you've seen what steps need to be taken individually to properly process the Ames housing data, let's use the much cleaner and more succinct DictVectorizer approach and put it alongside an XGBoostRegressor inside of a scikit-learn pipeline.</p>
 <ul>
 <li><p>Instructions</p>
 <ul>
@@ -832,7 +853,7 @@ memory usage: 239.7+ KB
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="4.2-Incorporating-XGBoost-into-pipelines">4.2 Incorporating XGBoost into pipelines<a class="anchor-link" href="#4.2-Incorporating-XGBoost-into-pipelines"> </a></h3><h4 id="4.2.1-Cross-validating-ur-XGBoost-model">4.2.1 Cross-validating ur XGBoost model<a class="anchor-link" href="#4.2.1-Cross-validating-ur-XGBoost-model"> </a></h4><p>In this exercise, you'll go one step further by using the pipeline you've created to preprocess and cross-validate your model.</p>
+<h2 id="Incorporating-XGBoost-into-pipelines">Incorporating XGBoost into pipelines<a class="anchor-link" href="#Incorporating-XGBoost-into-pipelines"> </a></h2><h4 id="Cross-validating-ur-XGBoost-model">Cross-validating ur XGBoost model<a class="anchor-link" href="#Cross-validating-ur-XGBoost-model"> </a></h4><p>In this exercise, you'll go one step further by using the pipeline you've created to preprocess and cross-validate your model.</p>
 <ul>
 <li><p>Instructions</p>
 <ul>
@@ -895,7 +916,7 @@ memory usage: 239.7+ KB
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.2.2-Kidney-disease-case-study-I:-Categorical-Imputer">4.2.2 Kidney disease case study I: Categorical Imputer<a class="anchor-link" href="#4.2.2-Kidney-disease-case-study-I:-Categorical-Imputer"> </a></h4><p>You'll now continue your exploration of using pipelines with a dataset that requires significantly more wrangling. The chronic kidney disease dataset contains both categorical and numeric features, but contains lots of missing values. The goal here is to predict who has chronic kidney disease given various blood indicators as features.</p>
+<h4 id="Kidney-disease-case-study-I:-Categorical-Imputer">Kidney disease case study I: Categorical Imputer<a class="anchor-link" href="#Kidney-disease-case-study-I:-Categorical-Imputer"> </a></h4><p>You'll now continue your exploration of using pipelines with a dataset that requires significantly more wrangling. The chronic kidney disease dataset contains both categorical and numeric features, but contains lots of missing values. The goal here is to predict who has chronic kidney disease given various blood indicators as features.</p>
 <p>As Sergey mentioned in the video, you'll be introduced to a new library, sklearn_pandas, that allows you to chain many more processing steps inside of a pipeline than are currently supported in scikit-learn. Specifically, you'll be able to impute missing categorical values directly using the Categorical_Imputer() class in sklearn_pandas, and the DataFrameMapper() class to apply any arbitrary sklearn-compatible transformer on DataFrame columns, where the resulting output can be either a NumPy array or DataFrame.</p>
 <p>We've also created a transformer called a Dictifier that encapsulates converting a DataFrame using .to_dict("records") without you having to do it explicitly (and so that it works in a pipeline). Finally, we've also provided the list of feature names in kidney_feature_names, the target name in kidney_target_name, the features in X, and the target in y.</p>
 <p>In this exercise, your task is to apply the CategoricalImputer to impute all of the categorical columns in the dataset. You can refer to how the numeric imputation mapper was created as a template. Notice the keyword arguments input_df=True and df_out=True? This is so that you can work with DataFrames instead of arrays. By default, the transformers are passed a numpy array of the selected columns as input, and as a result, the output of the DataFrame mapper is also an array. Scikit-learn transformers have historically been designed to work with numpy arrays, not pandas DataFrames, even though their basic indexing interfaces are similar.</p>
@@ -1347,7 +1368,7 @@ dtype: int64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.2.3-Kidney-disease-case-study-II:-Feature-Union">4.2.3 Kidney disease case study II: Feature Union<a class="anchor-link" href="#4.2.3-Kidney-disease-case-study-II:-Feature-Union"> </a></h4><p>Having separately imputed numeric as well as categorical columns, your task is now to use scikit-learn's FeatureUnion to concatenate their results, which are contained in two separate transformer objects - numeric_imputation_mapper, and categorical_imputation_mapper, respectively.</p>
+<h4 id="Kidney-disease-case-study-II:-Feature-Union">Kidney disease case study II: Feature Union<a class="anchor-link" href="#Kidney-disease-case-study-II:-Feature-Union"> </a></h4><p>Having separately imputed numeric as well as categorical columns, your task is now to use scikit-learn's FeatureUnion to concatenate their results, which are contained in two separate transformer objects - numeric_imputation_mapper, and categorical_imputation_mapper, respectively.</p>
 <p>You may have already encountered FeatureUnion in Machine Learning with the Experts: School Budgets. Just like with pipelines, you have to pass it a list of (string, transformer) tuples, where the first half of each tuple is the name of the transformer.</p>
 <ul>
 <li><p>Instructions</p>
@@ -1386,7 +1407,7 @@ dtype: int64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="4.2.4-Kidney-disease-case-study-III:-Full-pipeline">4.2.4 Kidney disease case study III: Full pipeline<a class="anchor-link" href="#4.2.4-Kidney-disease-case-study-III:-Full-pipeline"> </a></h4><p>It's time to piece together all of the transforms along with an XGBClassifier to build the full pipeline!</p>
+<h4 id="Kidney-disease-case-study-III:-Full-pipeline">Kidney disease case study III: Full pipeline<a class="anchor-link" href="#Kidney-disease-case-study-III:-Full-pipeline"> </a></h4><p>It's time to piece together all of the transforms along with an XGBClassifier to build the full pipeline!</p>
 <p>Besides the numeric_categorical_union that you created in the previous exercise, there are two other transforms needed: the Dictifier() transform which we created for you, and the DictVectorizer().</p>
 <p>After creating the pipeline, your task is to cross-validate it to see how well it performs.</p>
 <ul>
@@ -1567,7 +1588,7 @@ Pipeline(steps=[(&#39;preprocessor&#39;,
 
 
 
-  </div><!-- from https://github.com/utterance/utterances -->
+      </div><!-- from https://github.com/utterance/utterances -->
 <script src="https://utteranc.es/client.js"
         repo="anhhaibkhn/Data-Science-selfstudy-notes-Blog"
         issue-term="title"
@@ -1576,10 +1597,7 @@ Pipeline(steps=[(&#39;preprocessor&#39;,
         crossorigin="anonymous"
         async>
 </script><a class="u-url" href="/Data-Science-selfstudy-notes-Blog/python/datacamp/data%20visualization/eda/pandas/xgboost/scikit-learn/2022/05/25/Extreme-Gradient-Boosting-with-XGBoost-Part-4.html" hidden></a>
-</article>
-
-      </div>
-    </main><footer class="site-footer h-card">
+    </article><footer class="site-footer h-card">
   <data class="u-url" href="/Data-Science-selfstudy-notes-Blog/"></data>
 
   <div class="wrapper">
@@ -1605,6 +1623,13 @@ Pipeline(steps=[(&#39;preprocessor&#39;,
   </div>
 
 </footer>
-</body>
+</div>
+
+
+</div>
+
+    </main>
+
+  </body>
 
 </html>

@@ -23,15 +23,39 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Hai Nguyen"},"dateModified":"2022-08-15T00:00:00-05:00","datePublished":"2022-08-15T00:00:00-05:00","description":"Feature Engineering - You will now get exposure to different types of features. You will modify existing features and create new ones. Also, you will treat the missing data accordingly.","headline":"Winning a Kaggle Competition in Python - Part 3","image":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/winning_kaggle_p3.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/kaggle/datacamp/feature%20engineering/encoding/cross-validation/k-fold/imputing/missing-data/2022/08/15/Chapter_3-Feature-Engineering.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/kaggle/datacamp/feature%20engineering/encoding/cross-validation/k-fold/imputing/missing-data/2022/08/15/Chapter_3-Feature-Engineering.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://unpkg.com/@primer/css@17.3.0/dist/primer.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+
+    var i = 0, j = 0, k = 0;
+
+    document.querySelectorAll('h2, h3, h4').forEach((heading) => {
+
+        if (heading.localName == 'h2') {
+            i++; j = 0; k = 0;
+            heading.setAttribute('data-before', `${i}. `)
+        }
+        if (heading.localName == 'h3') {
+            j++; k = 0;
+            heading.setAttribute('data-before', `${i}.${j}. `)
+        }
+        if (heading.localName == 'h4') {
+            k++;
+            heading.setAttribute('data-before', `${i}.${j}.${k}. `)
+        }
+    });
+});
+</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" integrity="sha512-J8je2SgrCzA7hNBeiCJiA6oETHTTdp3We3EriOgJp6POycGLcDXj5dSwWlAPQcYGeaQ4N3uf30aOg/Nt5pxW2g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" integrity="sha512-1kNZVA50gKlorLAWU83+SdOAUwABzfFFQ4WuOAZTeS/UhNhnm9zU7rDv/Q5NEzSnr5u2L6uhR/+8icjjmHjSnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" integrity="sha512-CzIEOUs11SQ7tekLhEe5gil9kDip4RTJZVf7pSjlxOdVaYYHEcQflhunPz2Q/onNC4slL9jpKjvNgzPAAxEpew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         renderMathInElement( document.body, {
+        globalGroup: true,
         delimiters: [
             {left: "$$", right: "$$", display: true},
             {left: "[%", right: "%]", display: true},
@@ -71,8 +95,48 @@ window.onload = wrap_img;
     elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
     });
 </script>
+
 </head>
-<body><header class="site-header">
+<body>
+
+    <main class="page-content" aria-label="Content" style="padding-top: 0;">
+        <div class="Layout">
+    
+      <div class="Layout-sidebar">
+        <div id="toc" class="pt-3 pl-3 sticky">
+          <b><a href="#">Winning a Kaggle Competition in Python - Part 3</a></b>
+          <ol id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Feature-Engineering">Feature Engineering </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#Arithmetical-features">Arithmetical features </a></li>
+<li class="toc-entry toc-h3"><a href="#Date-features">Date features </a></li>
+<li class="toc-entry toc-h3"><a href="#Categorical-features">Categorical features </a></li>
+</ol>
+</li>
+<li class="toc-entry toc-h2"><a href="#Encoding">Encoding </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#Label-encoding">Label encoding </a></li>
+<li class="toc-entry toc-h3"><a href="#One-Hot-encoding">One-Hot encoding </a></li>
+<li class="toc-entry toc-h3"><a href="#Target-encoding">Target encoding </a></li>
+<li class="toc-entry toc-h3"><a href="#Mean-target-encoding">Mean target encoding </a></li>
+</ol>
+</li>
+<li class="toc-entry toc-h2"><a href="#Cross-Validation">Cross Validation </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#K-fold-cross-validation">K-fold cross-validation </a></li>
+<li class="toc-entry toc-h3"><a href="#Beyond-binary-classification">Beyond binary classification </a></li>
+</ol>
+</li>
+<li class="toc-entry toc-h2"><a href="#Missing-Data">Missing Data </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#Find-Missing-Data">Find Missing Data </a></li>
+<li class="toc-entry toc-h3"><a href="#Imputing-Missing-Data">Imputing Missing Data </a></li>
+</ol>
+</li>
+</ol>
+        </div>
+      </div>
+    <div class="Layout-main"><header class="site-header">
 
   <div class="wrapper"><a class="site-title" rel="author" href="/Data-Science-selfstudy-notes-Blog/">Self-study Data Science Projects notes Blog</a><nav class="site-nav">
         <input type="checkbox" id="nav-trigger" class="nav-trigger" />
@@ -87,113 +151,77 @@ window.onload = wrap_img;
         <div class="trigger"><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/about/">About Me</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/search/">Search</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/categories/">Tags</a></div>
       </nav></div>
 </header>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Winning a Kaggle Competition in Python - Part 3</h1><p class="page-description">Feature Engineering - You will now get exposure to different types of features. You will modify existing features and create new ones. Also, you will treat the missing data accordingly.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-08-15T00:00:00-05:00" itemprop="datePublished">
-        Aug 15, 2022
-      </time>• 
-          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-            <span class="p-author h-card" itemprop="name">Hai Nguyen</span></span>
-       • <span class="read-time" title="Estimated read time">
-    
-    
-      16 min read
-    
-</span></p>
-
-    
-      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i> 
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
       
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Kaggle">Kaggle</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Datacamp">Datacamp</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Feature Engineering">Feature Engineering</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Encoding">Encoding</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Cross-Validation">Cross-Validation</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#K-fold">K-fold</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Imputing">Imputing</a>
-        &nbsp;
-      
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Missing-Data">Missing-Data</a>
         
-      
-      </p>
-    
-
-    
-      
-        <div class="pb-5 d-flex flex-justify-center">
-          <div class="px-2">
+          <div class="pb-5 d-flex flex-wrap flex-justify-start" style="padding-left: 52px">
+            <div class="px-2">
 
     <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/Winning a Kaggle Competition in Python/2022-08-15-Chapter_3 Feature Engineering.ipynb" role="button" target="_blank">
 <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/github.svg" alt="View On GitHub">
     </a>
 </div>
 
-          <div class="px-2">
+            <div class="px-2">
     <a href="https://mybinder.org/v2/gh/anhhaibkhn/Data-Science-selfstudy-notes-Blog/master?filepath=_notebooks%2FWinning+a+Kaggle+Competition+in+Python%2F2022-08-15-Chapter_3+Feature+Engineering.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/binder.svg" alt="Open In Binder"/>
     </a>
 </div>
 
-          <div class="px-2">
+            <div class="px-2">
     <a href="https://colab.research.google.com/github/anhhaibkhn/Data-Science-selfstudy-notes-Blog/blob/master/_notebooks/Winning a Kaggle Competition in Python/2022-08-15-Chapter_3 Feature Engineering.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/colab.svg" alt="Open In Colab"/>
     </a>
 </div>
-          <div class="px-2">
-  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fanhhaibkhn%2FData-Science-selfstudy-notes-Blog%2Fblob%2Fmaster%2F_notebooks%2FWinning+a+Kaggle+Competition+in+Python%2F2022-08-15-Chapter_3+Feature+Engineering.ipynb" target="_blank">
-      <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
-  </a>
-</div>
+          </div>
+        <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">Winning a Kaggle Competition in Python - Part 3</h1><p class="page-description">Feature Engineering - You will now get exposure to different types of features. You will modify existing features and create new ones. Also, you will treat the missing data accordingly.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-08-15T00:00:00-05:00" itemprop="datePublished">
+            Aug 15, 2022
+          </time>• 
+              <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <span class="p-author h-card" itemprop="name">Hai Nguyen</span></span>
+           • <span class="read-time" title="Estimated read time">
+    
+    
+      16 min read
+    
+</span></p>
 
-        </div>
+        
+          <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i>
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Kaggle">Kaggle</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Datacamp">Datacamp</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Feature Engineering">Feature Engineering</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Encoding">Encoding</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Cross-Validation">Cross-Validation</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#K-fold">K-fold</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Imputing">Imputing</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Missing-Data">Missing-Data</a>
+            
+          
+          </p>
+        
+
+
       </header>
 
-  <div class="post-content e-content" itemprop="articleBody">
-    <ul id="toc" class="section-nav">
-<li class="toc-entry toc-h2"><a href="#3.1-Feature-Engineering">3.1 Feature Engineering </a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#3.1.1-Arithmetical-features">3.1.1 Arithmetical features </a></li>
-<li class="toc-entry toc-h3"><a href="#3.1.2-Date-features">3.1.2 Date features </a></li>
-<li class="toc-entry toc-h3"><a href="#3.1.3-Categorical-features">3.1.3 Categorical features </a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#3.2-Encoding">3.2 Encoding </a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#3.2.1-Label-encoding">3.2.1 Label encoding </a></li>
-<li class="toc-entry toc-h3"><a href="#3.2.2-One-Hot-encoding">3.2.2 One-Hot encoding </a></li>
-<li class="toc-entry toc-h3"><a href="#3.2.3-Target-encoding">3.2.3 Target encoding </a></li>
-<li class="toc-entry toc-h3"><a href="#3.2.4-Mean-target-encoding">3.2.4 Mean target encoding </a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#3.3-Cross-Validation">3.3 Cross Validation </a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#3.3.1-K-fold-cross-validation">3.3.1 K-fold cross-validation </a></li>
-<li class="toc-entry toc-h3"><a href="#3.3.2-Beyond-binary-classification">3.3.2 Beyond binary classification </a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#3.4-Missing-Data">3.4 Missing Data </a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#3.4.1-Find-Missing-Data">3.4.1 Find Missing Data </a></li>
-<li class="toc-entry toc-h3"><a href="#3.4.2-Imputing-Missing-Data">3.4.2 Imputing Missing Data </a></li>
-</ul>
-</li>
-</ul><!--
+      <div class="post-content e-content" itemprop="articleBody">
+        <!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
@@ -212,7 +240,7 @@ window.onload = wrap_img;
 <div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.expand_frame_repr'</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.expand_frame_repr&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -222,17 +250,13 @@ window.onload = wrap_img;
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.1-Feature-Engineering">
-<a class="anchor" href="#3.1-Feature-Engineering" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1 Feature Engineering<a class="anchor-link" href="#3.1-Feature-Engineering"> </a>
-</h2>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/solution_workflow2.png" alt="Solution Workflow"></p>
+<h2 id="Feature-Engineering">Feature Engineering<a class="anchor-link" href="#Feature-Engineering"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/solution_workflow2.png" alt="Solution Workflow" /></p>
 <p>Like a Marathon, we iterate the following processs:</p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/modeling.png" alt="Modeling"></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/modeling.png" alt="Modeling" /></p>
 <p>Feature Engineering with Domain Knowledge:</p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/domain.png" alt="Domain"></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/domain.png" alt="Domain" /></p>
 <p>Feature Types:</p>
 <ul>
 <li>Numerical </li>
@@ -244,18 +268,14 @@ window.onload = wrap_img;
 etc.</li>
 </ul>
 <p>Creating Features:</p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/creating_features.png" alt="Creating Features"></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/creating_features.png" alt="Creating Features" /></p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.1.1-Arithmetical-features">
-<a class="anchor" href="#3.1.1-Arithmetical-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1.1 Arithmetical features<a class="anchor-link" href="#3.1.1-Arithmetical-features"> </a>
-</h3>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/Arithm_features.png" alt=""></p>
+<h3 id="Arithmetical-features">Arithmetical features<a class="anchor-link" href="#Arithmetical-features"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/Arithm_features.png" alt="" /></p>
 <p>Arithmetical features (Exercise):</p>
 <p>To practice creating new features, you will be working with a subsample from the Kaggle competition called "House Prices: Advanced Regression Techniques". The goal of this competition is to predict the price of the house based on its properties. It's a regression problem with Root Mean Squared Error as an evaluation metric.</p>
 <p>Your goal is to create new features and determine whether they improve your validation score. To get the validation score from 5-fold cross-validation, you're given the get_kfold_rmse() function. Use it with the train DataFrame, available in your workspace, as an argument.</p>
@@ -274,8 +294,8 @@ etc.</li>
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./datasets/house_prices_train.csv'</span><span class="p">)</span>
-<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./datasets/house_prices_test.csv'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/house_prices_train.csv&#39;</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/house_prices_test.csv&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -305,7 +325,7 @@ etc.</li>
 
     <span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">kf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">train</span><span class="p">):</span>
         <span class="n">train</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">fillna</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-        <span class="n">feats</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">train</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">'Id'</span><span class="p">,</span> <span class="s1">'SalePrice'</span><span class="p">,</span> <span class="s1">'RoofStyle'</span><span class="p">,</span> <span class="s1">'CentralAir'</span><span class="p">]]</span>
+        <span class="n">feats</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">train</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s1">&#39;Id&#39;</span><span class="p">,</span> <span class="s1">&#39;SalePrice&#39;</span><span class="p">,</span> <span class="s1">&#39;RoofStyle&#39;</span><span class="p">,</span> <span class="s1">&#39;CentralAir&#39;</span><span class="p">]]</span>
         
         <span class="n">fold_train</span><span class="p">,</span> <span class="n">fold_test</span> <span class="o">=</span> <span class="n">train</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">train_index</span><span class="p">],</span> <span class="n">train</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span>
 
@@ -314,12 +334,12 @@ etc.</li>
         <span class="n">rf</span> <span class="o">=</span> <span class="n">RandomForestRegressor</span><span class="p">(</span><span class="n">n_estimators</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">min_samples_split</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
 
         <span class="c1"># Train a model</span>
-        <span class="n">rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">fold_train</span><span class="p">[</span><span class="n">feats</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">fold_train</span><span class="p">[</span><span class="s1">'SalePrice'</span><span class="p">])</span>
+        <span class="n">rf</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="o">=</span><span class="n">fold_train</span><span class="p">[</span><span class="n">feats</span><span class="p">],</span> <span class="n">y</span><span class="o">=</span><span class="n">fold_train</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">])</span>
 
         <span class="c1"># Get predictions for the test set</span>
         <span class="n">pred</span> <span class="o">=</span> <span class="n">rf</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">fold_test</span><span class="p">[</span><span class="n">feats</span><span class="p">])</span>
     
-        <span class="n">fold_score</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">fold_test</span><span class="p">[</span><span class="s1">'SalePrice'</span><span class="p">],</span> <span class="n">pred</span><span class="p">)</span>
+        <span class="n">fold_score</span> <span class="o">=</span> <span class="n">mean_squared_error</span><span class="p">(</span><span class="n">fold_test</span><span class="p">[</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">],</span> <span class="n">pred</span><span class="p">)</span>
         <span class="n">mse_scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">fold_score</span><span class="p">))</span>
         
     <span class="k">return</span> <span class="nb">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">mse_scores</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">mse_scores</span><span class="p">),</span> <span class="mi">2</span><span class="p">)</span>
@@ -327,19 +347,19 @@ etc.</li>
 
 
 <span class="c1"># Look at the initial RMSE</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'RMSE before feature engineering:'</span><span class="p">,</span> <span class="n">get_kfold_rmse</span><span class="p">(</span><span class="n">train</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RMSE before feature engineering:&#39;</span><span class="p">,</span> <span class="n">get_kfold_rmse</span><span class="p">(</span><span class="n">train</span><span class="p">))</span>
 
 <span class="c1"># Find the total area of the house</span>
-<span class="n">train</span><span class="p">[</span><span class="s1">'TotalArea'</span><span class="p">]</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">'TotalBsmtSF'</span><span class="p">]</span> <span class="o">+</span> <span class="n">train</span><span class="p">[</span><span class="s1">'1stFlrSF'</span><span class="p">]</span> <span class="o">+</span> <span class="n">train</span><span class="p">[</span><span class="s1">'2ndFlrSF'</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'RMSE with total area:'</span><span class="p">,</span> <span class="n">get_kfold_rmse</span><span class="p">(</span><span class="n">train</span><span class="p">))</span>
+<span class="n">train</span><span class="p">[</span><span class="s1">&#39;TotalArea&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;TotalBsmtSF&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;1stFlrSF&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;2ndFlrSF&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RMSE with total area:&#39;</span><span class="p">,</span> <span class="n">get_kfold_rmse</span><span class="p">(</span><span class="n">train</span><span class="p">))</span>
 
 <span class="c1"># Find the area of the garden</span>
-<span class="n">train</span><span class="p">[</span><span class="s1">'GardenArea'</span><span class="p">]</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">'LotArea'</span><span class="p">]</span> <span class="o">-</span> <span class="n">train</span><span class="p">[</span><span class="s1">'1stFlrSF'</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'RMSE with garden area:'</span><span class="p">,</span> <span class="n">get_kfold_rmse</span><span class="p">(</span><span class="n">train</span><span class="p">))</span>
+<span class="n">train</span><span class="p">[</span><span class="s1">&#39;GardenArea&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;LotArea&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="n">train</span><span class="p">[</span><span class="s1">&#39;1stFlrSF&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RMSE with garden area:&#39;</span><span class="p">,</span> <span class="n">get_kfold_rmse</span><span class="p">(</span><span class="n">train</span><span class="p">))</span>
 
 <span class="c1"># Find total number of bathrooms</span>
-<span class="n">train</span><span class="p">[</span><span class="s1">'TotalBath'</span><span class="p">]</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s2">"FullBath"</span><span class="p">]</span> <span class="o">+</span> <span class="n">train</span><span class="p">[</span><span class="s2">"HalfBath"</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="s1">'RMSE with number of bathrooms:'</span><span class="p">,</span> <span class="n">get_kfold_rmse</span><span class="p">(</span><span class="n">train</span><span class="p">))</span>
+<span class="n">train</span><span class="p">[</span><span class="s1">&#39;TotalBath&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">train</span><span class="p">[</span><span class="s2">&quot;FullBath&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="n">train</span><span class="p">[</span><span class="s2">&quot;HalfBath&quot;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">&#39;RMSE with number of bathrooms:&#39;</span><span class="p">,</span> <span class="n">get_kfold_rmse</span><span class="p">(</span><span class="n">train</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -366,28 +386,22 @@ RMSE with number of bathrooms: 34506.78
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p> Nice! You've created three new features. Here you see that house area improved the RMSE by almost 1,000 USD. Adding garden area improved the RMSE by another 600. However, with the total number of bathrooms, the RMSE has increased. It means that you keep the new area features, but DO NOT ADD "TotalBath" as a new feature. Let's now work with the datetime features! </p>
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.1.2-Date-features">
-<a class="anchor" href="#3.1.2-Date-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1.2 Date features<a class="anchor-link" href="#3.1.2-Date-features"> </a>
-</h3>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/date_features.png" alt=""></p>
+<h3 id="Date-features">Date features<a class="anchor-link" href="#Date-features"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/date_features.png" alt="" /></p>
 <p>then we can use pandas dt method, to get the attributes which we want.</p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/date_features2.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/date_features2.png" alt="" /></p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Date features (Exercise):</p>
 <p>You've built some basic features using numerical variables. Now, it's time to create features based on date and time. You will practice on a subsample from the Taxi Fare Prediction Kaggle competition data. The data represents information about the taxi rides and the goal is to predict the price for each ride.</p>
@@ -410,8 +424,8 @@ RMSE with number of bathrooms: 34506.78
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./datasets/taxi_train_chapter_4.csv'</span><span class="p">)</span>
-<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./datasets/taxi_test_chapter_4.csv'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/taxi_train_chapter_4.csv&#39;</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/taxi_test_chapter_4.csv&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -431,17 +445,17 @@ RMSE with number of bathrooms: 34506.78
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">taxi</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">])</span>
 
 <span class="c1"># Convert pickup date to datetime object</span>
-<span class="n">taxi</span><span class="p">[</span><span class="s1">'pickup_datetime'</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">taxi</span><span class="p">[</span><span class="s1">'pickup_datetime'</span><span class="p">])</span>
+<span class="n">taxi</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">taxi</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">])</span>
 
 <span class="c1"># Create a day of week feature</span>
-<span class="n">taxi</span><span class="p">[</span><span class="s1">'dayofweek'</span><span class="p">]</span> <span class="o">=</span> <span class="n">taxi</span><span class="p">[</span><span class="s1">'pickup_datetime'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofweek</span>
+<span class="n">taxi</span><span class="p">[</span><span class="s1">&#39;dayofweek&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">taxi</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">dayofweek</span>
 
 <span class="c1"># Create an hour feature</span>
-<span class="n">taxi</span><span class="p">[</span><span class="s1">'hour'</span><span class="p">]</span> <span class="o">=</span> <span class="n">taxi</span><span class="p">[</span><span class="s1">'pickup_datetime'</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
+<span class="n">taxi</span><span class="p">[</span><span class="s1">&#39;hour&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">taxi</span><span class="p">[</span><span class="s1">&#39;pickup_datetime&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">hour</span>
 
 <span class="c1"># Split back into train and test</span>
-<span class="n">new_train</span> <span class="o">=</span> <span class="n">taxi</span><span class="p">[</span><span class="n">taxi</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">'id'</span><span class="p">])]</span>
-<span class="n">new_test</span> <span class="o">=</span> <span class="n">taxi</span><span class="p">[</span><span class="n">taxi</span><span class="p">[</span><span class="s1">'id'</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">'id'</span><span class="p">])]</span>
+<span class="n">new_train</span> <span class="o">=</span> <span class="n">taxi</span><span class="p">[</span><span class="n">taxi</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">train</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])]</span>
+<span class="n">new_test</span> <span class="o">=</span> <span class="n">taxi</span><span class="p">[</span><span class="n">taxi</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">isin</span><span class="p">(</span><span class="n">test</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">])]</span>
 </pre></div>
 
     </div>
@@ -451,45 +465,33 @@ RMSE with number of bathrooms: 34506.78
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Great! Now you know how to perform feature engineering for train and test DataFrames simultaneously. Having considered numerical and datetime features, move forward to master feature engineering for categorical ones!</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.1.3-Categorical-features">
-<a class="anchor" href="#3.1.3-Categorical-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.1.3 Categorical features<a class="anchor-link" href="#3.1.3-Categorical-features"> </a>
-</h3>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/categorical_features.png" alt=""></p>
+<h3 id="Categorical-features">Categorical features<a class="anchor-link" href="#Categorical-features"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/categorical_features.png" alt="" /></p>
 <p>Example:</p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/categorical_features2.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/categorical_features2.png" alt="" /></p>
 <p>Label encoding is working, but it may affect to the results since it creates ranking data:</p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/categorical_features3.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/categorical_features3.png" alt="" /></p>
 <p>To overcome the label encoding problem, use One-Hot encoding:
-<img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/onehot.png" alt=""></p>
+<img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/onehot.png" alt="" /></p>
 <p>Binary Features:
-<img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/binary_feat.png" alt=""></p>
+<img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/binary_feat.png" alt="" /></p>
 <p>Other encoding methods:
-<img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/other_encoding.png" alt=""></p>
+<img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/other_encoding.png" alt="" /></p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.2-Encoding">
-<a class="anchor" href="#3.2-Encoding" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.2 Encoding<a class="anchor-link" href="#3.2-Encoding"> </a>
-</h2>
-<h3 id="3.2.1-Label-encoding">
-<a class="anchor" href="#3.2.1-Label-encoding" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.2.1 Label encoding<a class="anchor-link" href="#3.2.1-Label-encoding"> </a>
-</h3>
-<p>Label encoding (Exercise):</p>
+<h2 id="Encoding">Encoding<a class="anchor-link" href="#Encoding"> </a></h2><h3 id="Label-encoding">Label encoding<a class="anchor-link" href="#Label-encoding"> </a></h3><p>Label encoding (Exercise):</p>
 <p>Let's work on categorical variables encoding. You will again work with a subsample from the House Prices Kaggle competition.</p>
 <p>Your objective is to encode categorical features "RoofStyle" and "CentralAir" using label encoding. The train and test DataFrames are already available in your workspace.</p>
 <p>Instructions:</p>
@@ -509,8 +511,8 @@ RMSE with number of bathrooms: 34506.78
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./datasets/house_prices_train.csv'</span><span class="p">)</span>
-<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./datasets/house_prices_test.csv'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/house_prices_train.csv&#39;</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/house_prices_test.csv&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -534,11 +536,11 @@ RMSE with number of bathrooms: 34506.78
 <span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
 
 <span class="c1"># Create new features</span>
-<span class="n">houses</span><span class="p">[</span><span class="s1">'RoofStyle_enc'</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">houses</span><span class="p">[</span><span class="s1">'RoofStyle'</span><span class="p">])</span>
-<span class="n">houses</span><span class="p">[</span><span class="s1">'CentralAir_enc'</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">houses</span><span class="p">[</span><span class="s1">'CentralAir'</span><span class="p">])</span>
+<span class="n">houses</span><span class="p">[</span><span class="s1">&#39;RoofStyle_enc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">houses</span><span class="p">[</span><span class="s1">&#39;RoofStyle&#39;</span><span class="p">])</span>
+<span class="n">houses</span><span class="p">[</span><span class="s1">&#39;CentralAir_enc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">houses</span><span class="p">[</span><span class="s1">&#39;CentralAir&#39;</span><span class="p">])</span>
 
 <span class="c1"># Look at new features</span>
-<span class="n">display</span><span class="p">(</span><span class="n">houses</span><span class="p">[[</span><span class="s1">'RoofStyle'</span><span class="p">,</span> <span class="s1">'RoofStyle_enc'</span><span class="p">,</span> <span class="s1">'CentralAir'</span><span class="p">,</span> <span class="s1">'CentralAir_enc'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">houses</span><span class="p">[[</span><span class="s1">&#39;RoofStyle&#39;</span><span class="p">,</span> <span class="s1">&#39;RoofStyle_enc&#39;</span><span class="p">,</span> <span class="s1">&#39;CentralAir&#39;</span><span class="p">,</span> <span class="s1">&#39;CentralAir_enc&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 
     </div>
@@ -625,21 +627,16 @@ RMSE with number of bathrooms: 34506.78
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>All right! You can see that categorical variables have been label encoded. However, as you already know, label encoder is not always a good choice for categorical variables. Let's go further and apply One-Hot encoding.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.2-One-Hot-encoding">
-<a class="anchor" href="#3.2.2-One-Hot-encoding" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.2.2 One-Hot encoding<a class="anchor-link" href="#3.2.2-One-Hot-encoding"> </a>
-</h3>
-<p>One-Hot encoding (Exercise)
+<h3 id="One-Hot-encoding">One-Hot encoding<a class="anchor-link" href="#One-Hot-encoding"> </a></h3><p>One-Hot encoding (Exercise)
 The problem with label encoding is that it implicitly assumes that there is a ranking dependency between the categories. So, let's change the encoding method for the features "RoofStyle" and "CentralAir" to one-hot encoding. Again, the train and test DataFrames from House Prices Kaggle competition are already available in your workspace.</p>
 <p>Recall that if you're dealing with binary features (categorical features with only two categories) it is suggested to apply label encoder only.</p>
 <p>Your goal is to determine which of the mentioned features is not binary, and to apply one-hot encoding only to this one.</p>
@@ -662,8 +659,8 @@ The problem with label encoding is that it implicitly assumes that there is a ra
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">houses</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">])</span>
 
 <span class="c1"># Look at feature distributions</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">houses</span><span class="p">[</span><span class="s1">'RoofStyle'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(),</span> <span class="s1">'</span><span class="se">\n</span><span class="s1">'</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">houses</span><span class="p">[</span><span class="s1">'CentralAir'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">houses</span><span class="p">[</span><span class="s1">&#39;RoofStyle&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">houses</span><span class="p">[</span><span class="s1">&#39;CentralAir&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
 </pre></div>
 
     </div>
@@ -704,24 +701,24 @@ Name: CentralAir, dtype: int64
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">'display.expand_frame_repr'</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.expand_frame_repr&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
 <span class="c1"># Concatenate train and test together</span>
 <span class="n">houses</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">train</span><span class="p">,</span> <span class="n">test</span><span class="p">])</span>
 
-<span class="c1"># Label encode binary 'CentralAir' feature</span>
+<span class="c1"># Label encode binary &#39;CentralAir&#39; feature</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">LabelEncoder</span>
 <span class="n">le</span> <span class="o">=</span> <span class="n">LabelEncoder</span><span class="p">()</span>
-<span class="n">houses</span><span class="p">[</span><span class="s1">'CentralAir_enc'</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">houses</span><span class="p">[</span><span class="s1">'CentralAir'</span><span class="p">])</span>
+<span class="n">houses</span><span class="p">[</span><span class="s1">&#39;CentralAir_enc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">le</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">houses</span><span class="p">[</span><span class="s1">&#39;CentralAir&#39;</span><span class="p">])</span>
 
 <span class="c1"># Create One-Hot encoded features</span>
-<span class="n">ohe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">houses</span><span class="p">[</span><span class="s1">'RoofStyle'</span><span class="p">],</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">'RoofStyle'</span><span class="p">)</span>
+<span class="n">ohe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">houses</span><span class="p">[</span><span class="s1">&#39;RoofStyle&#39;</span><span class="p">],</span> <span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;RoofStyle&#39;</span><span class="p">)</span>
 
 <span class="c1"># Concatenate OHE features to houses</span>
 <span class="n">houses</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">houses</span><span class="p">,</span> <span class="n">ohe</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 
 <span class="c1"># Look at OHE features</span>
-<span class="n">display</span><span class="p">(</span><span class="n">houses</span><span class="p">[[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">houses</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s1">'RoofStyle'</span> <span class="ow">in</span> <span class="n">col</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">display</span><span class="p">(</span><span class="n">houses</span><span class="p">[[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">houses</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="s1">&#39;RoofStyle&#39;</span> <span class="ow">in</span> <span class="n">col</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -806,8 +803,7 @@ Name: CentralAir, dtype: int64
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Question
 Which of the features is binary?
@@ -816,39 +812,31 @@ Which of the features is binary?
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.3-Target-encoding">
-<a class="anchor" href="#3.2.3-Target-encoding" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.2.3 Target encoding<a class="anchor-link" href="#3.2.3-Target-encoding"> </a>
-</h3>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/target_encode.png" alt=""></p>
+<h3 id="Target-encoding">Target encoding<a class="anchor-link" href="#Target-encoding"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/target_encode.png" alt="" /></p>
 <p>High cardinality categorical features:</p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/high_cardinality_problem.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/mean_target_encoding1.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/mean_target_encoding2.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/mean_target_encoding3.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/mean_target_encoding4.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/high_cardinality_problem.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/mean_target_encoding1.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/mean_target_encoding2.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/mean_target_encoding3.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/mean_target_encoding4.png" alt="" /></p>
 <p>Some extra tips:</p>
 <ul>
 <li>Smoothing</li>
 </ul>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/mean_target_encoding5.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/mean_target_encoding5.png" alt="" /></p>
 <ul>
 <li>Global mean for new category: (C: 2/5 = 0.4)</li>
 </ul>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/mean_target_encoding6.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/mean_target_encoding6.png" alt="" /></p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.2.4-Mean-target-encoding">
-<a class="anchor" href="#3.2.4-Mean-target-encoding" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.2.4 Mean target encoding<a class="anchor-link" href="#3.2.4-Mean-target-encoding"> </a>
-</h3>
-<p>Mean target encoding (Exercise):</p>
+<h3 id="Mean-target-encoding">Mean target encoding<a class="anchor-link" href="#Mean-target-encoding"> </a></h3><p>Mean target encoding (Exercise):</p>
 <p>First of all, you will create a function that implements mean target encoding. Remember that you need to develop the two following steps:</p>
 <p>Calculate the mean on the train, apply to the test
 Split train into K folds. Calculate the out-of-fold mean for each fold, apply to this particular fold
@@ -894,8 +882,7 @@ Each of these steps will be implemented in a separate function: test_mean_target
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>To calculate the train mean encoded feature you need to use out-of-fold statistics, splitting train into several folds. Specify the train and test indices for each validation split to access it.</li>
@@ -914,7 +901,7 @@ Each of these steps will be implemented in a separate function: test_mean_target
 <div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">train_mean_target_encoding</span><span class="p">(</span><span class="n">train</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span> <span class="n">categorical</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
     <span class="c1"># Create 5-fold cross-validation</span>
     <span class="n">kf</span> <span class="o">=</span> <span class="n">KFold</span><span class="p">(</span><span class="n">n_splits</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">123</span><span class="p">,</span> <span class="n">shuffle</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">train_feature</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">train</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">'float'</span><span class="p">)</span>
+    <span class="n">train_feature</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="n">train</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;float&#39;</span><span class="p">)</span>
     
     <span class="c1"># For each folds split</span>
     <span class="k">for</span> <span class="n">train_index</span><span class="p">,</span> <span class="n">test_index</span> <span class="ow">in</span> <span class="n">kf</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">train</span><span class="p">):</span>
@@ -935,8 +922,7 @@ Each of these steps will be implemented in a separate function: test_mean_target
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>Finally, you just calculate train and test target mean encoded features and return them from the function. So, return train_feature and test_feature obtained.</li>
@@ -971,24 +957,16 @@ Each of these steps will be implemented in a separate function: test_mean_target
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Now you are equipped with a function that performs mean target encoding of any categorical feature. Move on to learn how to implement mean target encoding for the K-fold cross-validation using the mean_target_encoding() function you've just built!</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.3-Cross-Validation">
-<a class="anchor" href="#3.3-Cross-Validation" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.3 Cross Validation<a class="anchor-link" href="#3.3-Cross-Validation"> </a>
-</h2>
-<h3 id="3.3.1-K-fold-cross-validation">
-<a class="anchor" href="#3.3.1-K-fold-cross-validation" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.3.1 K-fold cross-validation<a class="anchor-link" href="#3.3.1-K-fold-cross-validation"> </a>
-</h3>
-<p>K-fold cross-validation (Exercise)</p>
+<h2 id="Cross-Validation">Cross Validation<a class="anchor-link" href="#Cross-Validation"> </a></h2><h3 id="K-fold-cross-validation">K-fold cross-validation<a class="anchor-link" href="#K-fold-cross-validation"> </a></h3><p>K-fold cross-validation (Exercise)</p>
 <p>You will work with a binary classification problem on a subsample from Kaggle playground competition. The objective of this competition is to predict whether a famous basketball player Kobe Bryant scored a basket or missed a particular shot.</p>
 <p>Train data is available in your workspace as bryant_shots DataFrame. It contains data on 10,000 shots with its properties and a target variable "shot_made_flag" -- whether shot was scored or not.</p>
 <p>One of the features in the data is "game_id" -- a particular game where the shot was made. There are 541 distinct games. So, you deal with a <strong>high-cardinality</strong> categorical feature. Let's encode it using <strong>a target mean</strong>!</p>
@@ -1010,7 +988,7 @@ Each of these steps will be implemented in a separate function: test_mean_target
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bryant_shots</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./datasets/bryant_shots.csv'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">bryant_shots</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/bryant_shots.csv&#39;</span><span class="p">)</span>
 
 <span class="n">display</span><span class="p">(</span><span class="n">bryant_shots</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 <span class="n">display</span><span class="p">(</span><span class="n">bryant_shots</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
@@ -1263,7 +1241,7 @@ Each of these steps will be implemented in a separate function: test_mean_target
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>&lt;class 'pandas.core.frame.DataFrame'&gt;
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 RangeIndex: 10000 entries, 0 to 9999
 Data columns (total 10 columns):
  #   Column             Non-Null Count  Dtype  
@@ -1322,13 +1300,13 @@ memory usage: 781.4+ KB
     <span class="n">cv_train</span><span class="p">,</span> <span class="n">cv_test</span> <span class="o">=</span> <span class="n">bryant_shots</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">train_index</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">(),</span> <span class="n">bryant_shots</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">test_index</span><span class="p">]</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
     <span class="c1"># Create mean target encoded feature</span>
-    <span class="n">cv_train</span><span class="p">[</span><span class="s1">'game_id_enc'</span><span class="p">],</span> <span class="n">cv_test</span><span class="p">[</span><span class="s1">'game_id_enc'</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_target_encoding</span><span class="p">(</span><span class="n">train</span><span class="o">=</span><span class="n">cv_train</span><span class="p">,</span>
+    <span class="n">cv_train</span><span class="p">[</span><span class="s1">&#39;game_id_enc&#39;</span><span class="p">],</span> <span class="n">cv_test</span><span class="p">[</span><span class="s1">&#39;game_id_enc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_target_encoding</span><span class="p">(</span><span class="n">train</span><span class="o">=</span><span class="n">cv_train</span><span class="p">,</span>
                                                                            <span class="n">test</span><span class="o">=</span><span class="n">cv_test</span><span class="p">,</span>
-                                                                           <span class="n">target</span><span class="o">=</span><span class="s1">'shot_made_flag'</span><span class="p">,</span>
-                                                                           <span class="n">categorical</span><span class="o">=</span><span class="s1">'game_id'</span><span class="p">,</span>
+                                                                           <span class="n">target</span><span class="o">=</span><span class="s1">&#39;shot_made_flag&#39;</span><span class="p">,</span>
+                                                                           <span class="n">categorical</span><span class="o">=</span><span class="s1">&#39;game_id&#39;</span><span class="p">,</span>
                                                                            <span class="n">alpha</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
     <span class="c1"># Look at the encoding</span>
-    <span class="n">display</span><span class="p">(</span><span class="n">cv_train</span><span class="p">[[</span><span class="s1">'game_id'</span><span class="p">,</span> <span class="s1">'shot_made_flag'</span><span class="p">,</span> <span class="s1">'game_id_enc'</span><span class="p">]]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">cv_train</span><span class="p">[[</span><span class="s1">&#39;game_id&#39;</span><span class="p">,</span> <span class="s1">&#39;shot_made_flag&#39;</span><span class="p">,</span> <span class="s1">&#39;game_id_enc&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 
     </div>
@@ -1549,21 +1527,16 @@ memory usage: 781.4+ KB
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>You could see different game encodings for each validation split in the output. The main conclusion you should make: <strong>while using local cross-validation, you need to repeat mean target encoding procedure inside each folds split separately</strong>. Go on to try other problem types beyond binary classification!</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.3.2-Beyond-binary-classification">
-<a class="anchor" href="#3.3.2-Beyond-binary-classification" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.3.2 Beyond binary classification<a class="anchor-link" href="#3.3.2-Beyond-binary-classification"> </a>
-</h3>
-<p>Beyond binary classification (Exercise)</p>
+<h3 id="Beyond-binary-classification">Beyond binary classification<a class="anchor-link" href="#Beyond-binary-classification"> </a></h3><p>Beyond binary classification (Exercise)</p>
 <p>Of course, binary classification is just a single special case. Target encoding could be applied to any target variable type:</p>
 <p>For binary classification usually mean target encoding is used
 For regression mean could be changed to median, quartiles, etc.
@@ -1587,17 +1560,17 @@ The mean_target_encoding() function you've created could be used for any target 
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./datasets/house_prices_train.csv'</span><span class="p">)</span>
-<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./datasets/house_prices_test.csv'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">train</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/house_prices_train.csv&#39;</span><span class="p">)</span>
+<span class="n">test</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/house_prices_test.csv&#39;</span><span class="p">)</span>
 
 <span class="c1"># Create mean target encoded feature</span>
-<span class="n">train</span><span class="p">[</span><span class="s1">'RoofStyle_enc'</span><span class="p">],</span> <span class="n">test</span><span class="p">[</span><span class="s1">'RoofStyle_enc'</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_target_encoding</span><span class="p">(</span><span class="n">train</span><span class="o">=</span><span class="n">train</span><span class="p">,</span>
+<span class="n">train</span><span class="p">[</span><span class="s1">&#39;RoofStyle_enc&#39;</span><span class="p">],</span> <span class="n">test</span><span class="p">[</span><span class="s1">&#39;RoofStyle_enc&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">mean_target_encoding</span><span class="p">(</span><span class="n">train</span><span class="o">=</span><span class="n">train</span><span class="p">,</span>
                                                                      <span class="n">test</span><span class="o">=</span><span class="n">test</span><span class="p">,</span> 
-                                                                     <span class="n">target</span><span class="o">=</span><span class="s1">'SalePrice'</span><span class="p">,</span>
-                                                                     <span class="n">categorical</span><span class="o">=</span><span class="s1">'RoofStyle'</span><span class="p">,</span>
+                                                                     <span class="n">target</span><span class="o">=</span><span class="s1">&#39;SalePrice&#39;</span><span class="p">,</span>
+                                                                     <span class="n">categorical</span><span class="o">=</span><span class="s1">&#39;RoofStyle&#39;</span><span class="p">,</span>
                                                                      <span class="n">alpha</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="c1"># Look at the encoding</span>
-<span class="n">test</span><span class="p">[[</span><span class="s1">'RoofStyle'</span><span class="p">,</span> <span class="s1">'RoofStyle_enc'</span><span class="p">]]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
+<span class="n">test</span><span class="p">[[</span><span class="s1">&#39;RoofStyle&#39;</span><span class="p">,</span> <span class="s1">&#39;RoofStyle_enc&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">drop_duplicates</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -1677,49 +1650,40 @@ The mean_target_encoding() function you've created could be used for any target 
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>So, you observe that houses with the <strong>Hip roof are the most pricy</strong>, while houses with the Gambrel roof are the cheapest. It's exactly the goal of target encoding: you've encoded categorical feature in such a manner that there is now a correlation between category values and target variable. We're done with categorical encoders. Now it's time to talk about the missing data!</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="3.4-Missing-Data">
-<a class="anchor" href="#3.4-Missing-Data" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.4 Missing Data<a class="anchor-link" href="#3.4-Missing-Data"> </a>
-</h2>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/missing_data.png" alt=""></p>
+<h2 id="Missing-Data">Missing Data<a class="anchor-link" href="#Missing-Data"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/missing_data.png" alt="" /></p>
 <ul>
 <li>Mean/median imputation</li>
 </ul>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/impute1.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/impute1.png" alt="" /></p>
 <ul>
 <li>Constant value imputation </li>
 </ul>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/impute2.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/impute2.png" alt="" /></p>
 <ul>
 <li>Most frequent category imputation</li>
 </ul>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/impute3.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/impute3.png" alt="" /></p>
 <ul>
 <li>New category imputation</li>
 </ul>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/impute4.png" alt=""></p>
-<h3 id="3.4.1-Find-Missing-Data">
-<a class="anchor" href="#3.4.1-Find-Missing-Data" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.4.1 Find Missing Data<a class="anchor-link" href="#3.4.1-Find-Missing-Data"> </a>
-</h3>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/find_missing.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/numerical_impute.png" alt=""></p>
-<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/categorical_impute.png" alt=""></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/impute4.png" alt="" /></p>
+<h3 id="Find-Missing-Data">Find Missing Data<a class="anchor-link" href="#Find-Missing-Data"> </a></h3><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/find_missing.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/numerical_impute.png" alt="" /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/categorical_impute.png" alt="" /></p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Find missing data (Exercise):</p>
 <p>Let's impute missing data on a real Kaggle dataset. For this purpose, you will be using a data subsample from the Kaggle "Two sigma connect: rental listing inquiries" competition.</p>
@@ -1741,12 +1705,12 @@ The mean_target_encoding() function you've created could be used for any target 
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">twosigma</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">'./datasets/twosigma_rental_train_null.csv'</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">twosigma</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/twosigma_rental_train_null.csv&#39;</span><span class="p">)</span>
 <span class="c1"># Find the number of missing values in each column</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">twosigma</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
 
 <span class="c1"># Look at the columns with the missing values</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">twosigma</span><span class="p">[[</span><span class="s1">'building_id'</span><span class="p">,</span> <span class="s1">'price'</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">twosigma</span><span class="p">[[</span><span class="s1">&#39;building_id&#39;</span><span class="p">,</span> <span class="s1">&#39;price&#39;</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 </pre></div>
 
     </div>
@@ -1785,21 +1749,16 @@ dtype: int64
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>All right, you've found out that 'building_id' and 'price' columns have missing values. Looking at the head of the DataFrame, we may conclude that 'price' is a numerical feature, while 'building_id' is a categorical feature that is encoding buildings as hashes.</p>
 
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="3.4.2-Imputing-Missing-Data">
-<a class="anchor" href="#3.4.2-Imputing-Missing-Data" aria-hidden="true"><span class="octicon octicon-link"></span></a>3.4.2 Imputing Missing Data<a class="anchor-link" href="#3.4.2-Imputing-Missing-Data"> </a>
-</h3>
-<p>Impute missing data (Exercise)</p>
+<h3 id="Imputing-Missing-Data">Imputing Missing Data<a class="anchor-link" href="#Imputing-Missing-Data"> </a></h3><p>Impute missing data (Exercise)</p>
 <p>You've found that "price" and "building_id" columns have missing values in the Rental Listing Inquiries dataset. So, before passing the data to the models you need to impute these values.</p>
 <p>Numerical feature "price" will be encoded with a mean value of non-missing prices.</p>
 <p>Imputing categorical feature "building_id" with the most frequent category is a bad idea, because it would mean that all the apartments with a missing "building_id" are located in the most popular building. The better idea is to impute it with a new category.</p>
@@ -1807,11 +1766,9 @@ dtype: int64
 <p>Instructions:</p>
 <ul>
 <li>Create a SimpleImputer object with "mean" strategy.</li>
-<li>
-<p>Impute missing prices with the mean value.</p>
+<li><p>Impute missing prices with the mean value.</p>
 </li>
-<li>
-<p>Create an imputer with "constant" strategy. Use "MISSING" as fill_value.</p>
+<li><p>Create an imputer with "constant" strategy. Use "MISSING" as fill_value.</p>
 </li>
 <li>Impute missing buildings with a constant value.</li>
 </ul>
@@ -1831,17 +1788,17 @@ dtype: int64
 <span class="n">rental_listings</span> <span class="o">=</span> <span class="n">twosigma</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 
 <span class="c1"># Create mean imputer</span>
-<span class="n">mean_imputer</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">'mean'</span><span class="p">)</span>
+<span class="n">mean_imputer</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;mean&#39;</span><span class="p">)</span>
 
 <span class="c1"># Price imputation</span>
-<span class="n">rental_listings</span><span class="p">[[</span><span class="s1">'price'</span><span class="p">]]</span> <span class="o">=</span> <span class="n">mean_imputer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">rental_listings</span><span class="p">[[</span><span class="s1">'price'</span><span class="p">]])</span>
+<span class="n">rental_listings</span><span class="p">[[</span><span class="s1">&#39;price&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">mean_imputer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">rental_listings</span><span class="p">[[</span><span class="s1">&#39;price&#39;</span><span class="p">]])</span>
 
 
 <span class="c1"># Create constant imputer</span>
-<span class="n">constant_imputer</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">'constant'</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="s2">"MISSING"</span><span class="p">)</span>
+<span class="n">constant_imputer</span> <span class="o">=</span> <span class="n">SimpleImputer</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;constant&#39;</span><span class="p">,</span> <span class="n">fill_value</span><span class="o">=</span><span class="s2">&quot;MISSING&quot;</span><span class="p">)</span>
 
 <span class="c1"># building_id imputation</span>
-<span class="n">rental_listings</span><span class="p">[[</span><span class="s1">'building_id'</span><span class="p">]]</span> <span class="o">=</span> <span class="n">constant_imputer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">rental_listings</span><span class="p">[[</span><span class="s1">'building_id'</span><span class="p">]])</span>
+<span class="n">rental_listings</span><span class="p">[[</span><span class="s1">&#39;building_id&#39;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">constant_imputer</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">rental_listings</span><span class="p">[[</span><span class="s1">&#39;building_id&#39;</span><span class="p">]])</span>
 
 
 <span class="nb">print</span><span class="p">(</span><span class="n">rental_listings</span><span class="o">.</span><span class="n">isnull</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
@@ -1877,8 +1834,7 @@ dtype: int64
 </div>
     
 
-<div class="cell border-box-sizing text_cell rendered">
-<div class="inner_cell">
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Nice! Now our data is ready to be passed to any Machine Learning model. Move on to the next chapter to build and improve your models!</p>
 
@@ -1889,7 +1845,7 @@ dtype: int64
 
 
 
-  </div><!-- from https://github.com/utterance/utterances -->
+      </div><!-- from https://github.com/utterance/utterances -->
 <script src="https://utteranc.es/client.js"
         repo="anhhaibkhn/Data-Science-selfstudy-notes-Blog"
         issue-term="title"
@@ -1898,10 +1854,7 @@ dtype: int64
         crossorigin="anonymous"
         async>
 </script><a class="u-url" href="/Data-Science-selfstudy-notes-Blog/kaggle/datacamp/feature%20engineering/encoding/cross-validation/k-fold/imputing/missing-data/2022/08/15/Chapter_3-Feature-Engineering.html" hidden></a>
-</article>
-
-      </div>
-    </main><footer class="site-footer h-card">
+    </article><footer class="site-footer h-card">
   <data class="u-url" href="/Data-Science-selfstudy-notes-Blog/"></data>
 
   <div class="wrapper">
@@ -1927,6 +1880,13 @@ dtype: int64
   </div>
 
 </footer>
-</body>
+</div>
+
+
+</div>
+
+    </main>
+
+  </body>
 
 </html>

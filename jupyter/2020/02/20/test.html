@@ -23,15 +23,39 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"FastAI"},"dateModified":"2020-02-20T00:00:00-06:00","datePublished":"2020-02-20T00:00:00-06:00","description":"A tutorial of fastpages for Jupyter notebooks. Test update","headline":"Fastpages Notebook Blog Post (Sample)","image":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/chart-preview.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/jupyter/2020/02/20/test.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/jupyter/2020/02/20/test.html"}</script>
 <!-- End Jekyll SEO tag -->
-<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Primer/15.2.0/primer.css" integrity="sha512-xTz2ys4coGAOz8vuV1NcQBkgVmKhsSEtjbqyMJbBHRplFuvKIUo6xhLHpAyPt9mfR6twHJgn9OgVLuqOvjeBhg==" crossorigin="anonymous" />
+<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects notes Blog" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://unpkg.com/@primer/css@17.3.0/dist/primer.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.css" integrity="sha512-h7nl+xz8wgDlNM4NqKEM4F1NkIRS17M9+uJwIGwuo8vGqIl4BhuCKdxjWEINm+xyrUjNCnK5dCrhM0sj+wTIXw==" crossorigin="anonymous" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/katex.min.js" integrity="sha512-/CMIhXiDA3m2c9kzRyd97MTb3MC6OVnx4TElQ7fkkoRghwDf6gi41gaT1PwF270W6+J60uTmwgeRpNpJdRV6sg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.12.0/contrib/auto-render.min.js" integrity="sha512-Do7uJAaHZm5OLrIv/yN4w0iG1dbu01kzdMNnFfu/mAqgUk6Nniv2JYHcwH+cNwjqgLcqcuBBk+JRvprLVI8azg==" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha512-0doc9hKxR3PYwso42RD1p5ySZpzzuDiOwMrdCEh2WdJZCjcmFKc/wEnL+z8fBQrnHoiNWbo+3fiGkOYXBdQp4A==" crossorigin="anonymous"></script>
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+
+    var i = 0, j = 0, k = 0;
+
+    document.querySelectorAll('h2, h3, h4').forEach((heading) => {
+
+        if (heading.localName == 'h2') {
+            i++; j = 0; k = 0;
+            heading.setAttribute('data-before', `${i}. `)
+        }
+        if (heading.localName == 'h3') {
+            j++; k = 0;
+            heading.setAttribute('data-before', `${i}.${j}. `)
+        }
+        if (heading.localName == 'h4') {
+            k++;
+            heading.setAttribute('data-before', `${i}.${j}.${k}. `)
+        }
+    });
+});
+</script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" integrity="sha512-J8je2SgrCzA7hNBeiCJiA6oETHTTdp3We3EriOgJp6POycGLcDXj5dSwWlAPQcYGeaQ4N3uf30aOg/Nt5pxW2g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" integrity="sha512-1kNZVA50gKlorLAWU83+SdOAUwABzfFFQ4WuOAZTeS/UhNhnm9zU7rDv/Q5NEzSnr5u2L6uhR/+8icjjmHjSnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" integrity="sha512-CzIEOUs11SQ7tekLhEe5gil9kDip4RTJZVf7pSjlxOdVaYYHEcQflhunPz2Q/onNC4slL9jpKjvNgzPAAxEpew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
     <script>
     document.addEventListener("DOMContentLoaded", function() {
         renderMathInElement( document.body, {
+        globalGroup: true,
         delimiters: [
             {left: "$$", right: "$$", display: true},
             {left: "[%", right: "%]", display: true},
@@ -71,8 +95,57 @@ window.onload = wrap_img;
     elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
     });
 </script>
+
 </head>
-<body><header class="site-header">
+<body>
+
+    <main class="page-content" aria-label="Content" style="padding-top: 0;">
+        <div class="Layout">
+    
+      <div class="Layout-sidebar">
+        <div id="toc" class="pt-3 pl-3 sticky">
+          <b><a href="#">Fastpages Notebook Blog Post (Sample)</a></b>
+          <ol id="toc" class="section-nav">
+<li class="toc-entry toc-h1">
+<a href="#About">About </a>
+<ol>
+<li class="toc-entry toc-h2"><a href="#Front-Matter">Front Matter </a></li>
+<li class="toc-entry toc-h2"><a href="#Markdown-Shortcuts">Markdown Shortcuts </a></li>
+<li class="toc-entry toc-h2">
+<a href="#Interactive-Charts-With-Altair">Interactive Charts With Altair </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#Example-1:-DropDown">Example 1: DropDown </a></li>
+<li class="toc-entry toc-h3"><a href="#Example-2:-Tooltips">Example 2: Tooltips </a></li>
+<li class="toc-entry toc-h3"><a href="#Example-3:-More-Tooltips">Example 3: More Tooltips </a></li>
+</ol>
+</li>
+<li class="toc-entry toc-h2"><a href="#Data-Tables">Data Tables </a></li>
+<li class="toc-entry toc-h2">
+<a href="#Images">Images </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#Local-Images">Local Images </a></li>
+<li class="toc-entry toc-h3"><a href="#Remote-Images">Remote Images </a></li>
+<li class="toc-entry toc-h3"><a href="#Animated-Gifs">Animated Gifs </a></li>
+<li class="toc-entry toc-h3"><a href="#Captions">Captions </a></li>
+</ol>
+</li>
+</ol>
+</li>
+<li class="toc-entry toc-h1">
+<a href="#Other-Elements">Other Elements </a>
+<ol>
+<li class="toc-entry toc-h2"><a href="#GitHub-Flavored-Emojis">GitHub Flavored Emojis </a></li>
+<li class="toc-entry toc-h2"><a href="#Tweetcards">Tweetcards </a></li>
+<li class="toc-entry toc-h2"><a href="#Youtube-Videos">Youtube Videos </a></li>
+<li class="toc-entry toc-h2"><a href="#Boxes-/-Callouts">Boxes / Callouts </a></li>
+<li class="toc-entry toc-h2"><a href="#Footnotes">Footnotes </a></li>
+</ol>
+</li>
+</ol>
+        </div>
+      </div>
+    <div class="Layout-main">
+<header class="site-header">
 
   <div class="wrapper">
 <a class="site-title" rel="author" href="/Data-Science-selfstudy-notes-Blog/">Self-study Data Science Projects notes Blog</a><nav class="site-nav">
@@ -91,103 +164,58 @@ window.onload = wrap_img;
       </nav>
 </div>
 </header>
-<main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
-
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">Fastpages Notebook Blog Post (Sample)</h1>
-<p class="page-description">A tutorial of fastpages for Jupyter notebooks. Test update</p>
-<p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-02-20T00:00:00-06:00" itemprop="datePublished">
-        Feb 20, 2020
-      </time>• 
-          <span itemprop="author" itemscope itemtype="http://schema.org/Person">
-            <span class="p-author h-card" itemprop="name">FastAI</span></span>
-       • <span class="read-time" title="Estimated read time">
-    
-    
-      5 min read
-    
-</span></p>
-
-    
-      <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i> 
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
       
-        <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#jupyter">jupyter</a>
         
-      
-      </p>
-    
-
-    
-      
-        <div class="pb-5 d-flex flex-justify-center">
-          <div class="px-2">
+          <div class="pb-5 d-flex flex-wrap flex-justify-start" style="padding-left: 52px">
+            <div class="px-2">
 
     <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/2020-02-20-test.ipynb" role="button" target="_blank">
 <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/github.svg" alt="View On GitHub">
     </a>
 </div>
 
-          <div class="px-2">
+            <div class="px-2">
     <a href="https://mybinder.org/v2/gh/anhhaibkhn/Data-Science-selfstudy-notes-Blog/master?filepath=_notebooks%2F2020-02-20-test.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/binder.svg" alt="Open In Binder">
     </a>
 </div>
 
-          <div class="px-2">
+            <div class="px-2">
     <a href="https://colab.research.google.com/github/anhhaibkhn/Data-Science-selfstudy-notes-Blog/blob/master/_notebooks/2020-02-20-test.ipynb" target="_blank">
         <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/colab.svg" alt="Open In Colab">
     </a>
 </div>
-          <div class="px-2">
-  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fanhhaibkhn%2FData-Science-selfstudy-notes-Blog%2Fblob%2Fmaster%2F_notebooks%2F2020-02-20-test.ipynb" target="_blank">
-      <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/deepnote.svg" alt="Launch in Deepnote">
-  </a>
-</div>
+          </div>
+        <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">Fastpages Notebook Blog Post (Sample)</h1>
+<p class="page-description">A tutorial of fastpages for Jupyter notebooks. Test update</p>
+<p class="post-meta post-meta-title"><time class="dt-published" datetime="2020-02-20T00:00:00-06:00" itemprop="datePublished">
+            Feb 20, 2020
+          </time>• 
+              <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <span class="p-author h-card" itemprop="name">FastAI</span></span>
+           • <span class="read-time" title="Estimated read time">
+    
+    
+      5 min read
+    
+</span></p>
 
-        </div>
+        
+          <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i>
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#jupyter">jupyter</a>
+            
+          
+          </p>
+        
+
+
       </header>
 
-  <div class="post-content e-content" itemprop="articleBody">
-    <ul id="toc" class="section-nav">
-<li class="toc-entry toc-h1">
-<a href="#About">About </a>
-<ul>
-<li class="toc-entry toc-h2"><a href="#Front-Matter">Front Matter </a></li>
-<li class="toc-entry toc-h2"><a href="#Markdown-Shortcuts">Markdown Shortcuts </a></li>
-<li class="toc-entry toc-h2">
-<a href="#Interactive-Charts-With-Altair">Interactive Charts With Altair </a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#Example-1:-DropDown">Example 1: DropDown </a></li>
-<li class="toc-entry toc-h3"><a href="#Example-2:-Tooltips">Example 2: Tooltips </a></li>
-<li class="toc-entry toc-h3"><a href="#Example-3:-More-Tooltips">Example 3: More Tooltips </a></li>
-</ul>
-</li>
-<li class="toc-entry toc-h2"><a href="#Data-Tables">Data Tables </a></li>
-<li class="toc-entry toc-h2">
-<a href="#Images">Images </a>
-<ul>
-<li class="toc-entry toc-h3"><a href="#Local-Images">Local Images </a></li>
-<li class="toc-entry toc-h3"><a href="#Remote-Images">Remote Images </a></li>
-<li class="toc-entry toc-h3"><a href="#Animated-Gifs">Animated Gifs </a></li>
-<li class="toc-entry toc-h3"><a href="#Captions">Captions </a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class="toc-entry toc-h1">
-<a href="#Other-Elements">Other Elements </a>
-<ul>
-<li class="toc-entry toc-h2"><a href="#GitHub-Flavored-Emojis">GitHub Flavored Emojis </a></li>
-<li class="toc-entry toc-h2"><a href="#Tweetcards">Tweetcards </a></li>
-<li class="toc-entry toc-h2"><a href="#Youtube-Videos">Youtube Videos </a></li>
-<li class="toc-entry toc-h2"><a href="#Boxes-/-Callouts">Boxes / Callouts </a></li>
-<li class="toc-entry toc-h2"><a href="#Footnotes">Footnotes </a></li>
-</ul>
-</li>
-</ul>
-<!--
+      <div class="post-content e-content" itemprop="articleBody">
+        <!--
 #################################################
 ### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
 #################################################
@@ -199,8 +227,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="About">
-<a class="anchor" href="#About" aria-hidden="true"><span class="octicon octicon-link"></span></a>About<a class="anchor-link" href="#About"> </a>
+<h1 id="About">About<a class="anchor-link" href="#About"> </a>
 </h1>
 <p>This notebook is a demonstration of some of capabilities of <a href="https://github.com/fastai/fastpages">fastpages</a> with notebooks.</p>
 <p>With <code>fastpages</code> you can save your jupyter notebooks into the <code>_notebooks</code> folder at the root of your repository, and they will be automatically be converted to Jekyll compliant blog posts!</p>
@@ -211,8 +238,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Front-Matter">
-<a class="anchor" href="#Front-Matter" aria-hidden="true"><span class="octicon octicon-link"></span></a>Front Matter<a class="anchor-link" href="#Front-Matter"> </a>
+<h2 id="Front-Matter">Front Matter<a class="anchor-link" href="#Front-Matter"> </a>
 </h2>
 <p>The first cell in your Jupyter Notebook or markdown blog post contains front matter. Front matter is metadata that can turn on/off options in your Notebook. It is formatted like this:</p>
 
@@ -237,8 +263,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Markdown-Shortcuts">
-<a class="anchor" href="#Markdown-Shortcuts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Markdown Shortcuts<a class="anchor-link" href="#Markdown-Shortcuts"> </a>
+<h2 id="Markdown-Shortcuts">Markdown Shortcuts<a class="anchor-link" href="#Markdown-Shortcuts"> </a>
 </h2>
 </div>
 </div>
@@ -382,8 +407,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Interactive-Charts-With-Altair">
-<a class="anchor" href="#Interactive-Charts-With-Altair" aria-hidden="true"><span class="octicon octicon-link"></span></a>Interactive Charts With Altair<a class="anchor-link" href="#Interactive-Charts-With-Altair"> </a>
+<h2 id="Interactive-Charts-With-Altair">Interactive Charts With Altair<a class="anchor-link" href="#Interactive-Charts-With-Altair"> </a>
 </h2>
 <p>Charts made with Altair remain interactive.  Example charts taken from <a href="https://github.com/uwdata/visualization-curriculum">this repo</a>, specifically <a href="https://github.com/uwdata/visualization-curriculum/blob/master/altair_interaction.ipynb">this notebook</a>.</p>
 
@@ -393,8 +417,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Example-1:-DropDown">
-<a class="anchor" href="#Example-1:-DropDown" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example 1: DropDown<a class="anchor-link" href="#Example-1:-DropDown"> </a>
+<h3 id="Example-1:-DropDown">Example 1: DropDown<a class="anchor-link" href="#Example-1:-DropDown"> </a>
 </h3>
 </div>
 </div>
@@ -499,8 +522,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Example-2:-Tooltips">
-<a class="anchor" href="#Example-2:-Tooltips" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example 2: Tooltips<a class="anchor-link" href="#Example-2:-Tooltips"> </a>
+<h3 id="Example-2:-Tooltips">Example 2: Tooltips<a class="anchor-link" href="#Example-2:-Tooltips"> </a>
 </h3>
 </div>
 </div>
@@ -599,8 +621,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Example-3:-More-Tooltips">
-<a class="anchor" href="#Example-3:-More-Tooltips" aria-hidden="true"><span class="octicon octicon-link"></span></a>Example 3: More Tooltips<a class="anchor-link" href="#Example-3:-More-Tooltips"> </a>
+<h3 id="Example-3:-More-Tooltips">Example 3: More Tooltips<a class="anchor-link" href="#Example-3:-More-Tooltips"> </a>
 </h3>
 </div>
 </div>
@@ -730,8 +751,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Data-Tables">
-<a class="anchor" href="#Data-Tables" aria-hidden="true"><span class="octicon octicon-link"></span></a>Data Tables<a class="anchor-link" href="#Data-Tables"> </a>
+<h2 id="Data-Tables">Data Tables<a class="anchor-link" href="#Data-Tables"> </a>
 </h2>
 <p>You can display tables per the usual way in your blog:</p>
 
@@ -854,11 +874,9 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Images">
-<a class="anchor" href="#Images" aria-hidden="true"><span class="octicon octicon-link"></span></a>Images<a class="anchor-link" href="#Images"> </a>
+<h2 id="Images">Images<a class="anchor-link" href="#Images"> </a>
 </h2>
-<h3 id="Local-Images">
-<a class="anchor" href="#Local-Images" aria-hidden="true"><span class="octicon octicon-link"></span></a>Local Images<a class="anchor-link" href="#Local-Images"> </a>
+<h3 id="Local-Images">Local Images<a class="anchor-link" href="#Local-Images"> </a>
 </h3>
 <p>You can reference local images and they will be copied and rendered on your blog automatically.  You can include these with the following markdown syntax:</p>
 <p><code>![](my_icons/fastai_logo.png)</code></p>
@@ -877,8 +895,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Remote-Images">
-<a class="anchor" href="#Remote-Images" aria-hidden="true"><span class="octicon octicon-link"></span></a>Remote Images<a class="anchor-link" href="#Remote-Images"> </a>
+<h3 id="Remote-Images">Remote Images<a class="anchor-link" href="#Remote-Images"> </a>
 </h3>
 <p>Remote images can be included with the following markdown syntax:</p>
 <p><code>![](https://image.flaticon.com/icons/svg/36/36686.svg)</code></p>
@@ -897,8 +914,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Animated-Gifs">
-<a class="anchor" href="#Animated-Gifs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Animated Gifs<a class="anchor-link" href="#Animated-Gifs"> </a>
+<h3 id="Animated-Gifs">Animated Gifs<a class="anchor-link" href="#Animated-Gifs"> </a>
 </h3>
 <p>Animated Gifs work, too!</p>
 <p><code>![](https://upload.wikimedia.org/wikipedia/commons/7/71/ChessPawnSpecialMoves.gif)</code></p>
@@ -917,8 +933,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Captions">
-<a class="anchor" href="#Captions" aria-hidden="true"><span class="octicon octicon-link"></span></a>Captions<a class="anchor-link" href="#Captions"> </a>
+<h3 id="Captions">Captions<a class="anchor-link" href="#Captions"> </a>
 </h3>
 <p>You can include captions with markdown images like this:</p>
 
@@ -931,8 +946,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Other-Elements">
-<a class="anchor" href="#Other-Elements" aria-hidden="true"><span class="octicon octicon-link"></span></a>Other Elements<a class="anchor-link" href="#Other-Elements"> </a>
+<h1 id="Other-Elements">Other Elements<a class="anchor-link" href="#Other-Elements"> </a>
 </h1>
 </div>
 </div>
@@ -940,8 +954,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="GitHub-Flavored-Emojis">
-<a class="anchor" href="#GitHub-Flavored-Emojis" aria-hidden="true"><span class="octicon octicon-link"></span></a>GitHub Flavored Emojis<a class="anchor-link" href="#GitHub-Flavored-Emojis"> </a>
+<h2 id="GitHub-Flavored-Emojis">GitHub Flavored Emojis<a class="anchor-link" href="#GitHub-Flavored-Emojis"> </a>
 </h2>
 <p>Typing <code>I give this post two :+1:!</code> will render this:</p>
 <p>I give this post two <img class="emoji" title=":+1:" alt=":+1:" src="https://github.githubassets.com/images/icons/emoji/unicode/1f44d.png" height="20" width="20">!</p>
@@ -952,8 +965,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Tweetcards">
-<a class="anchor" href="#Tweetcards" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tweetcards<a class="anchor-link" href="#Tweetcards"> </a>
+<h2 id="Tweetcards">Tweetcards<a class="anchor-link" href="#Tweetcards"> </a>
 </h2>
 <p>Typing <code>&gt; twitter: https://twitter.com/jakevdp/status/1204765621767901185?s=20</code> will render this:
 
@@ -974,8 +986,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Youtube-Videos">
-<a class="anchor" href="#Youtube-Videos" aria-hidden="true"><span class="octicon octicon-link"></span></a>Youtube Videos<a class="anchor-link" href="#Youtube-Videos"> </a>
+<h2 id="Youtube-Videos">Youtube Videos<a class="anchor-link" href="#Youtube-Videos"> </a>
 </h2>
 <p>Typing <code>&gt; youtube: https://youtu.be/XfoYk_Z5AkI</code> will render this:
 
@@ -991,8 +1002,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Boxes-/-Callouts">
-<a class="anchor" href="#Boxes-/-Callouts" aria-hidden="true"><span class="octicon octicon-link"></span></a>Boxes / Callouts<a class="anchor-link" href="#Boxes-/-Callouts"> </a>
+<h2 id="Boxes-/-Callouts">Boxes / Callouts<a class="anchor-link" href="#Boxes-/-Callouts"> </a>
 </h2>
 <p>Typing <code>&gt; Warning: There will be no second warning!</code> will render this:
 </p>
@@ -1031,8 +1041,7 @@ window.onload = wrap_img;
 <div class="cell border-box-sizing text_cell rendered">
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Footnotes">
-<a class="anchor" href="#Footnotes" aria-hidden="true"><span class="octicon octicon-link"></span></a>Footnotes<a class="anchor-link" href="#Footnotes"> </a>
+<h2 id="Footnotes">Footnotes<a class="anchor-link" href="#Footnotes"> </a>
 </h2>
 <p>You can have footnotes in notebooks, however the syntax is different compared to markdown documents. <a href="https://github.com/fastai/fastpages/blob/master/_fastpages_docs/NOTEBOOK_FOOTNOTES.md">This guide provides more detail about this syntax</a>, which looks like this:</p>
 
@@ -1053,12 +1062,9 @@ And another {% fn 2 %}
 
 
 
-  </div>
-<a class="u-url" href="/Data-Science-selfstudy-notes-Blog/jupyter/2020/02/20/test.html" hidden></a>
-</article>
-
       </div>
-    </main><footer class="site-footer h-card">
+<a class="u-url" href="/Data-Science-selfstudy-notes-Blog/jupyter/2020/02/20/test.html" hidden></a>
+    </article><footer class="site-footer h-card">
   <data class="u-url" href="/Data-Science-selfstudy-notes-Blog/"></data>
 
   <div class="wrapper">
@@ -1089,6 +1095,13 @@ And another {% fn 2 %}
   </div>
 
 </footer>
-</body>
+</div>
+
+
+</div>
+
+    </main>
+
+  </body>
 
 </html>
