@@ -118,6 +118,9 @@ kramdown:
   hard_wrap: false
   syntax_highlighter: rouge
 
+toc:
+  ordered_list: true
+
 # to limit size of xml as it can grow quite large.
 feed:
   posts_limit: 5 #default posts_limit: 10
