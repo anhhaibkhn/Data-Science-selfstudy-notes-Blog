@@ -17,18 +17,7 @@ Hi, and Welcome to my GitHub [Blog](https://anhhaibkhn.github.io/Data-Science-se
 All of my posts here are the memo from my self-study courses, articles, and books. I hope that some of these practices will help you along in your own journey of learning data science.
 
 
-If you find the blog posts useful, please give the <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog" target="_blank"><strong>GitHub blog repo</strong></a> a star to show your support and share it to others. Thank you! (´･ω･｀)ゞ ｱﾘｶﾞﾄｳ ﾖﾛｼｸ♪. Also, please let me know in the comments section of the posts if you have any questions.
+If you find the blog posts useful, please give the <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog" target="_blank"><strong>GitHub blog repo</strong></a> a star to show your support and share it to others. Thank you! (´･ω･｀)ゞ ｱﾘｶﾞﾄｳ ﾖﾛｼｸ♪. 
 
-## To start writing content, here are some helpful links:
+Also, please let me know in the comments section of the posts if you have any questions.
 
-- [Writing Blogs With Jupyter](https://github.com/fastai/fastpages#writing-blog-posts-with-jupyter)
-
-- [Writing Blogs With Markdown](https://github.com/fastai/fastpages#writing-blog-posts-with-markdown)
-
-- [Writing Blog Posts With Word](https://github.com/fastai/fastpages#writing-blog-posts-with-microsoft-word)
-
-- [(Optional) Preview Your Blog Locally](_fastpages_docs/DEVELOPMENT.md)
-
-**Note**: you may want to remove example blog posts from the `_posts`,  `_notebooks` or `_word` folders (but leave them empty, don't delete these folders) if you don't want these blog posts to appear on your site.
-
-Please use the [nbdev & blogging channel](https://forums.fast.ai/c/fastai-users/nbdev/48) in the fastai forums for any questions or feature requests.
