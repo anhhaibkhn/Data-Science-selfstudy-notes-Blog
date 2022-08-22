@@ -3,6 +3,7 @@ layout: default
 title: About Me
 permalink: /about/
 ---
+<script async defer src="https://buttons.github.io/buttons.js"></script>
 
 <p><img style="float: left;margin:5px 20px 5px 1px" src="{{site.baseurl}}/images/kuma_nyako.jpg" width="200px" alt="Image Source: いがらしゆり-igarashi yuri"></p> 
 
@@ -24,7 +25,10 @@ My research interests cover the following topics Machine Learning, Deep Learning
 In my spare time, I enjoy playing badminton, gardening, hiking, camping, and studying new languages. I’m looking to collaborate with other data science enthusiasts. Feel free to follow me on (<a href="https://github.com/anhhaibkhn" target="_blank"><strong>GitHub</strong></a>) or connect with me on <a href="https://www.linkedin.com/in/nguyen-hai-b1ab8042" target="_blank"><strong>LinkedIn</strong></a>.</p>
 
 <p style='text-align: justify; margin-left: 220px;font-size: 18px;'> 
-This website (powered by <a href="https://github.com/fastai/fastpages" target="_blank"><strong>fastpages</strong></a>) is the memo  of my own self-practices notebooks from Data Science related online courses or books. If you find the blog posts useful, please give the <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog" target="_blank"><strong>GitHub blog repo</strong></a> a star to show your support and share it to others. Thank you! (´･ω･｀)ゞ ｱﾘｶﾞﾄｳ ﾖﾛｼｸ♪. <br />
+This website (powered by <a href="https://github.com/fastai/fastpages" target="_blank"><strong>fastpages</strong></a>) is the memo  of my own self-practices notebooks from Data Science related online courses or books. If you find the blog posts useful, please give the <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog" target="_blank"><strong>GitHub blog repo</strong></a> a 
+        <!-- Place this tag where you want the button to render. -->
+        <a class="github-button" href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog" data-color-scheme="no-preference: light; light: light; dark: light;" data-icon="octicon-star" aria-label="Star anhhaibkhn/Data-Science-selfstudy-notes-Blog on GitHub" style='display: inline-block; vertical-align: middle;'>Star</a>
+        to show your support and share it to others. Thank you! (´･ω･｀)ゞ ｱﾘｶﾞﾄｳ ﾖﾛｼｸ♪. <br />
 
 <br>
 If you have a question about the contents, just feel free to contact me through <a href="mailto:nguyenngochaibkhn@gmail.com" target="_blank" font-weight= bold><strong>mail</strong></a> or comment it in each page (comments are linked to my github with <a href="https://utteranc.es/" target="_blank"><strong>utteranc.es</strong></a>)</p>
