@@ -343,7 +343,7 @@ Hence, we now need to clean our data. Specifically, the special characters <code
         <span class="n">y</span> <span class="o">=</span> <span class="n">num_apps_in_category</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="c1"># value = count</span>
 <span class="p">)]</span>
 
-<span class="n">plotly</span><span class="o">.</span><span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+<span class="n">plotly</span><span class="o">.</span><span class="n">offline</span><span class="o">.</span><span class="n">iplot</span><span class="p">({</span><span class="s1">&#39;data&#39;</span><span class="p">:</span> <span class="n">data</span><span class="p">,})</span>
 </pre></div>
 
     </div>
