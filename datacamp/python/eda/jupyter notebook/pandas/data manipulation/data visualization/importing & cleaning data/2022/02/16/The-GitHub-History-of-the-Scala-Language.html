@@ -158,6 +158,12 @@ window.onload = wrap_img;
         <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/colab.svg" alt="Open In Colab"/>
     </a>
 </div>
+            <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fanhhaibkhn%2FData-Science-selfstudy-notes-Blog%2Fblob%2Fmaster%2F_notebooks%2FThe+GitHub+History+of+the+Scala+Language%2F2022-02-16-The+GitHub+History+of+the+Scala+Language.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
           </div>
         <header class="post-header">
         <h1 class="post-title p-name" itemprop="name headline">The GitHub History of the Scala Language</h1><p class="page-description">Open source projects contain entire development histories, such as who made changes, the changes themselves, and code reviews. In this project, Let's find the true Scala experts by exploring its development history in Git and GitHub.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-02-16T00:00:00-06:00" itemprop="datePublished">
@@ -215,6 +221,31 @@ window.onload = wrap_img;
 
 <div class="container" id="notebook-container">
         
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.expand_frame_repr&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Scala's-real-world-project-repository-data">Scala's real-world project repository data<a class="anchor-link" href="#Scala's-real-world-project-repository-data"> </a></h2><p><p>With almost 30k commits and a history spanning over ten years, Scala is a mature programming language. It is a general-purpose programming language that has recently become another prominent language for data scientists.</p></p>
@@ -267,10 +298,10 @@ window.onload = wrap_img;
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">pulls</span> <span class="o">=</span> <span class="n">pulls_one</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pulls_two</span><span class="p">,</span> <span class="n">ignore_index</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pulls</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">pulls</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pulls</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="n">pulls</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
 <span class="c1"># Convert the date for the pulls object</span>
 <span class="n">pulls</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">to_datetime</span><span class="p">(</span><span class="n">pulls</span><span class="p">[</span><span class="s1">&#39;date&#39;</span><span class="p">],</span> <span class="n">utc</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">pulls</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">pulls</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">pulls</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="n">pulls</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -282,32 +313,152 @@ window.onload = wrap_img;
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>        pid         user                  date
-0  11166973  VladimirNik  2013-12-31T23:10:55Z
-1  11161892      Ichoran  2013-12-31T16:55:47Z
-2  11153894      Ichoran  2013-12-31T02:41:13Z
-3  11151917      rklaehn  2013-12-30T23:45:47Z
-4  11131244        qerub  2013-12-29T17:21:01Z 
- 18600
-        pid         user                      date
-0  11166973  VladimirNik 2013-12-31 23:10:55+00:00
-1  11161892      Ichoran 2013-12-31 16:55:47+00:00
-2  11153894      Ichoran 2013-12-31 02:41:13+00:00
-3  11151917      rklaehn 2013-12-30 23:45:47+00:00
-4  11131244        qerub 2013-12-29 17:21:01+00:00 
- 18600
-</pre>
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pid</th>
+      <th>user</th>
+      <th>date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>11166973</td>
+      <td>VladimirNik</td>
+      <td>2013-12-31T23:10:55Z</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>11161892</td>
+      <td>Ichoran</td>
+      <td>2013-12-31T16:55:47Z</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>11153894</td>
+      <td>Ichoran</td>
+      <td>2013-12-31T02:41:13Z</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11151917</td>
+      <td>rklaehn</td>
+      <td>2013-12-30T23:45:47Z</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>11131244</td>
+      <td>qerub</td>
+      <td>2013-12-29T17:21:01Z</td>
+    </tr>
+  </tbody>
+</table>
 </div>
+</div>
+
 </div>
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>C:\Users\nguyenngochai\AppData\Local\Temp\ipykernel_26248\2338645692.py:2: FutureWarning: The frame.append method is deprecated and will be removed from pandas in a future version. Use pandas.concat instead.
-  pulls = pulls_one.append(pulls_two, ignore_index=True)
-</pre>
+
+
+<div class="output_text output_subarea ">
+<pre>18600</pre>
 </div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pid</th>
+      <th>user</th>
+      <th>date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>11166973</td>
+      <td>VladimirNik</td>
+      <td>2013-12-31 23:10:55+00:00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>11161892</td>
+      <td>Ichoran</td>
+      <td>2013-12-31 16:55:47+00:00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>11153894</td>
+      <td>Ichoran</td>
+      <td>2013-12-31 02:41:13+00:00</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11151917</td>
+      <td>rklaehn</td>
+      <td>2013-12-30 23:45:47+00:00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>11131244</td>
+      <td>qerub</td>
+      <td>2013-12-29 17:21:01+00:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea ">
+<pre>18600</pre>
+</div>
+
 </div>
 
 </div>
@@ -329,9 +480,10 @@ window.onload = wrap_img;
 
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">pull_files</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">pulls</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">pull_files</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">pulls</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">pulls</span><span class="p">,</span> <span class="n">pull_files</span><span class="p">,</span> <span class="n">on</span> <span class="o">=</span><span class="s1">&#39;pid&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">(),</span> <span class="n">data</span><span class="o">.</span><span class="n">size</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
 </pre></div>
 
     </div>
@@ -343,16 +495,191 @@ window.onload = wrap_img;
 
 <div class="output_area">
 
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pid</th>
+      <th>file</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>163314316</td>
+      <td>test/files/pos/t5638/Among.java</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>163314316</td>
+      <td>test/files/pos/t5638/Usage.scala</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>163314316</td>
+      <td>test/files/pos/t9291.scala</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pid</th>
+      <th>user</th>
+      <th>date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>11166973</td>
+      <td>VladimirNik</td>
+      <td>2013-12-31 23:10:55+00:00</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>11161892</td>
+      <td>Ichoran</td>
+      <td>2013-12-31 16:55:47+00:00</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>11153894</td>
+      <td>Ichoran</td>
+      <td>2013-12-31 02:41:13+00:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pid</th>
+      <th>user</th>
+      <th>date</th>
+      <th>file</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>11166973</td>
+      <td>VladimirNik</td>
+      <td>2013-12-31 23:10:55+00:00</td>
+      <td>src/reflect/scala/reflect/api/Printers.scala</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>11166973</td>
+      <td>VladimirNik</td>
+      <td>2013-12-31 23:10:55+00:00</td>
+      <td>src/reflect/scala/reflect/internal/Printers.scala</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>11166973</td>
+      <td>VladimirNik</td>
+      <td>2013-12-31 23:10:55+00:00</td>
+      <td>test/files/run/reify_ann3.check</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11166973</td>
+      <td>VladimirNik</td>
+      <td>2013-12-31 23:10:55+00:00</td>
+      <td>test/junit/scala/reflect/internal/PrintersTest...</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>11161892</td>
+      <td>Ichoran</td>
+      <td>2013-12-31 16:55:47+00:00</td>
+      <td>src/library/scala/collection/mutable/ArrayOps....</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea ">
+<pre>342352</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>         pid                              file
-0  163314316   test/files/pos/t5638/Among.java
-1  163314316  test/files/pos/t5638/Usage.scala
-2  163314316        test/files/pos/t9291.scala 
-         pid         user                      date
-0  11166973  VladimirNik 2013-12-31 23:10:55+00:00
-1  11161892      Ichoran 2013-12-31 16:55:47+00:00
-2  11153894      Ichoran 2013-12-31 02:41:13+00:00
-&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 Int64Index: 85588 entries, 0 to 85587
 Data columns (total 4 columns):
  #   Column  Non-Null Count  Dtype              
@@ -363,23 +690,18 @@ Data columns (total 4 columns):
  3   file    85588 non-null  object             
 dtypes: datetime64[ns, UTC](1), int64(1), object(2)
 memory usage: 3.3+ MB
-        pid         user                      date  \
-0  11166973  VladimirNik 2013-12-31 23:10:55+00:00   
-1  11166973  VladimirNik 2013-12-31 23:10:55+00:00   
-2  11166973  VladimirNik 2013-12-31 23:10:55+00:00   
-3  11166973  VladimirNik 2013-12-31 23:10:55+00:00   
-4  11161892      Ichoran 2013-12-31 16:55:47+00:00   
-
-                                                file  
-0       src/reflect/scala/reflect/api/Printers.scala  
-1  src/reflect/scala/reflect/internal/Printers.scala  
-2                    test/files/run/reify_ann3.check  
-3  test/junit/scala/reflect/internal/PrintersTest...  
-4  src/library/scala/collection/mutable/ArrayOps....   
- 342352 
- None
 </pre>
 </div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea ">
+<pre>None</pre>
+</div>
+
 </div>
 
 </div>
@@ -414,11 +736,11 @@ memory usage: 3.3+ MB
 
 <span class="c1"># Create a column that will store the year</span>
 <span class="n">data</span><span class="p">[</span><span class="s1">&#39;year&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">dt</span><span class="o">.</span><span class="n">year</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 <span class="c1"># Group by the month and year and count the pull requests</span>
 <span class="n">counts</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">([</span><span class="s1">&#39;year&#39;</span><span class="p">,</span> <span class="s1">&#39;month&#39;</span><span class="p">])[</span><span class="s1">&#39;pid&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
 <span class="c1"># Plot the results</span>
 <span class="n">counts</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">&#39;bar&#39;</span><span class="p">,</span> <span class="n">figsize</span> <span class="o">=</span> <span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
 </pre></div>
@@ -432,21 +754,93 @@ memory usage: 3.3+ MB
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>        pid         user                      date  \
-0  11166973  VladimirNik 2013-12-31 23:10:55+00:00   
-1  11166973  VladimirNik 2013-12-31 23:10:55+00:00   
-2  11166973  VladimirNik 2013-12-31 23:10:55+00:00   
-3  11166973  VladimirNik 2013-12-31 23:10:55+00:00   
-4  11161892      Ichoran 2013-12-31 16:55:47+00:00   
 
-                                                file  month  year  
-0       src/reflect/scala/reflect/api/Printers.scala     12  2013  
-1  src/reflect/scala/reflect/internal/Printers.scala     12  2013  
-2                    test/files/run/reify_ann3.check     12  2013  
-3  test/junit/scala/reflect/internal/PrintersTest...     12  2013  
-4  src/library/scala/collection/mutable/ArrayOps....     12  2013  
-year  month
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pid</th>
+      <th>user</th>
+      <th>date</th>
+      <th>file</th>
+      <th>month</th>
+      <th>year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>11166973</td>
+      <td>VladimirNik</td>
+      <td>2013-12-31 23:10:55+00:00</td>
+      <td>src/reflect/scala/reflect/api/Printers.scala</td>
+      <td>12</td>
+      <td>2013</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>11166973</td>
+      <td>VladimirNik</td>
+      <td>2013-12-31 23:10:55+00:00</td>
+      <td>src/reflect/scala/reflect/internal/Printers.scala</td>
+      <td>12</td>
+      <td>2013</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>11166973</td>
+      <td>VladimirNik</td>
+      <td>2013-12-31 23:10:55+00:00</td>
+      <td>test/files/run/reify_ann3.check</td>
+      <td>12</td>
+      <td>2013</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>11166973</td>
+      <td>VladimirNik</td>
+      <td>2013-12-31 23:10:55+00:00</td>
+      <td>test/junit/scala/reflect/internal/PrintersTest...</td>
+      <td>12</td>
+      <td>2013</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>11161892</td>
+      <td>Ichoran</td>
+      <td>2013-12-31 16:55:47+00:00</td>
+      <td>src/library/scala/collection/mutable/ArrayOps....</td>
+      <td>12</td>
+      <td>2013</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea ">
+<pre>year  month
 2011  12        590
 2012  1         489
       2         787
@@ -458,9 +852,9 @@ year  month
       11        172
       12        224
 2018  1         202
-Name: pid, Length: 74, dtype: int64
-</pre>
+Name: pid, Length: 74, dtype: int64</pre>
 </div>
+
 </div>
 
 <div class="output_area">
@@ -478,7 +872,7 @@ Name: pid, Length: 74, dtype: int64
 
 
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAswAAAExCAYAAABoNfRAAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjUuMiwgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy8qNh9FAAAACXBIWXMAAAsTAAALEwEAmpwYAAAkZUlEQVR4nO3dfbQkdX3n8fd3ZgAHR55kJMBghjUoQY0YxhGPJjHByChGjMpKEhUNkY0hopJsHDab9ZhdlGyeTRQXHxY4cWOIEkEMKkHRGIVxeJBxQARhBFYCg+sDJAR5+O4f9ZtMc+lbXXembnXVve/XOXVud/WnuutX3+6Z761bVR2ZiSRJkqTxlkx7BSRJkqQ+s2GWJEmSatgwS5IkSTVsmCVJkqQaNsySJElSDRtmSZIkqcayaa/AJPvuu2+uXr162qshSZKkBezKK6+8OzNXjnus9w3z6tWr2bhx47RXQ5IkSQtYRHxrtsc8JEOSJEmqYcMsSZIk1bBhliRJkmrYMEuSJEk1bJglSZKkGjbMkiRJUg0bZkmSJKmGDbMkSZJUo/dfXKL2rF7/yUfN23LGMVNYE0mSpOFwD7MkSZJUw4ZZkiRJqmHDLEmSJNWwYZYkSZJq2DBLkiRJNWyYJUmSpBo2zJIkSVING2ZJkiSphg2zJEmSVMOGWZIkSaphwyxJkiTVsGGWJEmSatgwS5IkSTVsmCVJkqQaNsySJElSDRtmSZIkqYYNsyRJklTDhlmSJEmqYcMsSZIk1WjcMEfE0oi4OiIuKvf3iYhLIuLG8nPvkexpEXFTRNwQEUePzD8iIjaVx94dEdHucCRJkqR2zWUP85uB60furwcuzcxDgEvLfSLiMOB44KnAOuC9EbG0LHMmcBJwSJnW7dTaS5IkSfOsUcMcEauAY4APjMw+Fjin3D4HeNnI/I9k5v2ZeQtwE7A2IvYH9sjML2dmAueOLCNJkiT1UtM9zH8G/A7w8Mi8/TLzDoDy8wll/oHAbSO528u8A8vtmfMfJSJOioiNEbFx69atDVdRkiRJat/EhjkiXgLclZlXNnzOccclZ838R8/MPCsz12TmmpUrVzZ8WUmSJKl9yxpkngu8NCJeDDwG2CMi/gq4MyL2z8w7yuEWd5X87cBBI8uvAr5d5q8aM1+SJEnqrYl7mDPztMxclZmrqU7m+2xmvhq4EDihxE4ALii3LwSOj4jdIuJgqpP7NpTDNu6JiCPL1TFeO7KMJEmS1EtN9jDP5gzgvIg4EbgVOA4gMzdHxHnAdcCDwMmZ+VBZ5o3A2cBy4OIySZIkSb01p4Y5My8DLiu3vwMcNUvudOD0MfM3Ak+b60pKkiRJ0+I3/UmSJEk1bJglSZKkGjbMkiRJUg0bZkmSJKmGDbMkSZJUw4ZZkiRJqmHDLEmSJNXYmS8uUY+sXv/JR83bcsYxU1iTuZm53kNYZ0mStLi4h1mSJEmqYcMsSZIk1bBhliRJkmrYMEuSJEk1bJglSZKkGjbMkiRJUg0bZkmSJKmGDbMkSZJUw4ZZkiRJqmHDLEmSJNWwYZYkSZJq2DBLkiRJNWyYJUmSpBo2zJIkSVING2ZJkiSphg2zJEmSVGPZtFdgqFav/+Sj5m0545gprIkkSZLmk3uYJUmSpBo2zJIkSVING2ZJkiSphg2zJEmSVMOT/gbAEwwlSZKmxz3MkiRJUg0bZkmSJKmGDbMkSZJUw4ZZkiRJqmHDLEmSJNWwYZYkSZJq2DBLkiRJNSY2zBHxmIjYEBFfjYjNEfGOMn+fiLgkIm4sP/ceWea0iLgpIm6IiKNH5h8REZvKY++OiJifYUmSJEntaPLFJfcDP5eZ90bELsAXI+Ji4OXApZl5RkSsB9YDb4uIw4DjgacCBwD/EBFPzsyHgDOBk4DLgb8H1gEXtz4qzSu/SEWSJC0mE/cwZ+XecneXMiVwLHBOmX8O8LJy+1jgI5l5f2beAtwErI2I/YE9MvPLmZnAuSPLSJIkSb3U6BjmiFgaEdcAdwGXZOYVwH6ZeQdA+fmEEj8QuG1k8dvLvAPL7Znzx73eSRGxMSI2bt26dQ7DkSRJktrVqGHOzIcy83BgFdXe4qfVxMcdl5w188e93lmZuSYz16xcubLJKkqSJEnzYk5XycjM7wGXUR17fGc5zILy864Sux04aGSxVcC3y/xVY+ZLkiRJvdXkKhkrI2Kvcns58ALg68CFwAkldgJwQbl9IXB8ROwWEQcDhwAbymEb90TEkeXqGK8dWUaSJEnqpSZXydgfOCcillI12Odl5kUR8WXgvIg4EbgVOA4gMzdHxHnAdcCDwMnlChkAbwTOBpZTXR3DK2RIkiSp1yY2zJl5LfDMMfO/Axw1yzKnA6ePmb8RqDv+WQvIzMvPeek5SZI0RH7TnyRJklTDhlmSJEmqYcMsSZIk1bBhliRJkmrYMEuSJEk1bJglSZKkGjbMkiRJUg0bZkmSJKlGk2/6k3rPL0mRJEnzxT3MkiRJUg0bZkmSJKmGDbMkSZJUw4ZZkiRJqmHDLEmSJNWwYZYkSZJq2DBLkiRJNWyYJUmSpBo2zJIkSVING2ZJkiSphg2zJEmSVGPZtFdgsVu9/pOPmrfljGOmsCaSJEkaxz3MkiRJUg0bZkmSJKmGDbMkSZJUw4ZZkiRJquFJf1o0Zp5g6cmVkiSpCRtmaYRNtSRJmslDMiRJkqQaNsySJElSDRtmSZIkqYYNsyRJklTDhlmSJEmqYcMsSZIk1bBhliRJkmrYMEuSJEk1bJglSZKkGjbMkiRJUo2JDXNEHBQRn4uI6yNic0S8uczfJyIuiYgby8+9R5Y5LSJuiogbIuLokflHRMSm8ti7IyLmZ1iSJElSO5rsYX4Q+K3M/HHgSODkiDgMWA9cmpmHAJeW+5THjgeeCqwD3hsRS8tznQmcBBxSpnUtjkWSJElq3cSGOTPvyMyryu17gOuBA4FjgXNK7BzgZeX2scBHMvP+zLwFuAlYGxH7A3tk5pczM4FzR5aRJEmSemlOxzBHxGrgmcAVwH6ZeQdUTTXwhBI7ELhtZLHby7wDy+2Z8yVJkqTeatwwR8QK4GPAWzLzB3XRMfOyZv641zopIjZGxMatW7c2XUVJkiSpdY0a5ojYhapZ/nBmnl9m31kOs6D8vKvMvx04aGTxVcC3y/xVY+Y/SmaelZlrMnPNypUrm45FkiRJal2Tq2QE8EHg+sz8k5GHLgROKLdPAC4YmX98ROwWEQdTndy3oRy2cU9EHFme87Ujy0iSJEm9tKxB5rnAa4BNEXFNmfdfgDOA8yLiROBW4DiAzNwcEecB11FdYePkzHyoLPdG4GxgOXBxmSRJkqTemtgwZ+YXGX/8McBRsyxzOnD6mPkbgafNZQUlSZKkaWqyh1maqtXrP/mI+1vOOGZKayJJkhYjvxpbkiRJqmHDLEmSJNXwkAypx2YejgIekiJJUtdsmKUp8dhsSZKGwUMyJEmSpBo2zJIkSVING2ZJkiSphg2zJEmSVMOT/iQBXpFDkqTZuIdZkiRJquEeZkmtck+1JGmhcQ+zJEmSVMOGWZIkSaphwyxJkiTVsGGWJEmSanjSnx7BE7YkSZIeyT3MkiRJUg33MEsD518FJEmaXzbMkiRJU+bOj37zkAxJkiSphg2zJEmSVMNDMiRJWoQ8BEBqzj3MkiRJUg0bZkmSJKmGDbMkSZJUw4ZZkiRJquFJf/PIEyrUF74XJUnace5hliRJkmq4h1mSpBr+hUaSDbMkqTMzm08bz4XBumqhs2GWJA2Oe30ldcljmCVJkqQaNsySJElSDQ/JkNSYfwaXpOnx3+DpcQ+zJEmSVMM9zNI88IxxLUa+7yUtVBP3MEfEhyLiroj42si8fSLikoi4sfzce+Sx0yLipoi4ISKOHpl/RERsKo+9OyKi/eFIkiRJ7WpySMbZwLoZ89YDl2bmIcCl5T4RcRhwPPDUssx7I2JpWeZM4CTgkDLNfE5JkiSpdyYekpGZX4iI1TNmHws8v9w+B7gMeFuZ/5HMvB+4JSJuAtZGxBZgj8z8MkBEnAu8DLh4p0cgSQPjoQuSNCw7egzzfpl5B0Bm3hERTyjzDwQuH8ndXuY9UG7PnC9J2kE23pLUjbavkjHuuOSsmT/+SSJOioiNEbFx69atra2cJEmSNFc72jDfGRH7A5Sfd5X5twMHjeRWAd8u81eNmT9WZp6VmWsyc83KlSt3cBUlSZKknbejDfOFwAnl9gnABSPzj4+I3SLiYKqT+zaUwzfuiYgjy9UxXjuyjCRJktRbE49hjoi/pjrBb9+IuB14O3AGcF5EnAjcChwHkJmbI+I84DrgQeDkzHyoPNUbqa64sZzqZD9P+JO0U/zWq4XJukrqmyZXyfilWR46apb86cDpY+ZvBJ42p7WTJEmSpsxv+hvDvRuSJKkt9hXDZ8MsSS3yUm/SMPhZ1VzYMEuSpFnZWErtX4dZkiRJWlAW3R5mjyOSJEnSXLiHWZIkSaqx6PYwS5Kk7nkstIbMhlmSFjCbFEnaeR6SIUmSJNVwD7MkSQuMJ7hL7bJhliQtWjaWkpqwYZYkqSds4KV+smGWJKkDNsPScA2mYfZMb0mSJE3DYBpmSZLmYqHu0V2o4wJ3ji1EC+X96mXlJEmSpBruYZYkSdLUDGEvtA2zNEf+yVDSTEP4D1/SjltQDbP/YEnS3PlLoCTVW1ANsyRJUlv8ZVLb2DBL6qW2/mLU5Hn865QkPZL/Lj6SDbMkSdICYaM7P7ysnCRJklTDPcyS1EMeOylJ/WHDLEmSBsNfJjUNNsySOucxdpIWiiE28P4bPHc2zJLU0BD/Y5Qk7TwbZknSRP6yIGkx8yoZkiRJUg33MEuSJGnOFtOx0DbMkiRpQfEQosVpPht4G2ZJkiQtGjvyC5XHMEuSJEk13MMsSZKkXpv28dLuYZYkSZJq2DBLkiRJNWyYJUmSpBqdN8wRsS4iboiImyJifdevL0mSJM1Fpw1zRCwF3gO8CDgM+KWIOKzLdZAkSZLmous9zGuBmzLz5sz8IfAR4NiO10GSJElqrOuG+UDgtpH7t5d5kiRJUi9FZnb3YhHHAUdn5q+V+68B1mbmm2bkTgJOKnefAtww8vC+wN0TXmqImT6ukxkz853p4zqZMbMzmT6ukxkz853p4zrtSOZHM3Pl2GRmdjYBzwE+PXL/NOC0OT7HxoWY6eM6mTEz35k+rpMZMzuT6eM6mTEz35k+rlObY8vMzg/J+ApwSEQcHBG7AscDF3a8DpIkSVJjnX41dmY+GBG/CXwaWAp8KDM3d7kOkiRJ0lx02jADZObfA3+/E09x1gLNdP16Zsz0IdP165kxM9+Zrl/PjJk+ZLp+va7H1u1Jf5IkSdLQ+NXYkiRJUg0bZkmSJKlG58cw74iIeALwXOAA4D7ga1SXAnl4TPaxwL9l5kM1z2dmTKbJdm4rM42xd/161szMmMc6r1dXY1uoGT9jw8tYs2Fl+lqvRy3T52OYI+JngfXAPsDVwF3AY4AnA08CPgr8CXAM8CvAs4D7gd2ArVQnF54FfJPqEnZmxmdWNdjOG4BTWsh0Vq/MvDEilvRsW1uzxZnpsl5/DNzbs/EPMeNnbECZ8u99k57BmvUn06vPWGbeSJ2mF2yexgT8IfDEWR5bBrwM2Az8HvATwJKRx/cBXgF8DLjeTG3mkw2288dbynRZr1cDn+/ZtrZmizPTZb1ewcJ93y/UmvkZa+ff+yY9gzXrT6Zvn7FXj3uObVOv9zA3ERG7ZOYDEzLLM/M+M7NmJm7DtnRcr10AFuj7Y6HWbKFmOqtX09fr4TbqW8bP2LAyfsaGl+nbZ6w20/uT/iLi0Ig4KiJWzJi/DuqboW3LTCrabJmI2KdB5qU7+zwR8WMR8YqIOGxk9m5N1jki/v049IhYERFrRl9v22tFxMqIeGZEPH3mtszMB8p2fltEvDsi/rzc/vFJ61Ce+/Ujt/tUrwfGvZ4163XN/IyNMZd6bXu9mueyZj2rmfVqp14lY80aPk8fatazetU373W7n6c9UR2TcgPV7vYtwLEjj13VYPlby8+fAC4HbqM6bmbvkcyG8vO5VH9C2Aw8G7gEuLks85ySefmM6RXAP2+7XzL/deS5DwO+AdxS1v/ZZf7ngH3L7deUzAeATcCbyvwHgX8ATgT2mmV8rwO+U5Z/UVnfS8s6/9LIOvwDcBPwQ+CKsj5nA3uWzNuAa6iOJXp1mdZvmzeH7dyrelmz4dXMes1vvazZ8GpmvZrVy5oNr2Z9q9fEXJPQtKZSxBXl9mpgI/Dmcv/q8vPUWabfAv5fyXwRWAfsBfx2eWM+acbzbACeDjwHuBt4Xpn/k8A/jbyRLgI+BPzvMt1Tfn5oZnGojs95Ubm9FvhSuf21kcxXgMeX27sD146M/SXAh8sb8wKqA+iXz9g++wIHAz8YGdN+I89zOfCUkXU4p9x+A/DRcvsbwC5jtv+uwI3l9rWzTJuA+/tYL2s2vJpZr52vlzUbXs2s187Xy5oNr2Z9q9ekqe+XlVuamfcCZOaWiHg+8NGI+FEgSuadVAf6Pzhm+SXl54rM/FS5/UcRcSXwqYh4DZBl/i6ZuQkgIrZm5hfL614VEctL5jnAGVRvtPdlZkbE8zPz3/8sMMMBmXlxeZ4NI8/zQEQcmJn/l+ps9n8p8+8Hlm7LZOZFwEVluV+getO+JyI+nZm/DDyUmXcDd0fEvZn5zfJad0Zs2zwsz8wbRtbhfeX2+yPirSXzMNVlWL41Y/33L49B9UE4GvjujEwAXyq3+1YvsGZDq5n12vl6gTUbWs2s187XC6zZNkOpWd/qVavvDfM/R8ThmXkNQGbeGxEvofot6+klcxXw8cy8cubCEfFr22/Gnpn5/fI8n4uIbWdFbjvmZnSDnTbjqXYty30lIn4eeBPw2Yh4G9vf9Nv8h4i4kKpIqyJi98z81/LYLuXnW4HPRMTHqH7j/GxEfAr4KarfGGHkP7+sjgU6DzgvIvakOuMT4NaIeBfwOODrEfHHwPnAC4A7SuabEfF7VH8ueTnVnzq2nRC3rf5vAS6NiBup/qQC8ETgx4DfLPcvovrwXzNjvETEZeVmr+pVlrVmA6qZ9WqlXmDNhlYz67Xz9QJrNrSavYV+1ateNtgNPa2J6hp9PzLLY88tP59COSZnTGa/8vOXgSPHPP5E4P3l9kuB3cdkngT8zpj5B1C9kW6eMf9nZkzb/kywH3DySG5P4I3AnwJ/QXUsz6Ejj/92g+2zB9UHbD2wguq4pouA9wD7l8xewP8s808HHjfy+keOPNcS4MjyHK8st5culHpZs+HVzHrtWL2s2fBqZr3aqZc1G17N+lSvSdNgLysXESuy7ILX/GmyndvKqB3WbFis1/BYs+GxZsPSx3o1Om6jp66b9gosEk22c1sZtcOaDYv1Gh5rNjzWbFh6V69eH8McEafO9hDVnwHUgibbua2M2mHNhsV6DY81Gx5rNixDq1ff9zC/E9ib6sDy0WkF/V/3IWmyndvKqB3WbFis1/BYs+GxZsMyrHrN5cDqrieqS4YcMctjt01Y9jeAVwHLzNRnmmzntjJ9GHvf62HNFl6mD/Xq+zbqW6YPNevz9uljxpoNKzOUem2b+v6b0ut59PX5tlkzYdkAnkd1qRMz9Zkm27mtTJP1me9M169nzcz0oV4z18lMfaYPNevz9uljxpoNKzOUelXB0mFLkiRJGqPve5gbiYhDI+KoiFgxY/46M80yXYqItRHxrHL7sIg4NSJePB+Zrl+v67FNS0Sca2bnMl2KiOeV99ALzexYZj5FxLMjYo9ye3lEvCMiPhERfxDVF0aYmZDpWkScEhEHmdnxTJciYteIeG1EvKDc/+WI+MuIODmqL1OZ/BxD38McEacAJwPXA4dTfX/4BeWxqzLzJ83UZ1ooQ2MR8XbgRVTHL10CPBu4jOobgj6dmae3len69boeW1ei+vaoR8wCfhb4LEBmvtRMfYaORcSGzFxbbr+B6t+AvwNeCHwiM88wU59psx6TRMRm4BmZ+WBEnAX8K/BR4Kgy/+Vm6jPzUpgaEfF9qq+W/ibw18DfZuZWM80zXYqID1P9n7o78D2qEwLPp3oPRWaeMPFJJh3k3PcJ2MT2b7RZDWykagoBrjYzOTOFei2letP+ANijzF8OXNtmpuvX63psHdbsKuCvgOdTfYPU86m+/vRngJ8xMzkzhZpdPXL7K8DKcvuxwCYzkzMd1+v60c/bjMeuMTM5M4WaXU31V/oXAh8EtgKfAk5g+7famanJdFyvbf+/LgPupHybINUOjkb/rw7ykIyI+I2IeFVELKMa9L0AmbmF6j+rF0XEn8C/fye6mfrMWDO2c1uZBzPzoay+4/6bmfmDsm73AQ+XRdrKtPlcfcs02dZtZdYAVwK/C3w/My8D7svMz2fm58siZuozTbZzm5klEbF3RDyeau/JVoDM/BfgQTONMk23dRuZr0XE68tDX42INSXzZOCBMt9MfWZW81SzzMyHM/MzmXki1VdWvxdYB9xcFjFTn2mrFk0ySyJiV6rLze1O9RXdALsBjQ7J6Py3sjYmqj+f/QVwIdWfPQ+f8fgy4FzgoXLfTE2myXZuKwNcAexe5i8ZyexJ2XPQVqbN5+pbpsuajcxbBfwt8JfArbMsZ6Ym01W9gC1U/yndUn7+SJm/gu177czUZLqsGdVn+2yqP19fQdUE3gx8nuqQA8zUZ6ZQs6trcsvLTzM1mY7r9dbynvkWcApwKfB+qr/ovn3Seygzh9kwz9ggqyj/2I157LlmJmc6rtdus8zfF3h6m5muX6/rsU1rAo4B3mlmxzNTrN3uwMFmdjwzz/V5HPAM4AhgPzNzz3RYqyeb2bnMFGp2AHBAub0X8EpgbePlpz2AnRj46xtkVphplgEOpTr4fcWMzLq2M30Ye9/r0bBma4FnlduHAacCL56RbyXTt7EvhAxwboPlW8n0cfxDy1Bdq/VU4IU1y7aS6dvYh5KhOkF69JyPdwCfAP4A2LPNTB/HP7QM1Z7egyZkW8ns7DpnDrthnvgnTzPNMuXNdgPwcao/VR47krmqzUxfxt7nejSs2duBy6lO4nwX1aE3/w34AvC7bWb6NvYhZqj+JDg6fQK4d9v9NjN9HP8QM8CGkXlvAK4pn5d/Ata3menb2IeaATaz/Vv/zgL+jOoXlLcD57eZ6eP4h5YBvg98G/hHqm/cWzkm20pmZ9c5M5n1YOk+iIhrZ3sI2K9kTq3JrDAzOUP1j/gRmXlvRKwGPhoRqzPzz9l+YmArmY7H1btt3eLYXkl1mcDdgH8GVmXmDyLiD6mO8Tu9rUzfxj7EDNWhUdcBHwCyPLYG+OORfFuZ3o1/iBkeeSLQScDPZ+bWiPgjql8yz2gr07exDzFTLMnMbSdtrsntl039YkRc02amb+MfYobqmOIjqC6Z+irgHRFxJdVl6M7PzHvayszhPTSrvl8lYz/gtcAvjJm+UzLvBPamOrZpdFrB9vGZqc90eUWOLsfVx23dVqbLK3L0bexDzHR9RY6+jX+ImS6vyNG3sQ8xA91elaNv4x9iJrO7K3I0fQ/Nbi67rbueqK7d97xZHvs/5eeXqPZqjsvcZqZRpsurdnQ2rp5u67YyXV61o29jH1xm5P4qOrgiR9/GP9DMFrq7akffxj64TLm9J91duaNX4x9o5upxj5fH2r5qR+N/p2d9riahPk/AU5jleBXKWbRmJmZW0d1VOzobV0+3dVuZLq/a0bexDy4zZv68XpGjb+MfYqZmm7d+RY6+jX2ImRnzHsc8X5Wjb+MfaKbLq3bs8Gd+2zTYr8aOiBVZ/vyv+dNkO7eVUTus2bBYr+GxZsNjzYalj/UacsN8a2Y+sXyDy4nAL1Idt5JUZ0teAHwwMx8wU59psp3bynQ9rr5ta2u2ODNt1aJppm/jH2KmzXpMyvRt7EPM1G3nudajSaZv4x9ipq1aNMm08h7qc8M84azG383MfSLir4HvAecAt5fHV1F9X/k+mfkqMxMzTbZzW5nOxgXQw21tzRZnprN6wYJ+3y/ImvVw7IPLQOOewZr1J9Ores3yHNufrOcN878Bf8j2M4lHvTUz94qIGzLzKbMs/43MfLKZiZkm27mtTGfjKrf7tq2t2eLMdFav8rp9G/8QM37GBpQpt63ZsDK9qte4xx4hGxzoPK2JZmdZXg4cxyPP8F9CdS2+K8w0ynR5Vmxn4+rptrZmizPT9dUC+jb+IWb8jA0oY80GmelVvSZNEwPTnGh2luVq4G+ArcA3ynRXmXewmUaZJtu5rUxn4+rptrZmizPTWb16Ov4hZvyMDShjzQaZ6VW9Jk29PiRjrmL7heHvNrNjmS51Pa6+bWtrtjgzXevb+IeY6VLfxj7ETNf6Nv4hZrq0w+vTpKue1kT1pRf/CfgUcC3wVeBi4NeBXUZyewBPGrP8T5iZnGmyndvKdD32vm1ra7Y4M13Xq2/jH2Km65r1aewDzlizAWX6WK+6aWJgmhPV94CfCRxJdTbjqnL7TOBvSuY/Ul0a5BpgM/CskeWvMtMo02Q7t5XpbFw93dbWbHFmOqtXT8c/xIyfsQFlrNkgM72q16Rp6k1x7crBDTWPfaP8vAbYv9xeC3wdeHm5f7WZRpkm27mtTGfj6um2tmaLM9NZvXo6/iFm/IwNKGPNBpnpVb0mTcvot+9GxHHAxzLzYYCIWEJ1puN3S2ZpZt4BkJkbIuJngYsiYhXVhanNTM402c5tZbocVx+3tTVbnJku69XH8Q8x42dsWBlrNrxM3+pVLxt01dOaaHaW5ZeYcUwK1fe/Xwrcb6ZRpsl2bivT2bh6uq2t2eLMdFavno5/iJnOatbDsQ8uY80GmelVvSZNEwN9mYDHA/uOmf8M4JAx83cBfsXM5EyT7dxWputx9W1bW7PFmemyXn0c/xAzXdasb2MfYsaaDS/Tt3pNmiYGpj0x+SzLaPAcZiZkJm3nJrXoY736uK2t2eLMdFWvvo5/iBk/Y8PLWLNhZYZUr9qFpz3R7CzLy4A3AU+cseyuwM9RfW/4183UZt7TYDu3dVZsl/V63QJ+fyzUmi3UTGf1smbDq5n1au3f+7bqYc0W52fsdaOPzZxmfaAPE83OsnwM8BvAP5UNdh1wM/At4P3A4WYmZpps57YynY1rgb8/FmTNFnCms3pZs+HVrIdjH1ym5XpYs0X4GZvYk067KZ7QMG+acX9/4ErgFMZcN4/qWJT9gb1qntPMjEyT7dxWZlpj78u2tmaLMzOtevVl/EPM+BkbXsaaDSvT53qNHcdcwl1PtHBWo1M727mtjJM1W4yT9RreZM2GN1mzYU1Dq9fUN9iEjfkMdvKsRqd2tnNbGSdrthgn6zW8yZoNb7Jmw5qGVq9tZ5X2UkRETljBJhnVa2s7W6/uWLNhsV7DY82Gx5oNy9DqtWRnFu7A5yLiTRHxxNGZEbFrRPxcRJwDnDCldVtImmzn61vKWK92WLNhsV7DY82Gx5oNy6Dq1fc9zI8BfhX4FeBg4HtUZzouBT4DvCczr5nW+i0UTbYz1VmnO52xXu2wZsNivYbHmg2PNRuWodWr1w3zqIjYBdgXuC8zvzfl1VmwmmzntjJqhzUbFus1PNZseKzZsAyhXoNpmCVJkqRp6PsxzJIkSdJU2TBLkiRJNWyYJUmziojXRcQBI/e3RMS+01wnSeqaDbMkDVBELO3opV4HHDApJEkLmQ2zJM2ziPjvEfHmkfunR8QpEfGfI+IrEXFtRLxj5PGPR8SVEbE5Ik4amX9vRPx+RFwBPGfGa1wWEX8aEV+IiOsj4lkRcX5E3BgR/2Mkd2pEfK1MbynzVpdl3l9e8zMRsTwiXgmsAT4cEddExPLyNG+KiKsiYlNEHDovG02SesSGWZLm3wcpF86PiCXA8cCdwCHAWuBw4IiI+OmS/9XMPIKqWT0lIh5f5j8W+FpmPjszvzjmdX6YmT8NvA+4ADgZeBrwuoh4fEQcAbweeDZwJPCGiHhmWfYQquuVPpXqOqavyMyPAhupvl728My8r2TvzsyfBM4Efnsnt40k9Z4NsyTNs8zcAnynNKcvBK4GnjVy+yrgUKqmFaom+avA5cBBI/MfAj5W81IXlp+bgM2ZeUdm3g/cXJ7necDfZea/ZOa9wPnAT5Vlbhm5uP+VwOqa1zm/YU6SFoRl014BSVokPkB1PPCPAB8CjgLelZn/azQUEc8HXgA8JzP/NSIuo/rWKoB/y8yHal7j/vLz4ZHb2+4vA6LBslA15stnC45kH8L/RyQtAu5hlqRu/B2wjmrP8qfL9KsRsQIgIg6MiCcAewLfLc3yoVSHTowVEe+KiF+cwzp8AXhZROweEY8FfhH4xwnL3AM8bg6vIUkLjnsGJKkDmfnDiPgc8L2yl/gzEfHjwJcjAuBe4NXAp4Bfj4hrgRuoDsuYzdPZfhhGk3W4KiLOBjaUWR/IzKsjYnXNYmcD74uI+5hxoqEkLRZ+NbYkdaCc7HcVcFxm3tjSc346M49u47kkSbPzkAxJmmcRcRhwE3BpW80ygM2yJHXDPcySJElSDfcwS5IkSTVsmCVJkqQaNsySJElSDRtmSZIkqYYNsyRJklTDhlmSJEmq8f8BPFWTUL6+y70AAAAASUVORK5CYII=" />
+<img src="data:image/png;base64,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" />
 </div>
 
 </div>
@@ -534,7 +928,7 @@ Name: pid, Length: 74, dtype: int64
 
 
 <div class="output_png output_subarea ">
-<img src="data:image/png;base64,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" />
+<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAYUAAAD4CAYAAAAD6PrjAAAAOXRFWHRTb2Z0d2FyZQBNYXRwbG90bGliIHZlcnNpb24zLjUuMywgaHR0cHM6Ly9tYXRwbG90bGliLm9yZy/NK7nSAAAACXBIWXMAAAsTAAALEwEAmpwYAAARRElEQVR4nO3de7BdZX3G8e9Doly8FCiBRoIGOhkUOyoYKRbbKmiJqICttnHUpi1KO+KM1s5ook7VPzKDvah1LFW8tPGKwQukWMdivE1nWmKoN24psSBEUhJ1KlYdFPz1j73OyyY5SXbIWXufk/P9zJzZa717rb2fxQl5si577VQVkiQBHDLpAJKk2cNSkCQ1loIkqbEUJEmNpSBJahZOOsCBOOaYY2rp0qWTjiFJc8p11133vapaNN1zc7oUli5dyubNmycdQ5LmlCTf2dNzHj6SJDWWgiSpsRQkSY2lIElqLAVJUmMpSJIaS0GS1FgKkqTGUpAkNXP6E80Haunqz/T+Hrdd8pze30OSZop7CpKkxlKQJDWWgiSpsRQkSY2lIElqLAVJUmMpSJIaS0GS1FgKkqTGUpAkNZaCJKmxFCRJjaUgSWosBUlSYylIkhpLQZLUWAqSpMZSkCQ1loIkqbEUJElN76WQZEGSryW5ups/Osk1SW7pHo8aWnZNkq1JtiQ5p+9skqQHGseewquAm4bmVwMbq2oZsLGbJ8kpwErg8cAK4NIkC8aQT5LU6bUUkiwBngO8b2j4fGBdN70OuGBo/PKquqeqbgW2Aqf3mU+S9EB97ym8A3gt8IuhseOqajtA93hsN348cMfQctu6sQdIclGSzUk279y5s5fQkjRf9VYKSZ4L7Kiq60ZdZZqx2m2g6rKqWl5VyxctWnRAGSVJD7Swx9c+EzgvybnAYcAjk3wYuCvJ4qranmQxsKNbfhtwwtD6S4A7e8wnSdpFb3sKVbWmqpZU1VIGJ5C/UFUvATYAq7rFVgFXddMbgJVJDk1yIrAM2NRXPknS7vrcU9iTS4D1SS4EbgdeCFBVNyRZD9wI3AtcXFX3TSCfJM1bYymFqvoS8KVu+vvA2XtYbi2wdhyZJEm78xPNkqTGUpAkNZaCJKmxFCRJjaUgSWosBUlSYylIkhpLQZLUWAqSpMZSkCQ1loIkqbEUJEmNpSBJaiwFSVJjKUiSGktBktRYCpKkxlKQJDWWgiSpsRQkSY2lIElqLAVJUmMpSJIaS0GS1FgKkqTGUpAkNZaCJKmxFCRJjaUgSWosBUlSYylIkhpLQZLUWAqSpMZSkCQ1loIkqbEUJElNb6WQ5LAkm5J8I8kNSd7SjR+d5Jokt3SPRw2tsybJ1iRbkpzTVzZJ0vT63FO4Bzirqp4IPAlYkeQMYDWwsaqWARu7eZKcAqwEHg+sAC5NsqDHfJKkXfRWCjXwf93sQ7qfAs4H1nXj64ALuunzgcur6p6quhXYCpzeVz5J0u56PaeQZEGSrwM7gGuq6lrguKraDtA9Htstfjxwx9Dq27oxSdKY9FoKVXVfVT0JWAKcnuTX9rJ4pnuJ3RZKLkqyOcnmnTt3zlBSSRKM6eqjqvpf4EsMzhXclWQxQPe4o1tsG3DC0GpLgDunea3Lqmp5VS1ftGhRn7Elad7p8+qjRUmO7KYPB54J3AxsAFZ1i60CruqmNwArkxya5ERgGbCpr3ySpN0t7PG1FwPruiuIDgHWV9XVSf4dWJ/kQuB24IUAVXVDkvXAjcC9wMVVdV+P+SRJu+itFKrqm8Cp04x/Hzh7D+usBdb2lUmStHcjHT7axwliSdJBYtRzCu/uPp38iqnzBJKkg89IpVBVTwNezODqoM1JPprkWb0mkySN3chXH1XVLcAbgdcBvw28M8nNSX63r3CSpPEa9ZzCE5K8HbgJOAt4XlU9rpt+e4/5JEljNOrVR+8C3gu8vqp+OjVYVXcmeWMvySRJYzdqKZwL/HTqcwNJDgEOq6qfVNWHeksnSRqrUc8pfB44fGj+iG5MknQQGbUUDhu6DTbd9BH9RJIkTcqopfDjJKdNzSR5MvDTvSwvSZqDRj2n8GrgiiRTdy1dDPxBL4kkSRMzUilU1VeTPBY4mcH3HtxcVT/vNZkkaez254Z4TwGWduucmoSq+mAvqSRJEzFSKST5EPCrwNeBqdtZF2ApSNJBZNQ9heXAKVW129djSpIOHqNefXQ98Ct9BpEkTd6oewrHADcm2QTcMzVYVef1kkqSNBGjlsKb+wwhSZodRr0k9ctJHgMsq6rPJzkCWNBvNEnSuI166+yXA58A3tMNHQ9c2VMmSdKEjHqi+WLgTOBuaF+4c2xfoSRJkzFqKdxTVT+bmkmykMHnFCRJB5FRS+HLSV4PHN59N/MVwD/3F0uSNAmjlsJqYCfwLeBPgX9h8H3NkqSDyKhXH/2CwddxvrffOJKkSRr13ke3Ms05hKo6acYTSZImZn/ufTTlMOCFwNEzH0eSNEkjnVOoqu8P/Xy3qt4BnNVvNEnSuI16+Oi0odlDGOw5PKKXRJKkiRn18NHfDk3fC9wG/P6Mp5EkTdSoVx89o+8gkqTJG/Xw0Wv29nxVvW1m4kiSJml/rj56CrChm38e8BXgjj5CSZImY3++ZOe0qvoRQJI3A1dU1cv6CiZJGr9Rb3PxaOBnQ/M/A5bOeBpJ0kSNuqfwIWBTkk8z+GTz84EP9pZKkjQRo159tDbJZ4Hf7Ib+uKq+1l8sSdIkjHr4COAI4O6q+jtgW5IT97ZwkhOSfDHJTUluSPKqbvzoJNckuaV7PGponTVJtibZkuScB7VFkqQHbdSv43wT8DpgTTf0EODD+1jtXuAvqupxwBnAxUlOYXAb7o1VtQzY2M3TPbcSeDywArg0id8DLUljNOqewvOB84AfA1TVnezjNhdVtb2q/rOb/hFwE4Pvdj4fWNcttg64oJs+H7i8qu6pqluBrcDpI2+JJOmAjVoKP6uqort9dpKH7c+bJFkKnApcCxxXVdthUBzc/13Px/PAzz1s68Z2fa2LkmxOsnnnzp37E0OStA+jlsL6JO8BjkzycuDzjPiFO0keDnwSeHVV3b23RacZm+47HC6rquVVtXzRokWjRJAkjWifVx8lCfBx4LHA3cDJwF9W1TUjrPsQBoXwkar6VDd8V5LFVbU9yWJgRze+DThhaPUlwJ0jb4kk6YDtsxSqqpJcWVVPBvZZBFO6Mnk/cNMu90baAKwCLukerxoa/2iStwGPApYBm0Z9P0nSgRv1w2v/keQpVfXV/XjtM4GXAt9K8vVu7PUMymB9kguB2xl8ixtVdUOS9cCNDK5curiq7tuP95MkHaBRS+EZwJ8luY3BFUhhsBPxhD2tUFX/xvTnCQDO3sM6a4G1I2aSJM2wvZZCkkdX1e3As8eUR5I0QfvaU7iSwd1Rv5Pkk1X1e2PIJEmakH1dkjp8+OekPoNIkiZvX6VQe5iWJB2E9nX46IlJ7mawx3B4Nw33n2h+ZK/pJEljtddSqCpvSCdJ88j+3DpbknSQsxQkSY2lIElqLAVJUmMpSJIaS0GS1FgKkqTGUpAkNZaCJKmxFCRJjaUgSWosBUlSYylIkhpLQZLUWAqSpMZSkCQ1loIkqbEUJEmNpSBJaiwFSVJjKUiSGktBktRYCpKkxlKQJDWWgiSpsRQkSY2lIElqLAVJUmMpSJIaS0GS1FgKkqSmt1JI8oEkO5JcPzR2dJJrktzSPR419NyaJFuTbElyTl+5JEl71ueewj8BK3YZWw1srKplwMZuniSnACuBx3frXJpkQY/ZJEnT6K0UquorwA92GT4fWNdNrwMuGBq/vKruqapbga3A6X1lkyRNb9znFI6rqu0A3eOx3fjxwB1Dy23rxnaT5KIkm5Ns3rlzZ69hJWm+mS0nmjPNWE23YFVdVlXLq2r5okWLeo4lSfPLuEvhriSLAbrHHd34NuCEoeWWAHeOOZskzXvjLoUNwKpuehVw1dD4yiSHJjkRWAZsGnM2SZr3Fvb1wkk+BjwdOCbJNuBNwCXA+iQXArcDLwSoqhuSrAduBO4FLq6q+/rKJkmaXm+lUFUv2sNTZ+9h+bXA2r7ySJL2bbacaJYkzQKWgiSpsRQkSY2lIElqLAVJUmMpSJIaS0GS1FgKkqTGUpAkNZaCJKmxFCRJjaUgSWosBUlSYylIkhpLQZLUWAqSpMZSkCQ1loIkqbEUJEmNpSBJaiwFSVJjKUiSGktBktRYCpKkxlKQJDWWgiSpsRQkSY2lIElqLAVJUmMpSJIaS0GS1FgKkqTGUpAkNZaCJKmxFCRJjaUgSWosBUlSM+tKIcmKJFuSbE2yetJ5JGk+WTjpAMOSLAD+HngWsA34apINVXXjZJM9eEtXf6b397jtkuf0/h6S5odZVQrA6cDWqvpvgCSXA+cDc7YUxmEcxQPjKZ+DqUTH9Xvp28H0j46D5XcC/f1eUlW9vPCDkeQFwIqqelk3/1Lg16vqlUPLXARc1M2eDGw5gLc8BvjeAaw/aeafLPNPlvkfvMdU1aLpnphtewqZZuwBrVVVlwGXzcibJZuravlMvNYkmH+yzD9Z5u/HbDvRvA04YWh+CXDnhLJI0rwz20rhq8CyJCcmeSiwEtgw4UySNG/MqsNHVXVvklcCnwMWAB+oqht6fMsZOQw1QeafLPNPlvl7MKtONEuSJmu2HT6SJE2QpSBJauZlKczWW2kkOSHJF5PclOSGJK/qxo9Ock2SW7rHo4bWWdNtx5Yk5wyNPznJt7rn3plkust9+9iGBUm+luTquZa9e+8jk3wiyc3d7+Gpc2kbkvx592fn+iQfS3LYbM6f5ANJdiS5fmhsxvImOTTJx7vxa5MsHUP+v+7+/HwzyaeTHDlb80+rqubVD4MT2N8GTgIeCnwDOGXSubpsi4HTuulHAP8FnAL8FbC6G18NvLWbPqXLfyhwYrddC7rnNgFPZfDZj88Czx7TNrwG+ChwdTc/Z7J3770OeFk3/VDgyLmyDcDxwK3A4d38euCPZnN+4LeA04Drh8ZmLC/wCuDd3fRK4ONjyP87wMJu+q2zOf+029T3G8y2n+4//OeG5tcAayadaw9Zr2JwH6gtwOJubDGwZbrsDK7aemq3zM1D4y8C3jOGvEuAjcBZ3F8KcyJ7916PZPCXanYZnxPbwKAU7gCOZnBl4dXdX1CzOj+wdJe/VGcs79Qy3fRCBp8gTp/5d3nu+cBHZnP+XX/m4+Gjqf9xpmzrxmaVbjfxVOBa4Liq2g7QPR7bLbanbTm+m951vG/vAF4L/GJobK5kh8He407gH7tDYO9L8jDmyDZU1XeBvwFuB7YDP6yqf2WO5B8yk3nbOlV1L/BD4Jd7S767P2HwL/8HZOnMyvzzsRT2eSuNSUvycOCTwKur6u69LTrNWO1lvDdJngvsqKrrRl1lmrGJZB+ykMGhgH+oqlOBHzM4fLEns2obumPv5zM4NPEo4GFJXrK3VaYZm/TvYG8eTN6JbUuSNwD3Ah/ZR5ZZlX8+lsKsvpVGkocwKISPVNWnuuG7kizunl8M7OjG97Qt27rpXcf7dCZwXpLbgMuBs5J8mLmRfco2YFtVXdvNf4JBScyVbXgmcGtV7ayqnwOfAn6DuZN/ykzmbeskWQj8EvCD3pJ3kqwCngu8uLpjP8yR/POxFGbtrTS6Kw7eD9xUVW8bemoDsKqbXsXgXMPU+MruCoUTgWXApm6X+0dJzuhe8w+H1ulFVa2pqiVVtZTBf9MvVNVL5kL2oW34H+COJCd3Q2czuG37XNmG24EzkhzRve/ZwE1zKP+Umcw7/FovYPDnsu+95hXA64DzquonQ0/Nify9nviarT/AuQyu7Pk28IZJ5xnK9TQGu4bfBL7e/ZzL4BjiRuCW7vHooXXe0G3HFoauEAGWA9d3z72Lnk9O7bIdT+f+E81zLfuTgM3d7+BK4Ki5tA3AW4Cbu/f+EIMrXWZtfuBjDM5//JzBv4ovnMm8wGHAFcBWBlf4nDSG/FsZnAeY+n/43bM1/3Q/3uZCktTMx8NHkqQ9sBQkSY2lIElqLAVJUmMpSJIaS0GS1FgKkqTm/wH0N+H8ojiCGgAAAABJRU5ErkJggg==" />
 </div>
 
 </div>
@@ -559,7 +953,7 @@ Name: pid, Length: 74, dtype: int64
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">last_10</span> <span class="o">=</span> <span class="n">pulls</span><span class="o">.</span><span class="n">nlargest</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s1">&#39;date&#39;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">last_10</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">last_10</span><span class="p">)</span>
 
 <span class="c1"># Join the two data sets</span>
 <span class="n">joined_pr</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">merge</span><span class="p">(</span><span class="n">last_10</span><span class="p">,</span> <span class="n">pull_files</span><span class="p">,</span> <span class="n">on</span><span class="o">=</span> <span class="s1">&#39;pid&#39;</span><span class="p">,</span> <span class="n">how</span><span class="o">=</span><span class="s1">&#39;inner&#39;</span><span class="p">)</span>
@@ -569,7 +963,7 @@ Name: pid, Length: 74, dtype: int64
 <span class="n">files</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">joined_pr</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span> <span class="p">)</span>
 
 <span class="c1"># Print the results</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">files</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -581,22 +975,148 @@ Name: pid, Length: 74, dtype: int64
 
 <div class="output_area">
 
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pid</th>
+      <th>user</th>
+      <th>date</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>3296</th>
+      <td>163314316</td>
+      <td>hrhino</td>
+      <td>2018-01-16 23:29:16+00:00</td>
+    </tr>
+    <tr>
+      <th>3297</th>
+      <td>163061502</td>
+      <td>joroKr21</td>
+      <td>2018-01-15 23:44:52+00:00</td>
+    </tr>
+    <tr>
+      <th>3298</th>
+      <td>163057333</td>
+      <td>mkeskells</td>
+      <td>2018-01-15 23:05:06+00:00</td>
+    </tr>
+    <tr>
+      <th>3299</th>
+      <td>162985594</td>
+      <td>lrytz</td>
+      <td>2018-01-15 15:52:39+00:00</td>
+    </tr>
+    <tr>
+      <th>3300</th>
+      <td>162838837</td>
+      <td>zuvizudar</td>
+      <td>2018-01-14 19:16:16+00:00</td>
+    </tr>
+    <tr>
+      <th>3301</th>
+      <td>162765232</td>
+      <td>howtonotwin</td>
+      <td>2018-01-13 04:37:17+00:00</td>
+    </tr>
+    <tr>
+      <th>3302</th>
+      <td>162643301</td>
+      <td>hrhino</td>
+      <td>2018-01-12 14:29:49+00:00</td>
+    </tr>
+    <tr>
+      <th>3303</th>
+      <td>162256029</td>
+      <td>mkeskells</td>
+      <td>2018-01-10 23:20:03+00:00</td>
+    </tr>
+    <tr>
+      <th>3304</th>
+      <td>162197834</td>
+      <td>SethTisue</td>
+      <td>2018-01-10 18:31:25+00:00</td>
+    </tr>
+    <tr>
+      <th>3305</th>
+      <td>162011899</td>
+      <td>joroKr21</td>
+      <td>2018-01-10 00:45:57+00:00</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>            pid         user                      date
-3296  163314316       hrhino 2018-01-16 23:29:16+00:00
-3297  163061502     joroKr21 2018-01-15 23:44:52+00:00
-3298  163057333    mkeskells 2018-01-15 23:05:06+00:00
-3299  162985594        lrytz 2018-01-15 15:52:39+00:00
-3300  162838837    zuvizudar 2018-01-14 19:16:16+00:00
-3301  162765232  howtonotwin 2018-01-13 04:37:17+00:00
-3302  162643301       hrhino 2018-01-12 14:29:49+00:00
-3303  162256029    mkeskells 2018-01-10 23:20:03+00:00
-3304  162197834    SethTisue 2018-01-10 18:31:25+00:00
-3305  162011899     joroKr21 2018-01-10 00:45:57+00:00
-#########
-{&#39;src/scaladoc/scala/tools/nsc/doc/html/page/Entity.scala&#39;, &#39;test/files/pos/leibniz_liskov.scala&#39;, &#39;src/compiler/scala/tools/nsc/typechecker/Contexts.scala&#39;, &#39;src/compiler/scala/tools/nsc/backend/jvm/BCodeHelpers.scala&#39;, &#39;test/files/run/t8348/TableColumn.java&#39;, &#39;src/compiler/scala/tools/nsc/profile/Profiler.scala&#39;, &#39;test/files/neg/leibniz-liskov.check&#39;, &#39;src/reflect/scala/reflect/internal/tpe/GlbLubs.scala&#39;, &#39;test/files/pos/parallel-classloader.scala&#39;, &#39;doc/LICENSE.md&#39;, &#39;src/compiler/scala/tools/nsc/profile/AsyncHelper.scala&#39;, &#39;src/reflect/scala/reflect/internal/pickling/ByteCodecs.scala&#39;, &#39;src/library/scala/util/Properties.scala&#39;, &#39;src/scalap/decoder.properties&#39;, &#39;src/compiler/scala/tools/nsc/backend/jvm/analysis/BackendUtils.scala&#39;, &#39;src/library/scala/Predef.scala&#39;, &#39;src/library/scala/concurrent/Lock.scala&#39;, &#39;src/compiler/scala/tools/nsc/symtab/classfile/ClassfileParser.scala&#39;, &#39;LICENSE&#39;, &#39;doc/License.rtf&#39;, &#39;test/files/pos/leibniz-liskov.scala&#39;, &#39;project/VersionUtil.scala&#39;, &#39;test/files/pos/t5638/Usage.scala&#39;, &#39;src/compiler/scala/reflect/reify/phases/Calculate.scala&#39;, &#39;test/files/run/t8348/Test.scala&#39;, &#39;test/files/pos/t9291.scala&#39;, &#39;test/files/run/t8348/TableColumnImpl.java&#39;, &#39;test/files/neg/leibniz-liskov.scala&#39;, &#39;test/files/pos/t10686.scala&#39;, &#39;test/files/run/t8348.check&#39;, &#39;src/compiler/scala/tools/nsc/backend/jvm/PostProcessor.scala&#39;, &#39;test/files/pos/t10568/Impl.scala&#39;, &#39;test/files/pos/t5638/Among.java&#39;, &#39;test/files/pos/t10568/Converter.java&#39;}
+<pre>#########
 </pre>
 </div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea ">
+<pre>{&#39;LICENSE&#39;,
+ &#39;doc/LICENSE.md&#39;,
+ &#39;doc/License.rtf&#39;,
+ &#39;project/VersionUtil.scala&#39;,
+ &#39;src/compiler/scala/reflect/reify/phases/Calculate.scala&#39;,
+ &#39;src/compiler/scala/tools/nsc/backend/jvm/BCodeHelpers.scala&#39;,
+ &#39;src/compiler/scala/tools/nsc/backend/jvm/PostProcessor.scala&#39;,
+ &#39;src/compiler/scala/tools/nsc/backend/jvm/analysis/BackendUtils.scala&#39;,
+ &#39;src/compiler/scala/tools/nsc/profile/AsyncHelper.scala&#39;,
+ &#39;src/compiler/scala/tools/nsc/profile/Profiler.scala&#39;,
+ &#39;src/compiler/scala/tools/nsc/symtab/classfile/ClassfileParser.scala&#39;,
+ &#39;src/compiler/scala/tools/nsc/typechecker/Contexts.scala&#39;,
+ &#39;src/library/scala/Predef.scala&#39;,
+ &#39;src/library/scala/concurrent/Lock.scala&#39;,
+ &#39;src/library/scala/util/Properties.scala&#39;,
+ &#39;src/reflect/scala/reflect/internal/pickling/ByteCodecs.scala&#39;,
+ &#39;src/reflect/scala/reflect/internal/tpe/GlbLubs.scala&#39;,
+ &#39;src/scaladoc/scala/tools/nsc/doc/html/page/Entity.scala&#39;,
+ &#39;src/scalap/decoder.properties&#39;,
+ &#39;test/files/neg/leibniz-liskov.check&#39;,
+ &#39;test/files/neg/leibniz-liskov.scala&#39;,
+ &#39;test/files/pos/leibniz-liskov.scala&#39;,
+ &#39;test/files/pos/leibniz_liskov.scala&#39;,
+ &#39;test/files/pos/parallel-classloader.scala&#39;,
+ &#39;test/files/pos/t10568/Converter.java&#39;,
+ &#39;test/files/pos/t10568/Impl.scala&#39;,
+ &#39;test/files/pos/t10686.scala&#39;,
+ &#39;test/files/pos/t5638/Among.java&#39;,
+ &#39;test/files/pos/t5638/Usage.scala&#39;,
+ &#39;test/files/pos/t9291.scala&#39;,
+ &#39;test/files/run/t8348.check&#39;,
+ &#39;test/files/run/t8348/TableColumn.java&#39;,
+ &#39;test/files/run/t8348/TableColumnImpl.java&#39;,
+ &#39;test/files/run/t8348/Test.scala&#39;}</pre>
+</div>
+
 </div>
 
 </div>
@@ -623,11 +1143,11 @@ Name: pid, Length: 74, dtype: int64
 
 <span class="c1"># Identify the commits that changed the file</span>
 <span class="n">file_pr</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="n">data</span><span class="p">[</span><span class="s1">&#39;file&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">file</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">file_pr</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">file_pr</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 
 <span class="c1"># Count the number of changes made by each developer</span>
 <span class="n">author_counts</span> <span class="o">=</span> <span class="n">file_pr</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;user&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">author_counts</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">author_counts</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 
 <span class="c1"># Print the top 3 developers</span>
 <span class="n">author_counts</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">by</span><span class="o">=</span><span class="s1">&#39;pid&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
@@ -642,29 +1162,170 @@ Name: pid, Length: 74, dtype: int64
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>            pid          user                      date  \
-1234   10587633      retronym 2013-12-06 10:04:43+00:00   
-12514   5320191           soc 2013-04-23 15:47:45+00:00   
-12823   5291974  bjornregnell 2013-04-22 13:56:06+00:00   
-13381   5050360      retronym 2013-04-09 06:13:57+00:00   
-13779   5026775      retronym 2013-04-08 07:07:45+00:00   
 
-                                                    file  month  year  
-1234   src/compiler/scala/reflect/reify/phases/Calcul...     12  2013  
-12514  src/compiler/scala/reflect/reify/phases/Calcul...      4  2013  
-12823  src/compiler/scala/reflect/reify/phases/Calcul...      4  2013  
-13381  src/compiler/scala/reflect/reify/phases/Calcul...      4  2013  
-13779  src/compiler/scala/reflect/reify/phases/Calcul...      4  2013  
-              pid  date  file  month  year
-user                                      
-bjornregnell    1     1     1      1     1
-densh           1     1     1      1     1
-gkossakowski    1     1     1      1     1
-melloc          1     1     1      1     1
-odersky         2     2     2      2     2
-</pre>
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pid</th>
+      <th>user</th>
+      <th>date</th>
+      <th>file</th>
+      <th>month</th>
+      <th>year</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1234</th>
+      <td>10587633</td>
+      <td>retronym</td>
+      <td>2013-12-06 10:04:43+00:00</td>
+      <td>src/compiler/scala/reflect/reify/phases/Calcul...</td>
+      <td>12</td>
+      <td>2013</td>
+    </tr>
+    <tr>
+      <th>12514</th>
+      <td>5320191</td>
+      <td>soc</td>
+      <td>2013-04-23 15:47:45+00:00</td>
+      <td>src/compiler/scala/reflect/reify/phases/Calcul...</td>
+      <td>4</td>
+      <td>2013</td>
+    </tr>
+    <tr>
+      <th>12823</th>
+      <td>5291974</td>
+      <td>bjornregnell</td>
+      <td>2013-04-22 13:56:06+00:00</td>
+      <td>src/compiler/scala/reflect/reify/phases/Calcul...</td>
+      <td>4</td>
+      <td>2013</td>
+    </tr>
+    <tr>
+      <th>13381</th>
+      <td>5050360</td>
+      <td>retronym</td>
+      <td>2013-04-09 06:13:57+00:00</td>
+      <td>src/compiler/scala/reflect/reify/phases/Calcul...</td>
+      <td>4</td>
+      <td>2013</td>
+    </tr>
+    <tr>
+      <th>13779</th>
+      <td>5026775</td>
+      <td>retronym</td>
+      <td>2013-04-08 07:07:45+00:00</td>
+      <td>src/compiler/scala/reflect/reify/phases/Calcul...</td>
+      <td>4</td>
+      <td>2013</td>
+    </tr>
+  </tbody>
+</table>
 </div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>pid</th>
+      <th>date</th>
+      <th>file</th>
+      <th>month</th>
+      <th>year</th>
+    </tr>
+    <tr>
+      <th>user</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>bjornregnell</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>densh</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>gkossakowski</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>melloc</th>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>odersky</th>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
 </div>
 
 <div class="output_area">
