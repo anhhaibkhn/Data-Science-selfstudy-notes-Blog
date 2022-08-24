@@ -40,6 +40,30 @@ layout: notebook
 </div>
     {% raw %}
     
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.expand_frame_repr&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
 <div class="cell border-box-sizing code_cell rendered celltag_sample_code">
 <div class="input">
 
@@ -61,7 +85,7 @@ layout: notebook
 
 <span class="c1"># Counting the number of values</span>
 <span class="c1"># ... YOUR CODE FOR TASK 2 ...</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">dec6</span><span class="o">.</span><span class="n">info</span><span class="p">(),</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">dec6</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">dec6</span><span class="o">.</span><span class="n">info</span><span class="p">(),</span><span class="n">dec6</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 <span class="n">market_cap_raw</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
 </pre></div>
 
@@ -97,36 +121,155 @@ Data columns (total 15 columns):
  14  total_supply        1211 non-null   float64
 dtypes: float64(10), int64(2), object(3)
 memory usage: 165.8+ KB
-None 
-    24h_volume_usd  available_supply            id  last_updated  \
-0    9.007640e+09      1.672352e+07       bitcoin    1512549554   
-1    1.551330e+09      9.616537e+07      ethereum    1512549553   
-2    1.111350e+09      1.684044e+07  bitcoin-cash    1512549578   
-3    2.936090e+09      2.779530e+09          iota    1512549571   
-4    2.315050e+08      3.873915e+10        ripple    1512549541   
-
-   market_cap_usd    max_supply          name  percent_change_1h  \
-0    2.130493e+11  2.100000e+07       Bitcoin               0.12   
-1    4.352945e+10           NaN      Ethereum              -0.18   
-2    2.529585e+10  2.100000e+07  Bitcoin Cash               1.65   
-3    1.475225e+10  2.779530e+09          IOTA              -2.38   
-4    9.365343e+09  1.000000e+11        Ripple               0.56   
-
-   percent_change_24h  percent_change_7d  price_btc     price_usd  rank  \
-0                7.33              17.45   1.000000  12739.500000     1   
-1               -3.93              -7.33   0.036177    452.652000     2   
-2               -5.51              -4.75   0.120050   1502.090000     3   
-3               83.35             255.82   0.000424      5.307460     4   
-4               -3.70             -14.79   0.000019      0.241754     5   
-
-  symbol  total_supply  
-0    BTC  1.672352e+07  
-1    ETH  9.616537e+07  
-2    BCH  1.684044e+07  
-3  MIOTA  2.779530e+09  
-4    XRP  9.999309e+10  
 </pre>
 </div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea ">
+<pre>None</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>24h_volume_usd</th>
+      <th>available_supply</th>
+      <th>id</th>
+      <th>last_updated</th>
+      <th>market_cap_usd</th>
+      <th>max_supply</th>
+      <th>name</th>
+      <th>percent_change_1h</th>
+      <th>percent_change_24h</th>
+      <th>percent_change_7d</th>
+      <th>price_btc</th>
+      <th>price_usd</th>
+      <th>rank</th>
+      <th>symbol</th>
+      <th>total_supply</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>9.007640e+09</td>
+      <td>1.672352e+07</td>
+      <td>bitcoin</td>
+      <td>1512549554</td>
+      <td>2.130493e+11</td>
+      <td>2.100000e+07</td>
+      <td>Bitcoin</td>
+      <td>0.12</td>
+      <td>7.33</td>
+      <td>17.45</td>
+      <td>1.000000</td>
+      <td>12739.500000</td>
+      <td>1</td>
+      <td>BTC</td>
+      <td>1.672352e+07</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.551330e+09</td>
+      <td>9.616537e+07</td>
+      <td>ethereum</td>
+      <td>1512549553</td>
+      <td>4.352945e+10</td>
+      <td>NaN</td>
+      <td>Ethereum</td>
+      <td>-0.18</td>
+      <td>-3.93</td>
+      <td>-7.33</td>
+      <td>0.036177</td>
+      <td>452.652000</td>
+      <td>2</td>
+      <td>ETH</td>
+      <td>9.616537e+07</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1.111350e+09</td>
+      <td>1.684044e+07</td>
+      <td>bitcoin-cash</td>
+      <td>1512549578</td>
+      <td>2.529585e+10</td>
+      <td>2.100000e+07</td>
+      <td>Bitcoin Cash</td>
+      <td>1.65</td>
+      <td>-5.51</td>
+      <td>-4.75</td>
+      <td>0.120050</td>
+      <td>1502.090000</td>
+      <td>3</td>
+      <td>BCH</td>
+      <td>1.684044e+07</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.936090e+09</td>
+      <td>2.779530e+09</td>
+      <td>iota</td>
+      <td>1512549571</td>
+      <td>1.475225e+10</td>
+      <td>2.779530e+09</td>
+      <td>IOTA</td>
+      <td>-2.38</td>
+      <td>83.35</td>
+      <td>255.82</td>
+      <td>0.000424</td>
+      <td>5.307460</td>
+      <td>4</td>
+      <td>MIOTA</td>
+      <td>2.779530e+09</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2.315050e+08</td>
+      <td>3.873915e+10</td>
+      <td>ripple</td>
+      <td>1512549541</td>
+      <td>9.365343e+09</td>
+      <td>1.000000e+11</td>
+      <td>Ripple</td>
+      <td>0.56</td>
+      <td>-3.70</td>
+      <td>-14.79</td>
+      <td>0.000019</td>
+      <td>0.241754</td>
+      <td>5</td>
+      <td>XRP</td>
+      <td>9.999309e+10</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
 </div>
 
 <div class="output_area">
