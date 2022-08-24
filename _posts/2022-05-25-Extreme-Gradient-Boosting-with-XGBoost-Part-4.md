@@ -2,7 +2,7 @@
 keywords: fastai
 description: Chapter 4 - Using XGBoost in pipelines
 title: Extreme Gradient Boosting with XGBoost - Part 4 (DataCamp interactive course)
-toc: false
+toc: true
 branch: master
 badges: true
 comments: true
@@ -28,39 +28,8 @@ layout: notebook
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Chapter-4-Using-XGBoost-in-pipelines">Chapter 4 Using XGBoost in pipelines<a class="anchor-link" href="#Chapter-4-Using-XGBoost-in-pipelines"> </a></h3><p>Take your XGBoost skills to the next level by incorporating your models into two end-to-end machine learning pipelines. You'll learn how to tune the most important XGBoost hyperparameters efficiently within a pipeline, and get an introduction to some more advanced preprocessing techniques.</p>
 <ul>
-<li>4.1 Review of pipelines using sklearn<ul>
-<li>Exploratory data analysis</li>
-<li>Encoding categorical columns I: LabelEncoder</li>
-<li>Encoding categorical columns II: OneHotEncoder</li>
-<li>Encoding categorical columns III: DictVectorizer</li>
-<li>Preprocessing within a pipeline<br>
-<br/></li>
-</ul>
-</li>
-<li>4.2 Incorporating XGBoost into pipelines<ul>
-<li>Cross-validating your XGBoost model</li>
-<li>Kidney disease case study I: Categorical Imputer</li>
-<li>Kidney disease case study II: Feature Union</li>
-<li>Kidney disease case study III: Full pipeline<br>
-<br/></li>
-</ul>
-</li>
-<li>4.3 Tuning XGBoost hyperparameters<ul>
-<li>Bringing it all together</li>
-<li>Final Thoughts</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><p>Data Content: Each record in the database describes a Boston suburb or town. The data was drawn from the Boston Standard Metropolitan Statistical Area (SMSA) in 1970. The attributes are deﬁned as follows     :</p>
+<li><p>Data Content: Each record in the database describes a Boston suburb or town. The data was drawn from the Boston Standard Metropolitan Statistical Area (SMSA) in 1970. The attributes are deﬁned as follows :</p>
 <ul>
 <li>CRIM: per capita crime rate by town</li>
 <li>ZN: proportion of residential land zoned for lots over 25,000 sq.ft.</li>
@@ -90,6 +59,36 @@ layout: notebook
 
 <div class="inner_cell">
     <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.expand_frame_repr&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Review-of-pipelines-using-sklearn">Review of pipelines using sklearn<a class="anchor-link" href="#Review-of-pipelines-using-sklearn"> </a></h2>
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="sd">&quot;&quot;&quot; Scikit-learn pipeline example &quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestRegressor</span>
@@ -98,14 +97,13 @@ layout: notebook
 <span class="kn">from</span> <span class="nn">sklearn.pipeline</span> <span class="kn">import</span> <span class="n">Pipeline</span>
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">cross_val_score</span>
 
-<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.max_columns&#39;</span><span class="p">,</span> <span class="mi">50</span><span class="p">)</span>
 
 <span class="n">colnames</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;crime&quot;</span><span class="p">,</span><span class="s2">&quot;zone&quot;</span><span class="p">,</span><span class="s2">&quot;industry&quot;</span><span class="p">,</span><span class="s2">&quot;charles&quot;</span><span class="p">,</span><span class="s2">&quot;no&quot;</span><span class="p">,</span><span class="s2">&quot;rooms&quot;</span><span class="p">,</span><span class="s2">&quot;age&quot;</span><span class="p">,</span> <span class="s2">&quot;distance&quot;</span><span class="p">,</span><span class="s2">&quot;radial&quot;</span><span class="p">,</span><span class="s2">&quot;tax&quot;</span><span class="p">,</span><span class="s2">&quot;pupil&quot;</span><span class="p">,</span><span class="s2">&quot;aam&quot;</span><span class="p">,</span><span class="s2">&quot;lower&quot;</span><span class="p">,</span><span class="s2">&quot;med_price&quot;</span><span class="p">]</span>
 
 <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;datasets/boston_housing.csv&quot;</span><span class="p">,</span><span class="n">skiprows</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">names</span><span class="o">=</span><span class="n">colnames</span><span class="p">)</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
 <span class="n">X</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 <span class="n">rf_pipeline</span> <span class="o">=</span> <span class="n">Pipeline</span><span class="p">([</span> <span class="p">(</span><span class="s2">&quot;st_scaler&quot;</span><span class="p">,</span><span class="n">StandardScaler</span><span class="p">()),</span>
                         <span class="p">(</span><span class="s2">&quot;rf_model&quot;</span><span class="p">,</span><span class="n">RandomForestRegressor</span><span class="p">())])</span>
@@ -125,14 +123,139 @@ layout: notebook
 
 <div class="output_area">
 
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crime</th>
+      <th>zone</th>
+      <th>industry</th>
+      <th>charles</th>
+      <th>no</th>
+      <th>rooms</th>
+      <th>age</th>
+      <th>distance</th>
+      <th>radial</th>
+      <th>tax</th>
+      <th>pupil</th>
+      <th>aam</th>
+      <th>lower</th>
+      <th>med_price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.00632</td>
+      <td>18.0</td>
+      <td>2.31</td>
+      <td>0</td>
+      <td>0.538</td>
+      <td>6.575</td>
+      <td>65.2</td>
+      <td>4.0900</td>
+      <td>1</td>
+      <td>296.0</td>
+      <td>15.3</td>
+      <td>396.90</td>
+      <td>4.98</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.02731</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>6.421</td>
+      <td>78.9</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242.0</td>
+      <td>17.8</td>
+      <td>396.90</td>
+      <td>9.14</td>
+      <td>21.6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.02729</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>7.185</td>
+      <td>61.1</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242.0</td>
+      <td>17.8</td>
+      <td>392.83</td>
+      <td>4.03</td>
+      <td>34.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.03237</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>6.998</td>
+      <td>45.8</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222.0</td>
+      <td>18.7</td>
+      <td>394.63</td>
+      <td>2.94</td>
+      <td>33.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.06905</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>7.147</td>
+      <td>54.2</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222.0</td>
+      <td>18.7</td>
+      <td>396.90</td>
+      <td>5.33</td>
+      <td>36.2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>     crime  zone  industry  charles     no  rooms   age  distance  radial    tax  pupil     aam  lower  med_price
-0  0.00632  18.0      2.31        0  0.538  6.575  65.2    4.0900       1  296.0   15.3  396.90   4.98       24.0
-1  0.02731   0.0      7.07        0  0.469  6.421  78.9    4.9671       2  242.0   17.8  396.90   9.14       21.6
-2  0.02729   0.0      7.07        0  0.469  7.185  61.1    4.9671       2  242.0   17.8  392.83   4.03       34.7
-3  0.03237   0.0      2.18        0  0.458  6.998  45.8    6.0622       3  222.0   18.7  394.63   2.94       33.4
-4  0.06905   0.0      2.18        0  0.458  7.147  54.2    6.0622       3  222.0   18.7  396.90   5.33       36.2
-&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
+<pre>&lt;class &#39;pandas.core.frame.DataFrame&#39;&gt;
 RangeIndex: 506 entries, 0 to 505
 Data columns (total 14 columns):
  #   Column     Non-Null Count  Dtype  
@@ -153,8 +276,24 @@ Data columns (total 14 columns):
  13  med_price  506 non-null    float64
 dtypes: float64(12), int64(2)
 memory usage: 55.5 KB
-None
-Final RMSE: 4.211871629016008
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea ">
+<pre>None</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Final RMSE: 4.186097627860323
 </pre>
 </div>
 </div>
@@ -167,7 +306,7 @@ Final RMSE: 4.211871629016008
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Exploratory-data-analysis">Exploratory data analysis<a class="anchor-link" href="#Exploratory-data-analysis"> </a></h4><p>Before diving into the nitty gritty of pipelines and preprocessing, let's do some exploratory analysis of the original, unprocessed Ames housing dataset. When you worked with this data in previous chapters, we preprocessed it for you so you could focus on the core XGBoost concepts. In this chapter, you'll do the preprocessing yourself!</p>
+<h2 id="Exploratory-data-analysis">Exploratory data analysis<a class="anchor-link" href="#Exploratory-data-analysis"> </a></h2><p>Before diving into the nitty gritty of pipelines and preprocessing, let's do some exploratory analysis of the original, unprocessed Ames housing dataset. When you worked with this data in previous chapters, we preprocessed it for you so you could focus on the core XGBoost concepts. In this chapter, you'll do the preprocessing yourself!</p>
 <p>A smaller version of this original, unprocessed dataset has been pre-loaded into a pandas DataFrame called df. Your task is to explore df in the Shell and pick the option that is incorrect. The larger purpose of this exercise is to understand the kinds of transformations you will need to perform in order to be able to use XGBoost.</p>
 
 </div>
@@ -182,11 +321,11 @@ Final RMSE: 4.211871629016008
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">df_raw</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;datasets/ames_unprocessed_data.csv&quot;</span><span class="p">,</span><span class="n">skiprows</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
 <span class="n">df_processed</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;datasets/ames_housing_trimmed_processed.csv&quot;</span><span class="p">,</span><span class="n">skiprows</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df_raw</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df_raw</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_raw</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df_raw</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 
 <span class="n">categorical_columns</span> <span class="o">=</span> <span class="p">[</span><span class="n">col</span> <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df_raw</span><span class="o">.</span><span class="n">columns</span> <span class="k">if</span> <span class="n">df_raw</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">dtype</span> <span class="o">==</span> <span class="s2">&quot;object&quot;</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">categorical_columns</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">categorical_columns</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -227,16 +366,202 @@ Data columns (total 21 columns):
  20  SalePrice     1460 non-null   int64  
 dtypes: float64(1), int64(15), object(5)
 memory usage: 239.7+ KB
-None
-   MSSubClass MSZoning  LotFrontage  LotArea Neighborhood BldgType HouseStyle  OverallQual  OverallCond  YearBuilt  Remodeled  GrLivArea  BsmtFullBath  BsmtHalfBath  FullBath  HalfBath  BedroomAbvGr  Fireplaces  GarageArea PavedDrive  SalePrice
-0          60       RL         65.0     8450      CollgCr     1Fam     2Story            7            5       2003          0       1710             1             0         2         1             3           0         548          Y     208500
-1          20       RL         80.0     9600      Veenker     1Fam     1Story            6            8       1976          0       1262             0             1         2         0             3           1         460          Y     181500
-2          60       RL         68.0    11250      CollgCr     1Fam     2Story            7            5       2001          1       1786             1             0         2         1             3           1         608          Y     223500
-3          70       RL         60.0     9550      Crawfor     1Fam     2Story            7            5       1915          1       1717             1             0         1         0             3           1         642          Y     140000
-4          60       RL         84.0    14260      NoRidge     1Fam     2Story            8            5       2000          0       2198             1             0         2         1             4           1         836          Y     250000
-[&#39;MSZoning&#39;, &#39;Neighborhood&#39;, &#39;BldgType&#39;, &#39;HouseStyle&#39;, &#39;PavedDrive&#39;]
 </pre>
 </div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea ">
+<pre>None</pre>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MSSubClass</th>
+      <th>MSZoning</th>
+      <th>LotFrontage</th>
+      <th>LotArea</th>
+      <th>Neighborhood</th>
+      <th>BldgType</th>
+      <th>HouseStyle</th>
+      <th>OverallQual</th>
+      <th>OverallCond</th>
+      <th>YearBuilt</th>
+      <th>...</th>
+      <th>GrLivArea</th>
+      <th>BsmtFullBath</th>
+      <th>BsmtHalfBath</th>
+      <th>FullBath</th>
+      <th>HalfBath</th>
+      <th>BedroomAbvGr</th>
+      <th>Fireplaces</th>
+      <th>GarageArea</th>
+      <th>PavedDrive</th>
+      <th>SalePrice</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>60</td>
+      <td>RL</td>
+      <td>65.0</td>
+      <td>8450</td>
+      <td>CollgCr</td>
+      <td>1Fam</td>
+      <td>2Story</td>
+      <td>7</td>
+      <td>5</td>
+      <td>2003</td>
+      <td>...</td>
+      <td>1710</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>3</td>
+      <td>0</td>
+      <td>548</td>
+      <td>Y</td>
+      <td>208500</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>20</td>
+      <td>RL</td>
+      <td>80.0</td>
+      <td>9600</td>
+      <td>Veenker</td>
+      <td>1Fam</td>
+      <td>1Story</td>
+      <td>6</td>
+      <td>8</td>
+      <td>1976</td>
+      <td>...</td>
+      <td>1262</td>
+      <td>0</td>
+      <td>1</td>
+      <td>2</td>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>460</td>
+      <td>Y</td>
+      <td>181500</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>60</td>
+      <td>RL</td>
+      <td>68.0</td>
+      <td>11250</td>
+      <td>CollgCr</td>
+      <td>1Fam</td>
+      <td>2Story</td>
+      <td>7</td>
+      <td>5</td>
+      <td>2001</td>
+      <td>...</td>
+      <td>1786</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>3</td>
+      <td>1</td>
+      <td>608</td>
+      <td>Y</td>
+      <td>223500</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>70</td>
+      <td>RL</td>
+      <td>60.0</td>
+      <td>9550</td>
+      <td>Crawfor</td>
+      <td>1Fam</td>
+      <td>2Story</td>
+      <td>7</td>
+      <td>5</td>
+      <td>1915</td>
+      <td>...</td>
+      <td>1717</td>
+      <td>1</td>
+      <td>0</td>
+      <td>1</td>
+      <td>0</td>
+      <td>3</td>
+      <td>1</td>
+      <td>642</td>
+      <td>Y</td>
+      <td>140000</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>60</td>
+      <td>RL</td>
+      <td>84.0</td>
+      <td>14260</td>
+      <td>NoRidge</td>
+      <td>1Fam</td>
+      <td>2Story</td>
+      <td>8</td>
+      <td>5</td>
+      <td>2000</td>
+      <td>...</td>
+      <td>2198</td>
+      <td>1</td>
+      <td>0</td>
+      <td>2</td>
+      <td>1</td>
+      <td>4</td>
+      <td>1</td>
+      <td>836</td>
+      <td>Y</td>
+      <td>250000</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 21 columns</p>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea ">
+<pre>[&#39;MSZoning&#39;, &#39;Neighborhood&#39;, &#39;BldgType&#39;, &#39;HouseStyle&#39;, &#39;PavedDrive&#39;]</pre>
+</div>
+
 </div>
 
 </div>
@@ -247,19 +572,16 @@ None
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Encoding-categorical-columns-I:-LabelEncoder">Encoding categorical columns I: LabelEncoder<a class="anchor-link" href="#Encoding-categorical-columns-I:-LabelEncoder"> </a></h4><p>Now that you've seen what will need to be done to get the housing data ready for XGBoost, let's go through the process step-by-step.</p>
+<h3 id="Encoding-categorical-columns-I:-LabelEncoder">Encoding categorical columns I: LabelEncoder<a class="anchor-link" href="#Encoding-categorical-columns-I:-LabelEncoder"> </a></h3><p>Now that you've seen what will need to be done to get the housing data ready for XGBoost, let's go through the process step-by-step.</p>
 <p>First, you will need to fill in missing values - as you saw previously, the column LotFrontage has many missing values. Then, you will need to encode any categorical columns in the dataset using one-hot encoding so that they are encoded numerically. You can watch this video from Supervised Learning with scikit-learn for a refresher on the idea.</p>
 <p>The data has five categorical columns: MSZoning, PavedDrive, Neighborhood, BldgType, and HouseStyle. Scikit-learn has a LabelEncoder function that converts the values in each categorical column into integers. You'll practice using this here.</p>
-<ul>
-<li><p>Instructions</p>
+<p>Instructions:</p>
 <ul>
 <li>Import LabelEncoder from sklearn.preprocessing.</li>
 <li>Fill in missing values in the LotFrontage column with 0 using .fillna().</li>
 <li>Create a boolean mask for categorical columns. You can do this by checking for whether df.dtypes equals object.</li>
 <li>Create a LabelEncoder object. You can do this in the same way you instantiate any scikit-learn estimator.</li>
 <li>Encode all of the categorical columns into integers using LabelEncoder(). To do this, use the .fit_transform() method of le in the provided lambda function.</li>
-</ul>
-</li>
 </ul>
 
 </div>
@@ -300,7 +622,7 @@ None
 
 
 <span class="c1"># Print the head of the LabelEncoded categorical columns</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">categorical_columns</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">categorical_columns</span><span class="p">]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
 <span class="nb">print</span><span class="p">(</span><span class="o">*</span><span class="n">transform_dicts</span><span class="p">,</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -320,13 +642,91 @@ None
 2       RL      CollgCr     1Fam     2Story          Y
 3       RL      Crawfor     1Fam     2Story          Y
 4       RL      NoRidge     1Fam     2Story          Y
-   MSZoning  Neighborhood  BldgType  HouseStyle  PavedDrive
-0         3             5         0           5           2
-1         3            24         0           2           2
-2         3             5         0           5           2
-3         3             6         0           5           2
-4         3            15         0           5           2
-{&#39;C (all)&#39;: 0, &#39;FV&#39;: 1, &#39;RH&#39;: 2, &#39;RL&#39;: 3, &#39;RM&#39;: 4}
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MSZoning</th>
+      <th>Neighborhood</th>
+      <th>BldgType</th>
+      <th>HouseStyle</th>
+      <th>PavedDrive</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>3</td>
+      <td>5</td>
+      <td>0</td>
+      <td>5</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>24</td>
+      <td>0</td>
+      <td>2</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>3</td>
+      <td>5</td>
+      <td>0</td>
+      <td>5</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>6</td>
+      <td>0</td>
+      <td>5</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3</td>
+      <td>15</td>
+      <td>0</td>
+      <td>5</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>{&#39;C (all)&#39;: 0, &#39;FV&#39;: 1, &#39;RH&#39;: 2, &#39;RL&#39;: 3, &#39;RM&#39;: 4}
 {&#39;Blmngtn&#39;: 0, &#39;Blueste&#39;: 1, &#39;BrDale&#39;: 2, &#39;BrkSide&#39;: 3, &#39;ClearCr&#39;: 4, &#39;CollgCr&#39;: 5, &#39;Crawfor&#39;: 6, &#39;Edwards&#39;: 7, &#39;Gilbert&#39;: 8, &#39;IDOTRR&#39;: 9, &#39;MeadowV&#39;: 10, &#39;Mitchel&#39;: 11, &#39;NAmes&#39;: 12, &#39;NPkVill&#39;: 13, &#39;NWAmes&#39;: 14, &#39;NoRidge&#39;: 15, &#39;NridgHt&#39;: 16, &#39;OldTown&#39;: 17, &#39;SWISU&#39;: 18, &#39;Sawyer&#39;: 19, &#39;SawyerW&#39;: 20, &#39;Somerst&#39;: 21, &#39;StoneBr&#39;: 22, &#39;Timber&#39;: 23, &#39;Veenker&#39;: 24}
 {&#39;1Fam&#39;: 0, &#39;2fmCon&#39;: 1, &#39;Duplex&#39;: 2, &#39;Twnhs&#39;: 3, &#39;TwnhsE&#39;: 4}
 {&#39;1.5Fin&#39;: 0, &#39;1.5Unf&#39;: 1, &#39;1Story&#39;: 2, &#39;2.5Fin&#39;: 3, &#39;2.5Unf&#39;: 4, &#39;2Story&#39;: 5, &#39;SFoyer&#39;: 6, &#39;SLvl&#39;: 7}
@@ -375,16 +775,14 @@ None
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Encoding-categorical-columns-II:-OneHotEncoder">Encoding categorical columns II: OneHotEncoder<a class="anchor-link" href="#Encoding-categorical-columns-II:-OneHotEncoder"> </a></h4><p>Okay - so you have your categorical columns encoded numerically. Can you now move onto using pipelines and XGBoost? Not yet! In the categorical columns of this dataset, there is no natural ordering between the entries. As an example: Using LabelEncoder, the CollgCr Neighborhood was encoded as 5, while the Veenker Neighborhood was encoded as 24, and Crawfor as 6. Is Veenker "greater" than Crawfor and CollgCr? No - and allowing the model to assume this natural ordering may result in poor performance.</p>
+<h3 id="Encoding-categorical-columns-II:-OneHotEncoder">Encoding categorical columns II: OneHotEncoder<a class="anchor-link" href="#Encoding-categorical-columns-II:-OneHotEncoder"> </a></h3><p>Okay - so you have your categorical columns encoded numerically. Can you now move onto using pipelines and XGBoost? Not yet! In the categorical columns of this dataset, there is no natural ordering between the entries. As an example: Using LabelEncoder, the CollgCr Neighborhood was encoded as 5, while the Veenker Neighborhood was encoded as 24, and Crawfor as 6. Is Veenker "greater" than Crawfor and CollgCr? No - and allowing the model to assume this natural ordering may result in poor performance.</p>
 <p>As a result, there is another step needed: You have to apply a one-hot encoding to create binary, or "dummy" variables. You can do this using scikit-learn's OneHotEncoder.</p>
+<p>Instructions:</p>
 <ul>
-<li>Instructions<ul>
 <li>Import OneHotEncoder from sklearn.preprocessing.</li>
 <li>Instantiate a OneHotEncoder object called ohe. Specify the keyword arguments categorical_features=categorical_mask and sparse=False.</li>
 <li>Using its .fit_transform() method, apply the OneHotEncoder to df and save the result as df_encoded. The output will be a NumPy array.</li>
 <li>Print the first 5 rows of df_encoded, and then the shape of df as well as df_encoded to compare the difference.</li>
-</ul>
-</li>
 </ul>
 
 </div>
@@ -467,19 +865,16 @@ None
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Encoding-categorical-columns-III:-DictVectorizer">Encoding categorical columns III: DictVectorizer<a class="anchor-link" href="#Encoding-categorical-columns-III:-DictVectorizer"> </a></h4><p>Alright, one final trick before you dive into pipelines. The two step process you just went through - <strong>LabelEncoder</strong> followed by <strong>OneHotEncoder</strong> - can be simplified by using a <strong>DictVectorizer</strong>.</p>
+<h3 id="Encoding-categorical-columns-III:-DictVectorizer">Encoding categorical columns III: DictVectorizer<a class="anchor-link" href="#Encoding-categorical-columns-III:-DictVectorizer"> </a></h3><p>Alright, one final trick before you dive into pipelines. The two step process you just went through - <strong>LabelEncoder</strong> followed by <strong>OneHotEncoder</strong> - can be simplified by using a <strong>DictVectorizer</strong>.</p>
 <p>Using a DictVectorizer on a DataFrame that has been converted to a dictionary allows you to get label encoding as well as one-hot encoding in one go.</p>
 <p>Your task is to work through this strategy in this exercise!</p>
-<ul>
-<li><p>Instructions</p>
+<p>Instructions:</p>
 <ul>
 <li>Import DictVectorizer from sklearn.feature_extraction.</li>
 <li>Convert df into a dictionary called df_dict using its .to_dict() method with "records" as the argument.</li>
 <li>Instantiate a DictVectorizer object called dv with the keyword argument sparse=False.</li>
 <li>Apply the DictVectorizer on df_dict by using its .fit_transform() method.</li>
 <li>Hit 'Submit Answer' to print the resulting first five rows and the vocabulary.</li>
-</ul>
-</li>
 </ul>
 
 </div>
@@ -614,17 +1009,14 @@ memory usage: 239.7+ KB
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Preprocessing-within-a-pipeline">Preprocessing within a pipeline<a class="anchor-link" href="#Preprocessing-within-a-pipeline"> </a></h4><p>Now that you've seen what steps need to be taken individually to properly process the Ames housing data, let's use the much cleaner and more succinct DictVectorizer approach and put it alongside an XGBoostRegressor inside of a scikit-learn pipeline.</p>
-<ul>
-<li><p>Instructions</p>
+<h3 id="Preprocessing-within-a-pipeline">Preprocessing within a pipeline<a class="anchor-link" href="#Preprocessing-within-a-pipeline"> </a></h3><p>Now that you've seen what steps need to be taken individually to properly process the Ames housing data, let's use the much cleaner and more succinct DictVectorizer approach and put it alongside an XGBoostRegressor inside of a scikit-learn pipeline.</p>
+<p>Instructions:</p>
 <ul>
 <li>Import DictVectorizer from sklearn.feature_extraction and Pipeline from sklearn.pipeline.</li>
 <li>Fill in any missing values in the LotFrontage column of X with 0.</li>
 <li>Complete the steps of the pipeline with DictVectorizer(sparse=False) for "ohe_onestep" and xgb.XGBRegressor() for "xgb_model".</li>
 <li>Create the pipeline using Pipeline() and steps.</li>
 <li>Fit the Pipeline. Don't forget to convert X into a format that DictVectorizer understands by calling the to_dict("records") method on X.</li>
-</ul>
-</li>
 </ul>
 
 </div>
@@ -687,15 +1079,12 @@ memory usage: 239.7+ KB
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Incorporating-XGBoost-into-pipelines">Incorporating XGBoost into pipelines<a class="anchor-link" href="#Incorporating-XGBoost-into-pipelines"> </a></h2><h4 id="Cross-validating-ur-XGBoost-model">Cross-validating ur XGBoost model<a class="anchor-link" href="#Cross-validating-ur-XGBoost-model"> </a></h4><p>In this exercise, you'll go one step further by using the pipeline you've created to preprocess and cross-validate your model.</p>
-<ul>
-<li><p>Instructions</p>
+<h2 id="Incorporating-XGBoost-into-pipelines">Incorporating XGBoost into pipelines<a class="anchor-link" href="#Incorporating-XGBoost-into-pipelines"> </a></h2><h3 id="Cross-validating-ur-XGBoost-model">Cross-validating ur XGBoost model<a class="anchor-link" href="#Cross-validating-ur-XGBoost-model"> </a></h3><p>In this exercise, you'll go one step further by using the pipeline you've created to preprocess and cross-validate your model.</p>
+<p>Instructions</p>
 <ul>
 <li>Create a pipeline called xgb_pipeline using steps.</li>
 <li>Perform 10-fold cross-validation using cross_val_score(). You'll have to pass in the pipeline, X (as a dictionary, using .to_dict("records")), y, the number of folds you want to use, and scoring ("neg_mean_squared_error").</li>
 <li>Print the 10-fold RMSE.</li>
-</ul>
-</li>
 </ul>
 
 </div>
@@ -750,15 +1139,13 @@ memory usage: 239.7+ KB
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Kidney-disease-case-study-I:-Categorical-Imputer">Kidney disease case study I: Categorical Imputer<a class="anchor-link" href="#Kidney-disease-case-study-I:-Categorical-Imputer"> </a></h4><p>You'll now continue your exploration of using pipelines with a dataset that requires significantly more wrangling. The chronic kidney disease dataset contains both categorical and numeric features, but contains lots of missing values. The goal here is to predict who has chronic kidney disease given various blood indicators as features.</p>
+<h3 id="Kidney-disease-case-study-I:-Categorical-Imputer">Kidney disease case study I: Categorical Imputer<a class="anchor-link" href="#Kidney-disease-case-study-I:-Categorical-Imputer"> </a></h3><p>You'll now continue your exploration of using pipelines with a dataset that requires significantly more wrangling. The chronic kidney disease dataset contains both categorical and numeric features, but contains lots of missing values. The goal here is to predict who has chronic kidney disease given various blood indicators as features.</p>
 <p>As Sergey mentioned in the video, you'll be introduced to a new library, sklearn_pandas, that allows you to chain many more processing steps inside of a pipeline than are currently supported in scikit-learn. Specifically, you'll be able to impute missing categorical values directly using the Categorical_Imputer() class in sklearn_pandas, and the DataFrameMapper() class to apply any arbitrary sklearn-compatible transformer on DataFrame columns, where the resulting output can be either a NumPy array or DataFrame.</p>
 <p>We've also created a transformer called a Dictifier that encapsulates converting a DataFrame using .to_dict("records") without you having to do it explicitly (and so that it works in a pipeline). Finally, we've also provided the list of feature names in kidney_feature_names, the target name in kidney_target_name, the features in X, and the target in y.</p>
 <p>In this exercise, your task is to apply the CategoricalImputer to impute all of the categorical columns in the dataset. You can refer to how the numeric imputation mapper was created as a template. Notice the keyword arguments input_df=True and df_out=True? This is so that you can work with DataFrames instead of arrays. By default, the transformers are passed a numpy array of the selected columns as input, and as a result, the output of the DataFrame mapper is also an array. Scikit-learn transformers have historically been designed to work with numpy arrays, not pandas DataFrames, even though their basic indexing interfaces are similar.</p>
+<p>Instructions:</p>
 <ul>
-<li>Instructions<ul>
 <li>Apply the categorical imputer using DataFrameMapper() and CategoricalImputer(). CategoricalImputer() does not need any arguments to be passed in. The columns are contained in categorical_columns. Be sure to specify input_df=True and df_out=True, and use category_feature as your iterator variable in the list comprehension.</li>
-</ul>
-</li>
 </ul>
 
 </div>
