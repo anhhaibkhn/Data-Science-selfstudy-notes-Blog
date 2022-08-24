@@ -415,7 +415,7 @@ Name: test-rmse-mean, dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Tuning-the-number-of-boosting-rounds">Tuning the number of boosting rounds<a class="anchor-link" href="#Tuning-the-number-of-boosting-rounds"> </a></h2><p>Let's start with parameter tuning by seeing how the number of boosting rounds (number of trees you build) impacts the out-of-sample performance of your XGBoost model. You'll use <strong>xgb.cv()</strong> inside a for loop and build one model per num_boost_round parameter.</p>
+<h3 id="Tuning-the-number-of-boosting-rounds">Tuning the number of boosting rounds<a class="anchor-link" href="#Tuning-the-number-of-boosting-rounds"> </a></h3><p>Let's start with parameter tuning by seeing how the number of boosting rounds (number of trees you build) impacts the out-of-sample performance of your XGBoost model. You'll use <strong>xgb.cv()</strong> inside a for loop and build one model per num_boost_round parameter.</p>
 <p>Here, you'll continue working with the Ames housing dataset. The features are available in the array X, and the target vector is contained in y.</p>
 <ul>
 <li>Instructions: <ul>
@@ -567,7 +567,7 @@ Name: test-rmse-mean, dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Tunable-parameters-in-XGBoost">Tunable parameters in XGBoost<a class="anchor-link" href="#Tunable-parameters-in-XGBoost"> </a></h3><ul>
+<h2 id="Overview-of-XGBoost's-hyperparameters">Overview of XGBoost's hyperparameters<a class="anchor-link" href="#Overview-of-XGBoost's-hyperparameters"> </a></h2><h3 id="Tunable-parameters-in-XGBoost">Tunable parameters in XGBoost<a class="anchor-link" href="#Tunable-parameters-in-XGBoost"> </a></h3><ul>
 <li>Common tree tunable parameters<ul>
 <li>learning rate: learning rate/eta</li>
 <li>gamma: min loss reduction to create new tree split</li>
@@ -830,7 +830,7 @@ Name: test-rmse-mean, dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Review-of-grid-search-and-random-search">Review of grid search and random search<a class="anchor-link" href="#Review-of-grid-search-and-random-search"> </a></h3>
+<h2 id="Review-of-grid-search-and-random-search">Review of grid search and random search<a class="anchor-link" href="#Review-of-grid-search-and-random-search"> </a></h2>
 </div>
 </div>
 </div>

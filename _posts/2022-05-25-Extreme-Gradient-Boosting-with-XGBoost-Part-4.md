@@ -28,6 +28,12 @@ layout: notebook
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Review-of-pipelines-using-sklearn">Review of pipelines using sklearn<a class="anchor-link" href="#Review-of-pipelines-using-sklearn"> </a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li><p>Data Content: Each record in the database describes a Boston suburb or town. The data was drawn from the Boston Standard Metropolitan Statistical Area (SMSA) in 1970. The attributes are deﬁned as follows :</p>
 <ul>
@@ -76,12 +82,6 @@ layout: notebook
 </div>
     {% endraw %}
 
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Review-of-pipelines-using-sklearn">Review of pipelines using sklearn<a class="anchor-link" href="#Review-of-pipelines-using-sklearn"> </a></h2>
-</div>
-</div>
-</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -306,7 +306,7 @@ memory usage: 55.5 KB
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Exploratory-data-analysis">Exploratory data analysis<a class="anchor-link" href="#Exploratory-data-analysis"> </a></h2><p>Before diving into the nitty gritty of pipelines and preprocessing, let's do some exploratory analysis of the original, unprocessed Ames housing dataset. When you worked with this data in previous chapters, we preprocessed it for you so you could focus on the core XGBoost concepts. In this chapter, you'll do the preprocessing yourself!</p>
+<h3 id="Exploratory-data-analysis">Exploratory data analysis<a class="anchor-link" href="#Exploratory-data-analysis"> </a></h3><p>Before diving into the nitty gritty of pipelines and preprocessing, let's do some exploratory analysis of the original, unprocessed Ames housing dataset. When you worked with this data in previous chapters, we preprocessed it for you so you could focus on the core XGBoost concepts. In this chapter, you'll do the preprocessing yourself!</p>
 <p>A smaller version of this original, unprocessed dataset has been pre-loaded into a pandas DataFrame called df. Your task is to explore df in the Shell and pick the option that is incorrect. The larger purpose of this exercise is to understand the kinds of transformations you will need to perform in order to be able to use XGBoost.</p>
 
 </div>
@@ -1589,7 +1589,7 @@ dtype: int64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Kidney-disease-case-study-II:-Feature-Union">Kidney disease case study II: Feature Union<a class="anchor-link" href="#Kidney-disease-case-study-II:-Feature-Union"> </a></h4><p>Having separately imputed numeric as well as categorical columns, your task is now to use scikit-learn's FeatureUnion to concatenate their results, which are contained in two separate transformer objects - numeric_imputation_mapper, and categorical_imputation_mapper, respectively.</p>
+<h3 id="Kidney-disease-case-study-II:-Feature-Union">Kidney disease case study II: Feature Union<a class="anchor-link" href="#Kidney-disease-case-study-II:-Feature-Union"> </a></h3><p>Having separately imputed numeric as well as categorical columns, your task is now to use scikit-learn's FeatureUnion to concatenate their results, which are contained in two separate transformer objects - numeric_imputation_mapper, and categorical_imputation_mapper, respectively.</p>
 <p>You may have already encountered FeatureUnion in Machine Learning with the Experts: School Budgets. Just like with pipelines, you have to pass it a list of (string, transformer) tuples, where the first half of each tuple is the name of the transformer.</p>
 <ul>
 <li><p>Instructions</p>
@@ -1628,7 +1628,7 @@ dtype: int64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Kidney-disease-case-study-III:-Full-pipeline">Kidney disease case study III: Full pipeline<a class="anchor-link" href="#Kidney-disease-case-study-III:-Full-pipeline"> </a></h4><p>It's time to piece together all of the transforms along with an XGBClassifier to build the full pipeline!</p>
+<h3 id="Kidney-disease-case-study-III:-Full-pipeline">Kidney disease case study III: Full pipeline<a class="anchor-link" href="#Kidney-disease-case-study-III:-Full-pipeline"> </a></h3><p>It's time to piece together all of the transforms along with an XGBClassifier to build the full pipeline!</p>
 <p>Besides the numeric_categorical_union that you created in the previous exercise, there are two other transforms needed: the Dictifier() transform which we created for you, and the DictVectorizer().</p>
 <p>After creating the pipeline, your task is to cross-validate it to see how well it performs.</p>
 <ul>
@@ -1805,6 +1805,12 @@ Pipeline(steps=[(&#39;preprocessor&#39;,
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Tuning-XGBoost-hyperparameters">Tuning XGBoost hyperparameters<a class="anchor-link" href="#Tuning-XGBoost-hyperparameters"> </a></h2><h3 id="Bringing-it-all-together">Bringing it all together<a class="anchor-link" href="#Bringing-it-all-together"> </a></h3><h3 id="Final-Thoughts">Final Thoughts<a class="anchor-link" href="#Final-Thoughts"> </a></h3>
+</div>
+</div>
+</div>
 </div>
  
 
