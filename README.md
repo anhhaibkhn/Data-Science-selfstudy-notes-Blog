@@ -17,8 +17,6 @@ Hi, and Welcome to my GitHub [Blog](https://anhhaibkhn.github.io/Data-Science-se
 All of my posts here are the memo from my self-study courses, articles, and books. I hope that some of these practices will help you along in your own journey of learning data science.
 
 
-If you find the blog posts useful, please give the GitHub blog repo a 
-        <script    async defer src="https://buttons.github.io/buttons.js"></script>
-        <a class="github-button" href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog" data-color-scheme="no-preference: light; light: light; dark: light;" data-icon="octicon-star" data-size="large" aria-label="Star anhhaibkhn/Data-Science-selfstudy-notes-Blog on GitHub">Star </a> to show your support and share it to others. Also, please let me know in the comments section of the posts if you have any questions.
+If you find the blog posts useful, please give the <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog" target="_blank"><strong>GitHub blog repo</strong></a> a star to show your support and share it to others. Also, please let me know in the comments section of the posts if you have any questions.
 
 Thank you! (´･ω･｀)ゞ ｱﾘｶﾞﾄｳ ﾖﾛｼｸ♪. 
