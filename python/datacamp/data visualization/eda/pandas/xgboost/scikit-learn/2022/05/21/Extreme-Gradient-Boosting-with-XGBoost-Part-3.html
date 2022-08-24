@@ -108,18 +108,17 @@ window.onload = wrap_img;
         <div id="toc" class="pt-3 pl-3 sticky">
           <b><a href="#">Extreme Gradient Boosting with XGBoost - Part 3 (DataCamp interactive course)</a></b>
           <ol id="toc" class="section-nav">
-<li class="toc-entry toc-h3"><a href="#Chapter-3:-Fine-tuning-your-XGBoost-model">Chapter 3: Fine-tuning your XGBoost model </a>
+<li class="toc-entry toc-h2"><a href="#Why-tune-your-model-?">Why tune your model ? </a></li>
+<li class="toc-entry toc-h2"><a href="#Tuning-the-number-of-boosting-rounds">Tuning the number of boosting rounds </a>
 <ol>
-<li class="toc-entry toc-h4"><a href="#Why-tune-your-model-?">Why tune your model ? </a></li>
-<li class="toc-entry toc-h4"><a href="#Tuning-the-number-of-boosting-rounds">Tuning the number of boosting rounds </a></li>
-<li class="toc-entry toc-h4"><a href="#Automated-boosting-round-selection-using-early_stopping">Automated boosting round selection using early_stopping </a></li>
-<li class="toc-entry toc-h4"><a href="#Tunable-parameters-in-XGBoost">Tunable parameters in XGBoost </a></li>
-<li class="toc-entry toc-h4"><a href="#Tuning-eta">Tuning eta </a></li>
-<li class="toc-entry toc-h4"><a href="#3.2.3-Tuning-max_depth">3.2.3 Tuning max_depth </a></li>
-<li class="toc-entry toc-h4"><a href="#Tuning-colsample_bytree">Tuning colsample_bytree </a></li>
-<li class="toc-entry toc-h4"><a href="#Review-of-grid-search-and-random-search">Review of grid search and random search </a></li>
-<li class="toc-entry toc-h4"><a href="#Grid-search-with-XGBoost">Grid search with XGBoost </a></li>
-<li class="toc-entry toc-h4"><a href="#Random-search-with-XGBoost">Random search with XGBoost </a></li>
+<li class="toc-entry toc-h3"><a href="#Automated-boosting-round-selection-using-early_stopping">Automated boosting round selection using early_stopping </a></li>
+<li class="toc-entry toc-h3"><a href="#Tunable-parameters-in-XGBoost">Tunable parameters in XGBoost </a></li>
+<li class="toc-entry toc-h3"><a href="#Tuning-eta">Tuning eta </a></li>
+<li class="toc-entry toc-h3"><a href="#Tuning-max_depth">Tuning max_depth </a></li>
+<li class="toc-entry toc-h3"><a href="#Tuning-colsample_bytree">Tuning colsample_bytree </a></li>
+<li class="toc-entry toc-h3"><a href="#Review-of-grid-search-and-random-search">Review of grid search and random search </a></li>
+<li class="toc-entry toc-h3"><a href="#Grid-search-with-XGBoost">Grid search with XGBoost </a></li>
+<li class="toc-entry toc-h3"><a href="#Random-search-with-XGBoost">Random search with XGBoost </a></li>
 </ol>
 </li>
 </ol>
@@ -178,7 +177,7 @@ window.onload = wrap_img;
            • <span class="read-time" title="Estimated read time">
     
     
-      15 min read
+      13 min read
     
 </span></p>
 
@@ -224,44 +223,34 @@ window.onload = wrap_img;
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Chapter-3:-Fine-tuning-your-XGBoost-model">Chapter 3: Fine-tuning your XGBoost model<a class="anchor-link" href="#Chapter-3:-Fine-tuning-your-XGBoost-model"> </a></h3><p>This chapter will teach you how to make your XGBoost models as performant as possible. You'll learn about the variety of parameters that can be adjusted to alter the behavior of XGBoost and how to tune them efficiently so that you can supercharge the performance of your models.</p>
-<ul>
-<li>3.1 Why tune your model?<ul>
-<li>When is tuning your model a bad idea?</li>
-<li>Tuning the number of boosting rounds</li>
-<li>Automated boosting round selection using early_stopping<br />
-<br /></li>
-</ul>
-</li>
-<li>3.2 Overview of XGBoost's hyperparameters<ul>
-<li>Tuning eta</li>
-<li>Tuning max_depth</li>
-<li>Tuning colsample_bytree<br />
-<br /></li>
-</ul>
-</li>
-<li>3.3 Review of grid search and random search<ul>
-<li>Grid search with XGBoost</li>
-<li>Random search with XGBoost<br />
-<br /></li>
-</ul>
-</li>
-<li>3.4 Limits of grid search and random search<ul>
-<li>When should you use grid search and random search? 
-<br /></li>
-</ul>
-</li>
-</ul>
+<h2 id="Why-tune-your-model-?">Why tune your model ?<a class="anchor-link" href="#Why-tune-your-model-?"> </a></h2>
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.expand_frame_repr&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
 
 </div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Why-tune-your-model-?">Why tune your model ?<a class="anchor-link" href="#Why-tune-your-model-?"> </a></h4>
-</div>
-</div>
-</div>
+    
+
     
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -566,27 +555,9 @@ window.onload = wrap_img;
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\xgboost\compat.py:36: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
-  from pandas import MultiIndex, Int64Index
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Untuned model RMSE: 9    34624.22998
+<pre>Untuned model RMSE: 9    34624.230446
 Name: test-rmse-mean, dtype: float64
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\xgboost\data.py:262: FutureWarning: pandas.Int64Index is deprecated and will be removed from pandas in a future version. Use pandas.Index with the appropriate dtype instead.
-  elif isinstance(data.columns, (pd.Int64Index, pd.RangeIndex)):
 </pre>
 </div>
 </div>
@@ -639,7 +610,7 @@ Name: test-rmse-mean, dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Tuning-the-number-of-boosting-rounds">Tuning the number of boosting rounds<a class="anchor-link" href="#Tuning-the-number-of-boosting-rounds"> </a></h4><p>Let's start with parameter tuning by seeing how the number of boosting rounds (number of trees you build) impacts the out-of-sample performance of your XGBoost model. You'll use <strong>xgb.cv()</strong> inside a for loop and build one model per num_boost_round parameter.</p>
+<h2 id="Tuning-the-number-of-boosting-rounds">Tuning the number of boosting rounds<a class="anchor-link" href="#Tuning-the-number-of-boosting-rounds"> </a></h2><p>Let's start with parameter tuning by seeing how the number of boosting rounds (number of trees you build) impacts the out-of-sample performance of your XGBoost model. You'll use <strong>xgb.cv()</strong> inside a for loop and build one model per num_boost_round parameter.</p>
 <p>Here, you'll continue working with the Ames housing dataset. The features are available in the array X, and the target vector is contained in y.</p>
 <ul>
 <li>Instructions: <ul>
@@ -722,7 +693,7 @@ Name: test-rmse-mean, dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Automated-boosting-round-selection-using-early_stopping">Automated boosting round selection using early_stopping<a class="anchor-link" href="#Automated-boosting-round-selection-using-early_stopping"> </a></h4><p>Now, instead of attempting to cherry pick the best possible number of boosting rounds, you can very easily have XGBoost automatically select the number of boosting rounds for you within <strong>xgb.cv()</strong>. This is done using a technique called <strong>early stopping</strong>.</p>
+<h3 id="Automated-boosting-round-selection-using-early_stopping">Automated boosting round selection using early_stopping<a class="anchor-link" href="#Automated-boosting-round-selection-using-early_stopping"> </a></h3><p>Now, instead of attempting to cherry pick the best possible number of boosting rounds, you can very easily have XGBoost automatically select the number of boosting rounds for you within <strong>xgb.cv()</strong>. This is done using a technique called <strong>early stopping</strong>.</p>
 <p>Early stopping works by testing the XGBoost model after every boosting round against a hold-out dataset and stopping the creation of additional boosting rounds (thereby finishing training of the model early) if the hold-out metric ("rmse" in our case) does not improve for a given number of rounds. Here you will use the early_stopping_rounds parameter in xgb.cv() with a large possible number of boosting rounds (50). Bear in mind that if the holdout metric continuously improves up through when num_boost_rounds is reached, then early stopping does not occur.</p>
 <p>Here, the DMatrix and parameter dictionary have been created for you. Your task is to use cross-validation with early stopping. Go for it!</p>
 <ul>
@@ -746,7 +717,7 @@ Name: test-rmse-mean, dtype: float64
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing_dmatrix</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
 
 <span class="c1"># Create the parameter dictionary for each tree: params</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;objective&quot;</span><span class="p">:</span><span class="s2">&quot;reg:linear&quot;</span><span class="p">,</span> <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;objective&quot;</span><span class="p">:</span><span class="s2">&quot;reg:squarederror&quot;</span><span class="p">,</span> <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span><span class="mi">4</span><span class="p">}</span>
 
 <span class="c1"># Perform cross-validation with early stopping: cv_results</span>
 <span class="n">cv_results</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">dtrain</span><span class="o">=</span><span class="n">housing_dmatrix</span><span class="p">,</span>
@@ -773,14 +744,11 @@ Name: test-rmse-mean, dtype: float64
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[16:14:55] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[16:14:55] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[16:14:55] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-45    30758.543620
-46    30729.971354
-47    30732.663411
-48    30712.240886
-49    30720.854818
+<pre>45    30758.543732
+46    30729.971937
+47    30732.663173
+48    30712.241251
+49    30720.853939
 Name: test-rmse-mean, dtype: float64
 </pre>
 </div>
@@ -794,7 +762,7 @@ Name: test-rmse-mean, dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Tunable-parameters-in-XGBoost">Tunable parameters in XGBoost<a class="anchor-link" href="#Tunable-parameters-in-XGBoost"> </a></h4><ul>
+<h3 id="Tunable-parameters-in-XGBoost">Tunable parameters in XGBoost<a class="anchor-link" href="#Tunable-parameters-in-XGBoost"> </a></h3><ul>
 <li>Common tree tunable parameters<ul>
 <li>learning rate: learning rate/eta</li>
 <li>gamma: min loss reduction to create new tree split</li>
@@ -803,7 +771,8 @@ Name: test-rmse-mean, dtype: float64
 <li>max_depth: max depth per tree</li>
 <li>subsample: % samples used per tree</li>
 <li>colsample_bytree: % features used per<br />
-<br /></li>
+<br />
+<br />   </li>
 </ul>
 </li>
 <li>Linear tunable parameters<ul>
@@ -820,7 +789,7 @@ Name: test-rmse-mean, dtype: float64
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Tuning-eta">Tuning eta<a class="anchor-link" href="#Tuning-eta"> </a></h4><p>It's time to practice tuning other XGBoost hyperparameters in earnest and observing their effect on model performance! You'll begin by tuning the "eta", also known as the learning rate.</p>
+<h3 id="Tuning-eta">Tuning eta<a class="anchor-link" href="#Tuning-eta"> </a></h3><p>It's time to practice tuning other XGBoost hyperparameters in earnest and observing their effect on model performance! You'll begin by tuning the "eta", also known as the learning rate.</p>
 <p>The learning rate in XGBoost is a parameter that can range between 0 and 1, with higher values of "eta" penalizing feature weights more strongly, causing much stronger regularization.</p>
 <ul>
 <li><p>Instructions</p>
@@ -846,7 +815,7 @@ Name: test-rmse-mean, dtype: float64
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing_dmatrix</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
 
 <span class="c1"># Create the parameter dictionary for each tree (boosting round)</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;objective&quot;</span><span class="p">:</span><span class="s2">&quot;reg:linear&quot;</span><span class="p">,</span> <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;objective&quot;</span><span class="p">:</span><span class="s2">&quot;reg:squarederror&quot;</span><span class="p">,</span> <span class="s2">&quot;max_depth&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
 
 <span class="c1"># Create list of eta values and empty list to store final round rmse per xgboost model</span>
 <span class="n">eta_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.001</span><span class="p">,</span> <span class="mf">0.01</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">]</span>
@@ -884,19 +853,10 @@ Name: test-rmse-mean, dtype: float64
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[16:55:08] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[16:55:09] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[16:55:09] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[16:55:09] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[16:55:09] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[16:55:09] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[16:55:09] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[16:55:09] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[16:55:09] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-     eta      best_rmse
-0  0.001  195736.406250
-1  0.010  179932.187500
-2  0.100   79759.411459
+<pre>     eta      best_rmse
+0  0.001  195736.402543
+1  0.010  179932.183986
+2  0.100   79759.411808
 </pre>
 </div>
 </div>
@@ -909,7 +869,7 @@ Name: test-rmse-mean, dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="3.2.3-Tuning-max_depth">3.2.3 Tuning max_depth<a class="anchor-link" href="#3.2.3-Tuning-max_depth"> </a></h4><p>In this exercise, your job is to tune max_depth, which is the parameter that dictates the maximum depth that each tree in a boosting round can grow to. Smaller values will lead to shallower trees, and larger values to deeper trees.</p>
+<h3 id="Tuning-max_depth">Tuning max_depth<a class="anchor-link" href="#Tuning-max_depth"> </a></h3><p>In this exercise, your job is to tune max_depth, which is the parameter that dictates the maximum depth that each tree in a boosting round can grow to. Smaller values will lead to shallower trees, and larger values to deeper trees.</p>
 <ul>
 <li>Instructions<ul>
 <li>Create a list called max_depths to store the following "max_depth" values: 2, 5, 10, and 20.</li>
@@ -932,7 +892,7 @@ Name: test-rmse-mean, dtype: float64
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing_dmatrix</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
 
 <span class="c1"># Create the parameter dictionary</span>
-<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;objective&quot;</span><span class="p">:</span><span class="s2">&quot;reg:linear&quot;</span><span class="p">}</span>
+<span class="n">params</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;objective&quot;</span><span class="p">:</span><span class="s2">&quot;reg:squarederror&quot;</span><span class="p">}</span>
 
 <span class="c1"># Create list of max_depth values</span>
 <span class="n">max_depths</span> <span class="o">=</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]</span>
@@ -971,19 +931,11 @@ Name: test-rmse-mean, dtype: float64
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[17:09:43] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[17:09:43] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[17:09:43] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[17:09:43] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[17:09:43] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[17:09:43] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[17:09:43] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[17:09:43] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-   max_depth     best_rmse
-0          2  37957.468750
-1          5  35596.599610
-2         10  36065.548829
-3         20  36739.578125
+<pre>   max_depth     best_rmse
+0          2  37957.469464
+1          5  35596.599504
+2         10  36065.547345
+3         20  36739.576068
 </pre>
 </div>
 </div>
@@ -996,7 +948,7 @@ Name: test-rmse-mean, dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Tuning-colsample_bytree">Tuning colsample_bytree<a class="anchor-link" href="#Tuning-colsample_bytree"> </a></h4><p>Now, it's time to tune "colsample_bytree". You've already seen this if you've ever worked with scikit-learn's RandomForestClassifier or RandomForestRegressor, where it just was called max_features. In both xgboost and sklearn, this parameter (although named differently) simply specifies the fraction of features to choose from at every split in a given tree. In xgboost, colsample_bytree must be specified as a float between 0 and 1.</p>
+<h3 id="Tuning-colsample_bytree">Tuning colsample_bytree<a class="anchor-link" href="#Tuning-colsample_bytree"> </a></h3><p>Now, it's time to tune "colsample_bytree". You've already seen this if you've ever worked with scikit-learn's RandomForestClassifier or RandomForestRegressor, where it just was called max_features. In both xgboost and sklearn, this parameter (although named differently) simply specifies the fraction of features to choose from at every split in a given tree. In xgboost, colsample_bytree must be specified as a float between 0 and 1.</p>
 <ul>
 <li>Instructions<ul>
 <li>Create a list called colsample_bytree_vals to store the values 0.1, 0.5, 0.8, and 1.</li>
@@ -1018,7 +970,7 @@ Name: test-rmse-mean, dtype: float64
 <div class=" highlight hl-ipython3"><pre><span></span><span class="n">housing_dmatrix</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">DMatrix</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">X</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="n">y</span><span class="p">)</span>
 
 <span class="c1"># Create the parameter dictionary</span>
-<span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;objective&quot;</span><span class="p">:</span><span class="s2">&quot;reg:linear&quot;</span><span class="p">,</span><span class="s2">&quot;max_depth&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
+<span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;objective&quot;</span><span class="p">:</span><span class="s2">&quot;reg:squarederror&quot;</span><span class="p">,</span><span class="s2">&quot;max_depth&quot;</span><span class="p">:</span><span class="mi">3</span><span class="p">}</span>
 
 <span class="c1"># Create list of hyperparameter values: colsample_bytree_vals</span>
 <span class="n">colsample_bytree_vals</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
@@ -1056,19 +1008,11 @@ Name: test-rmse-mean, dtype: float64
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>[17:14:54] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[17:14:54] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[17:14:54] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[17:14:54] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[17:14:54] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[17:14:54] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[17:14:54] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-[17:14:54] WARNING: d:\bld\xgboost-split_1645118015404\work\src\objective\regression_obj.cu:188: reg:linear is now deprecated in favor of reg:squarederror.
-   colsample_bytree     best_rmse
-0               0.1  40918.117188
-1               0.5  35813.906250
-2               0.8  35995.677735
-3               1.0  35836.042969
+<pre>   colsample_bytree     best_rmse
+0               0.1  40918.116895
+1               0.5  35813.904168
+2               0.8  35995.678734
+3               1.0  35836.044343
 </pre>
 </div>
 </div>
@@ -1081,7 +1025,7 @@ Name: test-rmse-mean, dtype: float64
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Review-of-grid-search-and-random-search">Review of grid search and random search<a class="anchor-link" href="#Review-of-grid-search-and-random-search"> </a></h4>
+<h3 id="Review-of-grid-search-and-random-search">Review of grid search and random search<a class="anchor-link" href="#Review-of-grid-search-and-random-search"> </a></h3>
 </div>
 </div>
 </div>
@@ -1236,7 +1180,7 @@ Lowest RMSE found:  28875.728215978015
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Grid-search-with-XGBoost">Grid search with XGBoost<a class="anchor-link" href="#Grid-search-with-XGBoost"> </a></h4><p>Now that you've learned how to tune parameters individually with XGBoost, let's take your parameter tuning to the next level by using scikit-learn's GridSearch and RandomizedSearch capabilities with internal cross-validation using the GridSearchCV and RandomizedSearchCV functions. You will use these to find the best model exhaustively from a collection of possible parameter values across multiple parameters simultaneously. Let's get to work, starting with GridSearchCV!</p>
+<h3 id="Grid-search-with-XGBoost">Grid search with XGBoost<a class="anchor-link" href="#Grid-search-with-XGBoost"> </a></h3><p>Now that you've learned how to tune parameters individually with XGBoost, let's take your parameter tuning to the next level by using scikit-learn's GridSearch and RandomizedSearch capabilities with internal cross-validation using the GridSearchCV and RandomizedSearchCV functions. You will use these to find the best model exhaustively from a collection of possible parameter values across multiple parameters simultaneously. Let's get to work, starting with GridSearchCV!</p>
 <ul>
 <li>Instructions<ul>
 <li>Create a parameter grid called gbm_param_grid that contains a list of "colsample_bytree" values (0.3, 0.7), a list with a single value for "n_estimators" (50), and a list of 2 "max_depth" (2, 5) values.</li>
@@ -1307,7 +1251,7 @@ Lowest RMSE found:  28986.18703093561
 
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h4 id="Random-search-with-XGBoost">Random search with XGBoost<a class="anchor-link" href="#Random-search-with-XGBoost"> </a></h4><p>Often, GridSearchCV can be really time consuming, so in practice, you may want to use RandomizedSearchCV instead, as you will do in this exercise. The good news is you only have to make a few modifications to your GridSearchCV code to do RandomizedSearchCV. The key difference is you have to specify a param_distributions parameter instead of a param_grid parameter.</p>
+<h3 id="Random-search-with-XGBoost">Random search with XGBoost<a class="anchor-link" href="#Random-search-with-XGBoost"> </a></h3><p>Often, GridSearchCV can be really time consuming, so in practice, you may want to use RandomizedSearchCV instead, as you will do in this exercise. The good news is you only have to make a few modifications to your GridSearchCV code to do RandomizedSearchCV. The key difference is you have to specify a param_distributions parameter instead of a param_grid parameter.</p>
 <ul>
 <li>Instructions<ul>
 <li>Create a parameter grid called gbm_param_grid that contains a list with a single value for 'n_estimators' (25), and a list of 'max_depth' values between 2 and 11 for 'max_depth' - use range(2, 12) for this.</li>
