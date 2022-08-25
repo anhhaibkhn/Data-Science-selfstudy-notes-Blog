@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Visualizing Time Series Data in Python | Self-study Data Science Projects Notes</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Visualizing Time Series Data in Python" />
+<meta name="author" content="Datacamp" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Updating …" />
+<meta property="og:description" content="Updating …" />
+<link rel="canonical" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/data%20visualization/eda/time%20series/machine%20learning/boxplots/histograms/density%20plots/correlation/clustered%20heatmaps/2022/08/25/Visualizing-Time-Series-Data-in-Python.html" />
+<meta property="og:url" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/data%20visualization/eda/time%20series/machine%20learning/boxplots/histograms/density%20plots/correlation/clustered%20heatmaps/2022/08/25/Visualizing-Time-Series-Data-in-Python.html" />
+<meta property="og:site_name" content="Self-study Data Science Projects Notes" />
+<meta property="og:image" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/TimeSeriesVisualizing.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-25T00:00:00-05:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/TimeSeriesVisualizing.png" />
+<meta property="twitter:title" content="Visualizing Time Series Data in Python" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Datacamp"},"dateModified":"2022-08-25T00:00:00-05:00","datePublished":"2022-08-25T00:00:00-05:00","description":"Updating …","headline":"Visualizing Time Series Data in Python","image":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/TimeSeriesVisualizing.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/data%20visualization/eda/time%20series/machine%20learning/boxplots/histograms/density%20plots/correlation/clustered%20heatmaps/2022/08/25/Visualizing-Time-Series-Data-in-Python.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/data%20visualization/eda/time%20series/machine%20learning/boxplots/histograms/density%20plots/correlation/clustered%20heatmaps/2022/08/25/Visualizing-Time-Series-Data-in-Python.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects Notes" /><link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://unpkg.com/@primer/css@17.3.0/dist/primer.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+
+    var i = 0, j = 0, k = 0;
+
+    document.querySelectorAll('h2, h3, h4').forEach((heading) => {
+
+        if (heading.localName == 'h2') {
+            i++; j = 0; k = 0;
+            heading.setAttribute('data-before', `${i}. `)
+        }
+        if (heading.localName == 'h3') {
+            j++; k = 0;
+            heading.setAttribute('data-before', `${i}.${j}. `)
+        }
+        if (heading.localName == 'h4') {
+            k++;
+            heading.setAttribute('data-before', `${i}.${j}.${k}. `)
+        }
+    });
+});
+</script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" integrity="sha512-J8je2SgrCzA7hNBeiCJiA6oETHTTdp3We3EriOgJp6POycGLcDXj5dSwWlAPQcYGeaQ4N3uf30aOg/Nt5pxW2g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" integrity="sha512-1kNZVA50gKlorLAWU83+SdOAUwABzfFFQ4WuOAZTeS/UhNhnm9zU7rDv/Q5NEzSnr5u2L6uhR/+8icjjmHjSnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" integrity="sha512-CzIEOUs11SQ7tekLhEe5gil9kDip4RTJZVf7pSjlxOdVaYYHEcQflhunPz2Q/onNC4slL9jpKjvNgzPAAxEpew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        globalGroup: true,
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+
+</head>
+<body>
+
+    <main class="page-content" aria-label="Content" style="padding-top: 0;">
+        <div class="Layout">
+    
+      <div class="Layout-sidebar">
+        <div id="toc" class="pt-3 pl-3 sticky">
+          <b><a href="#">Visualizing Time Series Data in Python</a></b>
+          <ol id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Working-with-Time-Series-in-Pandas">Working with Time Series in Pandas </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#How-to-use-dates-&-times-with-pandas">How to use dates &amp; times with pandas </a></li>
+<li class="toc-entry toc-h3"><a href="#Indexing-&-resampling-time-series">Indexing &amp; resampling time series </a></li>
+<li class="toc-entry toc-h3"><a href="#Lags,-changes,-and-returns-for-stock-price-series">Lags, changes, and returns for stock price series </a></li>
+</ol>
+</li>
+<li class="toc-entry toc-h2"><a href="#Basic-Time-Series-Metrics-&-Resampling">Basic Time Series Metrics &amp; Resampling </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#Compare-time-series-growth-rates">Compare time series growth rates </a></li>
+<li class="toc-entry toc-h3"><a href="#Changing-the-time-series-frequency:resampling--Convert-monthly-to-weekly-data">Changing the time series frequency:resampling- Convert monthly to weekly data </a></li>
+<li class="toc-entry toc-h3"><a href="#Upsampling-&-interpolation-with-.resample()">Upsampling &amp; interpolation with .resample() </a></li>
+<li class="toc-entry toc-h3"><a href="#Downsampling-&-aggregation">Downsampling &amp; aggregation </a></li>
+</ol>
+</li>
+<li class="toc-entry toc-h2"><a href="#Window-Functions:-Rolling-&-Expanding-Metrics">Window Functions: Rolling &amp; Expanding Metrics </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#Rolling-window-functions-with-pandas">Rolling window functions with pandas </a></li>
+<li class="toc-entry toc-h3"><a href="#Expanding-window-functions-with-pandas">Expanding window functions with pandas </a></li>
+<li class="toc-entry toc-h3"><a href="#Case-study:S&P500-price-simulation--Random-walk-I">Case study:S&amp;P500 price simulation- Random walk I </a></li>
+<li class="toc-entry toc-h3"><a href="#Relationships-between-time-series:-correlation">Relationships between time series: correlation </a></li>
+</ol>
+</li>
+<li class="toc-entry toc-h2"><a href="#Putting-it-all-together:-Building-a-value-weighted-index">Putting it all together: Building a value-weighted index </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#Select-index-components-&-import-data">Select index components &amp; import data </a></li>
+<li class="toc-entry toc-h3"><a href="#Build-a-market-cap-weighted-index">Build a market-cap weighted index </a></li>
+<li class="toc-entry toc-h3"><a href="#Evaluate-index-performance">Evaluate index performance </a></li>
+<li class="toc-entry toc-h3"><a href="#Index-correlation-&-exporting-to-Excel">Index correlation &amp; exporting to Excel </a></li>
+</ol>
+</li>
+</ol>
+        </div>
+      </div>
+    <div class="Layout-main"><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/Data-Science-selfstudy-notes-Blog/">Self-study Data Science Projects Notes</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/about/">About Me</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/search/">Search</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+      
+        
+          <div class="pb-5 d-flex flex-wrap flex-justify-start" style="padding-left: 52px">
+            <div class="px-2">
+
+    <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/Visualizing Time Series Data in Python/2022-08-25-Visualizing Time Series Data in Python.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+            <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/anhhaibkhn/Data-Science-selfstudy-notes-Blog/master?filepath=_notebooks%2FVisualizing+Time+Series+Data+in+Python%2F2022-08-25-Visualizing+Time+Series+Data+in+Python.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+            <div class="px-2">
+    <a href="https://colab.research.google.com/github/anhhaibkhn/Data-Science-selfstudy-notes-Blog/blob/master/_notebooks/Visualizing Time Series Data in Python/2022-08-25-Visualizing Time Series Data in Python.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+            <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fanhhaibkhn%2FData-Science-selfstudy-notes-Blog%2Fblob%2Fmaster%2F_notebooks%2FVisualizing+Time+Series+Data+in+Python%2F2022-08-25-Visualizing+Time+Series+Data+in+Python.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+          </div>
+        <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">Visualizing Time Series Data in Python</h1><p class="page-description">Updating ...</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-08-25T00:00:00-05:00" itemprop="datePublished">
+            Aug 25, 2022
+          </time>• 
+              <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <span class="p-author h-card" itemprop="name">Datacamp</span></span>
+           • <span class="read-time" title="Estimated read time">
+    
+    
+      2 min read
+    
+</span></p>
+
+        
+          <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i>
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Python">Python</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Data Visualization">Data Visualization</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#EDA">EDA</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Time Series">Time Series</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Machine Learning">Machine Learning</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Boxplots">Boxplots</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Histograms">Histograms</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Density plots">Density plots</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Correlation">Correlation</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Clustered heatmaps">Clustered heatmaps</a>
+            
+          
+          </p>
+        
+
+
+      </header>
+
+      <div class="post-content e-content" itemprop="articleBody">
+        <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/Visualizing Time Series Data in Python/2022-08-25-Visualizing Time Series Data in Python.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.expand_frame_repr&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Working-with-Time-Series-in-Pandas">Working with Time Series in Pandas<a class="anchor-link" href="#Working-with-Time-Series-in-Pandas"> </a></h2><blockquote><p>This chapter lays the foundations to leverage the powerful time series functionality made available by how Pandas represents dates, in particular by the DateTimeIndex. You will learn how to create and manipulate date information and time series, and how to do calculations with time-aware DataFrames to shift your data in time or create period-specific returns.</p>
+</blockquote>
+<h3 id="How-to-use-dates-&amp;-times-with-pandas">How to use dates &amp; times with pandas<a class="anchor-link" href="#How-to-use-dates-&amp;-times-with-pandas"> </a></h3><ul>
+<li>Your first time series</li>
+</ul>
+<h3 id="Indexing-&amp;-resampling-time-series">Indexing &amp; resampling time series<a class="anchor-link" href="#Indexing-&amp;-resampling-time-series"> </a></h3><ul>
+<li>Create a time series of air quality data</li>
+<li>Compare annual stock price trends</li>
+<li>Set and change time series frequency</li>
+</ul>
+<h3 id="Lags,-changes,-and-returns-for-stock-price-series">Lags, changes, and returns for stock price series<a class="anchor-link" href="#Lags,-changes,-and-returns-for-stock-price-series"> </a></h3><ul>
+<li>Shifting stock prices across time</li>
+<li>Calculating stock price changes</li>
+<li>Plotting multi-period returns</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Basic-Time-Series-Metrics-&amp;-Resampling">Basic Time Series Metrics &amp; Resampling<a class="anchor-link" href="#Basic-Time-Series-Metrics-&amp;-Resampling"> </a></h2><blockquote><p>This chapter dives deeper into the essential time series functionality made available through the pandas DataTimeIndex. It introduces resampling and how to compare different time series by normalizing their start points.</p>
+</blockquote>
+<h3 id="Compare-time-series-growth-rates">Compare time series growth rates<a class="anchor-link" href="#Compare-time-series-growth-rates"> </a></h3><ul>
+<li>Compare the performance of several asset classes</li>
+<li>Comparing stock prices with a benchmark</li>
+<li>Plot performance difference vs benchmark index</li>
+</ul>
+<h3 id="Changing-the-time-series-frequency:resampling--Convert-monthly-to-weekly-data">Changing the time series frequency:resampling- Convert monthly to weekly data<a class="anchor-link" href="#Changing-the-time-series-frequency:resampling--Convert-monthly-to-weekly-data"> </a></h3><ul>
+<li>Create weekly from monthly unemployment data</li>
+</ul>
+<h3 id="Upsampling-&amp;-interpolation-with-.resample()">Upsampling &amp; interpolation with .resample()<a class="anchor-link" href="#Upsampling-&amp;-interpolation-with-.resample()"> </a></h3><ul>
+<li>Use interpolation to create weekly employment data</li>
+<li>Interpolate debt/GDP and compare to unemployment</li>
+</ul>
+<h3 id="Downsampling-&amp;-aggregation">Downsampling &amp; aggregation<a class="anchor-link" href="#Downsampling-&amp;-aggregation"> </a></h3><ul>
+<li>Compare weekly, monthly and annual ozone trends for NYC &amp; LA</li>
+<li>Compare monthly average stock prices for Facebook and Google</li>
+<li>Compare quarterly GDP growth rate and stock returns</li>
+<li>Visualize monthly mean, median and standard deviation of S&amp;P500 returns</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Window-Functions:-Rolling-&amp;-Expanding-Metrics">Window Functions: Rolling &amp; Expanding Metrics<a class="anchor-link" href="#Window-Functions:-Rolling-&amp;-Expanding-Metrics"> </a></h2><blockquote><p>This chapter will show you how to use window function to calculate time series metrics for both rolling and expanding windows.</p>
+</blockquote>
+<h3 id="Rolling-window-functions-with-pandas">Rolling window functions with pandas<a class="anchor-link" href="#Rolling-window-functions-with-pandas"> </a></h3><ul>
+<li>Rolling average air quality since 2010 for new york city</li>
+<li>Rolling 360-day median &amp; std. deviation for nyc ozone data since 2000</li>
+<li>Rolling quantiles for daily air quality in nyc</li>
+</ul>
+<h3 id="Expanding-window-functions-with-pandas">Expanding window functions with pandas<a class="anchor-link" href="#Expanding-window-functions-with-pandas"> </a></h3><ul>
+<li>Cumulative sum vs .diff()</li>
+<li>Cumulative return on $1,000 invested in google vs apple I</li>
+<li>Cumulative return on $1,000 invested in google vs apple II</li>
+</ul>
+<h3 id="Case-study:S&amp;P500-price-simulation--Random-walk-I">Case study:S&amp;P500 price simulation- Random walk I<a class="anchor-link" href="#Case-study:S&amp;P500-price-simulation--Random-walk-I"> </a></h3><ul>
+<li>Random walk II</li>
+<li>Random walk III</li>
+</ul>
+<h3 id="Relationships-between-time-series:-correlation">Relationships between time series: correlation<a class="anchor-link" href="#Relationships-between-time-series:-correlation"> </a></h3><ul>
+<li>Annual return correlations among several stocks</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Putting-it-all-together:-Building-a-value-weighted-index">Putting it all together: Building a value-weighted index<a class="anchor-link" href="#Putting-it-all-together:-Building-a-value-weighted-index"> </a></h2><blockquote><p>This chapter combines the previous concepts by teaching you how to create a value-weighted index. This index uses market-cap data contained in the stock exchange listings to calculate weights and 2016 stock price information. Index performance is then compared against benchmarks to evaluate the performance of the index you created.</p>
+</blockquote>
+<h3 id="Select-index-components-&amp;-import-data">Select index components &amp; import data<a class="anchor-link" href="#Select-index-components-&amp;-import-data"> </a></h3><ul>
+<li>Explore and clean company listing information</li>
+<li>Select and inspect index components</li>
+<li>Import index component price information</li>
+</ul>
+<h3 id="Build-a-market-cap-weighted-index">Build a market-cap weighted index<a class="anchor-link" href="#Build-a-market-cap-weighted-index"> </a></h3><ul>
+<li>Calculate number of shares outstanding</li>
+<li>Create time series of market value</li>
+<li>Calculate &amp; plot the composite index</li>
+</ul>
+<h3 id="Evaluate-index-performance">Evaluate index performance<a class="anchor-link" href="#Evaluate-index-performance"> </a></h3><ul>
+<li>Calculate the contribution of each stock to the index</li>
+<li>Compare index performance against benchmark I</li>
+<li>Compare index performance against benchmark II</li>
+</ul>
+<h3 id="Index-correlation-&amp;-exporting-to-Excel">Index correlation &amp; exporting to Excel<a class="anchor-link" href="#Index-correlation-&amp;-exporting-to-Excel"> </a></h3><ul>
+<li>Visualize your index constituent correlations</li>
+<li>Save your analysis to multiple excel worksheets</li>
+<li>Congratulations!</li>
+</ul>
+
+</div>
+</div>
+</div>
+</div>
+
+
+
+      </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="anhhaibkhn/Data-Science-selfstudy-notes-Blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/Data-Science-selfstudy-notes-Blog/python/data%20visualization/eda/time%20series/machine%20learning/boxplots/histograms/density%20plots/correlation/clustered%20heatmaps/2022/08/25/Visualizing-Time-Series-Data-in-Python.html" hidden></a>
+    </article><footer class="site-footer h-card">
+  <data class="u-url" href="/Data-Science-selfstudy-notes-Blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="https://feedrabbit.com/?url=https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+
+        <p>
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <a class="github-button" href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog" data-color-scheme="no-preference: light; light: light; dark: light;" data-icon="octicon-star" data-size="large" aria-label="Star anhhaibkhn/Data-Science-selfstudy-notes-Blog on GitHub">Star to Support</a>
+        </p>
+        <p>A collection of jupyter notebooks and datasets for practicing Data Science skills.</p>
+      </div>
+          
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/anhhaibkhn" target="_blank" title="anhhaibkhn"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://www.linkedin.com/in/nguyen-hai-b1ab8042" target="_blank" title="nguyen-hai-b1ab8042"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#linkedin"></use></svg></a></li><li><a rel="me" href="https://twitter.com/NguyenNgocHai2" target="_blank" title="NguyenNgocHai2"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</div>
+
+
+</div>
+
+    </main>
+
+  </body>
+
+</html>
