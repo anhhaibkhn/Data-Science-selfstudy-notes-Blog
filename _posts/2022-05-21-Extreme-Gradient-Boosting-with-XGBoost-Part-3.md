@@ -348,6 +348,7 @@ layout: notebook
 <span class="c1"># run 4 fold cross validation on untuned model params</span>
 <span class="n">untuned_cv_results_rmse</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">dtrain</span><span class="o">=</span><span class="n">housing_dmatrix</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">untuned_params</span><span class="p">,</span><span class="n">nfold</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;rmse&quot;</span><span class="p">,</span> <span class="n">as_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
 
+<span class="n">untuned_rmse</span> <span class="o">=</span> <span class="n">untuned_cv_results_rmse</span><span class="p">[</span><span class="s2">&quot;test-rmse-mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Untuned model RMSE:&quot;</span><span class="p">,</span> <span class="n">untuned_cv_results_rmse</span><span class="p">[</span><span class="s2">&quot;test-rmse-mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 
@@ -360,10 +361,49 @@ layout: notebook
 
 <div class="output_area">
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Untuned model RMSE: 9    34624.230446
-Name: test-rmse-mean, dtype: float64
-</pre>
+<div class="output_subarea output_text output_error">
+<pre>
+<span class="ansi-red-intense-fg ansi-bold">---------------------------------------------------------------------------</span>
+<span class="ansi-red-intense-fg ansi-bold">ValueError</span>                                Traceback (most recent call last)
+File <span class="ansi-green-intense-fg ansi-bold">c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\pandas\core\indexes\range.py:385</span>, in <span class="ansi-cyan-fg">RangeIndex.get_loc</span><span class="ansi-blue-intense-fg ansi-bold">(self, key, method, tolerance)</span>
+<span class="ansi-green-fg">    384</span> try:
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 385</span>     return self._range.index(new_key)
+<span class="ansi-green-fg">    386</span> except ValueError as err:
+
+<span class="ansi-red-intense-fg ansi-bold">ValueError</span>: -1 is not in range
+
+The above exception was the direct cause of the following exception:
+
+<span class="ansi-red-intense-fg ansi-bold">KeyError</span>                                  Traceback (most recent call last)
+<span class="ansi-green-intense-fg ansi-bold">c:\Users\nguyenngochai\Self_study\Data-Science-selfstudy-notes-Blog\_notebooks\Extreme Gradient Boosting with XGBoost\2022-05-21-Extreme Gradient Boosting with XGBoost-Part 3.ipynb Cell 5</span> in <span class="ansi-cyan-fg">&lt;cell line: 16&gt;</span><span class="ansi-blue-intense-fg ansi-bold">()</span>
+<span class="ansi-green-fg">     &lt;a href=&#39;vscode-notebook-cell:/c%3A/Users/nguyenngochai/Self_study/Data-Science-selfstudy-notes-Blog/_notebooks/Extreme%20Gradient%20Boosting%20with%20XGBoost/2022-05-21-Extreme%20Gradient%20Boosting%20with%20XGBoost-Part%203.ipynb#W4sZmlsZQ%3D%3D?line=12&#39;&gt;13&lt;/a&gt;</span> # run 4 fold cross validation on untuned model params
+<span class="ansi-green-fg">     &lt;a href=&#39;vscode-notebook-cell:/c%3A/Users/nguyenngochai/Self_study/Data-Science-selfstudy-notes-Blog/_notebooks/Extreme%20Gradient%20Boosting%20with%20XGBoost/2022-05-21-Extreme%20Gradient%20Boosting%20with%20XGBoost-Part%203.ipynb#W4sZmlsZQ%3D%3D?line=13&#39;&gt;14&lt;/a&gt;</span> untuned_cv_results_rmse = xgb.cv(dtrain=housing_dmatrix, params=untuned_params,nfold=4,metrics=&#34;rmse&#34;, as_pandas=True, seed=123)
+<span class="ansi-green-intense-fg ansi-bold">---&gt; &lt;a href=&#39;vscode-notebook-cell:/c%3A/Users/nguyenngochai/Self_study/Data-Science-selfstudy-notes-Blog/_notebooks/Extreme%20Gradient%20Boosting%20with%20XGBoost/2022-05-21-Extreme%20Gradient%20Boosting%20with%20XGBoost-Part%203.ipynb#W4sZmlsZQ%3D%3D?line=15&#39;&gt;16&lt;/a&gt;</span> untuned_rmse = untuned_cv_results_rmse[&#34;test-rmse-mean&#34;].tail(1)[-1]
+<span class="ansi-green-fg">     &lt;a href=&#39;vscode-notebook-cell:/c%3A/Users/nguyenngochai/Self_study/Data-Science-selfstudy-notes-Blog/_notebooks/Extreme%20Gradient%20Boosting%20with%20XGBoost/2022-05-21-Extreme%20Gradient%20Boosting%20with%20XGBoost-Part%203.ipynb#W4sZmlsZQ%3D%3D?line=16&#39;&gt;17&lt;/a&gt;</span> print(&#34;Untuned model RMSE:&#34;, untuned_cv_results_rmse[&#34;test-rmse-mean&#34;].tail(1))
+
+File <span class="ansi-green-intense-fg ansi-bold">c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\pandas\core\series.py:958</span>, in <span class="ansi-cyan-fg">Series.__getitem__</span><span class="ansi-blue-intense-fg ansi-bold">(self, key)</span>
+<span class="ansi-green-fg">    955</span>     return self._values[key]
+<span class="ansi-green-fg">    957</span> elif key_is_scalar:
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 958</span>     return self._get_value(key)
+<span class="ansi-green-fg">    960</span> if is_hashable(key):
+<span class="ansi-green-fg">    961</span>     # Otherwise index.get_value will raise InvalidIndexError
+<span class="ansi-green-fg">    962</span>     try:
+<span class="ansi-green-fg">    963</span>         # For labels that don&#39;t resolve as scalars like tuples and frozensets
+
+File <span class="ansi-green-intense-fg ansi-bold">c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\pandas\core\series.py:1069</span>, in <span class="ansi-cyan-fg">Series._get_value</span><span class="ansi-blue-intense-fg ansi-bold">(self, label, takeable)</span>
+<span class="ansi-green-fg">   1066</span>     return self._values[label]
+<span class="ansi-green-fg">   1068</span> # Similar to Index.get_value, but we do not fall back to positional
+<span class="ansi-green-intense-fg ansi-bold">-&gt; 1069</span> loc = self.index.get_loc(label)
+<span class="ansi-green-fg">   1070</span> return self.index._get_values_for_loc(self, loc, label)
+
+File <span class="ansi-green-intense-fg ansi-bold">c:\Users\nguyenngochai\.conda\envs\my_conda_env\lib\site-packages\pandas\core\indexes\range.py:387</span>, in <span class="ansi-cyan-fg">RangeIndex.get_loc</span><span class="ansi-blue-intense-fg ansi-bold">(self, key, method, tolerance)</span>
+<span class="ansi-green-fg">    385</span>         return self._range.index(new_key)
+<span class="ansi-green-fg">    386</span>     except ValueError as err:
+<span class="ansi-green-intense-fg ansi-bold">--&gt; 387</span>         raise KeyError(key) from err
+<span class="ansi-green-fg">    388</span> self._check_indexing_error(key)
+<span class="ansi-green-fg">    389</span> raise KeyError(key)
+
+<span class="ansi-red-intense-fg ansi-bold">KeyError</span>: -1</pre>
 </div>
 </div>
 
@@ -387,6 +427,7 @@ Name: test-rmse-mean, dtype: float64
 
 <span class="n">tuned_cv_results_rmse</span> <span class="o">=</span> <span class="n">xgb</span><span class="o">.</span><span class="n">cv</span><span class="p">(</span><span class="n">dtrain</span><span class="o">=</span><span class="n">housing_dmatrix</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">tuned_params</span><span class="p">,</span><span class="n">nfold</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">num_boost_round</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">metrics</span><span class="o">=</span><span class="s2">&quot;rmse&quot;</span><span class="p">,</span> <span class="n">as_pandas</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">123</span><span class="p">)</span>
 
+<span class="n">tuned_rmse</span> <span class="o">=</span> <span class="n">tuned_cv_results_rmse</span><span class="p">[</span><span class="s2">&quot;test-rmse-mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Tuned model RMSE:&quot;</span><span class="p">,</span> <span class="n">tuned_cv_results_rmse</span><span class="p">[</span><span class="s2">&quot;test-rmse-mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tail</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
  
 </pre></div>
@@ -401,7 +442,7 @@ Name: test-rmse-mean, dtype: float64
 <div class="output_area">
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Tuned model RMSE: 199    29965.413086
+<pre>Tuned model RMSE: 199    29965.411196
 Name: test-rmse-mean, dtype: float64
 </pre>
 </div>
@@ -413,6 +454,48 @@ Name: test-rmse-mean, dtype: float64
 </div>
     {% endraw %}
 
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">untuned_rmse</span> <span class="o">-</span> <span class="n">tuned_rmse</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>9     NaN
+199   NaN
+Name: test-rmse-mean, dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>That is almost 1400</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Tuning-the-number-of-boosting-rounds">Tuning the number of boosting rounds<a class="anchor-link" href="#Tuning-the-number-of-boosting-rounds"> </a></h3><p>Let's start with parameter tuning by seeing how the number of boosting rounds (number of trees you build) impacts the out-of-sample performance of your XGBoost model. You'll use <strong>xgb.cv()</strong> inside a for loop and build one model per num_boost_round parameter.</p>
