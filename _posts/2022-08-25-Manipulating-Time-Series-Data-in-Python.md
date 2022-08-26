@@ -39,7 +39,7 @@ layout: notebook
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span> 
-<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">250</span>
+<span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">125</span>
 
 <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.expand_frame_repr&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
@@ -554,23 +554,88 @@ None
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Basic-Time-Series-Metrics-&amp;-Resampling">Basic Time Series Metrics &amp; Resampling<a class="anchor-link" href="#Basic-Time-Series-Metrics-&amp;-Resampling"> </a></h2><blockquote><p>This chapter dives deeper into the essential time series functionality made available through the pandas DataTimeIndex. It introduces resampling and how to compare different time series by normalizing their start points.</p>
 </blockquote>
-<h3 id="Compare-time-series-growth-rates">Compare time series growth rates<a class="anchor-link" href="#Compare-time-series-growth-rates"> </a></h3><ul>
-<li>Compare the performance of several asset classes</li>
-<li>Comparing stock prices with a benchmark</li>
-<li>Plot performance difference vs benchmark index</li>
-</ul>
-<h3 id="Changing-the-time-series-frequency:resampling--Convert-monthly-to-weekly-data">Changing the time series frequency:resampling- Convert monthly to weekly data<a class="anchor-link" href="#Changing-the-time-series-frequency:resampling--Convert-monthly-to-weekly-data"> </a></h3><ul>
-<li>Create weekly from monthly unemployment data</li>
-</ul>
-<h3 id="Upsampling-&amp;-interpolation-with-.resample()">Upsampling &amp; interpolation with .resample()<a class="anchor-link" href="#Upsampling-&amp;-interpolation-with-.resample()"> </a></h3><ul>
-<li>Use interpolation to create weekly employment data</li>
-<li>Interpolate debt/GDP and compare to unemployment</li>
-<li>### Downsampling &amp; aggregation</li>
-<li>Compare weekly, monthly and annual ozone trends for NYC &amp; LA</li>
-<li>Compare monthly average stock prices for Facebook and Google</li>
-<li>Compare quarterly GDP growth rate and stock returns</li>
-<li>Visualize monthly mean, median and standard deviation of S&amp;P500 returns</li>
-</ul>
+<h3 id="Compare-time-series-growth-rates">Compare time series growth rates<a class="anchor-link" href="#Compare-time-series-growth-rates"> </a></h3><blockquote><p><strong>Compare the performance of several asset classes</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Comparing stock prices with a benchmark</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Plot performance difference vs benchmark index</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Changing-the-time-series-frequency:-resampling">Changing the time series frequency: resampling<a class="anchor-link" href="#Changing-the-time-series-frequency:-resampling"> </a></h3><blockquote><p><strong>Convert monthly to weekly data</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Create weekly from monthly unemployment data</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Upsampling-&amp;-interpolation-with-.resample()">Upsampling &amp; interpolation with .resample()<a class="anchor-link" href="#Upsampling-&amp;-interpolation-with-.resample()"> </a></h3><blockquote><p><strong>Use interpolation to create weekly employment data</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Interpolate debt/GDP and compare to unemployment</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Downsampling-&amp;-aggregation">Downsampling &amp; aggregation<a class="anchor-link" href="#Downsampling-&amp;-aggregation"> </a></h3><blockquote><p><strong>Compare weekly, monthly and annual ozone trends for NYC &amp; LA</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Compare monthly average stock prices for Facebook and Google</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Compare quarterly GDP growth rate and stock returns</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Visualize monthly mean, median and standard deviation of S&amp;P500 returns</strong></p>
+</blockquote>
 
 </div>
 </div>
