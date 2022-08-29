@@ -37,6 +37,16 @@
   gtag('config', 'UA-238805937-1');
 </script>
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGW0FX8XM4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DGW0FX8XM4');
+</script>
+
 
 <link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://unpkg.com/@primer/css@17.3.0/dist/primer.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
@@ -142,7 +152,7 @@ window.onload = wrap_img;
 <ol>
 <li class="toc-entry toc-h3"><a href="#Rolling-window-functions-with-pandas">Rolling window functions with pandas </a></li>
 <li class="toc-entry toc-h3"><a href="#Expanding-window-functions-with-pandas">Expanding window functions with pandas </a></li>
-<li class="toc-entry toc-h3"><a href="#Case-study:S&P500-price-simulation--Random-walk-I">Case study:S&amp;P500 price simulation- Random walk I </a></li>
+<li class="toc-entry toc-h3"><a href="#Case-study:-S&P500-price-simulation">Case study: S&amp;P500 price simulation </a></li>
 <li class="toc-entry toc-h3"><a href="#Relationships-between-time-series:-correlation">Relationships between time series: correlation </a></li>
 </ol>
 </li>
@@ -3888,23 +3898,80 @@ None
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Window-Functions:-Rolling-&amp;-Expanding-Metrics">Window Functions: Rolling &amp; Expanding Metrics<a class="anchor-link" href="#Window-Functions:-Rolling-&amp;-Expanding-Metrics"> </a></h2><blockquote><p>This chapter will show you how to use window function to calculate time series metrics for both rolling and expanding windows.</p>
 </blockquote>
-<h3 id="Rolling-window-functions-with-pandas">Rolling window functions with pandas<a class="anchor-link" href="#Rolling-window-functions-with-pandas"> </a></h3><ul>
-<li>Rolling average air quality since 2010 for new york city</li>
-<li>Rolling 360-day median &amp; std. deviation for nyc ozone data since 2000</li>
-<li>Rolling quantiles for daily air quality in nyc</li>
-</ul>
-<h3 id="Expanding-window-functions-with-pandas">Expanding window functions with pandas<a class="anchor-link" href="#Expanding-window-functions-with-pandas"> </a></h3><ul>
-<li>Cumulative sum vs .diff()</li>
-<li>Cumulative return on $1,000 invested in google vs apple I</li>
-<li>Cumulative return on $1,000 invested in google vs apple II</li>
-</ul>
-<h3 id="Case-study:S&amp;P500-price-simulation--Random-walk-I">Case study:S&amp;P500 price simulation- Random walk I<a class="anchor-link" href="#Case-study:S&amp;P500-price-simulation--Random-walk-I"> </a></h3><ul>
-<li>Random walk II</li>
-<li>Random walk III</li>
-</ul>
-<h3 id="Relationships-between-time-series:-correlation">Relationships between time series: correlation<a class="anchor-link" href="#Relationships-between-time-series:-correlation"> </a></h3><ul>
-<li>Annual return correlations among several stocks</li>
-</ul>
+<h3 id="Rolling-window-functions-with-pandas">Rolling window functions with pandas<a class="anchor-link" href="#Rolling-window-functions-with-pandas"> </a></h3><blockquote><p><strong>Rolling average air quality since 2010 for new york city</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Rolling 360-day median &amp; std. deviation for nyc ozone data since 2000</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Rolling quantiles for daily air quality in nyc</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Expanding-window-functions-with-pandas">Expanding window functions with pandas<a class="anchor-link" href="#Expanding-window-functions-with-pandas"> </a></h3><blockquote><p><strong>Cumulative sum vs .diff()</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Cumulative return on $1,000 invested in google vs apple I</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Cumulative return on $1,000 invested in google vs apple II</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Case-study:-S&amp;P500-price-simulation">Case study: S&amp;P500 price simulation<a class="anchor-link" href="#Case-study:-S&amp;P500-price-simulation"> </a></h3><blockquote><p><strong>Random walk I</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Random walk II</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Random walk III</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Relationships-between-time-series:-correlation">Relationships between time series: correlation<a class="anchor-link" href="#Relationships-between-time-series:-correlation"> </a></h3><blockquote><p><strong>Annual return correlations among several stocks</strong></p>
+</blockquote>
 
 </div>
 </div>
