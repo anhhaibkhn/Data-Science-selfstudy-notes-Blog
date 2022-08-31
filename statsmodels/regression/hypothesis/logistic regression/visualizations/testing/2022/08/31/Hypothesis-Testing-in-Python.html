@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>Hypothesis Testing in Python | Self-study Data Science Projects Notes</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="Hypothesis Testing in Python" />
+<meta name="author" content="Datacamp" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Hypothesis testing lets you answer questions about your datasets in a statistically rigorous way. Updating …" />
+<meta property="og:description" content="Hypothesis testing lets you answer questions about your datasets in a statistically rigorous way. Updating …" />
+<link rel="canonical" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/statsmodels/regression/hypothesis/logistic%20regression/visualizations/testing/2022/08/31/Hypothesis-Testing-in-Python.html" />
+<meta property="og:url" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/statsmodels/regression/hypothesis/logistic%20regression/visualizations/testing/2022/08/31/Hypothesis-Testing-in-Python.html" />
+<meta property="og:site_name" content="Self-study Data Science Projects Notes" />
+<meta property="og:image" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/python_sampling.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-08-31T00:00:00-05:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/python_sampling.png" />
+<meta property="twitter:title" content="Hypothesis Testing in Python" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Datacamp"},"dateModified":"2022-08-31T00:00:00-05:00","datePublished":"2022-08-31T00:00:00-05:00","description":"Hypothesis testing lets you answer questions about your datasets in a statistically rigorous way. Updating …","headline":"Hypothesis Testing in Python","image":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/python_sampling.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/statsmodels/regression/hypothesis/logistic%20regression/visualizations/testing/2022/08/31/Hypothesis-Testing-in-Python.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/statsmodels/regression/hypothesis/logistic%20regression/visualizations/testing/2022/08/31/Hypothesis-Testing-in-Python.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects Notes" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-238805937-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-238805937-1');
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGW0FX8XM4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DGW0FX8XM4');
+</script>
+
+
+<link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://unpkg.com/@primer/css@17.3.0/dist/primer.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+
+    var i = 0, j = 0, k = 0;
+
+    document.querySelectorAll('h2, h3, h4').forEach((heading) => {
+
+        if (heading.localName == 'h2') {
+            i++; j = 0; k = 0;
+            heading.setAttribute('data-before', `${i}. `)
+        }
+        if (heading.localName == 'h3') {
+            j++; k = 0;
+            heading.setAttribute('data-before', `${i}.${j}. `)
+        }
+        if (heading.localName == 'h4') {
+            k++;
+            heading.setAttribute('data-before', `${i}.${j}.${k}. `)
+        }
+    });
+});
+</script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" integrity="sha512-J8je2SgrCzA7hNBeiCJiA6oETHTTdp3We3EriOgJp6POycGLcDXj5dSwWlAPQcYGeaQ4N3uf30aOg/Nt5pxW2g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" integrity="sha512-1kNZVA50gKlorLAWU83+SdOAUwABzfFFQ4WuOAZTeS/UhNhnm9zU7rDv/Q5NEzSnr5u2L6uhR/+8icjjmHjSnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" integrity="sha512-CzIEOUs11SQ7tekLhEe5gil9kDip4RTJZVf7pSjlxOdVaYYHEcQflhunPz2Q/onNC4slL9jpKjvNgzPAAxEpew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        globalGroup: true,
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+
+</head>
+<body>
+
+    <main class="page-content" aria-label="Content" style="padding-top: 0;">
+        <div class="Layout">
+    
+      <div class="Layout-sidebar">
+        <div id="toc" class="pt-3 pl-3 sticky">
+          <b><a href="#">Hypothesis Testing in Python</a></b>
+          <ol id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Yum,-That-Dish-Tests-Good">Yum, That Dish Tests Good </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#To-the-lab-for-testing">To the lab for testing </a></li>
+<li class="toc-entry toc-h3"><a href="#A-tail-of-two-z's">A tail of two z&#39;s </a></li>
+<li class="toc-entry toc-h3"><a href="#Statistically-significant-other">Statistically significant other </a></li>
+</ol>
+</li>
+<li class="toc-entry toc-h2"><a href="#Pass-Me-ANOVA-Glass-of-Iced-t">Pass Me ANOVA Glass of Iced t </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#Is-this-some-kind-of-test-statistic?">Is this some kind of test statistic? </a></li>
+<li class="toc-entry toc-h3"><a href="#Time-for-t">Time for t </a></li>
+<li class="toc-entry toc-h3"><a href="#Pairing-is-caring">Pairing is caring </a></li>
+<li class="toc-entry toc-h3"><a href="#P-hacked-to-pieces">P-hacked to pieces </a></li>
+</ol>
+</li>
+<li class="toc-entry toc-h2"><a href="#Letting-the-Categoricals-Out-of-the-Bag">Letting the Categoricals Out of the Bag </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#Difference-strokes-for-proportions,-folks">Difference strokes for proportions, folks </a></li>
+<li class="toc-entry toc-h3"><a href="#A-sense-of-proportion">A sense of proportion </a></li>
+<li class="toc-entry toc-h3"><a href="#Declaration-of-independence">Declaration of independence </a></li>
+<li class="toc-entry toc-h3"><a href="#Does-this-dress-make-my-fit-look-good?">Does this dress make my fit look good? </a></li>
+</ol>
+</li>
+<li class="toc-entry toc-h2"><a href="#Time-to-Define-the-Relationship">Time to Define the Relationship </a>
+<ol>
+<li class="toc-entry toc-h3"><a href="#What-do-you-assume?">What do you assume? </a></li>
+<li class="toc-entry toc-h3"><a href="#Assumptions-not-met">Assumptions not met </a></li>
+<li class="toc-entry toc-h3"><a href="#Look-ma!-Still-no-parameters!">Look ma! Still no parameters! </a></li>
+<li class="toc-entry toc-h3"><a href="#Congratulations!">Congratulations! </a></li>
+</ol>
+</li>
+</ol>
+        </div>
+      </div>
+    <div class="Layout-main"><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/Data-Science-selfstudy-notes-Blog/">Self-study Data Science Projects Notes</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/about/">About Me</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/search/">Search</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+      
+        
+          <div class="pb-5 d-flex flex-wrap flex-justify-start" style="padding-left: 52px">
+            <div class="px-2">
+
+    <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/Hypothesis Testing in Python/2022-08-31-Hypothesis Testing in Python.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+            <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/anhhaibkhn/Data-Science-selfstudy-notes-Blog/master?filepath=_notebooks%2FHypothesis+Testing+in+Python%2F2022-08-31-Hypothesis+Testing+in+Python.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+            <div class="px-2">
+    <a href="https://colab.research.google.com/github/anhhaibkhn/Data-Science-selfstudy-notes-Blog/blob/master/_notebooks/Hypothesis Testing in Python/2022-08-31-Hypothesis Testing in Python.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+            <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fanhhaibkhn%2FData-Science-selfstudy-notes-Blog%2Fblob%2Fmaster%2F_notebooks%2FHypothesis+Testing+in+Python%2F2022-08-31-Hypothesis+Testing+in+Python.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+          </div>
+        <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">Hypothesis Testing in Python</h1><p class="page-description">Hypothesis testing lets you answer questions about your datasets in a statistically rigorous way. Updating ...</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-08-31T00:00:00-05:00" itemprop="datePublished">
+            Aug 31, 2022
+          </time>• 
+              <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <span class="p-author h-card" itemprop="name">Datacamp</span></span>
+           • <span class="read-time" title="Estimated read time">
+    
+    
+      2 min read
+    
+</span></p>
+
+        
+          <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i>
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#statsmodels">statsmodels</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Regression">Regression</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Hypothesis">Hypothesis</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#logistic regression">logistic regression</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Visualizations">Visualizations</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Testing">Testing</a>
+            
+          
+          </p>
+        
+
+
+      </header>
+
+      <div class="post-content e-content" itemprop="articleBody">
+        <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/Hypothesis Testing in Python/2022-08-31-Hypothesis Testing in Python.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>Hypothesis testing lets you answer questions about your datasets in a statistically rigorous way. In this course, you'll grow your Python analytical skills as you learn how and when to use common tests like t-tests, proportion tests, and chi-square tests. Working with real-world data, including Stack Overflow user feedback, you'll gain a deep understanding of how these tests work, and the key assumptions that underpin them. You'll also discover how different tests are related using the “there is only one test" framework, before learning how to use non-parametric tests to go beyond the limitations of side-step the requirements of hypothesis tests.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.expand_frame_repr&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Yum,-That-Dish-Tests-Good">Yum, That Dish Tests Good<a class="anchor-link" href="#Yum,-That-Dish-Tests-Good"> </a></h2><blockquote><p>How does hypothesis testing work and what problems can it solve? To find out, you’ll walk through the workflow for a one sample proportion test. In doing so, you'll encounter important concepts like z-scores, p-values, and false negative and false positive errors.</p>
+</blockquote>
+<h3 id="To-the-lab-for-testing">To the lab for testing<a class="anchor-link" href="#To-the-lab-for-testing"> </a></h3><blockquote><p><strong>Uses of A/B testing</strong>
+<strong>Calculating the sample mean</strong>
+<strong>Calculating a z-score</strong></p>
+</blockquote>
+<h3 id="A-tail-of-two-z's">A tail of two z's<a class="anchor-link" href="#A-tail-of-two-z's"> </a></h3><blockquote><p><strong>Criminal trials and hypothesis tests</strong>
+<strong>Left tail, right tail, two tails</strong>
+<strong>Calculating p-values</strong></p>
+</blockquote>
+<h3 id="Statistically-significant-other">Statistically significant other<a class="anchor-link" href="#Statistically-significant-other"> </a></h3><blockquote><p><strong>Decisions from p-values</strong>
+<strong>Calculating a confidence interval</strong>
+<strong>Type I and type II errors</strong></p>
+</blockquote>
+<h2 id="Pass-Me-ANOVA-Glass-of-Iced-t">Pass Me ANOVA Glass of Iced t<a class="anchor-link" href="#Pass-Me-ANOVA-Glass-of-Iced-t"> </a></h2><blockquote><p>In this chapter, you’ll learn how to test for differences in means between two groups using t-tests and extend this to more than two groups using ANOVA and pairwise t-tests.</p>
+</blockquote>
+<h3 id="Is-this-some-kind-of-test-statistic?">Is this some kind of test statistic?<a class="anchor-link" href="#Is-this-some-kind-of-test-statistic?"> </a></h3><blockquote><p><strong>Hypothesis testing workflow</strong>
+<strong>Two sample mean test statistic</strong></p>
+</blockquote>
+<h3 id="Time-for-t">Time for t<a class="anchor-link" href="#Time-for-t"> </a></h3><blockquote><p><strong>Why is t needed?</strong>
+<strong>The t-distribution</strong>
+<strong>From t to p</strong></p>
+</blockquote>
+<h3 id="Pairing-is-caring">Pairing is caring<a class="anchor-link" href="#Pairing-is-caring"> </a></h3><blockquote><p><strong>Is pairing needed?</strong>
+<strong>Visualizing the difference</strong>
+<strong>Using ttest()</strong></p>
+</blockquote>
+<h3 id="P-hacked-to-pieces">P-hacked to pieces<a class="anchor-link" href="#P-hacked-to-pieces"> </a></h3><blockquote><p><strong>Visualizing many categories</strong>
+<strong>ANOVA</strong>
+<strong>Pairwise t-tests</strong></p>
+</blockquote>
+<h2 id="Letting-the-Categoricals-Out-of-the-Bag">Letting the Categoricals Out of the Bag<a class="anchor-link" href="#Letting-the-Categoricals-Out-of-the-Bag"> </a></h2><blockquote><p>Now it’s time to test for differences in proportions between two groups using proportion tests. Through hands-on exercises, you’ll extend your proportion tests to more than two groups with chi-square independence tests, and return to the one sample case with chi-square goodness of fit tests.</p>
+</blockquote>
+<h3 id="Difference-strokes-for-proportions,-folks">Difference strokes for proportions, folks<a class="anchor-link" href="#Difference-strokes-for-proportions,-folks"> </a></h3><blockquote><p><strong>t for proportions?</strong>
+<strong>Test for single proportions</strong></p>
+</blockquote>
+<h3 id="A-sense-of-proportion">A sense of proportion<a class="anchor-link" href="#A-sense-of-proportion"> </a></h3><blockquote><p><strong>Test for two proportions</strong>
+<strong>proportions_ztest() for two samples</strong></p>
+</blockquote>
+<h3 id="Declaration-of-independence">Declaration of independence<a class="anchor-link" href="#Declaration-of-independence"> </a></h3><blockquote><p><strong>The chi-square distribution</strong>
+<strong>How many tails for chi-square tests?</strong>
+<strong>Chi-square test of independence</strong></p>
+</blockquote>
+<h3 id="Does-this-dress-make-my-fit-look-good?">Does this dress make my fit look good?<a class="anchor-link" href="#Does-this-dress-make-my-fit-look-good?"> </a></h3><blockquote><p><strong>Visualizing goodness of fit</strong>
+<strong>Chi-square test of goodness of fit</strong></p>
+</blockquote>
+<h2 id="Time-to-Define-the-Relationship">Time to Define the Relationship<a class="anchor-link" href="#Time-to-Define-the-Relationship"> </a></h2><blockquote><p>Finally, it’s time to learn about the assumptions made by parametric hypothesis tests, and see how non-parametric tests can be used when those assumptions aren't met.</p>
+</blockquote>
+<h3 id="What-do-you-assume?">What do you assume?<a class="anchor-link" href="#What-do-you-assume?"> </a></h3><blockquote><p><strong>Common assumptions of hypothesis tests</strong>
+<strong>Testing sample size</strong></p>
+</blockquote>
+<h3 id="Assumptions-not-met">Assumptions not met<a class="anchor-link" href="#Assumptions-not-met"> </a></h3><blockquote><p><strong>Which parametric test?</strong>
+<strong>Wilcoxon signed-rank test</strong></p>
+</blockquote>
+<h3 id="Look-ma!-Still-no-parameters!">Look ma! Still no parameters!<a class="anchor-link" href="#Look-ma!-Still-no-parameters!"> </a></h3><blockquote><p><strong>Wilcoxon-Mann-Whitney</strong>
+<strong>Kruskal-Wallis</strong></p>
+</blockquote>
+<h3 id="Congratulations!">Congratulations!<a class="anchor-link" href="#Congratulations!"> </a></h3>
+</div>
+</div>
+</div>
+</div>
+
+
+
+      </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="anhhaibkhn/Data-Science-selfstudy-notes-Blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/Data-Science-selfstudy-notes-Blog/statsmodels/regression/hypothesis/logistic%20regression/visualizations/testing/2022/08/31/Hypothesis-Testing-in-Python.html" hidden></a>
+    </article><footer class="site-footer h-card">
+  <data class="u-url" href="/Data-Science-selfstudy-notes-Blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="https://feedrabbit.com/?url=https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+
+        <p>
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <a class="github-button" href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog" data-color-scheme="no-preference: light; light: light; dark: light;" data-icon="octicon-star" data-size="large" aria-label="Star anhhaibkhn/Data-Science-selfstudy-notes-Blog on GitHub">Star to Support</a>
+        </p>
+        <p>A collection of jupyter notebooks and datasets for practicing Data Science skills.</p>
+      </div>
+          
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/anhhaibkhn" target="_blank" title="anhhaibkhn"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://www.linkedin.com/in/nguyen-hai-b1ab8042" target="_blank" title="nguyen-hai-b1ab8042"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#linkedin"></use></svg></a></li><li><a rel="me" href="https://twitter.com/NguyenNgocHai2" target="_blank" title="NguyenNgocHai2"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</div>
+
+
+</div>
+
+    </main>
+
+  </body>
+
+</html>
