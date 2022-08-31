@@ -220,7 +220,7 @@ window.onload = wrap_img;
            • <span class="read-time" title="Estimated read time">
     
     
-      3 min read
+      9 min read
     
 </span></p>
 
@@ -298,7 +298,7 @@ window.onload = wrap_img;
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">8</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
 
 <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.expand_frame_repr&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
@@ -323,16 +323,728 @@ window.onload = wrap_img;
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-is-statistics?">What is statistics?<a class="anchor-link" href="#What-is-statistics?"> </a></h3><blockquote><p><strong>Descriptive and inferential statistics</strong>
-<strong>Data type classification</strong></p>
+<h3 id="What-is-statistics?">What is statistics?<a class="anchor-link" href="#What-is-statistics?"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Descriptive and inferential statistics</strong></p>
 </blockquote>
-<h3 id="Measures-of-center">Measures of center<a class="anchor-link" href="#Measures-of-center"> </a></h3><blockquote><p><strong>Mean and median</strong>
-<strong>Mean vs. median</strong></p>
+<p>Statistics can be used to answer lots of different types of questions, but being able to identify which type of statistics is needed is essential to drawing accurate conclusions. In this exercise, you'll sharpen your skills by identifying which type is needed to answer each question.</p>
+<p>Identify which questions can be answered with descriptive statistics and which questions can be answered with inferential statistics.</p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/infer_desc.png" alt="" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Data type classification</strong></p>
 </blockquote>
-<h3 id="Measures-of-spread">Measures of spread<a class="anchor-link" href="#Measures-of-spread"> </a></h3><blockquote><p><strong>Quartiles, quantiles, and quintiles</strong>
-<strong>Variance and standard deviation</strong>
-<strong>Finding outliers using IQR</strong></p>
+<p>In the video, you learned about two main types of data:numeric and categorical. Numeric variables can be classified as either discrete or continuous, and categorical variables can be classified as either nominal or ordinal. These characteristics of a variable determine which ways of summarizing your data will work best.
+Map each variable to its data type by dragging each item and dropping it into the correct data type.</p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/infer_desc2.png" alt="" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Measures-of-center">Measures of center<a class="anchor-link" href="#Measures-of-center"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Mean and median</strong></p>
 </blockquote>
+<p>In this chapter, you'll be working with the 2018 Food Carbon Footprint Index from nu3. The food_consumption dataset contains information about the kilograms of food consumed per person per year in each country in each food category (consumption) as well as information about the carbon footprint of that food category (co2_emissions) measured in kilograms of carbon dioxide, or CO2, per person per year in each country.</p>
+<p>In this exercise, you'll compute measures of center to compare food consumption in the US and Belgium using your pandas and numpy skills.</p>
+<p>pandas is imported as pd for you and food_consumption is pre-loaded.</p>
+<p>Instruction:<br /></p>
+<ul>
+<li>Import numpy with the alias np.</li>
+<li>Create two DataFrames: one that holds the rows of food_consumption for 'Belgium' and another that holds rows for 'USA'. Call these be_consumption and usa_consumption.</li>
+<li>Calculate the mean and median of kilograms of food consumed per person per year for both countries.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">food_consumption</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/food_consumption.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">food_consumption</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea ">
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>country</th>
+      <th>food_category</th>
+      <th>consumption</th>
+      <th>co2_emission</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Argentina</td>
+      <td>pork</td>
+      <td>10.51</td>
+      <td>37.20</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Argentina</td>
+      <td>poultry</td>
+      <td>38.66</td>
+      <td>41.53</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Argentina</td>
+      <td>beef</td>
+      <td>55.48</td>
+      <td>1712.00</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Argentina</td>
+      <td>lamb_goat</td>
+      <td>1.56</td>
+      <td>54.63</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Argentina</td>
+      <td>fish</td>
+      <td>4.36</td>
+      <td>6.96</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Filter for Belgium</span>
+<span class="n">be_consumption</span> <span class="o">=</span><span class="n">food_consumption</span><span class="p">[</span><span class="n">food_consumption</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Belgium&#39;</span><span class="p">]</span> 
+
+<span class="c1"># Filter for USA</span>
+<span class="n">usa_consumption</span> <span class="o">=</span> <span class="n">food_consumption</span><span class="p">[</span><span class="n">food_consumption</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;USA&#39;</span><span class="p">]</span> 
+
+<span class="c1"># Calculate mean and median consumption in Belgium</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">be_consumption</span><span class="p">[</span><span class="s1">&#39;consumption&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">be_consumption</span><span class="p">[</span><span class="s1">&#39;consumption&#39;</span><span class="p">]))</span>
+
+<span class="c1"># Calculate m)an and median consumption in USA</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">usa_consumption</span><span class="p">[</span><span class="s1">&#39;consumption&#39;</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">usa_consumption</span><span class="p">[</span><span class="s1">&#39;consumption&#39;</span><span class="p">]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>42.13272727272727
+12.59
+44.650000000000006
+14.58
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Subset food_consumption for rows with data about Belgium and the USA.</li>
+<li>Group the subsetted data by country and select only the consumption column.</li>
+<li>Calculate the mean and median of the kilograms of food consumed per person per year in each country using .agg().</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="c1"># Subset for Belgium and USA only</span>
+<span class="n">be_and_usa</span> <span class="o">=</span> <span class="n">food_consumption</span><span class="p">[(</span><span class="n">food_consumption</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;Belgium&#39;</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">food_consumption</span><span class="p">[</span><span class="s1">&#39;country&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;USA&#39;</span><span class="p">)]</span>
+
+<span class="c1"># Group by country, select consumption column, and compute mean and median</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">be_and_usa</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)[</span><span class="s1">&#39;consumption&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>              mean  median
+country                   
+Belgium  42.132727   12.59
+USA      44.650000   14.58
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>When you want to compare summary statistics between groups, it's much easier to use .groupby() and .agg() instead of subsetting and calling the same functions multiple times.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Mean vs. median</strong></p>
+</blockquote>
+<p>In the video, you learned that the mean is the sum of all the data points divided by the total number of data points, and the median is the middle value of the dataset where 50% of the data is less than the median, and 50% of the data is greater than the median. In this exercise, you'll compare these two measures of center.</p>
+<p>pandas is loaded as pd, numpy is loaded as np, and food_consumption is available.</p>
+<p>Instructions:<br /></p>
+<ul>
+<li>Import matplotlib.pyplot with the alias plt.</li>
+<li>Subset food_consumption to get the rows where food_category is 'rice'.</li>
+<li>Create a histogram of co2_emission for rice and show the plot.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Subset for food_category equals rice</span>
+<span class="n">rice_consumption</span> <span class="o">=</span> <span class="n">food_consumption</span><span class="p">[</span><span class="n">food_consumption</span><span class="p">[</span><span class="s1">&#39;food_category&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;rice&#39;</span><span class="p">]</span>
+
+<span class="c1"># Histogram of co2_emission for rice and show plot</span>
+<span class="n">rice_consumption</span><span class="o">.</span><span class="n">co2_emission</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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" />
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Use .agg() to calculate the mean and median of co2_emission for rice.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">rice_consumption</span> <span class="o">=</span> <span class="n">food_consumption</span><span class="p">[</span><span class="n">food_consumption</span><span class="p">[</span><span class="s1">&#39;food_category&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;rice&#39;</span><span class="p">]</span>
+
+<span class="c1"># Calculate mean and median of co2_emission with .agg()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">rice_consumption</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>        consumption  co2_emission
+mean      29.375154     37.591615
+median    11.875000     15.200000
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Given the skew of this data, what measure of central tendency best summarizes the kilograms of CO2 emissions per person per year for rice?</p>
+<blockquote><p>Answer:Median</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Measures-of-spread">Measures of spread<a class="anchor-link" href="#Measures-of-spread"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Quartiles, quantiles, and quintiles</strong></p>
+</blockquote>
+<p>Quantiles are a great way of summarizing numerical data since they can be used to measure center and spread, as well as to get a sense of where a data point stands in relation to the rest of the data set. For example, you might want to give a discount to the 10% most active users on a website.</p>
+<p>In this exercise, you'll calculate quartiles, quintiles, and deciles, which split up a dataset into 4, 5, and 10 pieces, respectively.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">food_consumption</span><span class="p">[</span><span class="s1">&#39;co2_emission&#39;</span><span class="p">],</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[   0.        5.21     16.53     62.5975 1712.    ]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">food_consumption</span><span class="p">[</span><span class="s1">&#39;co2_emission&#39;</span><span class="p">],</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[   0.       3.54    11.026   25.59    99.978 1712.   ]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">food_consumption</span><span class="p">[</span><span class="s1">&#39;co2_emission&#39;</span><span class="p">],</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[0.00000000e+00 9.05555556e-01 4.19111111e+00 8.05333333e+00
+ 1.32000000e+01 2.10944444e+01 3.58666667e+01 7.90622222e+01
+ 1.86115556e+02 1.71200000e+03]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Those are some high-quality quantiles! While calculating more quantiles gives you a more detailed look at the data, it also produces more numbers, making the summary more difficult to quickly understand.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Variance and standard deviation</strong></p>
+</blockquote>
+<p>Variance and standard deviation are two of the most common ways to measure the spread of a variable, and you'll practice calculating these in this exercise. Spread is important since it can help inform expectations. For example, if a salesperson sells a mean of 20 products a day, but has a standard deviation of 10 products, there will probably be days where they sell 40 products, but also days where they only sell one or two. Information like this is important, especially when making predictions.</p>
+<p>Both pandas as pd and numpy as np are loaded, and food_consumption is available.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">food_consumption</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;food_category&#39;</span><span class="p">)[</span><span class="s1">&#39;co2_emission&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">agg</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">]))</span>
+
+<span class="c1"># Import matplotlib.pyplot with alias plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="c1"># Create histogram of co2_emission for food_category &#39;beef&#39;</span>
+<span class="n">food_consumption</span><span class="p">[</span><span class="n">food_consumption</span><span class="p">[</span><span class="s1">&#39;food_category&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;beef&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
+<span class="c1"># Show plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+<span class="c1"># Create histogram of co2_emission for food_category &#39;eggs&#39;</span>
+<span class="n">food_consumption</span><span class="p">[</span><span class="n">food_consumption</span><span class="p">[</span><span class="s1">&#39;food_category&#39;</span><span class="p">]</span><span class="o">==</span><span class="s1">&#39;eggs&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">()</span>
+<span class="c1"># Show plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>                        var         std
+food_category                          
+beef           88748.408132  297.906710
+dairy          17671.891985  132.935669
+eggs              21.371819    4.622966
+fish             921.637349   30.358481
+lamb_goat      16475.518363  128.356996
+nuts              35.639652    5.969895
+pork            3094.963537   55.632396
+poultry          245.026801   15.653332
+rice            2281.376243   47.763754
+soybeans           0.879882    0.938020
+wheat             71.023937    8.427570
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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" />
+</div>
+
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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" />
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Beef has the largest amount of variation in its CO2 emissions, while eggs have a relatively small amount of variation.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Finding outliers using IQR</strong></p>
+</blockquote>
+<p>Outliers can have big effects on statistics like mean, as well as statistics that rely on the mean, such as variance and standard deviation. Interquartile range, or IQR, is another way of measuring spread that's less influenced by outliers. IQR is also often used to find outliers. If a value is less than $Q1−1.5×IQR$ or greater than $Q3+1.5×IQR$, it's considered an outlier. <br /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/images/iqr.png" alt="iqr" /></p>
+<p><br /></p>
+<p>In this exercise, you'll calculate IQR and use it to find some outliers.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">emissions_by_country</span> <span class="o">=</span> <span class="n">food_consumption</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)[</span><span class="s1">&#39;co2_emission&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">emissions_by_country</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>country
+Albania      1777.85
+Algeria       707.88
+Angola        412.99
+Argentina    2172.40
+Armenia      1109.93
+              ...   
+Uruguay      1634.91
+Venezuela    1104.10
+Vietnam       641.51
+Zambia        225.30
+Zimbabwe      350.33
+Name: co2_emission, Length: 130, dtype: float64
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">display</span><span class="p">(</span><span class="n">emissions_by_country</span><span class="o">.</span><span class="n">sort_values</span><span class="p">())</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea ">
+<pre>country
+Mozambique      141.40
+Rwanda          181.63
+Togo            188.09
+Liberia         203.38
+Malawi          207.94
+                ...   
+Iceland        1731.36
+New Zealand    1750.95
+Albania        1777.85
+Australia      1938.66
+Argentina      2172.40
+Name: co2_emission, Length: 130, dtype: float64</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">emissions_by_country</span> <span class="o">=</span> <span class="n">food_consumption</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">&#39;country&#39;</span><span class="p">)[</span><span class="s1">&#39;co2_emission&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="c1"># Compute the first and third quantiles and IQR of emissions_by_country</span>
+<span class="n">q1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">emissions_by_country</span><span class="p">,</span> <span class="mf">0.25</span><span class="p">)</span>
+<span class="n">q3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">quantile</span><span class="p">(</span><span class="n">emissions_by_country</span><span class="p">,</span> <span class="mf">0.75</span><span class="p">)</span>
+<span class="n">iqr</span> <span class="o">=</span> <span class="n">q3</span> <span class="o">-</span> <span class="n">q1</span>
+
+<span class="c1"># Calculate the lower and upper cutoffs for outliers</span>
+<span class="n">lower</span> <span class="o">=</span> <span class="n">q1</span> <span class="o">-</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">iqr</span>
+<span class="n">upper</span> <span class="o">=</span> <span class="n">q3</span> <span class="o">+</span> <span class="mf">1.5</span> <span class="o">*</span> <span class="n">iqr</span>
+
+<span class="c1"># Subset emissions_by_country to find outliers</span>
+<span class="n">outliers</span> <span class="o">=</span> <span class="n">emissions_by_country</span><span class="p">[(</span><span class="n">emissions_by_country</span> <span class="o">&gt;</span> <span class="n">upper</span><span class="p">)</span> <span class="o">|</span> <span class="p">(</span><span class="n">emissions_by_country</span> <span class="o">&lt;</span> <span class="n">lower</span><span class="p">)]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">outliers</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>country
+Argentina    2172.4
+Name: co2_emission, dtype: float64
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Outstanding outlier detection! It looks like Argentina has a substantially higher amount of CO2 emissions per person than other countries in the world.</p>
 
 </div>
 </div>
