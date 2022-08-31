@@ -144,13 +144,6 @@ layout: notebook
 </div>
 </div>
 </div>
-<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://github.com/odenipinedo/Python/blob/master/datacamp/machine%20learning%20for%20time%20series%20data%20in%20Python.ipynb">https://github.com/odenipinedo/Python/blob/master/datacamp/machine%20learning%20for%20time%20series%20data%20in%20Python.ipynb</a></p>
-
-</div>
-</div>
-</div>
 </div>
  
 
