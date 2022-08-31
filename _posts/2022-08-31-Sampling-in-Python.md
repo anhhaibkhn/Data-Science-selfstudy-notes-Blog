@@ -60,6 +60,67 @@ layout: notebook
 </div>
     {% endraw %}
 
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Bias-Any-Stretch-of-the-Imagination">Bias Any Stretch of the Imagination<a class="anchor-link" href="#Bias-Any-Stretch-of-the-Imagination"> </a></h2><blockquote><p>Learn what sampling is and why it is so powerful. You’ll also learn about the problems caused by convenience sampling and the differences between true randomness and pseudo-randomness.</p>
+</blockquote>
+<h3 id="Living-the-sample-life">Living the sample life<a class="anchor-link" href="#Living-the-sample-life"> </a></h3><blockquote><p><strong>Reasons for sampling</strong>
+<strong>Simple sampling with pandas</strong>
+<strong>Simple sampling and calculating with NumPy</strong></p>
+</blockquote>
+<h3 id="A-little-too-convenient">A little too convenient<a class="anchor-link" href="#A-little-too-convenient"> </a></h3><blockquote><p><strong>Are the findings from this sample generalizable?</strong>
+<strong>Are these findings generalizable?</strong></p>
+</blockquote>
+<h3 id="How-does-Sue-do-sampling?">How does Sue do sampling?<a class="anchor-link" href="#How-does-Sue-do-sampling?"> </a></h3><blockquote><p><strong>Generating random numbers</strong>
+<strong>Understanding random seeds</strong></p>
+</blockquote>
+<h2 id="Don't-get-theory-eyed">Don't get theory eyed<a class="anchor-link" href="#Don't-get-theory-eyed"> </a></h2><blockquote><p>It’s time to get hands-on and perform the four random sampling methods in Python:simple, systematic, stratified, and cluster.</p>
+</blockquote>
+<h3 id="Simple-is-as-simple-does">Simple is as simple does<a class="anchor-link" href="#Simple-is-as-simple-does"> </a></h3><blockquote><p><strong>Simple random sampling</strong>
+<strong>Systematic sampling</strong>
+<strong>Is systematic sampling OK?</strong></p>
+</blockquote>
+<h3 id="Can't-get-no-stratisfaction">Can't get no stratisfaction<a class="anchor-link" href="#Can't-get-no-stratisfaction"> </a></h3><blockquote><p><strong>Which sampling method?</strong>
+<strong>Proportional stratified sampling</strong>
+<strong>Equal counts stratified sampling</strong>
+<strong>Weighted sampling</strong></p>
+</blockquote>
+<h3 id="What-a-cluster...">What a cluster...<a class="anchor-link" href="#What-a-cluster..."> </a></h3><blockquote><p><strong>Benefits of clustering</strong>
+<strong>Cluster sampling</strong></p>
+</blockquote>
+<h3 id="Straight-to-the-point-(estimate)">Straight to the point (estimate)<a class="anchor-link" href="#Straight-to-the-point-(estimate)"> </a></h3><blockquote><p><strong>3 kinds of sampling</strong>
+<strong>Comparing point estimates</strong></p>
+</blockquote>
+<h2 id="The-n's-justify-the-means">The n's justify the means<a class="anchor-link" href="#The-n's-justify-the-means"> </a></h2><blockquote><p>Let’s test your sampling. In this chapter, you’ll discover how to quantify the accuracy of sample statistics using relative errors, and measure variation in your estimates by generating sampling distributions.</p>
+</blockquote>
+<h3 id="An-ample-sample">An ample sample<a class="anchor-link" href="#An-ample-sample"> </a></h3><blockquote><p><strong>Calculating relative errors</strong>
+<strong>Relative error vs. sample size</strong></p>
+<h3 id="Baby-back-dist-rib-ution">Baby back dist-rib-ution<a class="anchor-link" href="#Baby-back-dist-rib-ution"> </a></h3><p><strong>Replicating samples</strong>
+<strong>Replication parameters</strong></p>
+<h3 id="Be-our-guess,-put-our-samples-to-the-test">Be our guess, put our samples to the test<a class="anchor-link" href="#Be-our-guess,-put-our-samples-to-the-test"> </a></h3><p><strong>Exact sampling distribution</strong>
+<strong>Approximate sampling distribution</strong>
+<strong>Exact vs. approximate</strong></p>
+<h3 id="Err-on-the-side-of-Gaussian">Err on the side of Gaussian<a class="anchor-link" href="#Err-on-the-side-of-Gaussian"> </a></h3><p><strong>Population &amp; sampling distribution means</strong>
+<strong>Population &amp; sampling distribution variation</strong></p>
+</blockquote>
+<h2 id="Pull-Your-Data-Up-By-Its-Bootstraps">Pull Your Data Up By Its Bootstraps<a class="anchor-link" href="#Pull-Your-Data-Up-By-Its-Bootstraps"> </a></h2><blockquote><p>You’ll get to grips with resampling to perform bootstrapping and estimate variation in an unknown population. You’ll learn the difference between sampling distributions and bootstrap distributions using resampling.</p>
+</blockquote>
+<h3 id="This-bears-a-striking-resample-lance">This bears a striking resample-lance<a class="anchor-link" href="#This-bears-a-striking-resample-lance"> </a></h3><blockquote><p><strong>Principles of bootstrapping</strong>
+<strong>With or without replacement?</strong>
+<strong>Generating a bootstrap distribution</strong></p>
+</blockquote>
+<h3 id="A-breath-of-fresh-error">A breath of fresh error<a class="anchor-link" href="#A-breath-of-fresh-error"> </a></h3><blockquote><p><strong>Bootstrap statistics and population statistics</strong>
+<strong>Sampling distribution vs. bootstrap distribution</strong>
+<strong>Compare sampling and bootstrap means</strong>
+<strong>Compare sampling and bootstrap standard deviations</strong></p>
+</blockquote>
+<h3 id="Venus-infers">Venus infers<a class="anchor-link" href="#Venus-infers"> </a></h3><blockquote><p><strong>Confidence interval interpretation</strong>
+<strong>Calculating confidence intervals</strong></p>
+</blockquote>
+<h3 id="Congratulations">Congratulations<a class="anchor-link" href="#Congratulations"> </a></h3>
+</div>
+</div>
+</div>
 </div>
  
 
