@@ -1,6 +1,6 @@
 ---
 keywords: fastai
-description: Updating ...
+description: You'll learn the basics of manipulating time series data.
 title: Manipulating Time Series Data in Python
 toc: true
 branch: master
@@ -26,6 +26,15 @@ layout: notebook
 
 <div class="container" id="notebook-container">
         
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p>You'll learn the basics of manipulating time series data. Time series data are data that are indexed by a sequence of dates or times. You'll learn how to use methods built into Pandas to work with this index. You'll also learn how resample time series to change the frequency. This course will also show you how to calculate rolling and cumulative values for times series. Finally, you'll use all your new skills to build a value-weighted stock index from actual stock data.</p>
+</blockquote>
+<p><strong>PREREQUISITES</strong>:Data Manipulation with pandas</p>
+
+</div>
+</div>
+</div>
     {% raw %}
     
 <div class="cell border-box-sizing code_cell rendered">
@@ -402,6 +411,16 @@ memory usage: 197.4 KB
 <div class="text_cell_render border-box-sizing rendered_html">
 <blockquote><p><strong>Set and change time series frequency</strong></p>
 </blockquote>
+<p>In the video, you have seen how to assign a frequency to a <strong>DateTimeIndex</strong>, and then change this frequency. Now, you'll use data on the daily carbon monoxide concentration in NYC, LA and Chicago from 2005-17.</p>
+<p>You'll set the frequency to calendar daily and then resample to monthly frequency, and visualize both series to see how the different frequencies affect the data.</p>
+<p>Instructions:<br></p>
+<ul>
+<li>Inspect co using .info().</li>
+<li>Use .asfreq() to set the frequency to calendar daily.</li>
+<li>Show a plot of 'co' using subplots=True.</li>
+<li>Change the the frequency to monthly using the alias 'M'.</li>
+<li>Show another plot of co using subplots=True.</li>
+</ul>
 
 </div>
 </div>
@@ -490,6 +509,15 @@ None
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Lags,-changes,-and-returns-for-stock-price-series">Lags, changes, and returns for stock price series<a class="anchor-link" href="#Lags,-changes,-and-returns-for-stock-price-series"> </a></h3><blockquote><p><strong>Shifting stock prices across time</strong></p>
 </blockquote>
+<p>The first method to manipulate time series that you saw in the video was .shift(), which allows you shift all values in a Series or DataFrame by a number of periods to a different time along the DateTimeIndex.</p>
+<p>Let's use this to visually compare a stock price series for Google shifted 90 business days into both past and future.</p>
+<p>Instructions:<br></p>
+<ul>
+<li>Use pd.read_csv() to import 'google.csv', parsing the 'Date' as dates, setting the result as index and assigning to google.</li>
+<li>Use .asfreq() to set the frequency of google to business daily.</li>
+<li>Add new columns lagged and shifted to google that contain the Close shifted by 90 business days into past and future, respectively.</li>
+<li>Plot the three columns of google.</li>
+</ul>
 
 </div>
 </div>
@@ -1081,6 +1109,16 @@ None
 <div class="text_cell_render border-box-sizing rendered_html">
 <blockquote><p><strong>Plot performance difference vs benchmark index</strong></p>
 </blockquote>
+<p>In the video, you learned how to calculate and plot the performance difference of a stock in percentage points relative to a benchmark index.</p>
+<p>Let's compare the performance of Microsoft (MSFT) and Apple (AAPL) to the S&amp;P 500 over the last 10 years.</p>
+<p>Instructions:<br></p>
+<ul>
+<li>Create the list tickers containing the two stock symbols.</li>
+<li>Use pd.read_csv() to import 'msft_aapl.csv' and 'sp500.csv', creating a DatetimeIndex for each from the 'date' column using parse_dates and index_col, and assign the result to stocks and sp500, respectively.</li>
+<li>Use pd.concat() to concatenate stocks and sp500 along axis=1, apply .dropna() to drop all missing values, and assign the result to data.</li>
+<li>Normalize data by dividing by the first price, multiply by 100 and assign the output to normalized.</li>
+<li>Select tickers from normalized, and subtract normalized['SP500'] with keyword axis=0 to align the indexes, then plot the result.</li>
+</ul>
 
 </div>
 </div>
@@ -4674,10 +4712,22 @@ XOM   0.336413 -0.133965  0.367253  0.178833  1.000000
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Putting-it-all-together:-Building-a-value-weighted-index">Putting it all together: Building a value-weighted index<a class="anchor-link" href="#Putting-it-all-together:-Building-a-value-weighted-index"> </a></h2><blockquote><p>This chapter combines the previous concepts by teaching you how to create a value-weighted index. This index uses market-cap data contained in the stock exchange listings to calculate weights and 2016 stock price information. Index performance is then compared against benchmarks to evaluate the performance of the index you created.</p>
 </blockquote>
-<h3 id="Select-index-components-&amp;-import-data">Select index components &amp; import data<a class="anchor-link" href="#Select-index-components-&amp;-import-data"> </a></h3><blockquote><p><strong>Explore and clean company listing information</strong>
-<br> 
-To get started with the construction of a market-value based index, you'll work with the combined listing info for the three largest US stock exchanges, the NYSE, the NASDAQ and the AMEX.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Select-index-components-&amp;-import-data">Select index components &amp; import data<a class="anchor-link" href="#Select-index-components-&amp;-import-data"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Explore and clean company listing information</strong>
+<br></p>
 </blockquote>
+<p>To get started with the construction of a market-value based index, you'll work with the combined listing info for the three largest US stock exchanges, the NYSE, the NASDAQ and the AMEX.</p>
 <p>In this and the next exercise, you will calculate market-cap weights for these stocks.</p>
 <p>We have already imported pandas as pd, and loaded the listings data set with listings information from the NYSE, NASDAQ, and AMEX. The column 'Market Capitalization' is already measured in USD mn.</p>
 <p>Instructions:<br></p>

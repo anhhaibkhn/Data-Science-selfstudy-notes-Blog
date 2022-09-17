@@ -809,21 +809,727 @@ Name: co2_emission, dtype: float64
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-are-the-chances?">What are the chances?<a class="anchor-link" href="#What-are-the-chances?"> </a></h3><blockquote><p><strong>With or without replacement?</strong>
-<strong>Calculating probabilities</strong>
-<strong>Sampling deals</strong></p>
+<h3 id="What-are-the-chances?">What are the chances?<a class="anchor-link" href="#What-are-the-chances?"> </a></h3><ul>
+<li>Measuring chance</li>
+</ul>
+<p>What's the probability of an event?
+{% raw %}
+$$ P(\text{event}) = \frac{\text{\# ways event can happen}}{\text{total \# of possible outcomes}} $$
+{% endraw %}</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>With or without replacement?</strong></p>
 </blockquote>
-<h3 id="Discrete-distributions">Discrete distributions<a class="anchor-link" href="#Discrete-distributions"> </a></h3><blockquote><p><strong>Creating a probability distribution</strong>
-<strong>Identifying distributions</strong>
-<strong>Expected value vs. sample mean</strong></p>
+<p>For each scenario, decide whether it's sampling with replacement or sampling without replacement.</p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/with_without_replacement.png" alt=""></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Correctly identifying the type of sampling that needs to be used is key to calculating accurate probabilities. With replacement, everyone always has a 5% chance of working on the weekend. Without replacement, the second pick has a 4/19 chance, and the third pick has a 3/18 chance of working on the weekend.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Calculating probabilities</strong></p>
 </blockquote>
-<h3 id="Continuous-distributions">Continuous distributions<a class="anchor-link" href="#Continuous-distributions"> </a></h3><blockquote><p><strong>Which distribution?</strong>
-<strong>Data back-ups</strong>
-<strong>Simulating wait times</strong></p>
+<p>You're in charge of the sales team, and it's time for performance reviews, starting with Amir. As part of the review, you want to randomly select a few of the deals that he's worked on over the past year so that you can look at them more deeply. Before you start selecting deals, you'll first figure out what the chances are of selecting certain deals.</p>
+<p>Recall that the probability of an event can be calculated by</p>
+<p>{% raw %}
+$$ P(\text{event}) = \frac{\text{\# ways event can happen}}{\text{total \# of possible outcomes}} $$
+{% endraw %}</p>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">amir_deals</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/amir_deals.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">amir_deals</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>product</th>
+      <th>client</th>
+      <th>status</th>
+      <th>amount</th>
+      <th>num_users</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td>Product F</td>
+      <td>Current</td>
+      <td>Won</td>
+      <td>7389.52</td>
+      <td>19</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>Product C</td>
+      <td>New</td>
+      <td>Won</td>
+      <td>4493.01</td>
+      <td>43</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>Product B</td>
+      <td>New</td>
+      <td>Won</td>
+      <td>5738.09</td>
+      <td>87</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>Product I</td>
+      <td>Current</td>
+      <td>Won</td>
+      <td>2591.24</td>
+      <td>83</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>Product E</td>
+      <td>Current</td>
+      <td>Won</td>
+      <td>6622.97</td>
+      <td>17</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">counts</span> <span class="o">=</span> <span class="n">amir_deals</span><span class="p">[</span><span class="s1">&#39;product&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counts</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Product B    62
+Product D    40
+Product A    23
+Product C    15
+Product F    11
+Product H     8
+Product I     7
+Product E     5
+Product N     3
+Product G     2
+Product J     2
+Name: product, dtype: int64
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">counts</span> <span class="o">=</span> <span class="n">amir_deals</span><span class="p">[</span><span class="s1">&#39;product&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+
+<span class="c1"># Calculate probability of picking a deal with each product</span>
+<span class="n">probs</span> <span class="o">=</span> <span class="n">counts</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">amir_deals</span><span class="p">[</span><span class="s1">&#39;product&#39;</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">probs</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Product B    0.348315
+Product D    0.224719
+Product A    0.129213
+Product C    0.084270
+Product F    0.061798
+Product H    0.044944
+Product I    0.039326
+Product E    0.028090
+Product N    0.016854
+Product G    0.011236
+Product J    0.011236
+Name: product, dtype: float64
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>If you randomly select one of Amir's deals, what's the probability that the deal will involve Product C?</p>
+<blockquote><p>Ans:8.43%</p>
 </blockquote>
-<h3 id="The-binomial-distribution">The binomial distribution<a class="anchor-link" href="#The-binomial-distribution"> </a></h3><blockquote><p><strong>Simulating sales deals</strong>
-<strong>Calculating binomial probabilities</strong>
-<strong>How many sales will be won?</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Sampling deals</strong></p>
+</blockquote>
+<p>In the previous exercise, you counted the deals Amir worked on. Now it's time to randomly pick five deals so that you can reach out to each customer and ask if they were satisfied with the service they received. You'll try doing this both with and without replacement.</p>
+<p>Additionally, you want to make sure this is done randomly and that it can be reproduced in case you get asked how you chose the deals, so you'll need to set the random seed before sampling from the deals.</p>
+<p>Instructions:<br></p>
+<ul>
+<li>Set the random seed to 24.</li>
+<li>Take a sample of 5 deals without replacement and store them as sample_without_replacement.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+
+<span class="c1"># Sample 5 deals without replacement</span>
+<span class="n">sample_without_replacement</span> <span class="o">=</span> <span class="n">amir_deals</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sample_without_replacement</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>       product   client status   amount  num_users
+128  Product B  Current    Won  2070.25          7
+149  Product D  Current    Won  3485.48         52
+78   Product B  Current    Won  6252.30         27
+105  Product D  Current    Won  4110.98         39
+167  Product C      New   Lost  3779.86         11
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Take a sample of 5 deals with replacement and save as sample_with_replacement.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">24</span><span class="p">)</span>
+
+<span class="c1"># Sample 5 deals with replacement</span>
+<span class="n">sample_with_replacement</span> <span class="o">=</span> <span class="n">amir_deals</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">sample_with_replacement</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>       product   client status   amount  num_users
+163  Product D  Current    Won  6755.66         59
+132  Product B  Current    Won  6872.29         25
+88   Product C  Current    Won  3579.63          3
+146  Product A  Current    Won  4682.94         63
+146  Product A  Current    Won  4682.94         63
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>What type of sampling is better to use for this situation?</p>
+<blockquote><p>Answers:Without replacement</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>It's important to consider how you'll take a sample since there's no one-size-fits-all way to sample, and this can have an effect on your results.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Discrete-distributions">Discrete distributions<a class="anchor-link" href="#Discrete-distributions"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Creating a probability distribution</strong></p>
+</blockquote>
+<p>A new restaurant opened a few months ago, and the restaurant's management wants to optimize its seating space based on the size of the groups that come most often. On one night, there are 10 groups of people waiting to be seated at the restaurant, but instead of being called in the order they arrived, they will be called randomly. In this exercise, you'll investigate the probability of groups of different sizes getting picked first. Data on each of the ten groups is contained in the restaurant_groups DataFrame.</p>
+<p>Remember that expected value can be calculated by multiplying each possible outcome with its corresponding probability and taking the sum. The restaurant_groups data is available. pandas is loaded as pd, numpy is loaded as np, and matplotlib.pyplot is loaded as plt.</p>
+<p>Instructions:<br></p>
+<ul>
+<li>Create a histogram of the group_size column of restaurant_groups, setting bins to [2, 3, 4, 5, 6]. Remember to show the plot.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">restaurant_groups</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/restaurant_groups.csv&#39;</span><span class="p">)</span>
+<span class="n">restaurant_groups</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>group_id</th>
+      <th>group_size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>A</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>B</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>C</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>D</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>E</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">restaurant_groups</span><span class="p">[</span><span class="s1">&#39;group_size&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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"
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Count the number of each group_size in restaurant_groups, then divide by the number of rows in restaurant_groups to calculate the probability of randomly selecting a group of each size. Save as size_dist.</li>
+<li>Reset the index of size_dist.</li>
+<li>Rename the columns of size_dist to group_size and prob.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">size_dist</span> <span class="o">=</span> <span class="n">restaurant_groups</span><span class="p">[</span><span class="s1">&#39;group_size&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">restaurant_groups</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="c1"># Reset index and rename columns</span>
+<span class="n">size_dist</span> <span class="o">=</span> <span class="n">size_dist</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">size_dist</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;group_size&#39;</span><span class="p">,</span> <span class="s1">&#39;prob&#39;</span><span class="p">]</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">size_dist</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>   group_size  prob
+0           0   0.2
+1           1   0.4
+2           2   0.6
+3           3   0.2
+4           4   0.2
+5           5   0.2
+6           6   0.3
+7           7   0.2
+8           8   0.4
+9           9   0.2
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Calculate the expected value of the size_distribution, which represents the expected group size, by multiplying the group_size by the prob and taking the sum.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">expected_value</span> <span class="o">=</span> <span class="p">(</span><span class="n">size_dist</span><span class="p">[</span><span class="s1">&#39;group_size&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">size_dist</span><span class="p">[</span><span class="s1">&#39;prob&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">expected_value</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>12.200000000000001
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Calculate the probability of randomly picking a group of 4 or more people by subsetting for groups of size 4 or more and summing the probabilities of selecting those groups.</li>
+</ul>
+
+</div>
+</div>
+</div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">size_dist</span> <span class="o">=</span> <span class="n">restaurant_groups</span><span class="p">[</span><span class="s1">&#39;group_size&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span> <span class="o">/</span> <span class="n">restaurant_groups</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="c1"># Reset index and rename columns</span>
+<span class="n">size_dist</span> <span class="o">=</span> <span class="n">size_dist</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">size_dist</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;group_size&#39;</span><span class="p">,</span> <span class="s1">&#39;prob&#39;</span><span class="p">]</span>
+
+<span class="c1"># Expected value</span>
+<span class="n">expected_value</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">size_dist</span><span class="p">[</span><span class="s1">&#39;group_size&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="n">size_dist</span><span class="p">[</span><span class="s1">&#39;prob&#39;</span><span class="p">])</span>
+
+<span class="c1"># Subset groups of size 4 or more</span>
+<span class="n">groups_4_or_more</span> <span class="o">=</span> <span class="n">size_dist</span><span class="p">[</span><span class="n">size_dist</span><span class="p">[</span><span class="s1">&#39;group_size&#39;</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="mi">4</span><span class="p">]</span>
+
+<span class="c1"># Sum the probabilities of groups_4_or_more</span>
+<span class="n">prob_4_or_more</span> <span class="o">=</span> <span class="n">groups_4_or_more</span><span class="p">[</span><span class="s1">&#39;prob&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob_4_or_more</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.30000000000000004
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Identifying distributions</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Expected value vs. sample mean</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Continuous-distributions">Continuous distributions<a class="anchor-link" href="#Continuous-distributions"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Which distribution?</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Data back-ups</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Simulating wait times</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="The-binomial-distribution">The binomial distribution<a class="anchor-link" href="#The-binomial-distribution"> </a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Simulating sales deals</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Calculating binomial probabilities</strong></p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>How many sales will be won?</strong></p>
 </blockquote>
 
 </div>
