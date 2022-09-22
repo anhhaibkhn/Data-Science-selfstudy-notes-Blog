@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="twitter:card" content="summary_large_image" /><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>How to download datasets from IPython Shell in Datacamp | Self-study Data Science Projects Notes</title>
+<meta name="generator" content="Jekyll v4.1.1" />
+<meta property="og:title" content="How to download datasets from IPython Shell in Datacamp" />
+<meta name="author" content="Datacamp" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="This blog post will show you how to download datasets from DataCamp Ipython Shell/Console in a web browser." />
+<meta property="og:description" content="This blog post will show you how to download datasets from DataCamp Ipython Shell/Console in a web browser." />
+<link rel="canonical" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/datacamp/dataset/download/ipython%20shell/2022/09/21/How-to-download-datasets-from-IPython-Shell.html" />
+<meta property="og:url" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/datacamp/dataset/download/ipython%20shell/2022/09/21/How-to-download-datasets-from-IPython-Shell.html" />
+<meta property="og:site_name" content="Self-study Data Science Projects Notes" />
+<meta property="og:image" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/datacamp.png" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-09-21T00:00:00-05:00" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta property="twitter:image" content="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/datacamp.png" />
+<meta property="twitter:title" content="How to download datasets from IPython Shell in Datacamp" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Datacamp"},"dateModified":"2022-09-21T00:00:00-05:00","datePublished":"2022-09-21T00:00:00-05:00","description":"This blog post will show you how to download datasets from DataCamp Ipython Shell/Console in a web browser.","headline":"How to download datasets from IPython Shell in Datacamp","image":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/images/datacamp.png","mainEntityOfPage":{"@type":"WebPage","@id":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/datacamp/dataset/download/ipython%20shell/2022/09/21/How-to-download-datasets-from-IPython-Shell.html"},"url":"https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/datacamp/dataset/download/ipython%20shell/2022/09/21/How-to-download-datasets-from-IPython-Shell.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/Data-Science-selfstudy-notes-Blog/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" title="Self-study Data Science Projects Notes" /><!-- the google_analytics_id gets auto inserted from the config file -->
+
+
+
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-238805937-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-238805937-1');
+</script>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DGW0FX8XM4"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-DGW0FX8XM4');
+</script>
+
+
+<link rel="shortcut icon" type="image/x-icon" href="/Data-Science-selfstudy-notes-Blog/images/favicon.ico"><link rel="stylesheet" href="https://unpkg.com/@primer/css@17.3.0/dist/primer.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==" crossorigin="anonymous" />
+
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+
+    var i = 0, j = 0, k = 0;
+
+    document.querySelectorAll('h2, h3, h4').forEach((heading) => {
+
+        if (heading.localName == 'h2') {
+            i++; j = 0; k = 0;
+            heading.setAttribute('data-before', `${i}. `)
+        }
+        if (heading.localName == 'h3') {
+            j++; k = 0;
+            heading.setAttribute('data-before', `${i}.${j}. `)
+        }
+        if (heading.localName == 'h4') {
+            k++;
+            heading.setAttribute('data-before', `${i}.${j}.${k}. `)
+        }
+    });
+});
+</script>
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.css" integrity="sha512-J8je2SgrCzA7hNBeiCJiA6oETHTTdp3We3EriOgJp6POycGLcDXj5dSwWlAPQcYGeaQ4N3uf30aOg/Nt5pxW2g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/katex.min.js" integrity="sha512-1kNZVA50gKlorLAWU83+SdOAUwABzfFFQ4WuOAZTeS/UhNhnm9zU7rDv/Q5NEzSnr5u2L6uhR/+8icjjmHjSnQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.13.11/contrib/auto-render.min.js" integrity="sha512-CzIEOUs11SQ7tekLhEe5gil9kDip4RTJZVf7pSjlxOdVaYYHEcQflhunPz2Q/onNC4slL9jpKjvNgzPAAxEpew==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement( document.body, {
+        globalGroup: true,
+        delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "[%", right: "%]", display: true},
+            {left: "$", right: "$", display: false}
+        ]}
+        );
+    });
+    </script>
+
+
+<script>
+function wrap_img(fn) {
+    if (document.attachEvent ? document.readyState === "complete" : document.readyState !== "loading") {
+        var elements = document.querySelectorAll(".post img");
+        Array.prototype.forEach.call(elements, function(el, i) {
+            if (el.getAttribute("title") && (el.className != "emoji")) {
+                const caption = document.createElement('figcaption');
+                var node = document.createTextNode(el.getAttribute("title"));
+                caption.appendChild(node);
+                const wrapper = document.createElement('figure');
+                wrapper.className = 'image';
+                el.parentNode.insertBefore(wrapper, el);
+                el.parentNode.removeChild(el);
+                wrapper.appendChild(el);
+                wrapper.appendChild(caption);
+            }
+        });
+    } else { document.addEventListener('DOMContentLoaded', fn); }
+}
+window.onload = wrap_img;
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function(){
+    // add link icon to anchor tags
+    var elem = document.querySelectorAll(".anchor-link")
+    elem.forEach(e => (e.innerHTML = '<i class="fas fa-link fa-xs"></i>'));
+    });
+</script>
+
+</head>
+<body>
+
+    <main class="page-content" aria-label="Content" style="padding-top: 0;">
+        <div class="Layout">
+    
+      <div class="Layout-sidebar">
+        <div id="toc" class="pt-3 pl-3 sticky">
+          <b><a href="#">How to download datasets from IPython Shell in Datacamp</a></b>
+          <ol id="toc" class="section-nav">
+<li class="toc-entry toc-h2"><a href="#Quick-EDA">Quick EDA </a></li>
+<li class="toc-entry toc-h2"><a href="#Save-the-dataset-to-the-cloud-storage">Save the dataset to the cloud storage </a></li>
+<li class="toc-entry toc-h2"><a href="#Encode-the-file-data-and-an-generate-HTML-link">Encode the file data and an generate HTML link </a></li>
+<li class="toc-entry toc-h2"><a href="#Check-the-downloaded-dataset-in-your-local-Jupyter-notebook">Check the downloaded dataset in your local Jupyter notebook </a></li>
+<li class="toc-entry toc-h2"><a href="#Full-Code">Full Code </a></li>
+</ol>
+        </div>
+      </div>
+    <div class="Layout-main"><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/Data-Science-selfstudy-notes-Blog/">Self-study Data Science Projects Notes</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/about/">About Me</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/search/">Search</a><a class="page-link" href="/Data-Science-selfstudy-notes-Blog/categories/">Tags</a></div>
+      </nav></div>
+</header>
+<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+      
+        
+          <div class="pb-5 d-flex flex-wrap flex-justify-start" style="padding-left: 52px">
+            <div class="px-2">
+
+    <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/How to download dataset from IPython Shell/2022-09-21-How to download datasets from IPython Shell.ipynb" role="button" target="_blank">
+<img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/github.svg" alt="View On GitHub">
+    </a>
+</div>
+
+            <div class="px-2">
+    <a href="https://mybinder.org/v2/gh/anhhaibkhn/Data-Science-selfstudy-notes-Blog/master?filepath=_notebooks%2FHow+to+download+dataset+from+IPython+Shell%2F2022-09-21-How+to+download+datasets+from+IPython+Shell.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/binder.svg" alt="Open In Binder"/>
+    </a>
+</div>
+
+            <div class="px-2">
+    <a href="https://colab.research.google.com/github/anhhaibkhn/Data-Science-selfstudy-notes-Blog/blob/master/_notebooks/How to download dataset from IPython Shell/2022-09-21-How to download datasets from IPython Shell.ipynb" target="_blank">
+        <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/colab.svg" alt="Open In Colab"/>
+    </a>
+</div>
+            <div class="px-2">
+  <a href="https://deepnote.com/launch?url=https%3A%2F%2Fgithub.com%2Fanhhaibkhn%2FData-Science-selfstudy-notes-Blog%2Fblob%2Fmaster%2F_notebooks%2FHow+to+download+dataset+from+IPython+Shell%2F2022-09-21-How+to+download+datasets+from+IPython+Shell.ipynb" target="_blank">
+      <img class="notebook-badge-image" src="/Data-Science-selfstudy-notes-Blog/assets/badges/deepnote.svg" alt="Launch in Deepnote"/>
+  </a>
+</div>
+
+          </div>
+        <header class="post-header">
+        <h1 class="post-title p-name" itemprop="name headline">How to download datasets from IPython Shell in Datacamp</h1><p class="page-description">This blog post will show you how to download datasets from DataCamp Ipython Shell/Console in a web browser.</p><p class="post-meta post-meta-title"><time class="dt-published" datetime="2022-09-21T00:00:00-05:00" itemprop="datePublished">
+            Sep 21, 2022
+          </time>• 
+              <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+                <span class="p-author h-card" itemprop="name">Datacamp</span></span>
+           • <span class="read-time" title="Estimated read time">
+    
+    
+      3 min read
+    
+</span></p>
+
+        
+          <p class="category-tags"><i class="fas fa-tags category-tags-icon"></i></i>
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#DataCamp">DataCamp</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Dataset">Dataset</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#Download">Download</a>
+            &nbsp;
+          
+            <a class="category-tags-link" href="/Data-Science-selfstudy-notes-Blog/categories/#IPython Shell">IPython Shell</a>
+            
+          
+          </p>
+        
+
+
+      </header>
+
+      <div class="post-content e-content" itemprop="articleBody">
+        <!--
+#################################################
+### THIS FILE WAS AUTOGENERATED! DO NOT EDIT! ###
+#################################################
+# file to edit: _notebooks/How to download dataset from IPython Shell/2022-09-21-How to download datasets from IPython Shell.ipynb
+-->
+
+<div class="container" id="notebook-container">
+        
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>TL;DR:</strong> Use the python <a href="#Full-Code">script</a> to extract the link to download the targeting datasets from IPython Shell.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Motivation</strong>: While studying DataCamp courses, there were so many times that I could not reproduce the course results in my local environment with the provided datasets, which was quite frustrating. I had tried to reach out to the support team, but the results were not satisfactory. After spending hours searching on Stackoverflow <a href="https://stackoverflow.com/questions/31893930/download-csv-from-an-ipython-notebook">here</a> and <a href="https://stackoverflow.com/questions/26497912/trigger-file-download-within-ipython-notebook">there</a>, then trying and failing numerous times with several scripts, I could finally manage to download the dataset that the course was using.</p>
+<p>I decided to share my workaround here. Hopefully, it could help everyone who is facing the same problems. <br /></p>
+<p>I have summarized how I did it in the following steps:</p>
+<ul>
+<li><a href="#quick-eda"><strong>1.</strong></a> Check the general info of the dataset</li>
+<li><a href="#save-dataset-to-the-cloud-storage"><strong>2.</strong></a> Put the download script to the script.py</li>
+<li><a href="#encode-the-file-data-and-generate-html-link"><strong>3.</strong></a> Extract the "href "link, and download it.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Quick-EDA">Quick EDA<a class="anchor-link" href="#Quick-EDA"> </a></h2><p>Run the following command to take do a quick check on the data</p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+
+                   <span class="n">y</span>
+<span class="mi">2013</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span>  <span class="mf">1.624345</span>
+<span class="mi">2013</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">02</span> <span class="o">-</span><span class="mf">0.936625</span>
+<span class="mi">2013</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">03</span>  <span class="mf">0.081483</span>
+<span class="mi">2013</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">04</span> <span class="o">-</span><span class="mf">0.663558</span>
+<span class="mi">2013</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">05</span>  <span class="mf">0.738023</span>
+</pre></div>
+<p>then a quick look with <code>df.info()</code></p>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+
+
+<span class="o">&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">pandas</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">frame</span><span class="o">.</span><span class="n">DataFrame</span><span class="s1">&#39;&gt;</span>
+<span class="n">DatetimeIndex</span><span class="p">:</span> <span class="mi">1000</span> <span class="n">entries</span><span class="p">,</span> <span class="mi">2013</span><span class="o">-</span><span class="mi">01</span><span class="o">-</span><span class="mi">01</span> <span class="n">to</span> <span class="mi">2015</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">27</span>
+<span class="n">Freq</span><span class="p">:</span> <span class="n">D</span>
+<span class="n">Data</span> <span class="n">columns</span> <span class="p">(</span><span class="n">total</span> <span class="mi">1</span> <span class="n">columns</span><span class="p">):</span>
+ <span class="c1">#   Column  Non-Null Count  Dtype  </span>
+<span class="o">---</span>  <span class="o">------</span>  <span class="o">--------------</span>  <span class="o">-----</span>  
+ <span class="mi">0</span>   <span class="n">y</span>       <span class="mi">1000</span> <span class="n">non</span><span class="o">-</span><span class="n">null</span>   <span class="n">float64</span>
+<span class="n">dtypes</span><span class="p">:</span> <span class="n">float64</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">memory</span> <span class="n">usage</span><span class="p">:</span> <span class="mf">55.6</span> <span class="n">KB</span>
+<span class="kc">None</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Okay, the dataset has 1000 rows, with Freq set as Date, Dtype = float64, etc.</p>
+<p>Here are the first 5 rows of data:</p>
+<div class="highlight"><pre><span></span><span class="go">2013-01-01  1.624345</span>
+<span class="go">2013-01-02 -0.936625</span>
+<span class="go">2013-01-03  0.081483</span>
+<span class="go">2013-01-04 -0.663558</span>
+<span class="go">2013-01-05  0.738023</span>
+</pre></div>
+<p>We will remember this, so we can check later once we download the dataset to our local environment.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Save-the-dataset-to-the-cloud-storage">Save the dataset to the cloud storage<a class="anchor-link" href="#Save-the-dataset-to-the-cloud-storage"> </a></h2><p>Next, we will save the dataset from the DataFrame to the cloud storage. Try the following code in the script.py.</p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tempsnip.png" alt="" /></p>
+<p>CODE:</p>
+<div class="highlight"><pre><span></span><span class="c1"># Get the filename fullpath</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;data.csv&quot;</span>
+<span class="n">filename</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="n">filename</span>
+<span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+</pre></div>
+<p><br /></p>
+<p>Check the result by typing the following commands to the IPython Shell: <br /></p>
+<div class="highlight"><pre><span></span><span class="go">!pwd</span>
+<span class="go">!ls</span>
+</pre></div>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tempsnip2.png" alt="" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Encode-the-file-data-and-an-generate-HTML-link">Encode the file data and an generate HTML link<a class="anchor-link" href="#Encode-the-file-data-and-an-generate-HTML-link"> </a></h2><p>Next, we run the following code, to generate HTML data.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">base64</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+
+<span class="n">in_file</span>  <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span>
+<span class="n">csv</span> <span class="o">=</span> <span class="n">in_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="c1"># print(csv) # Uncomment this if you want to check the csv content</span>
+<span class="n">in_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+<span class="n">b64</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">csv</span><span class="p">)</span>
+<span class="n">payload</span> <span class="o">=</span> <span class="n">b64</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+<span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;a download=&quot;</span><span class="si">{filename}</span><span class="s1">&quot; href=&quot;data:text/csv;base64,</span><span class="si">{payload}</span><span class="s1">&quot; target=&quot;_blank&quot;&gt;</span><span class="si">{title}</span><span class="s1">&lt;/a&gt;&#39;</span>
+<span class="n">html</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+<span class="c1"># Print the link</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;data:text/csv;base64,</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">payload</span><span class="p">))</span>
+</pre></div>
+<p><br /></p>
+<p><strong>Result:</strong> <br /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tempsnip3.png" alt="" /></p>
+<p>Paste the extracted link in the Shell output to a new tab in the browser. 
+<br /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tempsnip4.PNG" alt="" />
+<br /></p>
+<p><strong>Voila</strong>! That is the dataset that we want. <br /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tempsnip5.PNG" alt="" /></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Check-the-downloaded-dataset-in-your-local-Jupyter-notebook">Check the downloaded dataset in your local Jupyter notebook<a class="anchor-link" href="#Check-the-downloaded-dataset-in-your-local-Jupyter-notebook"> </a></h2><p>Use this code: <br /></p>
+<div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/download.csv&#39;</span><span class="p">,</span> <span class="n">parse_dates</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">asfreq</span><span class="p">(</span><span class="s1">&#39;d&#39;</span><span class="p">)</span>  <span class="c1"># Set the frequent as DATE </span>
+<span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+</pre></div>
+<p>then <br /></p>
+<div class="highlight"><pre><span></span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+<p>Results: <br /></p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/tempsnip6.PNG" alt="" /></p>
+<p><br /></p>
+<p>As you can see, the downloaded dataset looks exactly like what we saw in the quick <a href="#quick-eda">EDA</a> section. You can now freely run your experiment locally with no worries about preprocessing the raw datasets.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Full-Code">Full Code<a class="anchor-link" href="#Full-Code"> </a></h2><p>Here is the full code of the post. Use this script in the script.py, you should be able to download the targeted datasets.</p>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">base64</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+
+<span class="k">def</span> <span class="nf">create_download_link</span><span class="p">(</span> <span class="n">df</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Download CSV file&quot;</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;data.csv&quot;</span><span class="p">):</span>
+
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="n">filename</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="n">in_file</span>  <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span>
+    <span class="n">csv</span> <span class="o">=</span> <span class="n">in_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="c1"># print(csv) # Uncomment this if you want to check the csv content</span>
+    <span class="n">in_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">b64</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">csv</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">b64</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;a download=&quot;</span><span class="si">{filename}</span><span class="s1">&quot; href=&quot;data:text/csv;base64,</span><span class="si">{payload}</span><span class="s1">&quot; target=&quot;_blank&quot;&gt;</span><span class="si">{title}</span><span class="s1">&lt;/a&gt;&#39;</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+    <span class="c1"># print the link</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;data:text/csv;base64,</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">payload</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">HTML</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+
+<span class="n">create_download_link</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>That's it. Thank you for reading. If you find the blog post useful, please give the <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog">GitHub blog repo</a> a star to show your support and share it with others. Also, please let me know in the comments section of the post if you have any questions.</p>
+
+</div>
+</div>
+</div>
+    
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    
+
+</div>
+
+
+
+      </div><!-- from https://github.com/utterance/utterances -->
+<script src="https://utteranc.es/client.js"
+        repo="anhhaibkhn/Data-Science-selfstudy-notes-Blog"
+        issue-term="title"
+        label="blogpost-comment"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+</script><a class="u-url" href="/Data-Science-selfstudy-notes-Blog/datacamp/dataset/download/ipython%20shell/2022/09/21/How-to-download-datasets-from-IPython-Shell.html" hidden></a>
+    </article><footer class="site-footer h-card">
+  <data class="u-url" href="/Data-Science-selfstudy-notes-Blog/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="https://feedrabbit.com/?url=https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+
+        <p>
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <a class="github-button" href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog" data-color-scheme="no-preference: light; light: light; dark: light;" data-icon="octicon-star" data-size="large" aria-label="Star anhhaibkhn/Data-Science-selfstudy-notes-Blog on GitHub">Star to Support</a>
+        </p>
+        <p>A collection of jupyter notebooks and datasets for practicing Data Science skills.</p>
+      </div>
+          
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/anhhaibkhn" target="_blank" title="anhhaibkhn"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://www.linkedin.com/in/nguyen-hai-b1ab8042" target="_blank" title="nguyen-hai-b1ab8042"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#linkedin"></use></svg></a></li><li><a rel="me" href="https://twitter.com/NguyenNgocHai2" target="_blank" title="NguyenNgocHai2"><svg class="svg-icon grey"><use xlink:href="/Data-Science-selfstudy-notes-Blog/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</div>
+
+
+</div>
+
+    </main>
+
+  </body>
+
+</html>

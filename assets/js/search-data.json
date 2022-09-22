@@ -72,6 +72,8 @@
   
     
   
+    
+  
 
   
   
@@ -112,10 +114,12 @@
   
 
   
+
+  
   
 
   
-      ,"page13": {
+      ,"page14": {
           "title": "",
           "content": "Sitemap: {{ “sitemap.xml” | absolute_url }} | .",
           "url": "https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/robots.txt",
