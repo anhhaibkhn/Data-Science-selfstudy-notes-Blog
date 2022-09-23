@@ -40,9 +40,9 @@ layout: notebook
 <p>I decided to share my workaround here. Hopefully, it could help everyone who is facing the same problems. <br></p>
 <p>I have summarized how I did it in the following steps:</p>
 <ul>
-<li><a href="#quick-eda"><strong>1.</strong></a> Check the general info of the dataset</li>
-<li><a href="#save-dataset-to-the-cloud-storage"><strong>2.</strong></a> Put the download script to the script.py</li>
-<li><a href="#encode-the-file-data-and-generate-html-link"><strong>3.</strong></a> Extract the "href "link, and download it.</li>
+<li><a href="#Quick-EDA"><strong>1.</strong></a> Check the general info of the dataset</li>
+<li><a href="#Save-the-dataset-to-the-cloud-storage"><strong>2.</strong></a> Put the download script to the script.py</li>
+<li><a href="#Encode-the-file-data-and-an-generate-HTML-link"><strong>3.</strong></a> Extract the "href "link, and download it.</li>
 </ul>
 
 </div>
@@ -194,7 +194,7 @@ layout: notebook
     <span class="k">return</span> <span class="n">HTML</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
 
 <span class="n">create_download_link</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
 </pre></div>
 
 </div>
@@ -202,28 +202,11 @@ layout: notebook
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>That's it. Thank you for reading. If you find the blog post useful, please give the <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog">GitHub blog repo</a> a star to show your support and share it to others. Also, please let me know in the comments section of the post if you have any questions.</p>
+<p>That's it. Thank you for reading. If you find the blog post useful, please give the <a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog">GitHub blog repo</a> a star to show your support and share it with others. Also, please let me know in the comments section of the post if you have any questions.</p>
 
 </div>
 </div>
 </div>
-    {% raw %}
-    
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-python"><pre><span></span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-    {% endraw %}
-
 </div>
  
 
