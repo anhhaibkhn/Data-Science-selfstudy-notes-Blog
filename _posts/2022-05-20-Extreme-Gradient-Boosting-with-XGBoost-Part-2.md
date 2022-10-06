@@ -28,7 +28,15 @@ layout: notebook
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Chapter-2:-Regression-with-XGBoost">Chapter 2: Regression with XGBoost<a class="anchor-link" href="#Chapter-2:-Regression-with-XGBoost"> </a></h2><blockquote><p>After a brief review of supervised regression, you'll apply XGBoost to the regression task of predicting house prices in Ames, Iowa. You'll learn about the two kinds of base learners that XGboost can use as its weak learners, and review how to evaluate the quality of your regression models.</p>
+<p><a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/Extreme%20Gradient%20Boosting%20with%20XGBoost"><strong>Download Datasets and Presentation slides for this post HERE</strong></a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Chapter-2:-Regression-with-XGBoost">Chapter 2: Regression with XGBoost<a class="anchor-link" href="#Chapter-2:-Regression-with-XGBoost"> </a></h2><p>PREREQUISITES: Supervised Learning with scikit-learn, Case Study: School Budgeting with Machine Learning in Python.</p>
+<blockquote><p>After a brief review of supervised regression, you'll apply XGBoost to the regression task of predicting house prices in Ames, Iowa. You'll learn about the two kinds of base learners that XGboost can use as its weak learners, and review how to evaluate the quality of your regression models.</p>
 </blockquote>
 
 </div>
