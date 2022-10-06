@@ -28,6 +28,13 @@ layout: notebook
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/Winning%20a%20Kaggle%20Competition%20in%20Python"><strong>Download Datasets and Presentation slides for this post HERE</strong></a></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Competitions-overview">Competitions overview<a class="anchor-link" href="#Competitions-overview"> </a></h2><p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/competition_overview.png" alt="Competition Overview"></p>
 <ul>
 <li>Explore train and test data</li>

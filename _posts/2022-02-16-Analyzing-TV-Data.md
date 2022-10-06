@@ -26,6 +26,13 @@ layout: notebook
 
 <div class="container" id="notebook-container">
         
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/Analyzing%20TV%20Data"><strong>Download Datasets and Presentation slides for this post HERE</strong></a></p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="TV,-halftime-shows,-and-the-Big-Game">TV, halftime shows, and the Big Game<a class="anchor-link" href="#TV,-halftime-shows,-and-the-Big-Game"> </a></h2><p>Whether or not you like football, the Super Bowl is a spectacle. There's a little something for everyone at your Super Bowl party. Drama in the form of blowouts, comebacks, and controversy for the sports fan. There are the ridiculously expensive ads, some hilarious, others gut-wrenching, thought-provoking, and weird. The half-time shows with the biggest musicians in the world, sometimes <a href="https://youtu.be/ZD1QrIe--_Y?t=14">riding giant mechanical tigers</a> or <a href="https://youtu.be/mjrdywp5nyE?t=62">leaping from the roof of the stadium</a>. It's a show, baby. And in this notebook, we're going to find out how some of the elements of this show interact with each other. After exploring and cleaning our data a little, we're going to answer questions like:</p>

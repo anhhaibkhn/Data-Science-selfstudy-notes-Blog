@@ -26,6 +26,13 @@ layout: notebook
 
 <div class="container" id="notebook-container">
         
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/ASL%20Recognition%20with%20Deep%20Learning"><strong>Download Datasets and Presentation slides for this post HERE</strong></a></p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing text_cell rendered celltag_context"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="American-Sign-Language-(ASL)">American Sign Language (ASL)<a class="anchor-link" href="#American-Sign-Language-(ASL)"> </a></h2><p><p>American Sign Language (ASL) is the primary language used by many deaf individuals in North America, and it is also used by hard-of-hearing and hearing individuals.  The language is as rich as spoken languages and employs signs made with the hand, along with facial gestures and bodily postures.</p></p>
