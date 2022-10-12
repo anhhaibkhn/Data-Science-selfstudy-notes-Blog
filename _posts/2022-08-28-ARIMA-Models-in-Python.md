@@ -1,6 +1,6 @@
 ---
 keywords: fastai
-description: Learn to use the powerful ARIMA class models to forecast the future. Updating ...
+description: Learn to use the powerful ARIMA class models to forecast the future.
 title: ARIMA Models in Python
 toc: true
 branch: master
@@ -28,7 +28,16 @@ layout: notebook
         
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/ARIMA%20Models%20in%20Python"><strong>Download Datasets and Presentation slides for this post HERE</strong></a></p>
+<p><a href="https://github.com/anhhaibkhn/Data-Science-selfstudy-notes-Blog/tree/master/_notebooks/ARIMA%20Models%20in%20Python"><strong>Download Datasets and Presentation slides for this post HERE</strong></a>
+<br></p>
+<p>This post is 4th part of Time Series with Python Track from DataCamp. The track includes:</p>
+<ol>
+<li><a href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/pandas/data%20visualization/eda/time%20series/stock%20price/scikit-learn/correlation/value-weighte/index/2022/08/25/Manipulating-Time-Series-Data-in-Python.html">Manipulating Time Series Data in Python</a></li>
+<li><a href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/data%20visualization/eda/time%20series/correlation/autocorrelation/arma/cointegration%20model/2022/08/26/Time-Series-Analysis-in-Python.html">Time Series Analysis in Python</a></li>
+<li><a href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/data%20visualization/eda/time%20series/diagnostics/boxplots/histograms/density%20plots/correlation/clustered%20heatmaps/line%20plots/case%20study/2022/08/27/Visualizing-Time-Series-Data-in-Python.html">Visualizing Time Series Data in Python</a></li>
+<li><a href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/seasonal%20data/forecast/arima/time%20series/arma/armax/aic/bic/acf/pacf/sarima/box-jenkins/2022/08/28/ARIMA-Models-in-Python.html">ARIMA Models in Python</a></li>
+<li><a href="https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/python/data%20visualization/eda/time%20series/machine%20learning/scikit-learn/regression/classification/tempogram/spectrogram/cross-valiation/stationarity/2022/08/29/Machine-Learning-for-Time-Series-Data-in-Python.html">Machine Learning for Time Series Data in Python</a></li>
+</ol>
 
 </div>
 </div>
