@@ -194,7 +194,7 @@ window.onload = wrap_img;
            • <span class="read-time" title="Estimated read time">
     
     
-      3 min read
+      6 min read
     
 </span></p>
 
@@ -398,6 +398,128 @@ window.onload = wrap_img;
 
 <span class="n">create_download_link</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>BONUS</strong>:&nbsp; Here is another version of the code. It was modified to help downloading numpy arrays. <br /></p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">base64</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">HTML</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+
+<span class="k">def</span> <span class="nf">create_download_link</span><span class="p">(</span> <span class="n">numpy_arr</span><span class="p">,</span> <span class="n">title</span> <span class="o">=</span> <span class="s2">&quot;Download CSV file&quot;</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;data.csv&quot;</span><span class="p">):</span>
+    <span class="c1"># CONVERT numpy array to pandas frame. </span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">numpy_arr</span><span class="p">)</span> 
+
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="n">filename</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="n">in_file</span>  <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span>
+    <span class="n">csv</span> <span class="o">=</span> <span class="n">in_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="c1"># print(csv) # Uncomment this if you want to check the csv content</span>
+    <span class="n">in_file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="n">b64</span> <span class="o">=</span> <span class="n">base64</span><span class="o">.</span><span class="n">b64encode</span><span class="p">(</span><span class="n">csv</span><span class="p">)</span>
+    <span class="n">payload</span> <span class="o">=</span> <span class="n">b64</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;a download=&quot;</span><span class="si">{filename}</span><span class="s1">&quot; href=&quot;data:text/csv;base64,</span><span class="si">{payload}</span><span class="s1">&quot; target=&quot;_blank&quot;&gt;</span><span class="si">{title}</span><span class="s1">&lt;/a&gt;&#39;</span>
+    <span class="n">html</span> <span class="o">=</span> <span class="n">html</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">payload</span><span class="o">=</span><span class="n">payload</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="n">title</span><span class="p">,</span><span class="n">filename</span><span class="o">=</span><span class="n">filename</span><span class="p">)</span>
+    <span class="c1"># print the link</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;data:text/csv;base64,</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">payload</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">HTML</span><span class="p">(</span><span class="n">html</span><span class="p">)</span>
+
+<span class="n">create_download_link</span><span class="p">(</span><span class="n">new_inputs</span><span class="p">)</span>
+</pre></div>
+<p>Then we can reload the downloaded numpy array as follows.</p>
+<div class="highlight"><pre><span></span><span class="n">new_inputs_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/data.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="n">new_inputs</span> <span class="o">=</span> <span class="n">new_inputs_df</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="n">new_inputs</span><span class="o">.</span><span class="n">reshape</span><span class="p">((</span><span class="mi">100</span><span class="p">,))</span>  <span class="c1"># CONVERT it back to its original shape.</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>OTHER NOTE:</strong> &nbsp; To see the pre-defined function from the scripts.py use the following script:
+<br /></p>
+</blockquote>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">inspect</span>
+<span class="n">source</span> <span class="o">=</span> <span class="n">inspect</span><span class="o">.</span><span class="n">getsource</span><span class="p">(</span><span class="n">pre_defined_fucntion_name</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>UPDATE (2022 Oct 13)</strong> <br /></p>
+</blockquote>
+<p>In the above methods, it seems like that <strong>base64.b64encode</strong> create a TOO LONG string data when encoding the large table (Ex:Tables have more than 6500 rows). The download link is too long, and therefore nolonger possible to be loaded by the browser. The data will be lost if we use the above method. It will be trickier to download the data in these cases without encoding data with base64. 
+One can think of using some string compression method to make the string shorter, but that is not feasible when huge tables present.</p>
+<p>As an alternative, we can download the csv data as string in bytes format by:</p>
+<ul>
+<li>Manually copying data from the terminal</li>
+<li>Save it as .txt format</li>
+<li>Finally, reload it back to the original form. </li>
+</ul>
+<p>In details:</p>
+<ul>
+<li><strong>STEP 1:</strong> Download the data as "data.txt" file. <br /></li>
+</ul>
+<div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">numpy_arr</span><span class="p">)</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="k">def</span> <span class="nf">create_download_link</span><span class="p">(</span><span class="n">numpy_arr</span><span class="p">,</span> <span class="n">filename</span> <span class="o">=</span> <span class="s2">&quot;data.csv&quot;</span><span class="p">):</span>
+    <span class="c1"># CONVERT numpy array to pandas frame. </span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">numpy_arr</span><span class="p">)</span> 
+
+    <span class="n">filename</span> <span class="o">=</span> <span class="n">Path</span><span class="o">.</span><span class="n">cwd</span><span class="p">()</span> <span class="o">/</span> <span class="n">filename</span>
+    <span class="n">df</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">in_file</span><span class="p">:</span>
+        <span class="n">csv_data</span> <span class="o">=</span> <span class="n">in_file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+        <span class="c1"># print(&quot;data:text/csv;charset=utf-8,{}&quot;.format(csv_data)) --&gt; not working since &#39;\\n&#39; is not the actual new line char anymore. </span>
+        <span class="c1"># print(&quot;data:text/plain;charset=utf-8,{}&quot;.format(csv_data)) # save the byte data as plain text</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">csv_data</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n\n\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># if the browser can not cover all character, we ll paste the data to .txt file directly </span>
+
+<span class="n">create_download_link</span><span class="p">(</span><span class="n">abnormal</span><span class="p">)</span>
+</pre></div>
+<ul>
+<li><strong>STEP 2:</strong> Load the "data.txt" file, and convert it back to normal csv format file. <br /></li>
+</ul>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span> 
+<span class="kn">import</span> <span class="nn">csv</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./datasets/data.txt&#39;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">plain_str</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">plain_str</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">plain_str</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:])</span>
+    <span class="n">csv_data</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.*?b\&#39;(.*)\&#39;.*?&quot;</span><span class="p">,</span> <span class="n">plain_str</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># remove byte traces</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">csv_data</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">csv_data</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:])</span>
+    <span class="n">csv_data</span> <span class="o">=</span> <span class="n">csv_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">n&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># remove \\n with actual new line chars</span>
+
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./datasets/data.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
+        <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">csv_data</span><span class="p">)</span>
+</pre></div>
+<ul>
+<li><strong>STEP 3:</strong>  Load the csv data as usual, we can also convert it to numpy array if we want. <br /></li>
+</ul>
+<div class="highlight"><pre><span></span><span class="c1"># Read in the data</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;./datasets/data.csv&#39;</span><span class="p">,</span> <span class="n">index_col</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">info</span><span class="p">())</span>
+<span class="n">display</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">tail</span><span class="p">())</span>
+
+<span class="n">new_np_arr</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">new_np_arr</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
 </pre></div>
 
 </div>
