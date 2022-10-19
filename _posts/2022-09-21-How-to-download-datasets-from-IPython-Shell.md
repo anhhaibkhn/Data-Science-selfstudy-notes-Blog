@@ -294,17 +294,23 @@ One can think of using some string compression method to make the string shorter
 <ul>
 <li><strong>STEP 2:</strong> Load the "data.txt" file, and convert it back to normal csv format file. <br></li>
 </ul>
-<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span> 
-<span class="kn">import</span> <span class="nn">csv</span>
+<div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">re</span><span class="o">,</span> <span class="nn">csv</span><span class="o">,</span> <span class="nn">os</span>
+<span class="n">file_path</span> <span class="o">=</span> <span class="s1">&#39;./datasets/all_prices.txt&#39;</span>
 
-<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./datasets/data.txt&#39;</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
     <span class="n">plain_str</span> <span class="o">=</span> <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">plain_str</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">plain_str</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:])</span>
-    <span class="n">csv_data</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.*?b\&#39;(.*)\&#39;.*?&quot;</span><span class="p">,</span> <span class="n">plain_str</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="c1"># remove byte traces</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">csv_data</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">csv_data</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:])</span>
-    <span class="n">csv_data</span> <span class="o">=</span> <span class="n">csv_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">n&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> <span class="c1"># remove \\n with actual new line chars</span>
 
-    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;./datasets/data.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
+    <span class="c1"># remove byte traces</span>
+    <span class="n">csv_data</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">match</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;.*?b\&#39;(.*)\&#39;.*?&quot;</span><span class="p">,</span> <span class="n">plain_str</span><span class="p">)</span><span class="o">.</span><span class="n">group</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;START:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">csv_data</span><span class="p">[:</span><span class="mi">250</span><span class="p">],</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">END:&quot;</span><span class="p">,</span> <span class="n">csv_data</span><span class="p">[</span><span class="o">-</span><span class="mi">250</span><span class="p">:])</span>
+
+    <span class="c1"># remove \\n with actual new line chars</span>
+    <span class="n">csv_data</span> <span class="o">=</span> <span class="n">csv_data</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">n&#39;</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span> 
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;START:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span><span class="n">csv_data</span><span class="p">[:</span><span class="mi">250</span><span class="p">],</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">END:&quot;</span><span class="p">,</span> <span class="n">csv_data</span><span class="p">[</span><span class="o">-</span><span class="mi">250</span><span class="p">:])</span>
+
+    <span class="c1"># update csv format to the filename</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">splitext</span><span class="p">(</span><span class="n">file_path</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">out</span><span class="p">:</span>
         <span class="n">out</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">csv_data</span><span class="p">)</span>
 </pre></div>
 <ul>
