@@ -52,12 +52,32 @@ layout: notebook
 <span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">]</span>
+<span class="kn">import</span> <span class="nn">matplotlib</span> <span class="k">as</span> <span class="nn">mpl</span> 
+
+
+<span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.figsize&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">7</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
 
 <span class="n">pd</span><span class="o">.</span><span class="n">set_option</span><span class="p">(</span><span class="s1">&#39;display.expand_frame_repr&#39;</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
 
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
-<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">FutureWarning</span><span class="p">)</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mpl</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.grid&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;seaborn&#39;</span><span class="p">)</span>
 </pre></div>
 
     </div>
@@ -1470,6 +1490,15 @@ Name: product, dtype: float64
 <div class="text_cell_render border-box-sizing rendered_html">
 <blockquote><p><strong>Identifying distributions</strong></p>
 </blockquote>
+<p>Which sample is most likely to have been taken from a uniform distribution?</p>
+<p><img src="/Data-Science-selfstudy-notes-Blog/images/copied_from_nb/./images/distributions.png" alt=""></p>
+<p><br></p>
+<ul>
+<li>A:bell-shaped distribution, - B: relatively flat distribution, </li>
+<li>C: lots of lower values, fewer high values</li>
+</ul>
+<p><strong>Ans: B</strong> <br></p>
+<p>Since the histogram depicts a sample and not the actual probability distribution, each outcome won't happen the exact same number of times due to randomness, but they're similar in number.</p>
 
 </div>
 </div>
@@ -1478,6 +1507,17 @@ Name: product, dtype: float64
 <div class="text_cell_render border-box-sizing rendered_html">
 <blockquote><p><strong>Expected value vs. sample mean</strong></p>
 </blockquote>
+<p>The app to the right will take a sample from a discrete uniform distribution, which includes the numbers 1 through 9, and calculate the sample's mean. You can adjust the size of the sample using the slider. Note that the expected value of this distribution is 5.</p>
+<p>A sample is taken, and you win twenty dollars if the sample's mean is less than 4. There's a catch:you get to pick the sample's size.
+Which sample size is most likely to win you the twenty dollars?</p>
+<ul>
+<li><strong>10</strong></li>
+<li>100</li>
+<li>1000</li>
+<li>5000</li>
+<li>10000</li>
+</ul>
+<p>Ans: <strong>10</strong>. Since the sample mean will likely be closer to 5 (the expected value) with larger sample sizes, you have a better chance of getting a sample mean further away from 5 with a smaller sample.</p>
 
 </div>
 </div>
@@ -1500,18 +1540,124 @@ Name: product, dtype: float64
 <div class="text_cell_render border-box-sizing rendered_html">
 <blockquote><p><strong>Data back-ups</strong></p>
 </blockquote>
+<p>The sales software used at your company is set to automatically back itself up, but no one knows exactly what time the back-ups happen. It is known, however, that back-ups happen exactly every 30 minutes. Amir comes back from sales meetings at random times to update the data on the client he just met with. He wants to know how long he'll have to wait for his newly-entered data to get backed up. Use your new knowledge of continuous uniform distributions to model this situation and answer Amir's questions.</p>
+<p>Instructions:<br></p>
+<ol>
+<li>To model how long Amir will wait for a back-up using a continuous uniform distribution, save his lowest possible wait time as min_time and his longest possible wait time as max_time. Remember that back-ups happen every 30 minutes.</li>
+<li>Import uniform from scipy.stats and calculate the probability that Amir has to wait less than 5 minutes, and store in a variable called prob_less_than_5.</li>
+<li>Calculate the probability that Amir has to wait more than 5 minutes, and store in a variable called prob_greater_than_5.</li>
+<li>Calculate the probability that Amir has to wait between 10 and 20 minutes, and store in a variable called prob_between_10_and_20.</li>
+</ol>
 
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">min_time</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">max_time</span> <span class="o">=</span> <span class="mi">30</span>
+
+<span class="c1"># Import uniform from scipy.stats</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">uniform</span>
+
+<span class="c1"># Calculate probability of waiting less than 5 mins</span>
+<span class="n">prob_less_than_5</span> <span class="o">=</span> <span class="n">uniform</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob_less_than_5</span><span class="p">)</span>
+
+<span class="c1"># Calculate probability of waiting more than 5 mins</span>
+<span class="n">prob_greater_than_5</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">uniform</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob_greater_than_5</span><span class="p">)</span>
+
+<span class="c1"># Calculate probability of waiting 10-20 mins</span>
+<span class="n">prob_between_10_and_20</span> <span class="o">=</span> <span class="n">uniform</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span> <span class="o">-</span> <span class="n">uniform</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">prob_between_10_and_20</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.16666666666666666
+0.8333333333333334
+0.3333333333333333
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <blockquote><p><strong>Simulating wait times</strong></p>
 </blockquote>
+<p>To give Amir a better idea of how long he'll have to wait, you'll simulate Amir waiting 1000 times and create a histogram to show him what he should expect. Recall from the last exercise that his minimum wait time is 0 minutes and his maximum wait time is 30 minutes.</p>
 
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">334</span><span class="p">)</span>
+
+<span class="c1"># Import uniform</span>
+<span class="kn">from</span> <span class="nn">cProfile</span> <span class="kn">import</span> <span class="n">label</span>
+<span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">uniform</span>
+
+<span class="c1"># Generate 1000 wait times between 0 and 30 mins</span>
+<span class="n">wait_times</span> <span class="o">=</span> <span class="n">uniform</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+
+<span class="c1"># Create a histogram of simulated times and show plot</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">wait_times</span><span class="p">,</span> <span class="n">rwidth</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mf">1.01</span><span class="p">,</span> <span class="mf">0.85</span><span class="p">,</span> <span class="sa">f</span><span class="s1">&#39;average: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">wait_times</span><span class="p">)</span><span class="si">:</span><span class="s1">.2f</span><span class="si">}</span><span class="s1"> mins&#39;</span><span class="p">,</span> 
+         <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">transAxes</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+
+
+<div class="output_png output_subarea ">
+<img src="data:image/png;base64,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/EFdu3ZV+/btlZycrBdffFFOp9P92u+++05TpkxRt27d1LVrVz355JOaN2+ekpM9PxF87dq16t+/v9q3b6/bb79dL774okf43bVrV6MuEcnMzNThw4f13//93/rVr351we3KysqUnp6uadOmKSws7Ef3KZ0O5ZLUqlUrd1toaKhatGih0tJSd9uHH36oRYsW6Y9//KOmTp160f1K///yly1btmjixInq1KmTevToocWLF6uiokKPP/64EhIS1KNHD82ZM0cul8vjdWfmZN26dbr11lu1Z88ejRgxQh06dNDtt9+uZcuWefS3adMmDRw4UB07dlT37t01depUfffdd42qVSK8AwAAeG369OnKzc3V+PHjlZ2drRkzZmj//v2aMmWKXC6XUlJSFBoaqo0bN3q87u2339ZNN92kjh076tSpUxo9erTee+89TZkyRYsWLdK1116rBx544JwAv2TJEqWmpuqFF17QHXfcocLCQo0ZM0bh4eGaN2+elixZos6dO2vRokXuPmtrazV69Gh9/vnnevzxx5WZmanCwkJlZ2d77Pvll1/WzJkzlZSUpJdeekkjR47UsmXL9OSTT7q3adeuXaMuEZk8ebL++te/qmvXrj+63axZs9S2bVvde++9F5tqSaffwJwJ1Pv371dpaamysrJUU1Oju+++271dhw4dtH37dk2YMEHNmjVr1L7PeOKJJxQbG6slS5aoe/fuWrBggYYNG6aQkBAtWLBAycnJWr58uTZv3nzBfTidTk2ePFl33323li5dqoSEBM2dO1cfffSRJOmzzz7T1KlT1a9fPy1btkyPPfaY8vPz9cgjjzS6TrtXowIAAGjiamtrVVlZqZkzZ7qDY7du3VRZWamsrCwdP35cP/vZz5SamqpNmza5g1lNTY3ee+89jRs3TpK0YcMGFRYW6i9/+Ytuu+02SVKfPn00atQozZ07V2+++aa7z44dO2r8+PHux2+99Zb7TLDNdvpcbM+ePbVjxw4VFBQoLS1Nf/3rX3Xw4EG9+eabat++vSSpe/fuuvPOO937KS8v15IlSzRixAilp6dLknr16qXw8HClp6dr7NixiomJUatWrdSpU6eLzk1sbOxFt9m2bZvee+895eXlKSgo6KLbnzFz5kyNGzdOaWlpkqSgoCBlZmaqc+fO7m2uueaaRu/vh3r37q3JkydLkqKjo7Vx40ZdddVV7jcxPXv21DvvvKPPP/9cv/nNb867D5fLpYkTJ2r48OGSpISEBG3btk07duxQ79699dlnn6lFixYaN26cWrRoIUkKDw/Xl19+KZfL1aj5ILwDAAB4ITg4WCtWrJB0+rKUQ4cO6eDBg3r//fclSXV1dZKkgQMHat26ddqzZ49uu+02bd++XVVVVe7wuXPnTkVFRaldu3Yel6j07dtXf/7zn1VWVqY2bdpIOjcUDx48WIMHD9apU6d0+PBhHTp0SPv27VNDQ4O7//z8fN1www3u4C6dvuykb9++2rVrlyTpiy++UHV1tZKTkz1qOHNZzccff6yYmBjL5q6kpERPPfWUpk+fruuvv77Rr/vmm29077336vrrr9fChQvVunVrbdy4Uenp6QoJCblgmPZGfHy8+/+joqIkyf2mSjr9ZqFNmzYqLy9v9H6Cg4MVGRmpqqoqSVLXrl01b948paWl6Te/+Y369OmjXr166de//nWj6yS8AwAAeOmjjz7S7NmzdfDgQYWGhiouLk6hoaGS5L4munv37rruuuu0ceNG3XbbbXr77bfVpUsXd2gtLS3V8ePH1a5du/P2cfz4cXd4v/rqqz2eq6mp0axZs7RhwwbV19fr+uuvV3x8vOx2u7v/kydP6qqrrjpnv2fv68z14mef1T+bN9diN8bTTz+ttm3batiwYR5vFlwul+rr69WsWbPznn3OycmR0+lUdna2IiIiJEk9evRQeXm5nnnmGaWmprp/A3Gpzr6e/gyHw+H1fkJCQjwe22w2979JfHy8+048K1as0EsvvaSoqCiNGzdOo0ePbtT+Ce8AAABeOHz4sCZNmqQ77rhDL7/8sn75y19KklavXu2+tlk6faY2LS1NGzZs0KRJk/Thhx/qqaeecj/funVr3XjjjZo7d+55+/mxM9MZGRnasmWL5s+frx49eqhly5aSpKSkJPc211xzjQ4dOnTOa0+cOOH+/zN/LDp37lzdeOON52z7wzcNP9WWLVskyeO3AZL07bff6q233tLKlSuVmJh4zuuOHj2qm2++2R3cz+jWrZu2bNmikpISy2u9XHr37q3evXururpa+fn5WrlypWbPnq1OnTp5nOm/EMI7gCbl/qztvi7Ba9kzks9pM20c5xsDYKqvvvpKp06d0oMPPugO7pLcwf3MWVZJGjRokJYuXaoXX3xRQUFBuuuuu9zPdevWTTt27NBVV12ln//85+72pUuXat++fRcM9dLpP3xMTEz0uH79q6++UklJiftuM926ddObb76pv//97+47v5w6dUoffvihgoODJZ2+LKR58+Y6duyY+3Ie6fR90rOysjRp0iRdd911lzRP55Obm3tO24QJE9S+fXtNmjRJN91003lfd9NNN+nNN99UaWmpwsPD3e2ff/65WrVq5f4Nhb977rnnVFBQoLVr18rhcKhv37667rrrNGjQIP3rX/8ivAMAAFitXbt2stvtmjNnju6//37V1tZq3bp12rFjhyS5r2+WTv/hY7t27fTaa68pJSXF457mQ4YM0apVqzR27Fj98Y9/1HXXXadPPvlEy5Yt03333afmzZtfsIaOHTvqnXfe0euvv662bduqsLBQS5YsUVBQkKqrqyVJAwYM0NKlSzVp0iQ9/PDDCgsLU3Z2tk6cOOF+sxAREaEHHnhACxYsUEVFhRITE3Xs2DEtWLBAQUFBuuWWWySd/iTUoqIi/fKXv/xJ9zXv0KHDOW3BwcEKDw/3eO7f//63/v3vf+vWW29VcHCwxo4dq7y8PI0ZM0YPPvigWrdura1bt2rjxo2aMWPGj86VP0lKStIrr7yiGTNmaODAgaqrq9Py5csVHh6u7t27N2ofhHcAAAAv/Md//Ieef/55LVq0SBMmTFCbNm3UqVMnvfrqqxo1apR2796tuLg49/aDBg3Svn37NHDgQI/9tGzZUqtXr9bzzz+vOXPmqLy8XL/4xS/0yCOP6P777//RGmbMmKG6ujrNnz9ftbW1uv766zVhwgQVFRVp+/btamhokN1u14oVK5SRkaGnn35adrtdAwcOVEREhP7v//7Pva/JkycrKipKr732mpYvX642bdooKSlJ//Vf/+V+s7Fv3z79/ve/V2ZmpoYMGWLhbJ7f2rVrtWjRIr333nu6/vrr9Ytf/EKvv/66XnjhBc2cOVNOp1PR0dF68cUX1a9fv8tej1X69OmjuXPnKjs7Ww899JCCgoKUkJCglStXevxG4ccEuc7+3Y6fO378x/+611t2u00REaE6ebJS9fXOi7/AEKb9Ol0KjMsCJOsuDQjUY9MXfjiXgXJcmTYOLpvxxBq3zuWcy6ioi3/ypz87cOCADh48qH79+nn8EejQoUN13XXXadGiRT6sDpeKM+8AAAABqKqqSg8/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qIyMDNXX11/JEgAAAABjXdHwPnnyZLVs2VIfffSRcnNztXPnTuXk5FzJEgAAAABj2a9UR4cOHdKnn36qDz/8UA6HQzfccIMmTpyoOXPm6IEHHmjUPmy2INlsQZbV1KyZzeOriex2c2s/G+PwL4E0Dta5fwiEMUiMw98EyhoHvBHkcrlcV6Kjd999V0888YR27drlbvv66681cOBAFRQUKCws7EqUAQAAABjrir1NrayslMPh8Gg787iqqupKlQEAAAAY64qF95YtW6q6utqj7czj0NDQK1UGAAAAYKwrFt5jYmJUWlqq4uJid9s333yja6+9Vq1bt75SZQAAAADGumLh/cYbb1RCQoJmz56tiooKHTlyRIsXL9awYcOuVAkAAACA0a7YH6xKUnFxsZ555hnt2rVLNptNgwcP1tSpU9WsWbMrVQIAAABgrCsa3gEAAABcOm6KCgAAABiC8A4AAAAYgvAOAAAAGILwDgAAABiiyYb3EydOaOLEierSpYsSExOVkZGh+vp6X5dlpE2bNunWW29VfHy8+79p06b5uiyjlJSUKCUlRbt27XK37dmzR8OHD1d8fLySk5O1du1aH1ZolvPN51NPPaX27dt7HKdvvPGGD6v0b4WFhRo7dqy6deumnj17avr06SopKZHEsemtH5tLjkvv7Ny5U8OHD1fnzp3Vs2dPzZo1SzU1NZI4LtGEuJqo++67z/XII4+4qqqqXIcPH3b179/ftWzZMl+XZaSsrCzXjBkzfF2GsXbv3u268847XbGxsa78/HyXy+VylZaWurp16+ZatWqVq66uzvXJJ5+44uPjXXv27PFxtf7vfPPpcrlcv/3tb13r1q3zYWXmqK6udvXs2dO1YMEC16lTp1wlJSWucePGuR588EGOTS/92Fy6XByX3jhx4oSrQ4cOrjfffNPV0NDgOnbsmGvAgAGuBQsWcFyiSWmSZ94PHTqkTz/9VNOmTZPD4dANN9ygiRMnavXq1b4uzUhffvml2rdv7+syjLR+/XpNnTpVU6ZM8WjfunWrwsPDNXLkSNntdiUlJSktLY1j9CIuNJ+1tbXav38/x2kjHT16VLfccosmTZqk4OBgRUREaMSIESooKODY9NKPzSXHpXciIyP1ySefaMiQIQoKClJpaalOnTqlyMhIjks0KU0yvB84cEDh4eG65ppr3G1t27bV0aNH9f333/uwMvM4nU7t27dPO3bsUN++fdWnTx/NnDlTZWVlvi7NCL169dK2bdt09913e7QfOHBAsbGxHm3R0dEqLCy8kuUZ50LzWVhYqPr6ei1cuFA9evRQamqqli5dKqfT6aNK/dvNN9+s5cuXe3yA3pYtW9SuXTuOTS/92FxyXHqvVatWkqRf//rXSktLU1RUlIYMGcJxiSalSYb3yspKORwOj7Yzj6uqqnxRkrFKSkp06623KjU1VZs2bdKaNWv0j3/8g2veGykqKkp2u/2c9vMdoyEhIRyfF3Gh+SwvL1e3bt00atQoffDBB5ozZ45effVVZWdn+6BKs7hcLs2bN0/vv/++nnjiCY7Nn+CHc8lxeem2bt2qDz/8UDabTX/60584LtGknPtTrglo2bKlqqurPdrOPA4NDfVFSca6+uqrPX4t6XA4NG3aNN1zzz2qqKhwnyWBdxwOh8rLyz3aampqOD4vUc+ePdWzZ0/3444dO2r06NHatGmTHnjgAR9W5t8qKir02GOPad++fVq1apXi4uI4Ni/R+eYyLi6O4/IShYSEKCQkRNOmTdPw4cM1atQojks0GU3yzHtMTIxKS0tVXFzsbvvmm2907bXXqnXr1j6szDyFhYWaO3euXC6Xu622tlY2m03BwcE+rMxssbGxOnDggEdbUVGRYmJifFSR2d59912tWbPGo622tlYhISE+qsj/HT58WEOHDlVFRYVyc3MVFxcniWPzUlxoLjkuvfP555/rrrvuUm1trbuttrZWzZs3V3R0NMclmowmGd5vvPFGJSQkaPbs2aqoqNCRI0e0ePFiDRs2zNelGSc8PFyrV6/W8uXLVV9fr6NHj2rOnDn67W9/S3j/CVJSUlRcXKycnBzV1dUpPz9feXl5Gjp0qK9LM5LL5VJmZqZ27twpl8ulL774QitXrtSIESN8XZpfKisr0+jRo9W5c2etWLFCkZGR7uc4Nr3zY3PJcemduLg41dTU6Pnnn1dtba2+/fZbPffccxo2bJhSU1M5LtFkBLnOPmXahBQXF+uZZ57Rrl27ZLPZNHjwYE2dOtXjj4rQOJ9++qleeOEF7d+/Xy1atFD//v01bdo0tWjRwtelGSUuLk4rV65UYmKipNN38cnIyND+/fsVGRmpiRMnasiQIT6u0hw/nM81a9bolVde0bFjx3T11Vdr7NixGjlypI+r9E+vvPKKsrKy5HA4FBQU5PHcF198wbHphYvNJceld4qKijR79mx9+eWXat26tdLS0tx38uG4RFPRZMM7AAAAYJomedkMAAAAYCLCOwAAAGAIwjsAAABgCMI7AAAAYAjCOwAAAGAIwjsAAABgCMI7AAAAYAjCOwAAAGAIwjsAAABgCMI7AAAAYAjCOwAAAGCI/wdoe5hpcJ+X5AAAAABJRU5ErkJggg=="
+>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="The-binomial-distribution">The binomial distribution<a class="anchor-link" href="#The-binomial-distribution"> </a></h3>
@@ -1522,26 +1668,187 @@ Name: product, dtype: float64
 <div class="text_cell_render border-box-sizing rendered_html">
 <blockquote><p><strong>Simulating sales deals</strong></p>
 </blockquote>
+<p>Assume that Amir usually works on 3 deals per week, and overall, he wins 30% of deals he works on. Each deal has a binary outcome:it's either lost, or won, so you can model his sales deals with a binomial distribution. In this exercise, you'll help Amir simulate a year's worth of his deals so he can better understand his performance.</p>
 
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
+
+<span class="c1"># Set random seed to 10</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="c1"># Simulate a single deal</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">binom</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># Simulate 1 week of 3 deals</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">binom</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># Simulate 52 weeks of 3 deals</span>
+<span class="n">deals</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">52</span><span class="p">)</span>
+
+<span class="c1"># Print mean deals won per week</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">deals</span><span class="p">))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>[1]
+[1]
+0.8269230769230769
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <blockquote><p><strong>Calculating binomial probabilities</strong></p>
 </blockquote>
+<p>ust as in the last exercise, assume that Amir wins 30% of deals. He wants to get an idea of how likely he is to close a certain number of deals each week. In this exercise, you'll calculate what the chances are of him closing different numbers of deals using the binomial distribution.</p>
+<p>binom is imported from scipy.stats.</p>
 
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">prob_3</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">prob_3</span><span class="p">)</span>
+
+<span class="c1"># Probability of closing &lt;= 1 deal out of 3 deals</span>
+<span class="n">prob_less_than_or_equal_1</span> <span class="o">=</span> <span class="n">binom</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">0.3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">prob_less_than_or_equal_1</span><span class="p">)</span>
+
+<span class="c1"># Probability of closing &gt; 1 deal out of 3 deals</span>
+<span class="n">prob_greater_than_1</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">binom</span><span class="o">.</span><span class="n">cdf</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">prob_greater_than_1</span><span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot;Amir has about a 22% chance of closing more than one deal in a week.&quot;&quot;&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.026999999999999996
+0.784
+0.21599999999999997
+</pre>
+</div>
+</div>
+
+<div class="output_area">
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;Amir has about a 22% chance of closing more than one deal in a week.&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <blockquote><p><strong>How many sales will be won?</strong></p>
 </blockquote>
+<p>Now Amir wants to know how many deals he can expect to close each week if his win rate changes. Luckily, you can use your binomial distribution knowledge to help him calculate the expected value in different situations. Recall from the video that the expected value of a binomial distribution can be calculated by $n \times p$.</p>
+<p>Instructions:<br></p>
+<ul>
+<li>Calculate the expected number of sales out of the 3 he works on that Amir will win each week if he maintains his 30% win rate.</li>
+<li>Calculate the expected number of sales out of the 3 he works on that he'll win if his win rate drops to 25%.</li>
+<li>Calculate the expected number of sales out of the 3 he works on that he'll win if his win rate rises to 35%.</li>
+</ul>
 
 </div>
 </div>
 </div>
+    {% raw %}
+    
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">won_30pct</span> <span class="o">=</span> <span class="mf">0.3</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">won_30pct</span><span class="p">)</span>
+
+<span class="c1"># Expected number won with 25% win rate</span>
+<span class="n">won_25pct</span> <span class="o">=</span> <span class="mf">0.25</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">won_25pct</span><span class="p">)</span>
+
+<span class="c1"># Expected number won with 35% win rate</span>
+<span class="n">won_35pct</span> <span class="o">=</span> <span class="mf">0.35</span> <span class="o">*</span> <span class="mi">3</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">won_35pct</span><span class="p">)</span>
+
+<span class="sd">&quot;&quot;&quot;Excellent expectation experimentation! If Amir&#39;s win rate goes up by 5%, he can expect to close more than 1 deal on average each week.&quot;&quot;&quot;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+<div class="output_area">
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0.8999999999999999
+0.75
+1.0499999999999998
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+    {% endraw %}
+
 <div class="cell border-box-sizing text_cell rendered"><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="More-Distributions-and-the-Central-Limit-Theorem">More Distributions and the Central Limit Theorem<a class="anchor-link" href="#More-Distributions-and-the-Central-Limit-Theorem"> </a></h2><blockquote><p>It’s time to explore one of the most important probability distributions in statistics, normal distribution. You’ll create histograms to plot normal distributions and gain an understanding of the central limit theorem, before expanding your knowledge of statistical functions by adding the Poisson, exponential, and t-distributions to your repertoire.</p>
