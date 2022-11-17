@@ -39,9 +39,10 @@ baseurl: "/Data-Science-selfstudy-notes-Blog" # the subpath of your site, e.g. "
 # Github and twitter are optional:
 minima:
   social_links:
-    twitter: NguyenNgocHai2
-    github: anhhaibkhn
-    linkedin: nguyen-hai-b1ab8042
+    - { platform: rss, user_url: "https://feedrabbit.com/?url=https://anhhaibkhn.github.io/Data-Science-selfstudy-notes-Blog/feed.xml" }
+    - { platform: github, user_url: "https://github.com/anhhaibkhn/" }
+    - { platform: twitter, user_url: "https://twitter.com/NguyenNgocHai2" }
+    - { platform: linkedin, user_url: "https://www.linkedin.com/in/nguyen-hai-b1ab8042/" }
 
 # Set this to true to get LaTeX math equation support
 use_math: True
